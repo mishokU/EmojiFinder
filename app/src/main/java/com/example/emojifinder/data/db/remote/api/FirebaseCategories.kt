@@ -5,4 +5,5 @@ import com.example.emojifinder.ui.categories.CategoryModel
 
 interface FirebaseCategories {
     suspend fun fetchCategories() : Result<List<CategoryModel?>>
+    suspend fun fetchLevel(title : String) : Result<List<HashMap<String, Any?>>>
 }

@@ -13,7 +13,6 @@ import com.example.emojifinder.domain.viewModels.CategoriesViewModel
 import com.example.emojifinder.domain.viewModels.LogInViewModel
 import dagger.android.support.DaggerFragment
 import com.example.emojifinder.domain.result.Result
-import com.example.emojifinder.shared.utils.asCategoryModel
 import javax.inject.Inject
 
 
@@ -74,6 +73,28 @@ class CategoryGameFragment : DaggerFragment() {
                 }
             }
         })
+
+        viewModel.levelResponse.observe(viewLifecycleOwner, Observer {
+            it?.let { result ->
+                when(result){
+                    is Result.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+                    is Result.Success -> {
+                        binding.progressBar.visibility = View.INVISIBLE
+                        binding.errorMessage.visibility = View.INVISIBLE
+
+                        print(result.data)
+                    }
+                    is Result.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                        binding.errorMessage.text = result.exception.message
+                    }
+                }
+            }
+        })
+
+
     }
 
     private fun initCategories() {

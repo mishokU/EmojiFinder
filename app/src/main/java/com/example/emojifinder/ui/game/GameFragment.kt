@@ -1,6 +1,7 @@
 package com.example.emojifinder.ui.game
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
 import androidx.core.animation.addListener
 import androidx.core.animation.addPauseListener
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -56,7 +59,7 @@ class GameFragment : DaggerFragment() {
         initProgressAnimator()
         openKeyboard()
         backToLevels()
-        startDialog()
+        //startDialog()
 
         return binding.root
     }
@@ -127,6 +130,7 @@ class GameFragment : DaggerFragment() {
         binding.triggerKeyboard.isFocusableInTouchMode = true
         binding.triggerKeyboard.showSoftInputOnFocus = true
         binding.triggerKeyboard.requestFocus()
+
 
         ((activity as DaggerAppCompatActivity)).showSoftKeyboard(binding.triggerKeyboard)
     }

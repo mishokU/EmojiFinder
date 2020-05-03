@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/main_color"
+        android:fitsSystemWindows="true"
         tools:context=".ui.game.GameFragment">
 
         <RelativeLayout
@@ -41,11 +42,11 @@
                 android:orientation="vertical"
                 android:layout_alignParentBottom="true">
 
-                <EditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/trigger_keyboard"
                     android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:focusedByDefault="true"
+                    android:layout_height="40dp"
+                    android:focusableInTouchMode="true"
                     android:focusable="true"
                     android:background="@color/background_color"/>
 

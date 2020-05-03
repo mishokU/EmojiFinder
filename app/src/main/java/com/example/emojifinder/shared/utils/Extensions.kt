@@ -123,12 +123,7 @@ fun <T> MutableLiveData<T>.setValueIfNew(newValue: T) {
     if (this.value != newValue) value = newValue
 }
 
-fun Any.asCategoryModel(): CategoryModel {
-    if(this is CategoryModel){
-        return CategoryModel(this.id!!, this.title!!)
-    }
-    return CategoryModel(0,"hi")
-}
+
 // endregion
 
 // region ZonedDateTime

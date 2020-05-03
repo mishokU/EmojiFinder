@@ -4,6 +4,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
+import com.example.emojifinder.core.di.utils.CoroutineScopeIO
 import com.example.emojifinder.ui.application.MainApplication
 import com.example.emojifinder.data.prefs.PreferenceStorage
 import com.example.emojifinder.data.prefs.SharedPreferenceStorage
@@ -75,6 +76,10 @@ class AppModule {
     fun providesClipboardManager(context: Context): ClipboardManager =
         context.applicationContext.getSystemService(Context.CLIPBOARD_SERVICE)
                 as ClipboardManager
+
+    @CoroutineScopeIO
+    @Provides
+    fun provideCoroutineScopeIO() = CoroutineScope(Dispatchers.IO)
 
     @CoroutineScopeMain
     @Provides

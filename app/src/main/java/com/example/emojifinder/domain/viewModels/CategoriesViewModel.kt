@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CategoriesViewModel @Inject constructor(
-    firebaseCategories: FirebaseCategories,
+    val firebaseCategories: FirebaseCategories,
     @CoroutineScopeIO
     val coroutineScope : CoroutineScope
 ) : ViewModel() {
@@ -24,6 +24,10 @@ class CategoriesViewModel @Inject constructor(
     val categoriesResponse : LiveData<Result<List<CategoryModel?>>>
         get() = _categoriesResponse
 
+    private val _levelResponse = MutableLiveData<Result<List<HashMap<String, Any?>>>>()
+    val levelResponse : LiveData<Result<List<HashMap<String, Any?>>>>
+        get() = _levelResponse
+
     private val _gameCategory = MutableLiveData<CategoryModel>()
     val gameCategory : LiveData<CategoryModel>
         get() = _gameCategory
@@ -31,11 +35,24 @@ class CategoriesViewModel @Inject constructor(
 
     init {
         coroutineScope.launch {
-            _categoriesResponse.value = Result.Loading
+            withContext(Dispatchers.Main){
+                _categoriesResponse.value = Result.Loading
+            }
             val categories = firebaseCategories.fetchCategories()
 
             withContext(Dispatchers.Main){
                 _categoriesResponse.value = categories
+            }
+        }
+    }
+
+    fun fetchLevel(title : String){
+        coroutineScope.launch {
+           _levelResponse.value = Result.Loading
+            val level = firebaseCategories.fetchLevel(title)
+
+            withContext(Dispatchers.Main){
+                _levelResponse.value = level
             }
         }
     }

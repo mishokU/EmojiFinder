@@ -1,22 +1,13 @@
 package com.example.emojifinder.ui.main
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import com.example.emojifinder.R
-import com.example.emojifinder.core.di.launcher.LaunchDestination
-import com.example.emojifinder.core.di.launcher.LaunchViewModel
-import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.ActivityMainBinding
-import com.example.emojifinder.domain.result.EventObserver
-import com.example.emojifinder.shared.utils.checkAllMatched
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject

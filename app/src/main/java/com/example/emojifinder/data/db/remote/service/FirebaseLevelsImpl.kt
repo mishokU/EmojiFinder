@@ -9,11 +9,11 @@ import javax.inject.Inject
 
 class FirebaseLevelsImpl : FirebaseInit(), FirebaseCategories {
 
-    suspend fun fetchLevel() : Result<List<HashMap<String, Any?>>>{
+    override suspend fun fetchLevel(title : String) : Result<List<HashMap<String, Any?>>>{
         return try {
             val document = mFireStore
                 .collection("categories")
-                .document("animals")
+                .document(title)
                 .get().await()
 
             print(document)
