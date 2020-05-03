@@ -1,0 +1,71 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="CustomAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/main_color</item>
+        <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button</item>
+    </style>
+
+    <style name="CustomMaterialButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:inset">0dp</item>
+        <item name="iconStartPadding">0dp</item>
+        <item name="android:paddingRight">48dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+
+    <style name="CustomMaterialIcon" parent="Widget.MaterialComponents.Button.Icon">
+        <item name="android:inset">0dp</item>
+        <item name="iconStartPadding">0dp</item>
+        <item name="android:paddingRight">48dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+
+    <style name="CustomButtonImage" parent="Widget.MaterialComponents.Button">
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+    
+    <style name="CustomToolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:textAlignment">center</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <!-- This style is for the splash screen -->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="android:statusBarColor">@color/main_color</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:statusBarColor">@color/main_color</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+
+</resources>

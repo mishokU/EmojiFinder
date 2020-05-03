@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Emoji Finder</string>
+    <string name="title_login">Login Module</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="login_with_vk">Login with VK</string>
+    <string name="create_account">Create Account</string>
+    <string name="login_with_facebook">Login with Facebook</string>
+    <string name="or">OR</string>
+    <string name="language">Language</string>
+    <string name="help">Help</string>
+    <string name="password">Password</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="registration">Registration</string>
+    <string name="email">Email</string>
+    <string name="repeat_password">Repeat Password</string>
+
+    <string name="passwords_error">Passwords are different</string>
+    <string name="email_error">Email is incorrect</string>
+    <string name="login_error">Login should be unique</string>
+
+    <string name="registration_error">Some errors occurred</string>
+    <string name="registration_successful">Registration Complete</string>
+    <string name="email_is_not_unique">This email already registered</string>
+    <string name="login_successful">Log In Successful</string>
+    <string name="login_failure">Log In failure</string>
+
+    <string name="some_fields_empty">Fill all fields !</string>
+    <string name="an_error_has_occurred">An error has occurred</string>
+    <string name="okey">Okey</string>
+    <string name="loading">loading</string>
+    <string name="restore_password">Restore Password</string>
+    <string name="start_arcade_game">Start Arcade Game</string>
+    <string name="start_category_game">Start category game</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+    <string name="exit">Exit</string>
+    <string name="_128515"></string>
+    <string name="animals">Animals</string>
+    <string name="score">Score</string>
+    <string name="time">Time</string>
+    <string name="mistakes">Mistakes</string>
+    <string name="level">Level</string>
+    <string name="start_the_game">Start the game</string>
+    <string name="hint">Hint</string>
+    <string name="game_hint">The goal of the game is to find all emojis from the category in n seconds</string>
+    <string name="start_game">Start game</string>
+    <string name="exit_game_text">If you exit now, you’ll lose all progress</string>
+    <string name="finish">Finish</string>
+    <string name="back_to_game">Back to game</string>
+    <string name="try_again">Try again</string>
+    <string name="next_level">Next level</string>
+</resources>

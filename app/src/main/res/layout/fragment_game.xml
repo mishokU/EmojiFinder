@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_color"
+        tools:context=".ui.game.GameFragment">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/game_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_margin="20dp"
+                android:indeterminateBehavior="cycle"
+                android:progressDrawable="@drawable/custom_progress_bar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+            <RelativeLayout
+                android:id="@+id/game_emoji_field"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/game_progress_bar"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_above="@id/stat_place"/>
+
+            <LinearLayout
+                android:id="@+id/stat_place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentBottom="true">
+
+                <EditText
+                    android:id="@+id/trigger_keyboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:focusedByDefault="true"
+                    android:focusable="true"
+                    android:background="@color/background_color"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:background="@drawable/game_score_style"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/main_color"
+                        android:text="@string/score"/>
+
+                    <TextView
+                        android:id="@+id/game_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/main_color"
+                        android:text="80"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+
+                    android:background="@drawable/game_score_style"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/main_color"
+                        android:text="@string/time"/>
+
+                    <TextView
+                        android:id="@+id/game_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/main_color"
+                        android:text="4:30"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+
+                    android:background="@drawable/game_score_style"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/main_color"
+                        android:text="@string/mistakes"/>
+
+                    <TextView
+                        android:id="@+id/game_mistakes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/main_color"
+                        android:text="20"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+
+                    android:background="@drawable/game_score_style"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/main_color"
+                        android:text="@string/level"/>
+
+                    <TextView
+                        android:id="@+id/game_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/main_color"
+                        android:text="2"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/background_color"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </FrameLayout>
+</layout>
+

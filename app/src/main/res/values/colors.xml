@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="main_color">#4f5154</color>
+    <color name="main_ripple_button_color">#696D73</color>
+    <color name="second_text_color">#389aed</color>
+    <color name="black_color">#050708</color>
+    <color name="first_color">#4f5154</color>
+
+    <color name="timer_delay_color">#ecdde2</color>
+    <color name="background_color">#f0f4fd</color>
+    <color name="yellow_color">#ffeb3b</color>
+    <color name="blue_color">#389aed</color>
+    <color name="red_color">#e84a48</color>
+
+    <color name="green_color">#6ed65c</color>
+    <color name="chest_sad_color">#ff5a79</color>
+
+</resources>

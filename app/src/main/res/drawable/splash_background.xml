@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@color/main_color"/>
+
+    <item
+        android:gravity="center"
+        android:width="500dp"
+        android:height="500dp">
+
+        <bitmap android:src="@drawable/splash_fff"
+            android:gravity="center"/>
+
+        <animated-rotate android:drawable="@drawable/splash_fff"/>
+    </item>
+
+
+</layer-list>
