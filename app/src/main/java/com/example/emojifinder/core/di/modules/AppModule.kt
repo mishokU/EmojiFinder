@@ -9,7 +9,7 @@ import com.example.emojifinder.ui.application.MainApplication
 import com.example.emojifinder.data.prefs.PreferenceStorage
 import com.example.emojifinder.data.prefs.SharedPreferenceStorage
 import com.example.emojifinder.core.di.utils.CoroutineScopeMain
-import com.example.emojifinder.data.db.remote.api.FirebaseCategories
+import com.example.emojifinder.data.db.remote.api.FirebaseLevels
 import com.example.emojifinder.data.db.remote.api.FirebaseRegistration
 import com.example.emojifinder.data.db.remote.service.*
 import com.example.emojifinder.domain.user.FirebaseCreateUserAccount
@@ -47,7 +47,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideFirebaseCategories() : FirebaseCategories = FirebaseLevelsImpl()
+    fun provideFirebaseCategories() : FirebaseLevels = FirebaseLevelsImpl()
 
     @Singleton
     @Provides

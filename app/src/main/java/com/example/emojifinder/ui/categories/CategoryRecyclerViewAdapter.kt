@@ -7,18 +7,18 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emojifinder.databinding.CategoryCellItemBinding
 
-class CategoryRecyclerViewAdapter(private val onClickListener : OnCategoryClickListener) : ListAdapter<CategoryModel,
+class CategoryRecyclerViewAdapter(private val onClickListener : OnCategoryClickListener) : ListAdapter<SmallLevelModel,
         CategoryRecyclerViewAdapter.CategoriesViewHolder>(
     DiffCallback
 ) {
 
-    companion object DiffCallback: DiffUtil.ItemCallback<CategoryModel>()     {
+    companion object DiffCallback: DiffUtil.ItemCallback<SmallLevelModel>()     {
 
-        override fun areItemsTheSame(oldItem: CategoryModel, newItem: CategoryModel): Boolean {
+        override fun areItemsTheSame(oldItem: SmallLevelModel, newItem: SmallLevelModel): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: CategoryModel, newItem: CategoryModel): Boolean {
+        override fun areContentsTheSame(oldItem: SmallLevelModel, newItem: SmallLevelModel): Boolean {
             return oldItem.id == newItem.id
         }
     }
@@ -39,13 +39,13 @@ class CategoryRecyclerViewAdapter(private val onClickListener : OnCategoryClickL
 
     class CategoriesViewHolder(private val binding: CategoryCellItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(category: CategoryModel?) {
+        fun bind(category: SmallLevelModel?) {
             binding.category = category
             binding.executePendingBindings()
         }
     }
 
-    class OnCategoryClickListener(val clickListener: (track: CategoryModel?) -> Unit) {
-        fun onClick(track: CategoryModel) = clickListener(track)
+    class OnCategoryClickListener(val clickListener: (track: SmallLevelModel?) -> Unit) {
+        fun onClick(track: SmallLevelModel) = clickListener(track)
     }
 }

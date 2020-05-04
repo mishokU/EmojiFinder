@@ -32,8 +32,6 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.emojifinder.BuildConfig
-import com.example.emojifinder.ui.categories.CategoryModel
-import com.google.firebase.auth.AuthResult
 import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
 

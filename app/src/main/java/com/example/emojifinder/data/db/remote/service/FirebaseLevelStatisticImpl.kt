@@ -2,10 +2,8 @@ package com.example.emojifinder.data.db.remote.service
 
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.domain.result.Result
-import com.example.emojifinder.ui.categories.CategoryModel
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
-import javax.inject.Inject
 
 class FirebaseLevelStatisticImpl : FirebaseInit() {
 

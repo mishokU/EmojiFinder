@@ -1,35 +1,29 @@
 package com.example.emojifinder.ui.game
 
 import android.animation.ObjectAnimator
-import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
 import androidx.core.animation.addListener
 import androidx.core.animation.addPauseListener
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.databinding.FragmentGameBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.CategoriesViewModel
 import com.example.emojifinder.domain.viewModels.GameViewModel
-import com.example.emojifinder.ui.categories.CategoryModel
+import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.example.emojifinder.ui.utils.GameDialogs
-import com.example.emojifinder.ui.utils.showSoftKeyboard
-import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.DaggerFragment
-import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil
 import javax.inject.Inject
 
 
@@ -39,11 +33,15 @@ class GameFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel : GameViewModel
 
+    @Inject
+    lateinit var levelViewModelFactory: ViewModelProvider.Factory
+    lateinit var levelViewModel : CategoriesViewModel
+
     lateinit var binding : FragmentGameBinding
     private lateinit var animation: ObjectAnimator
     private lateinit var gameDialog : GameDialogs
 
-    private lateinit var category : CategoryModel
+    private lateinit var category : SmallLevelModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,14 +50,17 @@ class GameFragment : DaggerFragment() {
         binding = FragmentGameBinding.inflate(inflater)
 
         viewModel = injectViewModel(viewModelFactory)
+        levelViewModel = injectViewModel(levelViewModelFactory)
 
-        gameDialog = GameDialogs()
+        gameDialog = GameDialogs(this)
 
         getGameCategory()
         initProgressAnimator()
-        openKeyboard()
+
         backToLevels()
-        //startDialog()
+        startGameDialog()
+
+        loadGameLevel()
 
         return binding.root
     }
@@ -83,25 +84,44 @@ class GameFragment : DaggerFragment() {
                 id = binding.gameLevel.text.toString().toInt(),
                 result = "Lost"
             )
+            showEndGameDialog(statistics)
             viewModel.writeGameStatistic(category.title, statistics)
         })
     }
 
-    private fun observeGameStatistic(){
-        viewModel.statisticResponse.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                when(it){
-                    is Result.Success -> {
-                        gameDialog.showEndGameDialog(this@GameFragment, it.data)
-                        gameDialog.getRetryButton().setOnClickListener{
+    private fun showEndGameDialog(statistics: UserLevelStatistics) {
+        gameDialog.showEndGameDialog(statistics)
 
-                        }
+        gameDialog.getRetryButton().setOnClickListener{
+            gameDialog.alert.dismiss()
+            startGameDialog()
+        }
+
+        gameDialog.getNextLevelButton().setOnClickListener {
+            startNextLevel()
+        }
+
+    }
+
+    private fun startNextLevel() {
+
+    }
+
+    private fun loadGameLevel(){
+        levelViewModel.fetchLevel(category.title)
+        levelViewModel.levelResponse.observe(viewLifecycleOwner, Observer {
+            it?.let { result ->
+                when(result){
+                    is Result.Loading -> {
+
+                    }
+                    is Result.Success -> {
+                        print(result.data)
                     }
                     is Result.Error -> {
 
                     }
                 }
-                viewModel.statisticResponseComplete()
             }
         })
     }
@@ -109,7 +129,8 @@ class GameFragment : DaggerFragment() {
     private fun backToLevels() {
         requireActivity().onBackPressedDispatcher.addCallback(this){
             animation.pause()
-            gameDialog.showExitDialog(this@GameFragment)
+            gameDialog.showExitDialog()
+
             gameDialog.getGameExitButton().setOnClickListener {
                 animation.cancel()
                 gameDialog.alert.dismiss()
@@ -122,22 +143,20 @@ class GameFragment : DaggerFragment() {
         }
     }
 
+    private fun showSoftKeyboard() {
+        binding.keyboardTrigger.isFocusableInTouchMode = true
+        binding.keyboardTrigger.requestFocus()
 
-
-    private fun openKeyboard() {
-        UIUtil.showKeyboard(requireContext(), binding.triggerKeyboard)
-
-        binding.triggerKeyboard.isFocusableInTouchMode = true
-        binding.triggerKeyboard.showSoftInputOnFocus = true
-        binding.triggerKeyboard.requestFocus()
-
-
-        ((activity as DaggerAppCompatActivity)).showSoftKeyboard(binding.triggerKeyboard)
+        val imm = context?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm?.showSoftInput(binding.keyboardTrigger, InputMethodManager.SHOW_FORCED)
     }
 
     override fun onResume() {
         super.onResume()
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+
+        showSoftKeyboard()
+
         animation.addPauseListener(onResume = {
             it.resume()
         })
@@ -152,14 +171,13 @@ class GameFragment : DaggerFragment() {
     }
 
 
-    private fun startDialog() {
-        val dialog = GameDialogs().showStartDialog(this)
-        val button = dialog.dialogView.findViewById<View>(R.id.start_game_btn)
-        dialog.alert.setOnDismissListener {
+    private fun startGameDialog() {
+        gameDialog.showStartDialog()
+        gameDialog.alert.setOnDismissListener {
             startTimer()
         }
-        button.setOnClickListener {
-            dialog.alert.dismiss()
+        gameDialog.getStartGameButton().setOnClickListener {
+            gameDialog.alert.dismiss()
         }
     }
 

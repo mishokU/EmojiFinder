@@ -1,19 +1,19 @@
 package com.example.emojifinder.data.db.remote.service
 
-import com.example.emojifinder.data.db.remote.api.FirebaseCategories
+import com.example.emojifinder.data.db.remote.api.FirebaseLevels
 import com.example.emojifinder.domain.result.Result
-import com.example.emojifinder.ui.categories.CategoryModel
+import com.example.emojifinder.ui.categories.SmallLevelModel
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
-import javax.inject.Inject
 
-class FirebaseLevelsImpl : FirebaseInit(), FirebaseCategories {
+class FirebaseLevelsImpl : FirebaseInit(), FirebaseLevels {
 
-    override suspend fun fetchLevel(title : String) : Result<List<HashMap<String, Any?>>>{
+    override suspend fun fetchLevel(title : String?) : Result<List<HashMap<String, Any?>>>{
         return try {
             val document = mFireStore
                 .collection("categories")
-                .document(title)
+                .document(title!!)
+                .collection("emojis")
                 .get().await()
 
             print(document)
@@ -26,16 +26,16 @@ class FirebaseLevelsImpl : FirebaseInit(), FirebaseCategories {
         }
     }
 
-    override suspend fun fetchCategories() : Result<List<CategoryModel?>>{
+    override suspend fun fetchLevels() : Result<List<SmallLevelModel?>>{
         return try {
             val document = mFireStore
                 .collection("categories")
                 .get()
                 .await()
 
-            val list : MutableList<CategoryModel?> = mutableListOf()
+            val list : MutableList<SmallLevelModel?> = mutableListOf()
             for(data in document.documents){
-                list.add(data.toObject(CategoryModel::class.java))
+                list.add(data.toObject(SmallLevelModel::class.java))
             }
 
             Result.Success(list.toList())
