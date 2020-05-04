@@ -8,12 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
 import androidx.core.animation.addListener
 import androidx.core.animation.addPauseListener
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -22,14 +20,10 @@ import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.databinding.FragmentGameBinding
 import com.example.emojifinder.domain.result.Result
-import com.example.emojifinder.domain.viewModels.CategoriesViewModel
 import com.example.emojifinder.domain.viewModels.GameViewModel
 import com.example.emojifinder.ui.categories.CategoryModel
 import com.example.emojifinder.ui.utils.GameDialogs
-import com.example.emojifinder.ui.utils.showSoftKeyboard
-import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.DaggerFragment
-import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil
 import javax.inject.Inject
 
 
@@ -125,14 +119,9 @@ class GameFragment : DaggerFragment() {
 
 
     private fun openKeyboard() {
-        UIUtil.showKeyboard(requireContext(), binding.triggerKeyboard)
-
-        binding.triggerKeyboard.isFocusableInTouchMode = true
-        binding.triggerKeyboard.showSoftInputOnFocus = true
         binding.triggerKeyboard.requestFocus()
-
-
-        ((activity as DaggerAppCompatActivity)).showSoftKeyboard(binding.triggerKeyboard)
+        val imgr = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
     }
 
     override fun onResume() {
