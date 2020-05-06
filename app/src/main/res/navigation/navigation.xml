@@ -14,7 +14,7 @@
 
         <argument
             android:name="Category"
-            app:argType="com.example.emojifinder.ui.categories.CategoryModel"/>
+            app:argType="com.example.emojifinder.ui.categories.SmallLevelModel"/>
 
     </fragment>
     <fragment

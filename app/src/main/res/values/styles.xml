@@ -16,6 +16,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/main_color</item>
         <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button</item>
+        <item name="android:navigationMode">tabMode</item>
     </style>
 
     <style name="CustomMaterialButton" parent="Widget.MaterialComponents.Button">
@@ -34,6 +35,13 @@
         <item name="iconPadding">0dp</item>
     </style>
 
+    <style name="CustomMaterialIconLeft" parent="Widget.MaterialComponents.Button.Icon">
+        <item name="android:inset">0dp</item>
+        <item name="iconStartPadding">0dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+
     <style name="CustomButtonImage" parent="Widget.MaterialComponents.Button">
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetRight">0dp</item>
@@ -45,7 +53,6 @@
     <style name="CustomToolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:textAlignment">center</item>
         <item name="android:padding">10dp</item>
-        <item name="android:layout_margin">0dp</item>
     </style>
 
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">

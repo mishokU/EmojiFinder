@@ -1,14 +1,9 @@
 package com.example.emojifinder.ui.main
 
-import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.provider.FontRequest
-import androidx.emoji.text.EmojiCompat
-import androidx.emoji.text.FontRequestEmojiCompatConfig
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.databinding.FragmentMainMenuBinding
@@ -51,6 +46,6 @@ class MainMenuFragment : DaggerFragment() {
         binding.emojiTextView2.text = Emoji.getEmojiByUnicode(unicode = 0x1F973)
         binding.emojiTextView4.text = Emoji.getEmojiByUnicode(unicode = 0x1F64F)
         binding.emojiTextView6.text = Emoji.getEmojiByUnicode(unicode = 0x1F44D)
-        binding.emojiTextView3.text = Emoji.getEmojiByUnicode(unicode = 0x2764)
+        binding.emojiTextView3.text = Emoji.getEmojiByUnicode(unicode = 0x1F764)
     }
 }

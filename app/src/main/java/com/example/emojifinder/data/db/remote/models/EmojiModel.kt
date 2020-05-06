@@ -5,10 +5,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class EmojiModel(
-    val id : Int,
-    val code : String,
-    val emoji : String,
     val unicode : String,
-    val category : String,
-    val position : Point
-) : Parcelable
+    val order : Int,
+    val x : Int,
+    val y : Int
+) : Parcelable {
+    constructor() : this("", 0,0,0)
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="emoji_font">10sp</dimen>
+    <dimen name="emoji_small_font">8sp</dimen>
+    <dimen name="emoji_medium_font">8sp</dimen>
+    <dimen name="emoji_huge_font">8sp</dimen>
+</resources>

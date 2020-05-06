@@ -2,6 +2,8 @@ package com.example.emojifinder.ui.application
 
 import android.graphics.Color
 import android.os.StrictMode
+import android.util.Log.d
+import android.view.View
 import androidx.core.provider.FontRequest
 import androidx.emoji.bundled.BundledEmojiCompatConfig
 import androidx.emoji.text.EmojiCompat
@@ -12,6 +14,9 @@ import com.example.emojifinder.core.di.DaggerAppComponent
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
+import timber.log.Timber.d
+import java.util.*
+
 
 class MainApplication : DaggerApplication() {
 
@@ -36,7 +41,22 @@ class MainApplication : DaggerApplication() {
     }
 
     private fun initEmojies() {
-        val config = BundledEmojiCompatConfig(this)
+        val fontRequest = FontRequest(
+            "com.google.android.gms.fonts",
+            "com.google.android.gms",
+            "Noto Color Emoji Compat",
+            R.array.com_google_android_gms_fonts_certs
+        )
+
+        val config: EmojiCompat.Config = FontRequestEmojiCompatConfig(this, fontRequest)
+            .setReplaceAll(true)
+            .setEmojiSpanIndicatorColor(Color.GREEN)
+            .registerInitCallback(object : EmojiCompat.InitCallback() {
+                override fun onInitialized() {
+                    super.onInitialized()
+                    Timer("init")
+                }
+            })
         EmojiCompat.init(config)
     }
 

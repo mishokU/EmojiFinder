@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -35,11 +36,21 @@ class CategoryGameFragment : DaggerFragment() {
         // Inflate the layout for this fragment
         initCategories()
         initViewModel()
-
+        initBackButton()
         initLevel()
 
         return binding.root
     }
+
+    private fun initBackButton() {
+        ((activity) as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.toolbar.setNavigationOnClickListener {
+            this.findNavController().navigateUp()
+        }
+    }
+
 
     private fun initLevel() {
         viewModel.gameCategory.observe(viewLifecycleOwner, Observer {

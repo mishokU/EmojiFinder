@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.emojifinder.core.di.utils.CoroutineScopeIO
 import com.example.emojifinder.data.db.remote.api.FirebaseLevels
+import com.example.emojifinder.data.db.remote.models.EmojiModel
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +15,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CategoriesViewModel @Inject constructor(
-    val firebaseCategories: FirebaseLevels,
+    private val firebaseCategories: FirebaseLevels,
     @CoroutineScopeIO
     val coroutineScope : CoroutineScope
 ) : ViewModel() {
@@ -23,8 +24,8 @@ class CategoriesViewModel @Inject constructor(
     val categoriesResponse : LiveData<Result<List<SmallLevelModel?>>>
         get() = _categoriesResponse
 
-    private val _levelResponse = MutableLiveData<Result<List<HashMap<String, Any?>>>>()
-    val levelResponse : LiveData<Result<List<HashMap<String, Any?>>>>
+    private val _levelResponse = MutableLiveData<Result<List<EmojiModel?>>>()
+    val levelResponse : LiveData<Result<List<EmojiModel?>>>
         get() = _levelResponse
 
     private val _gameCategory = MutableLiveData<SmallLevelModel>()
@@ -47,7 +48,9 @@ class CategoriesViewModel @Inject constructor(
 
     fun fetchLevel(title : String?){
         coroutineScope.launch {
-           _levelResponse.value = Result.Loading
+            withContext(Dispatchers.Main){
+                _levelResponse.value = Result.Loading
+            }
             val level = firebaseCategories.fetchLevel(title)
 
             withContext(Dispatchers.Main){

@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/transparent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/upper_back_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="start|top"
+            app:icon="@drawable/back_24px"
+            style="@style/CustomMaterialIcon"
+            app:backgroundTint="@android:color/transparent"
+            android:layout_margin="10dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/upper_retry_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:icon="@drawable/icons8_synchronize_32px_1"
+            android:layout_gravity="end|top"
+            style="@style/CustomMaterialIconLeft"
+            app:backgroundTint="@android:color/transparent"
+            android:layout_margin="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"

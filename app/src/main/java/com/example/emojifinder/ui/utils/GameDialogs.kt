@@ -1,43 +1,37 @@
 package com.example.emojifinder.ui.utils
 
-import android.annotation.SuppressLint
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import com.example.emojifinder.R
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
-import com.example.emojifinder.ui.game.GameFragment
+import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
-class GameDialogs(val fragment: GameFragment) {
+object GameDialogs  {
 
     lateinit var dialogView : View
     lateinit var alert : AlertDialog
-    lateinit var builder : AlertDialog.Builder
-    lateinit var inflater : LayoutInflater
 
-    fun showStartDialog(){
-        builder = AlertDialog.Builder(fragment.requireContext())
-        inflater = fragment.layoutInflater
-
-        createBuilder(R.layout.start_game_layout)
-    }
-
-    @SuppressLint("InflateParams")
-    private fun createBuilder(gameLayout: Int) {
-        dialogView = inflater.inflate(gameLayout, null)
+    fun showStartDialog(fragment : DaggerFragment){
+        val builder = AlertDialog.Builder(fragment.requireContext())
+        builder.setCancelable(false)
+        val inflater = fragment.layoutInflater
+        dialogView = inflater.inflate(R.layout.start_game_layout, null)
         builder.setView(dialogView)
         builder.create()
         alert = builder.show()
+        alert.onWindowFocusChanged(false)
     }
 
-    fun showEndGameDialog(statistics: UserLevelStatistics?) {
-        builder = AlertDialog.Builder(fragment.requireContext(), R.style.CustomDialog)
-        inflater = fragment.layoutInflater
+    fun showEndGameDialog(fragment : DaggerFragment,statistics: UserLevelStatistics?) {
+        val builder = AlertDialog.Builder(fragment.requireContext(), R.style.CustomDialog)
+        builder.setCancelable(false)
+        val inflater = fragment.layoutInflater
 
-        createBuilder(R.layout.end_game_layout)
+        dialogView = inflater.inflate(R.layout.end_game_layout, null)
+        builder.setView(dialogView)
+        builder.create()
 
         val result = dialogView.findViewById<TextView>(R.id.level_result_et)
         val score = dialogView.findViewById<TextView>(R.id.level_result_score)
@@ -49,8 +43,10 @@ class GameDialogs(val fragment: GameFragment) {
 
             if(statistics.result == "Lost"){
                 result.setTextColor(result.resources.getColor(R.color.red_color))
+                getNextLevelButton().text = result.resources.getText(R.string.exit)
             } else {
                 result.setTextColor(result.resources.getColor(R.color.green_color))
+                getNextLevelButton().text = result.resources.getText(R.string.next_level)
             }
 
             result.text = statistics.result
@@ -59,22 +55,35 @@ class GameDialogs(val fragment: GameFragment) {
             time.text = statistics.time
             level.text = statistics.id.toString()
         }
+
+        alert = builder.show()
     }
 
-    @SuppressLint("InflateParams")
-    fun showExitDialog(){
-        builder = AlertDialog.Builder(fragment.requireContext())
-        inflater = fragment.layoutInflater
+    fun showExitDialog(fragment : DaggerFragment){
+        val builder = AlertDialog.Builder(fragment.requireContext())
+        builder.setCancelable(false)
+        val inflater = fragment.layoutInflater
 
-        createBuilder(R.layout.exit_game_layout)
+        dialogView = inflater.inflate(R.layout.exit_game_layout, null)
+        builder.setView(dialogView)
+        builder.create()
+        alert = builder.show()
     }
 
     fun getRetryButton() : View {
         return dialogView.findViewById(R.id.try_again_btn)
     }
 
-    fun getNextLevelButton() : View {
+    fun getNextLevelButton() : MaterialButton {
         return dialogView.findViewById(R.id.next_level_btn)
+    }
+
+    fun getUpperBackButton() : MaterialButton{
+        return dialogView.findViewById(R.id.upper_back_button)
+    }
+
+    fun getUpperRetryButton() : MaterialButton{
+        return dialogView.findViewById(R.id.upper_retry_button)
     }
 
     fun getGameExitButton() : View {

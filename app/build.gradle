@@ -107,8 +107,14 @@ dependencies {
     //Progress Button
     implementation 'com.github.razir.progressbutton:progressbutton:2.1.0'
 
+
+    implementation 'com.android.support:gridlayout-v7:22.2.1'
+
     //Emoji
+    implementation "com.android.support:support-emoji:28.0.0"
     implementation "com.android.support:support-emoji-bundled:$version"
+    implementation "com.android.support:support-emoji-appcompat:$version"
+
 
     //Keyboard
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.0.0'

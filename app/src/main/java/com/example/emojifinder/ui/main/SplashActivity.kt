@@ -31,7 +31,6 @@ class SplashActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val intent = Intent(this, MainActivity::class.java)
-
         val viewModel: LaunchViewModel = injectViewModel(viewModelFactory)
         viewModel.launchDestination.observe(this, EventObserver { destination ->
             when (destination) {

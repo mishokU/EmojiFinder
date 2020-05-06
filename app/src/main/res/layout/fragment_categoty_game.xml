@@ -22,14 +22,12 @@
             android:backgroundTint="@color/main_color">
 
             <androidx.appcompat.widget.Toolbar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:gravity="start"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
                 android:textAlignment="viewStart"
-                style="@style/CustomToolbar"
                 app:titleTextAppearance="@style/Toolbar.TitleText"
                 app:titleTextColor="@color/background_color"
                 app:title="@string/app_name"/>
