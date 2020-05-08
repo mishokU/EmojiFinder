@@ -1,9 +1,7 @@
 package com.example.emojifinder.data.db.remote.service
 
-import android.util.Log
 import com.example.emojifinder.data.db.remote.api.FirebaseLevels
 import com.example.emojifinder.data.db.remote.models.EmojiModel
-import com.example.emojifinder.data.db.remote.models.LevelModel
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import kotlinx.coroutines.tasks.await

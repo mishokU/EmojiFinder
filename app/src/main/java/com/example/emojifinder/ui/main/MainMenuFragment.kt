@@ -40,6 +40,19 @@ class MainMenuFragment : DaggerFragment() {
         binding.settingsMainBtn.setOnClickListener {
             this.findNavController().navigate(R.id.settingsFragment)
         }
+
+        binding.emojiTextView2.setOnClickListener {
+            binding.emojiTextView2.text = Emoji.getRandomEmoji()
+        }
+        binding.emojiTextView3.setOnClickListener {
+            binding.emojiTextView3.text = Emoji.getRandomEmoji()
+        }
+        binding.emojiTextView4.setOnClickListener {
+            binding.emojiTextView4.text = Emoji.getRandomEmoji()
+        }
+        binding.emojiTextView6.setOnClickListener {
+            binding.emojiTextView6.text = Emoji.getRandomEmoji()
+        }
     }
 
     private fun initEmojies() {

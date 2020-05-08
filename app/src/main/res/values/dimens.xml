@@ -2,6 +2,19 @@
 <resources>
     <dimen name="emoji_font">10sp</dimen>
     <dimen name="emoji_small_font">8sp</dimen>
+    <dimen name="emoji_small_font_one">22sp</dimen>
+    <dimen name="emoji_small_font_two">18sp</dimen>
+    <dimen name="emoji_small_font_four">16sp</dimen>
+    <dimen name="emoji_small_font_nine">14sp</dimen>
+    <dimen name="emoji_small_font_sixteen">12sp</dimen>
+    <dimen name="emoji_small_font_thirty_two">10sp</dimen>
+    <dimen name="emoji_small_font_sixty_four">8sp</dimen>
+
+
     <dimen name="emoji_medium_font">8sp</dimen>
     <dimen name="emoji_huge_font">8sp</dimen>
+
+
+
+
 </resources>

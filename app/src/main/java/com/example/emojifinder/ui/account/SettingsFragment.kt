@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
@@ -35,6 +36,13 @@ class SettingsFragment : DaggerFragment() {
             viewModel.logOut()
             this.findNavController().popBackStack(R.id.settingsFragment, true)
             this.findNavController().navigate(R.id.signInFragment)
+        }
+
+        ((activity) as AppCompatActivity).setSupportActionBar(binding.toolbarSettings)
+        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.toolbarSettings.setNavigationOnClickListener {
+            this.findNavController().navigateUp()
         }
 
         return binding.root

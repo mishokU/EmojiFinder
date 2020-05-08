@@ -27,22 +27,60 @@
                 android:progressDrawable="@drawable/custom_progress_bar"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
 
-            <androidx.gridlayout.widget.GridLayout
-                android:id="@+id/game_emoji_field"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/game_back_button"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="start|top"
+                android:layout_marginStart="10dp"
+                android:paddingStart="10dp"
                 android:layout_below="@id/game_progress_bar"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:alpha="1"
-                android:layout_centerHorizontal="true"
-                app:alignmentMode="alignMargins"
+                android:padding="0dp"
+                app:icon="@drawable/back_24px"
+                app:strokeColor="@color/main_color"
+                app:rippleColor="@color/main_ripple_button_color"
+                app:cornerRadius="12dp"
+                app:iconTint="@color/background_color"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:backgroundTint="@android:color/transparent"
+                tools:ignore="RtlSymmetry" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/game_restart_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="start|top"
+                app:icon="@drawable/icons8_synchronize_32px_1"
+                android:layout_marginEnd="10dp"
+                android:padding="0dp"
+                app:rippleColor="@color/main_ripple_button_color"
+                app:cornerRadius="12dp"
+                android:paddingStart="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/game_progress_bar"
+                app:strokeColor="@color/main_color"
+                app:iconTint="@color/background_color"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:backgroundTint="@android:color/transparent" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                app:columnCount="10"
-                app:rowCount="10"
+                android:layout_below="@id/game_progress_bar"
                 android:layout_above="@id/stat_place">
 
-            </androidx.gridlayout.widget.GridLayout>
+                <androidx.gridlayout.widget.GridLayout
+                    android:id="@+id/game_emoji_field"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:alpha="1"
+                    app:alignmentMode="alignMargins"
+                    app:columnCount="10"
+                    app:rowCount="10" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/stat_place"
@@ -203,7 +241,7 @@
 
                 <LinearLayout
                     android:id="@+id/finder_game_field"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
 

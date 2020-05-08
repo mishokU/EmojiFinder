@@ -25,7 +25,6 @@ class GameViewModel @Inject constructor(
     fun writeGameStatistic(title : String?, statistics: UserLevelStatistics){
         coroutineScope.launch {
             levelStatistics.writeLevelStatistic(title, statistics)
-            _statisticResponse.value = levelStatistics.fetchUserLevelStatistic(title)
         }
     }
 
