@@ -30,6 +30,10 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideFirebaseUserData() : FirebaseUserData = FirebaseUserData()
+
+    @Singleton
+    @Provides
     fun provideFirebaseAuthHandler() : FirebaseAuthHandler =
         FirebaseAuthHandler()
 

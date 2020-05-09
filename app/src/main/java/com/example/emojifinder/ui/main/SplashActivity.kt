@@ -12,7 +12,6 @@ import com.example.emojifinder.R
 import com.example.emojifinder.core.di.launcher.LaunchDestination
 import com.example.emojifinder.core.di.launcher.LaunchViewModel
 import com.example.emojifinder.core.di.utils.injectViewModel
-import com.example.emojifinder.databinding.ActivitySplashBinding
 import com.example.emojifinder.domain.result.EventObserver
 import com.example.emojifinder.shared.utils.checkAllMatched
 import com.google.common.graph.GraphBuilder
@@ -24,8 +23,6 @@ class SplashActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    lateinit var binding : ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

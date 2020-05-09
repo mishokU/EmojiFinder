@@ -19,4 +19,6 @@
     <color name="green_color">#6ed65c</color>
     <color name="chest_sad_color">#ff5a79</color>
 
+    <color name="alert_background_color">#66202022</color>
+
 </resources>

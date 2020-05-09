@@ -44,11 +44,19 @@
     <string name="level">Level:</string>
     <string name="start_the_game">Start the game</string>
     <string name="hint">Hint</string>
-    <string name="game_hint">The goal of the game is to find all emojis from the category in n seconds</string>
+    <string name="game_hint">Purpose of the game: to find all emojis from the lower menu by comparing with the selected upper emoji in</string>
     <string name="start_game">Start game</string>
     <string name="exit_game_text">If you exit now, you’ll lose all progress</string>
     <string name="finish">Finish</string>
     <string name="back_to_game">Resume</string>
     <string name="try_again">Try again</string>
     <string name="next_level">Next level</string>
+    <string name="save">Save</string>
+    <string name="empty_levels">There is no statistisc for your level progress, but not you can do it!</string>
+    <string name="let_s_play">Let\'s play!</string>
+    <string name="some_error_ocure">Some error occur</string>
+    <string name="update">Update</string>
+    <string name="current_password">Current password</string>
+    <string name="check_password">Check password</string>
+    <string name="if_you_want_to_change_password_or_email_write_current_password">If you want to change password or email write current password</string>
 </resources>

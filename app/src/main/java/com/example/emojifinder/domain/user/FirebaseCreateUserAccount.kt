@@ -15,12 +15,20 @@ class FirebaseCreateUserAccountImpl @Inject constructor(private val collection: 
     : FirebaseCreateUserAccount, FirebaseInit() {
 
     override suspend fun createMainInfoBrunch(login : String, email : String, password : String) {
-        val brunch = "main"
-        val mainAccountInfo = MainAccountModel(login = login, email = email, password = password)
-        val data : HashMap<String, MainAccountModel> = hashMapOf()
-
-        data[brunch] = mainAccountInfo
-        collection.setCollectionData("users", data)
+        val mainAccountInfo = MainAccountModel(
+            login = login,
+            email = email,
+            password = password,
+            score = 0,
+            avatar = "\uD83D\uDE02"
+        )
+        if(mAuth.uid != null){
+            mFireStore.collection("users")
+                .document(mAuth.uid!!)
+                .collection("main")
+                .document("data")
+                .set(mainAccountInfo)
+        }
     }
 
     override fun createValuesBrunch() {

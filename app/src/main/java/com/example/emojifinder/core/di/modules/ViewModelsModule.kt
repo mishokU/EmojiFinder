@@ -47,4 +47,9 @@ abstract class ViewModelsModule {
     @ViewModelKey(GameViewModel::class)
     abstract fun bindGameViewModel(viewModel: GameViewModel) : ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(AccountViewModel::class)
+    abstract fun bindAccountViewModel(viewModel: AccountViewModel) : ViewModel
+
 }

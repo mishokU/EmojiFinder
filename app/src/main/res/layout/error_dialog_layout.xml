@@ -40,6 +40,7 @@
             android:id="@+id/okey_btn"
             android:text="@string/okey"
             android:layout_margin="10dp"
+            android:backgroundTint="@color/blue_color"
             app:backgroundTint="@color/blue_color"
             android:textColor="@color/background_color"
             android:layout_width="match_parent"

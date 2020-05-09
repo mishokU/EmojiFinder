@@ -8,6 +8,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.databinding.FragmentMainMenuBinding
 import com.example.emojifinder.shared.utils.Emoji
+import com.example.emojifinder.ui.utils.EndGameDialog
+import com.example.emojifinder.ui.utils.GameDialogs
 import dagger.android.support.DaggerFragment
 
 

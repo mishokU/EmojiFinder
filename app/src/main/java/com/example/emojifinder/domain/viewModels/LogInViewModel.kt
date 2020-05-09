@@ -11,6 +11,7 @@ import com.example.emojifinder.domain.auth.LoginModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -56,6 +57,11 @@ class LogInViewModel @Inject constructor(
                     firebaseAuthHandler.restorePassword(email.text.toString())
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        coroutineScope.cancel()
     }
 
     fun logOut() {

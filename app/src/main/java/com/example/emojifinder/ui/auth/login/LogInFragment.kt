@@ -78,7 +78,7 @@ class LogInFragment : DaggerFragment() {
             it?.let {
                 when(it){
                     is Result.Success -> {
-                        this.findNavController().popBackStack(R.id.logInFragment, true);
+                        this.findNavController().popBackStack(R.id.signInFragment, true);
                         this.findNavController().navigate(R.id.mainMenuFragment)
                     }
                     is Result.Loading -> {

@@ -19,18 +19,16 @@
                 android:id="@+id/game_progress_bar"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:progress="100"
+                android:layout_margin="10dp"
                 android:indeterminateBehavior="cycle"
                 android:progressDrawable="@drawable/custom_progress_bar"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/game_back_button"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="start|top"
                 android:layout_marginStart="10dp"
                 android:paddingStart="10dp"
@@ -39,7 +37,6 @@
                 app:icon="@drawable/back_24px"
                 app:strokeColor="@color/main_color"
                 app:rippleColor="@color/main_ripple_button_color"
-                app:cornerRadius="12dp"
                 app:iconTint="@color/background_color"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:backgroundTint="@android:color/transparent"
@@ -247,11 +244,15 @@
 
             </HorizontalScrollView>
 
-            <ProgressBar
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/level_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loading_dots"/>
 
         </RelativeLayout>
 

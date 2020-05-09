@@ -20,10 +20,6 @@ class ScaleGesture(c: Context?) : OnTouchListener, OnScaleGestureListener {
         return true
     }
 
-
-
-
-
     override fun onScale(detector: ScaleGestureDetector): Boolean {
         scaleFactor *= detector.scaleFactor
         scaleFactor = if (scaleFactor < 0.75f) 0.75f else scaleFactor // prevent our view from becoming too small //

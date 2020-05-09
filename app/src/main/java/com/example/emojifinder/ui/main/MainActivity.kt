@@ -24,6 +24,7 @@ class MainActivity : DaggerAppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
@@ -35,10 +36,8 @@ class MainActivity : DaggerAppCompatActivity() {
         navGraph.startDestination = intent.getIntExtra("destination", R.id.signInFragment)
         navigation.graph = navGraph
 
-        hideSystemUI()
+        //hideSystemUI()
     }
-
-    override fun onBackPressed() {}
 
     private fun hideSystemUI() {
         // Enables regular immersive mode.
@@ -50,21 +49,19 @@ class MainActivity : DaggerAppCompatActivity() {
 //                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 //                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 //                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                // Hide the nav bar and status bar
+                // Hide the nav bar and status bar
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
-               // or View.SYSTEM_UI_FLAG_FULLSCREEN)
+//                or View.SYSTEM_UI_FLAG_FULLSCREEN)
     }
 
-    private fun showSystemUI() {
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+    fun showSystemUI() {
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
     }
 
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) hideSystemUI()
-    }
+//    override fun onWindowFocusChanged(hasFocus: Boolean) {
+//        super.onWindowFocusChanged(hasFocus)
+//        if (hasFocus) hideSystemUI()
+//    }
 
 
 }

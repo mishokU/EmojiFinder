@@ -39,7 +39,6 @@ class CategoriesViewModel @Inject constructor(
                 _categoriesResponse.value = Result.Loading
             }
             val categories = firebaseCategories.fetchLevels()
-
             withContext(Dispatchers.Main){
                 _categoriesResponse.value = categories
             }

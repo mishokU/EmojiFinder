@@ -5,11 +5,9 @@
     <item android:drawable="@color/main_color"/>
 
     <item
-        android:gravity="center"
-        android:width="500dp"
-        android:height="500dp">
+        android:gravity="center">
 
-        <bitmap android:src="@drawable/splash_fff"
+        <bitmap android:src="@drawable/splash_screen"
             android:gravity="center"/>
 
         <animated-rotate android:drawable="@drawable/splash_fff"/>

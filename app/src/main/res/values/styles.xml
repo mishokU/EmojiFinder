@@ -74,9 +74,9 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="CustomDialog" parent="android:Theme.Dialog">
+    <style name="CustomDialog" parent="Theme.Design.Light">
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/alert_background_color</item>
     </style>
 
 

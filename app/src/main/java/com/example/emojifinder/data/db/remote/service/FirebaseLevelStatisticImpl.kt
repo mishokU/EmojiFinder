@@ -7,33 +7,33 @@ import java.lang.Exception
 
 class FirebaseLevelStatisticImpl : FirebaseInit() {
 
-    suspend fun writeLevelStatistic(title : String?, statistics: UserLevelStatistics){
-
-        val level : HashMap<String, UserLevelStatistics> = hashMapOf()
-        level[title!!] = statistics
+    fun writeLevelStatistic(title : String?, statistics: UserLevelStatistics){
 
         mFireStore
             .collection("users")
             .document(mUser!!.uid)
             .collection("levels")
-            .document(title)
-            .set(level)
+            .document(title!!)
+            .set(statistics)
     }
 
-    suspend fun fetchUserLevelStatistic(level : String?): Result<UserLevelStatistics?>{
+    suspend fun fetchUserLevelsStatistic(): Result<List<UserLevelStatistics?>>{
         return try {
             val document =  mFireStore
                 .collection("users")
                 .document(mUser!!.uid)
                 .collection("levels")
-                .document(level!!)
                 .get()
                 .await()
 
-            Result.Success(document.toObject(UserLevelStatistics::class.java))
+            val levels : MutableList<UserLevelStatistics?> = mutableListOf()
+            for(level in document.documents){
+                levels.add(level.toObject(UserLevelStatistics::class.java))
+            }
+
+            Result.Success(levels)
         } catch (e : Exception){
             Result.Error(e)
         }
     }
-
 }

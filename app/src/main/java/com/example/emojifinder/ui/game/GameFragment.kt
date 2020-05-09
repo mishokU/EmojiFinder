@@ -2,6 +2,7 @@ package com.example.emojifinder.ui.game
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.Gravity
@@ -10,9 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.widget.LinearLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
+import androidx.annotation.NonNull
 import androidx.core.animation.addListener
 import androidx.core.animation.addPauseListener
+import androidx.core.content.ContextCompat
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.widget.EmojiAppCompatButton
 import androidx.emoji.widget.EmojiAppCompatEditText
@@ -30,12 +34,15 @@ import com.example.emojifinder.domain.viewModels.CategoriesViewModel
 import com.example.emojifinder.domain.viewModels.GameViewModel
 import com.example.emojifinder.shared.utils.Emoji
 import com.example.emojifinder.ui.categories.SmallLevelModel
+import com.example.emojifinder.ui.utils.EndGameDialog
 import com.example.emojifinder.ui.utils.GameDialogs
 import com.example.emojifinder.ui.utils.ScaleGesture
 import com.example.emojifinder.ui.utils.ScreenSize
+import com.github.razir.progressbutton.bindProgressButton
+import com.github.razir.progressbutton.hideProgress
+import com.github.razir.progressbutton.showProgress
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
-import kotlin.random.Random
 
 
 class GameFragment : DaggerFragment() {
@@ -76,57 +83,57 @@ class GameFragment : DaggerFragment() {
 
         getGameCategory()
 
-        initProgressAnimator()
         initButtons()
         startGameDialog()
         loadGameLevel()
 
-        //createTestLevel()
-
         return binding.root
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+            true // default to enabled
+        ) {
+            override fun handleOnBackPressed() {
+                onBackButton()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,  // LifecycleOwner
+            callback
+        )
+    }
+
+
     private fun initButtons() {
         binding.gameBackButton.setOnClickListener {
-            animation.pause()
-            GameDialogs.showExitDialog(this@GameFragment)
-
-            GameDialogs.getGameExitButton().setOnClickListener {
-                GameDialogs.alert.dismiss()
-                animation.removeAllListeners()
-                animation.cancel()
-                this@GameFragment.findNavController().popBackStack()
-            }
-
-            GameDialogs.getResumeGameButton().setOnClickListener {
-                animation.resume()
-                GameDialogs.alert.dismiss()
-            }
-
-            GameDialogs.alert.setOnDismissListener {
-                animation.resume()
+            if(this.view != null){
+                onBackButton()
             }
         }
     }
 
+    private fun onBackButton() {
+        animation.pause()
+        GameDialogs.showExitDialog(this@GameFragment)
 
-    private fun createTestLevel(){
-        for(i : Int in 1..10){
-            for(j : Int in 1..10){
-                val emojiView = EmojiAppCompatEditText(requireContext())
-                emojiView.textSize = ScreenSize.getScreenSize(resources, list)
-                emojiView.isFocusable = false
-                emojiView.isSingleLine = true
-                emojiView.maxEmojiCount = 1
-                emojiView.background = null
-                emojiView.setPadding(0,0,0,0)
-                emojiView.setText(Emoji.getEmojiByUnicode(0x1F62F))
-                emojiView.alpha = 1.0f
-                binding.gameEmojiField.addView(emojiView)
-            }
+        GameDialogs.getGameExitButton().setOnClickListener {
+            GameDialogs.alert.dismiss()
+            animation.removeAllListeners()
+            animation.cancel()
+            this@GameFragment.findNavController().popBackStack()
+        }
+
+        GameDialogs.getResumeGameButton().setOnClickListener {
+            animation.resume()
+            GameDialogs.alert.dismiss()
+        }
+
+        GameDialogs.alert.setOnDismissListener {
+            animation.resume()
         }
     }
-
 
     private fun createKeyboardLevel() {
         val emojiSize = ScreenSize.getEmojiSize(resources)
@@ -171,7 +178,7 @@ class GameFragment : DaggerFragment() {
                 animation.pause()
 
                 val statistics = getLevelStatistics("Win")
-                GameDialogs.showEndGameDialog(this, statistics)
+                EndGameDialog.showEndGameDialog(this, statistics)
                 createEndGameListeners()
 
                 viewModel.writeGameStatistic(level.title, statistics)
@@ -182,22 +189,22 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun createEndGameListeners() {
-        GameDialogs.getRetryButton().setOnClickListener{
-            GameDialogs.alert.dismiss()
+        EndGameDialog.getRetryButton().setOnClickListener{
+            EndGameDialog.dialogView.dismiss()
             startGameDialog()
         }
 
-        GameDialogs.getNextLevelButton().setOnClickListener {
+        EndGameDialog.getNextLevelButton().setOnClickListener {
             startNextLevel()
         }
 
-        GameDialogs.getUpperRetryButton().setOnClickListener {
-            GameDialogs.alert.dismiss()
+        EndGameDialog.getUpperRetryButton().setOnClickListener {
+            EndGameDialog.dialogView.dismiss()
             startGameDialog()
         }
 
-        GameDialogs.getUpperBackButton().setOnClickListener {
-            GameDialogs.alert.dismiss()
+        EndGameDialog.getUpperBackButton().setOnClickListener {
+            EndGameDialog.dialogView.dismiss()
             this.findNavController().popBackStack()
         }
     }
@@ -208,6 +215,8 @@ class GameFragment : DaggerFragment() {
             mistakes = binding.gameMistakes.text.toString().toInt(),
             time = binding.gameTime.text.toString(),
             id = binding.gameLevel.text.toString().toInt(),
+            max_score = (20 * list.size),
+            title = level.title!!,
             result = status
         )
     }
@@ -216,15 +225,17 @@ class GameFragment : DaggerFragment() {
         level = GameFragmentArgs.fromBundle(
             requireArguments()
         ).Category
+        binding.gameLevel.text = level.id.toString()
     }
 
     private fun initProgressAnimator() {
         animation = ObjectAnimator
             .ofInt(binding.gameProgressBar, "progress", 100, 0)
         animation.duration = (level.time * 1000).toLong()
-
         animation.interpolator = AccelerateInterpolator()
+    }
 
+    private fun addEndAnimationListener(){
         animation.addListener(onEnd = {
             val statistics = getLevelStatistics("Lost")
             showEndGameDialog(statistics)
@@ -233,8 +244,9 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun showEndGameDialog(statistics: UserLevelStatistics) {
-        GameDialogs.showEndGameDialog(this, statistics)
+        EndGameDialog.showEndGameDialog(this, statistics)
         createEndGameListeners()
+
     }
 
     private fun startNextLevel() {
@@ -248,11 +260,17 @@ class GameFragment : DaggerFragment() {
                 when(result){
                     is Result.Loading -> {
                         binding.levelProgressBar.visibility = View.VISIBLE
+                        GameDialogs.getStartGameButton().showProgress {
+                            this.progressColor = ContextCompat.getColor(requireContext(),R.color.main_color)
+                            this.buttonText = ""
+                        }
                     }
                     is Result.Success -> {
                         binding.levelProgressBar.visibility = View.GONE
                         drawLevel(result.data)
                         createKeyboardLevel()
+                        GameDialogs.getStartGameButton().hideProgress(resources.getString(R.string.start_the_game))
+                        addEndAnimationListener()
                     }
                     is Result.Error -> {
 
@@ -319,18 +337,15 @@ class GameFragment : DaggerFragment() {
 
     private fun startGameDialog() {
         setEmptyStatistic()
-        setGameDialogs()
-        GameDialogs.showStartDialog(this)
+        initProgressAnimator()
+        GameDialogs.showStartDialog(this, level.time)
         GameDialogs.alert.setOnDismissListener {
             startTimer()
         }
+        bindProgressButton(GameDialogs.getStartGameButton())
         GameDialogs.getStartGameButton().setOnClickListener {
             GameDialogs.alert.dismiss()
         }
-    }
-
-    private fun setGameDialogs() {
-        initProgressAnimator()
     }
 
     private fun setEmptyStatistic() {
@@ -338,7 +353,9 @@ class GameFragment : DaggerFragment() {
         binding.gameMistakes.text = "0"
         binding.gameTime.text = level.time.toString()
         if(!levelEditTextList.isNullOrEmpty()) {
-            levelEditTextList[number-1].alpha = 0.4f
+            if(number != 0){
+                levelEditTextList[number-1].alpha = 0.4f
+            }
             number = 0
             keyboardNumber = 0
             levelEditTextList[number].alpha = 1.0f

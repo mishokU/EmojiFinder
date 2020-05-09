@@ -35,7 +35,7 @@
                 android:text="@string/back_to_game"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                app:backgroundTint="@color/blue_color"
+                android:backgroundTint="@color/blue_color"
                 android:textColor="@color/background_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -45,6 +45,7 @@
                 android:text="@string/finish"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/red_color"
                 app:backgroundTint="@color/red_color"
                 android:textColor="@color/background_color"
                 android:layout_width="match_parent"

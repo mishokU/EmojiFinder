@@ -64,7 +64,7 @@ class RegistrationFragment : DaggerFragment() {
                         }
                     }
                     is Result.Success -> {
-                        this.findNavController().popBackStack(R.id.registrationFragment, true);
+                        this.findNavController().popBackStack(R.id.signInFragment, true);
                         this.findNavController().navigate(R.id.mainMenuFragment)
                     }
                     is Result.Error -> {

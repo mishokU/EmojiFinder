@@ -24,6 +24,7 @@ class RegistrationViewModel @Inject constructor(
     val registrationResponse : LiveData<Result<AuthResult>>
         get() = _registrationResponse
 
+
     fun registration(
         login: TextInputEditText,
         email: TextInputEditText,
@@ -48,5 +49,4 @@ class RegistrationViewModel @Inject constructor(
             }
         }
     }
-
 }

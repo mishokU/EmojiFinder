@@ -1,5 +1,6 @@
 package com.example.emojifinder.core.di.modules
 
+import com.example.emojifinder.ui.account.MainAccountInfoFragment
 import com.example.emojifinder.ui.account.AccountFragment
 import com.example.emojifinder.ui.account.SettingsFragment
 import com.example.emojifinder.ui.auth.login.LogInFragment
@@ -30,12 +31,15 @@ abstract class FragmentsBuilderModule {
     abstract fun contributeCategoriesFragment() : CategoryGameFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeAccountFragment() : AccountFragment
-
-    @ContributesAndroidInjector
     abstract fun contributeSettingsFragment() : SettingsFragment
 
     @ContributesAndroidInjector
     abstract fun contributeGameFragment() : GameFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAccountFragment() : AccountFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMainAccountInfoFragment() : MainAccountInfoFragment
 
 }
