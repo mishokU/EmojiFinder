@@ -77,4 +77,13 @@ class FirebaseUserData : FirebaseInit() {
             })
         return result?.await()
     }
+
+    fun updateScore(score: Int) {
+        mFireStore
+            .collection("users")
+            .document(mUser!!.uid)
+            .collection("main")
+            .document("data")
+            .update("score", score)
+    }
 }

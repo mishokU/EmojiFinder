@@ -92,4 +92,10 @@ class AccountViewModel @Inject constructor(
         _levelsStatisticResponse.value = null
     }
 
+    fun updateUserFullScore(score: Int) {
+        coroutineScope.launch {
+            userMainData.updateScore(score)
+        }
+    }
+
 }

@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
+import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.databinding.FragmentAccountBinding
 import com.example.emojifinder.domain.viewModels.AccountViewModel
 import dagger.android.support.DaggerFragment
@@ -93,6 +94,7 @@ class AccountFragment : DaggerFragment() {
                         binding.loadingLevelsAccount.visibility = View.GONE
                         if(!it.data.isNullOrEmpty()){
                             adapter.submitList(it.data)
+                            updateUserFullScore(it.data)
                         } else {
                             binding.emptyPlace.visibility = View.VISIBLE
                             binding.errorTextAccount.text = resources.getString(R.string.empty_levels)
@@ -106,6 +108,14 @@ class AccountFragment : DaggerFragment() {
                 }
             }
         })
+    }
+
+    private fun updateUserFullScore(data: List<UserLevelStatistics?>) {
+        var score : Int = 0
+        for(level in data){
+            score += level!!.score
+        }
+        viewModel.updateUserFullScore(score)
     }
 
     private fun setBackButton() {
