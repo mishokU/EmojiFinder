@@ -7,15 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.databinding.FragmentMainAccountInfoBinding
 import com.example.emojifinder.domain.viewModels.AccountViewModel
+import com.example.emojifinder.domain.viewModels.SharedViewModel
 import com.example.emojifinder.ui.utils.hideKeyboard
 import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.DaggerFragment
+import java.nio.channels.Selector
 import javax.inject.Inject
 
 
@@ -24,6 +28,8 @@ class MainAccountInfoFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel : AccountViewModel
+
+    private val viewModelShared : SharedViewModel by activityViewModels()
 
     lateinit var binding : FragmentMainAccountInfoBinding
     lateinit var profile : MainAccountModel
@@ -37,16 +43,22 @@ class MainAccountInfoFragment : DaggerFragment() {
 
         viewModel = injectViewModel(viewModelFactory)
 
-
         addTextWatchers()
 
         getUserMainData()
         setBackButton()
         setSaveButton()
+        setAvatarButton()
         setCheckEmailAndPasswordButtons()
 
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    private fun setAvatarButton() {
+        binding.goToUserAvatar.setOnClickListener {
+            this.findNavController().navigate(R.id.accountAvatarFragment)
+        }
     }
 
     private fun setCheckEmailAndPasswordButtons() {
@@ -70,6 +82,7 @@ class MainAccountInfoFragment : DaggerFragment() {
 
     private fun setSaveButton() {
         binding.updateLoginBtn.setOnClickListener {
+            viewModelShared.updateLoginView(binding.loginRegistration.text.toString())
             viewModel.updateLogin(binding.loginRegistration)
         }
 

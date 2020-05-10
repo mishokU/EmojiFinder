@@ -1,12 +1,12 @@
 package com.example.emojifinder.core.di.modules
 
-import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.emojifinder.core.di.launcher.LaunchViewModel
 import com.example.emojifinder.core.di.utils.ViewModelFactory
 import com.example.emojifinder.core.di.utils.ViewModelKey
 import com.example.emojifinder.domain.viewModels.*
+import com.example.emojifinder.domain.viewModels.SharedViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

@@ -108,6 +108,14 @@
         <argument
             android:name="MainInfo"
             app:argType="com.example.emojifinder.data.db.remote.models.account.MainAccountModel"/>
+        <action
+            android:id="@+id/action_mainAccountInfoFragment_to_accountAvatarFragment"
+            app:destination="@id/accountAvatarFragment" />
 
     </fragment>
+    <fragment
+        android:id="@+id/accountAvatarFragment"
+        android:name="com.example.emojifinder.ui.account.AccountAvatarFragment"
+        android:label="fragment_account_avatar"
+        tools:layout="@layout/fragment_account_avatar" />
 </navigation>

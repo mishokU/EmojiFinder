@@ -35,8 +35,6 @@ class FirebaseUserData : FirebaseInit() {
             .collection("main")
             .document("data")
             .update("login", login)
-
-        println(login)
     }
 
     suspend fun updateEmailAndPassword(

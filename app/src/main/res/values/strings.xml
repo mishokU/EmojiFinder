@@ -51,7 +51,6 @@
     <string name="back_to_game">Resume</string>
     <string name="try_again">Try again</string>
     <string name="next_level">Next level</string>
-    <string name="save">Save</string>
     <string name="empty_levels">There is no statistisc for your level progress, but not you can do it!</string>
     <string name="let_s_play">Let\'s play!</string>
     <string name="some_error_ocure">Some error occur</string>
@@ -59,4 +58,5 @@
     <string name="current_password">Current password</string>
     <string name="check_password">Check password</string>
     <string name="if_you_want_to_change_password_or_email_write_current_password">If you want to change password or email write current password</string>
+    <string name="save">Save</string>
 </resources>

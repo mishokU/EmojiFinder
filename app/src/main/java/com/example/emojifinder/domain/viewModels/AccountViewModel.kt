@@ -33,10 +33,8 @@ class AccountViewModel @Inject constructor(
     var oldPassword : String ?= null
 
     init {
-        coroutineScope.launch {
-            fetchUserLevelsStatistic()
-            fetchMainUserData()
-        }
+        fetchUserLevelsStatistic()
+        fetchMainUserData()
     }
 
     fun updateLogin(login : TextInputEditText){
@@ -50,8 +48,8 @@ class AccountViewModel @Inject constructor(
         new_password: TextInputEditText
     ) {
         if(CheckOnValid.isEmailValid(new_email) && new_password.text.toString().count() >= 7){
-            coroutineScope.launch {
-                if(!oldEmail.isNullOrEmpty() && !oldPassword.isNullOrEmpty()){
+            if(!oldEmail.isNullOrEmpty() && !oldPassword.isNullOrEmpty()){
+                coroutineScope.launch {
                     userMainData.updateEmailAndPassword(oldEmail!!,oldPassword!!,
                         new_email.text.toString(),new_password.text.toString())
                 }
@@ -59,27 +57,31 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    private suspend fun fetchMainUserData() {
-        withContext(Dispatchers.Main){
-            _userMainDataResponse.value = Result.Loading
-        }
+    fun fetchMainUserData() {
+        coroutineScope.launch {
+            withContext(Dispatchers.Main){
+                _userMainDataResponse.value = Result.Loading
+            }
 
-        val user = userMainData.fetchUserMainInfo()
+            val user = userMainData.fetchUserMainInfo()
 
-        withContext(Dispatchers.Main){
-            _userMainDataResponse.value = user
+            withContext(Dispatchers.Main){
+                _userMainDataResponse.value = user
+            }
         }
     }
 
-    private suspend fun fetchUserLevelsStatistic() {
-        withContext(Dispatchers.Main){
-            _levelsStatisticResponse.value = Result.Loading
-        }
+    fun fetchUserLevelsStatistic() {
+        coroutineScope.launch {
+            withContext(Dispatchers.Main){
+                _levelsStatisticResponse.value = Result.Loading
+            }
 
-        val levels = levelStatistics.fetchUserLevelsStatistic()
+            val levels = levelStatistics.fetchUserLevelsStatistic()
 
-        withContext(Dispatchers.Main){
-            _levelsStatisticResponse.value = levels
+            withContext(Dispatchers.Main){
+                _levelsStatisticResponse.value = levels
+            }
         }
     }
 
@@ -95,6 +97,28 @@ class AccountViewModel @Inject constructor(
     fun updateUserFullScore(score: Int) {
         coroutineScope.launch {
             userMainData.updateScore(score)
+        }
+    }
+
+    fun userMainDataResponseComplete() {
+        when(val user = _userMainDataResponse.value){
+            is Result.Success -> {
+                if(user.data != null){
+                    val login: String = ""
+                    val avatar = user.data.avatar
+                    val password = user.data.password
+                    val email = user.data.email
+                    val score = user.data.score
+
+                    _userMainDataResponse.value = Result.Success(MainAccountModel(
+                        login = login,
+                        password = password,
+                        email = email,
+                        score = score,
+                        avatar = avatar
+                    ))
+                }
+            }
         }
     }
 

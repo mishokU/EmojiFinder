@@ -31,21 +31,28 @@ class SettingsFragment : DaggerFragment() {
         binding = FragmentSettingsBinding.inflate(inflater)
         // Inflate the layout for this fragment
 
+        setLogOutButton()
+        setBackButton()
+
+        return binding.root
+    }
+
+    private fun setLogOutButton() {
         viewModel = injectViewModel(viewModelFactory)
         binding.exitBtn.setOnClickListener {
             viewModel.logOut()
             this.findNavController().popBackStack(R.id.settingsFragment, true)
             this.findNavController().navigate(R.id.signInFragment)
         }
+    }
 
+    private fun setBackButton() {
         ((activity) as AppCompatActivity).setSupportActionBar(binding.toolbarSettings)
         ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.toolbarSettings.setNavigationOnClickListener {
             this.findNavController().navigateUp()
         }
-
-        return binding.root
     }
 
 }

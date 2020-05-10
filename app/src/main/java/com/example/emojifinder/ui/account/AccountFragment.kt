@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.emojifinder.domain.result.Result
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.databinding.FragmentAccountBinding
 import com.example.emojifinder.domain.viewModels.AccountViewModel
+import com.example.emojifinder.domain.viewModels.SharedViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -24,6 +26,11 @@ class AccountFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel : AccountViewModel
+
+
+    private val model: SharedViewModel by activityViewModels()
+
+    var login : String = ""
 
     lateinit var binding : FragmentAccountBinding
     lateinit var profile : MainAccountModel
@@ -39,6 +46,8 @@ class AccountFragment : DaggerFragment() {
         viewModel = injectViewModel(viewModelFactory)
         binding.lifecycleOwner = this
 
+        binding.profilePlace.visibility = View.INVISIBLE
+
         setBackButton()
         initUserLevelsAdapter()
         observeLevelsStatistic()
@@ -46,6 +55,11 @@ class AccountFragment : DaggerFragment() {
         initButtons()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.fetchMainUserData()
     }
 
     private fun initButtons() {

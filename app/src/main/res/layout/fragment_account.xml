@@ -36,6 +36,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
@@ -47,7 +48,6 @@
                     android:id="@+id/go_to_main_info_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:background="@color/main_color">
 
                     <RelativeLayout
@@ -81,6 +81,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/profile_login"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="22sp"
