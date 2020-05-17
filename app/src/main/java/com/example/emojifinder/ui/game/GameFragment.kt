@@ -267,6 +267,9 @@ class GameFragment : DaggerFragment() {
                     }
                     is Result.Success -> {
                         binding.levelProgressBar.visibility = View.GONE
+
+                        //viewModel.drawLevel(this, result.data)
+                        //viewModel.drawKeyBoard(this, result.data)
                         drawLevel(result.data)
                         createKeyboardLevel()
                         GameDialogs.getStartGameButton().hideProgress(resources.getString(R.string.start_the_game))

@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 class GameViewModel @Inject constructor(
     private val levelStatistics: FirebaseLevelStatisticImpl,
+
     @CoroutineScopeIO
     val coroutineScope: CoroutineScope
 ) : ViewModel() {

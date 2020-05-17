@@ -59,4 +59,7 @@
     <string name="check_password">Check password</string>
     <string name="if_you_want_to_change_password_or_email_write_current_password">If you want to change password or email write current password</string>
     <string name="save">Save</string>
+    <string name="reset">Reset</string>
+    <string name="generate">Generate</string>
+    <string name="shop">Shop</string>
 </resources>

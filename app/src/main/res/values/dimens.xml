@@ -11,7 +11,7 @@
     <dimen name="emoji_small_font_sixty_four">8sp</dimen>
 
 
-    <dimen name="emoji_medium_font">8sp</dimen>
+    <dimen name="emoji_medium_font">10sp</dimen>
     <dimen name="emoji_huge_font">8sp</dimen>
 
 

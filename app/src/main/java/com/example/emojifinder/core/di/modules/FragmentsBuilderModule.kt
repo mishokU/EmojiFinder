@@ -1,5 +1,6 @@
 package com.example.emojifinder.core.di.modules
 
+import com.example.emojifinder.ui.account.AccountAvatarFragment
 import com.example.emojifinder.ui.account.MainAccountInfoFragment
 import com.example.emojifinder.ui.account.AccountFragment
 import com.example.emojifinder.ui.account.SettingsFragment
@@ -41,5 +42,9 @@ abstract class FragmentsBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMainAccountInfoFragment() : MainAccountInfoFragment
+
+
+    @ContributesAndroidInjector
+    abstract fun contributeAccountAvatarFragment() : AccountAvatarFragment
 
 }

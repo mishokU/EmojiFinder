@@ -7,6 +7,7 @@
             type="com.example.emojifinder.data.db.remote.models.account.MainAccountModel" />
     </data>
 
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -46,9 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/ripple_color_account">
+                android:background="@color/main_color">
 
                 <LinearLayout
                     android:id="@+id/avatar_place"
@@ -66,34 +65,31 @@
                             android:layout_width="20dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:paddingStart="5dp"
+                            android:paddingStart="2dp"
                             app:icon="@drawable/icons8_back_16px_left"
-                            app:iconSize="15dp"
+                            app:iconSize="20dp"
                             app:strokeColor="@color/main_color"
                             app:iconTint="@android:color/white"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
-                        <androidx.emoji.widget.EmojiAppCompatEditText
+                        <androidx.emoji.widget.EmojiAppCompatButton
                             android:id="@+id/emoji_avatar"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:focusable="false"
-                            android:clickable="false"
-                            android:text="@{profile.avatar}"
+                            android:text="😂"
                             android:textSize="30sp"
                             android:textAlignment="center"
                             android:maxLines="1"
-                            android:background="@drawable/avatar_emoji_style"
-                            android:src="@drawable/emoji_finder" />
+                            android:background="@drawable/avatar_emoji_style" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/right_change_avatar_btn"
                             android:layout_width="20dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:paddingStart="1dp"
+                            android:paddingStart="0dp"
                             app:icon="@drawable/icons8_back_16px_right"
-                            app:iconSize="15dp"
+                            app:iconSize="20dp"
                             app:strokeColor="@color/main_color"
                             app:iconTint="@android:color/white"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
@@ -227,15 +223,21 @@
 
                     </LinearLayout>
 
-                    <androidx.gridlayout.widget.GridLayout
-                        android:id="@+id/your_emojis_place"
+                    <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="5dp"
                         android:layout_marginBottom="6dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/your_emojis_style"
-                        app:rowCount="2" />
+                        android:background="@drawable/your_emojis_style">
+
+                        <LinearLayout
+                            android:id="@+id/your_emojis_place"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
+                            android:orientation="vertical" />
+
+                    </HorizontalScrollView>
 
                 </LinearLayout>
 
@@ -260,14 +262,26 @@
                         app:iconTint="@android:color/white"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
-                    <TextView
+                    <RelativeLayout
                         android:layout_weight="1"
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:padding="5dp"
-                        android:layout_margin="5dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/generator_emoji_style"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <androidx.emoji.widget.EmojiAppCompatButton
+                            android:id="@+id/first_generator_field"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="5dp"
+                            android:clickable="true"
+                            android:textSize="24sp"
+                            android:textAlignment="center"
+                            android:focusable="true"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="5dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/generator_emoji_style"/>
+
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_weight="1"
@@ -279,14 +293,26 @@
                         android:textColor="@android:color/white"
                         android:text="+"/>
 
-                    <TextView
+                    <RelativeLayout
                         android:layout_weight="1"
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:padding="5dp"
-                        android:layout_margin="5dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/generator_emoji_style"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <androidx.emoji.widget.EmojiAppCompatButton
+                            android:id="@+id/second_generator_field"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="5dp"
+                            android:textSize="24sp"
+                            android:textAlignment="center"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="5dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/generator_emoji_style"/>
+
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_weight="1"
@@ -299,14 +325,26 @@
                         android:text="+"/>
 
 
-                    <TextView
+                    <RelativeLayout
                         android:layout_weight="1"
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:padding="5dp"
-                        android:layout_margin="5dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/generator_emoji_style"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <androidx.emoji.widget.EmojiAppCompatButton
+                            android:id="@+id/third_generator_field"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="5dp"
+                            android:textSize="24sp"
+                            android:textAlignment="center"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="5dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/generator_emoji_style"/>
+
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_weight="1"
@@ -319,14 +357,26 @@
                         android:text="="/>
 
 
-                    <TextView
+                    <RelativeLayout
                         android:layout_weight="1"
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:padding="5dp"
-                        android:layout_margin="5dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/generator_emoji_style"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <androidx.emoji.widget.EmojiButton
+                            android:id="@+id/result_generator_field"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="5dp"
+                            android:textSize="24sp"
+                            android:textAlignment="center"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="5dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/generator_emoji_style"/>
+
+                    </RelativeLayout>
 
                     <com.google.android.material.button.MaterialButton
                         android:layout_weight="1"
@@ -340,6 +390,123 @@
                         app:strokeColor="@color/main_color"
                         app:iconTint="@android:color/white"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/generate_emoji_set"
+                        android:text="@string/generate"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="5dp"
+                        android:backgroundTint="@color/blue_color"
+                        android:textColor="@color/background_color"
+                        android:textAllCaps="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/reset_emojis_btn"
+                        android:text="@string/reset"
+                        android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:textAllCaps="false"
+                        app:backgroundTint="@color/blue_color"
+                        android:textColor="@color/background_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/main_color"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:layout_margin="10dp"
+                        android:textColor="@color/background_color"
+                        android:text="@string/shop"/>
+
+                    <androidx.emoji.widget.EmojiAppCompatButton
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:singleLine="true"
+                            android:layout_margin="5dp">
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Animals"
+                                style="@style/Widget.MaterialComponents.Chip.Action"/>
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Animals"
+                                style="@style/Widget.MaterialComponents.Chip.Action"/>
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Animals"
+                                style="@style/Widget.MaterialComponents.Chip.Action"/>
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Animals"
+                                style="@style/Widget.MaterialComponents.Chip.Action"/>
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Animals"
+                                style="@style/Widget.MaterialComponents.Chip.Action"/>
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Animals"
+                                style="@style/Widget.MaterialComponents.Chip.Action"/>
+
+                        </com.google.android.material.chip.ChipGroup>
+
+                        <androidx.gridlayout.widget.GridLayout
+                            android:id="@+id/shop_emojis_place"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/your_emojis_style" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
