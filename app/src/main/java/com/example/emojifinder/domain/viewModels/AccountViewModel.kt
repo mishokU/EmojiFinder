@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.emojifinder.core.di.utils.CoroutineScopeIO
+import com.example.emojifinder.data.db.remote.models.account.AccountValuesModel
 import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.data.db.remote.service.FirebaseLevelStatisticImpl
@@ -33,6 +34,10 @@ class AccountViewModel @Inject constructor(
     private val _userEmojisResponse = MutableLiveData<Result<List<EmojiShopModel?>>>()
     val userEmojisResponse : LiveData<Result<List<EmojiShopModel?>>>
         get() = _userEmojisResponse
+
+    private val _userValuesResponse = MutableLiveData<Result<AccountValuesModel>>()
+    val userValuesResponse : LiveData<Result<AccountValuesModel>>
+        get() = _userValuesResponse
 
     var oldEmail : String ?= null
     var oldPassword : String ?= null
@@ -103,6 +108,18 @@ class AccountViewModel @Inject constructor(
         }
     }
 
+    fun fetchUserValues() {
+        coroutineScope.launch {
+            withContext(Dispatchers.Main){
+                _userValuesResponse.value = Result.Loading
+            }
+            val values = userMainData.fetchUserValues()
+            withContext(Dispatchers.Main){
+                _userValuesResponse.value = values
+            }
+        }
+    }
+
     override fun onCleared() {
         super.onCleared()
         coroutineScope.cancel()
@@ -118,9 +135,31 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    fun addEmoji(emoji: EmojiShopModel?) {
+    fun addEmoji(emoji: EmojiShopModel?, cost : Int, values : AccountValuesModel) {
         coroutineScope.launch {
             userMainData.addEmoji(emoji)
+            userMainData.updateValues(-cost, values)
+        }
+    }
+
+    fun removeEmoji(emoji: EmojiShopModel, cost : Int,values : AccountValuesModel) {
+        coroutineScope.launch {
+            userMainData.removeEmoji(emoji)
+            userMainData.updateValues(cost, values)
+        }
+    }
+
+    fun addGeneratedEmoji(generatedEmoji: EmojiShopModel?) {
+        if(generatedEmoji != null){
+            coroutineScope.launch {
+                userMainData.addEmoji(generatedEmoji)
+            }
+        }
+    }
+
+    fun updateUserAvatar(avatar: String) {
+        coroutineScope.launch {
+            userMainData.updateAvatar(avatar)
         }
     }
 

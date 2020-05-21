@@ -43,6 +43,10 @@ class MainMenuFragment : DaggerFragment() {
             this.findNavController().navigate(R.id.settingsFragment)
         }
 
+        binding.shopMainBtn.setOnClickListener {
+            this.findNavController().navigate(R.id.accountAvatarFragment)
+        }
+
         binding.emojiTextView2.setOnClickListener {
             binding.emojiTextView2.text = Emoji.getRandomEmoji()
         }

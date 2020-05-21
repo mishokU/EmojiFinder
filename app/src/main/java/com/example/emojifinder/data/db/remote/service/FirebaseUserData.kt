@@ -1,5 +1,6 @@
 package com.example.emojifinder.data.db.remote.service
 
+import com.example.emojifinder.data.db.remote.models.account.AccountValuesModel
 import com.example.emojifinder.data.db.remote.models.account.EmojiShopModelFirebase
 import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.domain.result.Result
@@ -43,7 +44,6 @@ class FirebaseUserData : FirebaseInit() {
             for(emoji in emojisQuery){
                 emojisList.add(emoji.toObject(EmojiShopModel::class.java))
             }
-            println(emojisList)
             Result.Success(emojisList)
 
         } catch (e: Exception){
@@ -108,11 +108,66 @@ class FirebaseUserData : FirebaseInit() {
             .update("score", score)
     }
 
+    suspend fun fetchUserValues() : Result<AccountValuesModel> {
+        return try {
+            val valuesQuery = mFireStore
+                .collection("users")
+                .document(mAuth.uid!!)
+                .collection("values")
+                .get()
+                .await()
+
+            val values : MutableList<AccountValuesModel> = mutableListOf()
+            for(emoji in valuesQuery){
+                values.add(emoji.toObject(AccountValuesModel::class.java))
+            }
+
+            Result.Success(values[0])
+        } catch(e : Exception){
+            Result.Error(e)
+        }
+    }
+
     fun addEmoji(emoji: EmojiShopModel?) {
         mFireStore.collection("users")
             .document(mAuth.uid!!)
             .collection("emojis")
-            .document()
-            .set(emoji!!)
+            .document(emoji!!.text)
+            .set(emoji)
+    }
+
+    fun removeEmoji(emoji: EmojiShopModel) {
+        mFireStore.collection("users")
+            .document(mAuth.uid!!)
+            .collection("emojis")
+            .document(emoji.text)
+            .delete()
+    }
+
+    fun updateValues(cost: Int, values : AccountValuesModel) {
+
+        if(cost > 0){
+            values.emojis -= 1
+            values.emos += cost
+        } else {
+            values.emojis += 1
+            values.emos += cost
+        }
+
+        mFireStore
+            .collection("users")
+            .document(mAuth.uid!!)
+            .collection("values")
+            .document("data")
+            .set(values)
+    }
+
+    fun updateAvatar(avatar: String) {
+        mFireStore
+            .collection("users")
+            .document(mUser!!.uid)
+            .collection("main")
+            .document("data")
+            .update("avatar", avatar)
     }
 }

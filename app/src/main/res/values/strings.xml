@@ -66,4 +66,7 @@
     <string name="there_is_no_emojis">There is no emojis</string>
     <string name="buy">Buy</string>
     <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="not_enough_emos">Not enough emos</string>
 </resources>

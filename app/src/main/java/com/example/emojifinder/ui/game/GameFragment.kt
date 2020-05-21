@@ -87,6 +87,8 @@ class GameFragment : DaggerFragment() {
         startGameDialog()
         loadGameLevel()
 
+
+
         return binding.root
     }
 
@@ -173,15 +175,18 @@ class GameFragment : DaggerFragment() {
             if(++number != list.size) {
                 levelEditTextList[number].alpha = 1.0f
             } else {
+                if(animation.isRunning){
+                    animation.removeAllListeners()
+                    animation.pause()
 
-                animation.removeAllListeners()
-                animation.pause()
+                    val statistics = getLevelStatistics("Win")
+                    EndGameDialog.showEndGameDialog(this, statistics)
+                    createEndGameListeners()
 
-                val statistics = getLevelStatistics("Win")
-                EndGameDialog.showEndGameDialog(this, statistics)
-                createEndGameListeners()
-
-                viewModel.writeGameStatistic(level.title, statistics)
+                    viewModel.writeGameStatistic(level.title, statistics)
+                } else {
+                    setEmptyStatistic()
+                }
             }
         } else {
             binding.gameMistakes.text = (binding.gameMistakes.text.toString().toInt() + 1).toString()
@@ -213,7 +218,7 @@ class GameFragment : DaggerFragment() {
         return UserLevelStatistics(
             score = binding.gameScore.text.toString().toInt(),
             mistakes = binding.gameMistakes.text.toString().toInt(),
-            time = binding.gameTime.text.toString(),
+            time = (animation.currentPlayTime.toDouble() / 1000.0).toString(),
             id = binding.gameLevel.text.toString().toInt(),
             max_score = (20 * list.size),
             title = level.title!!,
@@ -246,7 +251,6 @@ class GameFragment : DaggerFragment() {
     private fun showEndGameDialog(statistics: UserLevelStatistics) {
         EndGameDialog.showEndGameDialog(this, statistics)
         createEndGameListeners()
-
     }
 
     private fun startNextLevel() {
@@ -273,6 +277,7 @@ class GameFragment : DaggerFragment() {
                         drawLevel(result.data)
                         createKeyboardLevel()
                         GameDialogs.getStartGameButton().hideProgress(resources.getString(R.string.start_the_game))
+
                         addEndAnimationListener()
                     }
                     is Result.Error -> {

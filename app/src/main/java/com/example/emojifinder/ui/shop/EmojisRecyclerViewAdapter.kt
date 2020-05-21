@@ -129,4 +129,13 @@ class EmojisRecyclerViewAdapter(
     fun submitList(data: List<EmojiShopModel?>) {
         adapterlist.submitList(data)
     }
+
+    fun getGeneratedEmoji(generatedEmoji: String): EmojiShopModel? {
+        for(emoji in adapterlist.currentList){
+            if(emoji.text == generatedEmoji){
+               return emoji
+            }
+        }
+        return null
+    }
 }

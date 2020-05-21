@@ -37,8 +37,8 @@ class FirebaseCreateUserAccountImpl @Inject constructor(private val collection: 
     override fun createValuesBrunch() {
         val values = AccountValuesModel(
             boxes = 0,
-            emos = 0,
-            emojis = 0
+            emos = 200,
+            emojis = 1
         )
         if(mAuth.uid != null){
             mFireStore
@@ -70,7 +70,7 @@ class FirebaseCreateUserAccountImpl @Inject constructor(private val collection: 
                 .collection("users")
                 .document(mAuth.uid!!)
                 .collection("emojis")
-                .document()
+                .document("😀")
                 .set(emoji)
         }
     }

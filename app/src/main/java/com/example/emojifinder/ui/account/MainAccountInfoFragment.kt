@@ -46,6 +46,7 @@ class MainAccountInfoFragment : DaggerFragment() {
         addTextWatchers()
 
         getUserMainData()
+
         setBackButton()
         setSaveButton()
         setAvatarButton()
@@ -57,7 +58,9 @@ class MainAccountInfoFragment : DaggerFragment() {
 
     private fun setAvatarButton() {
         binding.goToUserAvatar.setOnClickListener {
-            this.findNavController().navigate(R.id.accountAvatarFragment)
+            this.findNavController().navigate(MainAccountInfoFragmentDirections.actionMainAccountInfoFragmentToAccountAvatarFragment(
+                profile
+            ))
         }
     }
 
