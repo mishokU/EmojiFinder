@@ -21,6 +21,8 @@ class FirebaseRegistrationImpl @Inject constructor(
                 .await()
             if(result != null){
                 createUserAccount.createMainInfoBrunch(data.login, data.email, data.password)
+                createUserAccount.createValuesBrunch()
+                createUserAccount.createUserEmojisBrunch()
             }
             Result.Success(result)
         } catch (e : Exception){

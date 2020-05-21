@@ -1,22 +1,26 @@
 package com.example.emojifinder.ui.account
 
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import androidx.emoji.widget.EmojiAppCompatButton
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentAccountAvatarBinding
+import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.AccountViewModel
-import com.example.emojifinder.shared.utils.Emoji
-import com.example.emojifinder.ui.utils.ScreenSize
+import com.example.emojifinder.domain.viewModels.ShopViewModel
+import com.example.emojifinder.ui.shop.EmojiShopModel
+import com.example.emojifinder.ui.shop.EmojisRecyclerViewAdapter
+import com.example.emojifinder.ui.utils.ShopEmojiDialog
+import com.example.emojifinder.ui.utils.closeFilters
+import com.example.emojifinder.ui.utils.openFilters
+import com.google.android.material.chip.Chip
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -27,12 +31,16 @@ class AccountAvatarFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel : AccountViewModel
 
-//    @Inject
-//    lateinit var viewModelFactoryShop: ViewModelProvider.Factory
-//    lateinit var viewModelShop : ShopViewModel
+    @Inject
+    lateinit var viewModelFactoryShop: ViewModelProvider.Factory
+    lateinit var viewModelShop : ShopViewModel
+
+    lateinit var adapter : EmojisRecyclerViewAdapter
+    lateinit var userEmojisAdapter : EmojisRecyclerViewAdapter
 
     lateinit var binding : FragmentAccountAvatarBinding
     var generatedList : HashMap<EmojiAppCompatButton, Boolean> = hashMapOf()
+    var isFilterVisible : Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,17 +50,139 @@ class AccountAvatarFragment : DaggerFragment() {
         // Inflate the layout for this fragment
 
         viewModel = injectViewModel(viewModelFactory)
-        //viewModelShop = injectViewModel(viewModelFactoryShop)
+        viewModelShop = injectViewModel(viewModelFactoryShop)
 
         setBackButton()
-
-        loadAccountEmojis()
-        loadShopEmojis()
 
         initGeneratorList()
         setGeneratorButtons()
 
+        initUserEmojisAdapter()
+        initShopAdapter()
+
+        initUserEmojisViewModel()
+        initShowFilterButton()
+
         return binding.root
+    }
+
+    private fun initShowFilterButton() {
+        binding.filterToggleButton.setOnClickListener {
+            handleFilters()
+        }
+        binding.applyFilters.setOnClickListener {
+            setCheckedFilters()
+            handleFilters()
+        }
+        binding.resetFilters.setOnClickListener {
+            adapter.resetFilters()
+            handleFilters()
+        }
+    }
+
+    private fun setCheckedFilters() {
+        val categories : MutableList<String> = mutableListOf()
+        for(chip in binding.categoriesChipGroup.children){
+            if((chip as Chip).isChecked){
+                categories.add(chip.text.toString())
+            }
+            adapter.filter(categories)
+        }
+    }
+
+    private fun handleFilters() {
+        isFilterVisible = if(!isFilterVisible){
+            openFilters(binding.shopRecyclerView, binding.filtersPlace)
+            binding.filterToggleButton
+                .setImageDrawable(ContextCompat.getDrawable(requireContext(),
+                    R.drawable.icons8_filter_100px_close))
+            true
+        } else {
+            closeFilters(binding.shopRecyclerView, binding.filtersPlace)
+            binding.filterToggleButton
+                .setImageDrawable(ContextCompat.getDrawable(requireContext(),
+                    R.drawable.icons8_filter_100px))
+            false
+        }
+    }
+
+    private fun initUserEmojisViewModel(){
+        viewModel.fetchUserEmojis()
+        viewModel.userEmojisResponse.observe(viewLifecycleOwner, Observer {
+            it?.let { userEmojis ->
+                when(userEmojis){
+                    is Result.Loading -> {
+                        binding.userEmojisProgressBar.visibility = View.VISIBLE
+                    }
+                    is Result.Success -> {
+                        binding.userEmojisProgressBar.visibility = View.INVISIBLE
+                        userEmojisAdapter.submitList(userEmojis.data)
+
+                        initShopViewModel(userEmojis.data)
+                    }
+                    is Result.Error -> {
+                        binding.userEmojisProgressBar.visibility = View.INVISIBLE
+                        binding.errorMessage.text = userEmojis.exception.message
+                    }
+                }
+            }
+        })
+    }
+
+    private fun initShopViewModel(data: List<EmojiShopModel?>) {
+        viewModelShop.emojisResponse.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                when(it){
+                    is Result.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+                    is Result.Success -> {
+                        binding.progressBar.visibility = View.INVISIBLE
+                        adapter.shopSubmitList(it.data, data)
+                        generateGroupChips(it.data)
+                    }
+                    is Result.Error -> {
+                        binding.progressBar.visibility = View.INVISIBLE
+                    }
+                }
+            }
+        })
+    }
+
+    private fun generateGroupChips(data: List<EmojiShopModel?>) {
+        val groups = data.distinctBy {
+            it?.group
+        }
+        for(model in groups){
+            val chip = Chip(requireContext())
+            chip.text = model?.group
+            chip.isChipIconVisible = true
+            chip.isClickable = true
+            chip.isCheckable = true
+            binding.categoriesChipGroup.addView(chip)
+        }
+    }
+
+    private fun initShopAdapter() {
+        adapter = EmojisRecyclerViewAdapter(EmojisRecyclerViewAdapter.OnShopItemClickListener{
+            showEmojiPriceAlert(it)
+        }, binding.progressBar,true)
+        binding.shopRecyclerView.adapter = adapter
+    }
+
+    private fun showEmojiPriceAlert(emoji: EmojiShopModel?) {
+        ShopEmojiDialog.showAlert(this, emoji)
+        ShopEmojiDialog.getBuyButton().setOnClickListener {
+            viewModel.addEmoji(emoji)
+            ShopEmojiDialog.dialogView.dismiss()
+        }
+    }
+
+    private fun initUserEmojisAdapter(){
+        userEmojisAdapter = EmojisRecyclerViewAdapter(EmojisRecyclerViewAdapter.OnShopItemClickListener{
+            handleEmojiNavigator(it!!.text)
+        }, binding.progressBar,false)
+        binding.userEmojisPlaceRv.adapter = userEmojisAdapter
     }
 
     private fun initGeneratorList() {
@@ -76,6 +206,30 @@ class AccountAvatarFragment : DaggerFragment() {
         }
         binding.emojiAvatar.setOnClickListener {
             changeButtonState(binding.emojiAvatar)
+        }
+
+        binding.generateEmojiSet.setOnClickListener {
+            val first = binding.firstGeneratorField.text.toString()
+            val second = binding.secondGeneratorField.text.toString()
+            val third = binding.thirdGeneratorField.text.toString()
+
+            val generatedEmoji = "$first$second$third"
+            binding.resultGeneratorField.text = generatedEmoji
+            if(binding.resultGeneratorField.lineCount == 1){
+                binding.resultGeneratorField.backgroundTintList =
+                    ContextCompat
+                        .getColorStateList(requireContext(), R.color.green_color)
+            } else {
+                binding.resultGeneratorField.backgroundTintList =
+                    ContextCompat
+                        .getColorStateList(requireContext(), R.color.red_color)
+            }
+        }
+
+        binding.resetEmojisBtn.setOnClickListener {
+            binding.firstGeneratorField.text = ""
+            binding.secondGeneratorField.text = ""
+            binding.thirdGeneratorField.text = ""
         }
     }
 
@@ -114,49 +268,11 @@ class AccountAvatarFragment : DaggerFragment() {
         }
     }
 
-    private fun loadShopEmojis() {
-
-    }
-
-    private fun loadAccountEmojis() {
-        val emojiSize = ScreenSize.getEmojiSize(resources)
-        for(i : Int in 0..2){
-
-            val horizontal = LinearLayout(requireContext())
-            horizontal.gravity = Gravity.CENTER_HORIZONTAL
-
-            for(j : Int in 0..7){
-
-                val buttonsParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
-                    100,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-
-                val emojiView = EmojiAppCompatButton(requireContext())
-                emojiView.isSingleLine = true
-                emojiView.layoutParams = buttonsParams
-                emojiView.background = resources.getDrawable(R.drawable.emoji_style)
-
-                emojiView.textSize = emojiSize
-
-                emojiView.text = Emoji.getRandomEmoji()
-                emojiView.setPadding(0,0,0,0)
-
-                emojiView.setOnClickListener {
-                    handleEmojiNavigator(it as EmojiAppCompatButton)
-                }
-
-                horizontal.addView(emojiView)
-            }
-            binding.yourEmojisPlace.addView(horizontal)
-        }
-    }
-
-    private fun handleEmojiNavigator(it: EmojiAppCompatButton) {
+    private fun handleEmojiNavigator(it: String) {
         for(button in generatedList){
             if(button.value)
             {
-                button.key.text = it.text
+                button.key.text = it
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.emojifinder.core.di.modules
 
+import android.app.Application
 import android.content.ClipboardManager
 import android.content.Context
 import android.net.ConnectivityManager
@@ -9,6 +10,7 @@ import com.example.emojifinder.ui.application.MainApplication
 import com.example.emojifinder.data.prefs.PreferenceStorage
 import com.example.emojifinder.data.prefs.SharedPreferenceStorage
 import com.example.emojifinder.core.di.utils.CoroutineScopeMain
+import com.example.emojifinder.data.db.local.emoji_json.ShopEmojiService
 import com.example.emojifinder.data.db.remote.api.FirebaseLevels
 import com.example.emojifinder.data.db.remote.api.FirebaseRegistration
 import com.example.emojifinder.data.db.remote.service.*
@@ -16,6 +18,7 @@ import com.example.emojifinder.domain.user.FirebaseCreateUserAccount
 import com.example.emojifinder.domain.user.FirebaseCreateUserAccountImpl
 import dagger.Module
 import dagger.Provides
+import dagger.android.support.DaggerApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
@@ -80,6 +83,11 @@ class AppModule {
     fun providesClipboardManager(context: Context): ClipboardManager =
         context.applicationContext.getSystemService(Context.CLIPBOARD_SERVICE)
                 as ClipboardManager
+
+    @Singleton
+    @Provides
+    fun provideShopEmojiService(application : Application)
+            : ShopEmojiService = ShopEmojiService(application)
 
     @CoroutineScopeIO
     @Provides

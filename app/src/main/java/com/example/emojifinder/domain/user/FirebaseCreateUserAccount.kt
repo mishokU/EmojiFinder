@@ -1,14 +1,17 @@
 package com.example.emojifinder.domain.user
 
+import com.example.emojifinder.data.db.remote.models.account.AccountValuesModel
 import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.data.db.remote.service.FirebaseCollection
 import com.example.emojifinder.data.db.remote.service.FirebaseInit
+import com.example.emojifinder.ui.shop.EmojiShopModel
 import javax.inject.Inject
 
 interface FirebaseCreateUserAccount {
     suspend fun createMainInfoBrunch(login : String, email : String, password : String)
     fun createValuesBrunch()
     fun createLevelStatisticBrunch()
+    fun createUserEmojisBrunch()
 }
 
 class FirebaseCreateUserAccountImpl @Inject constructor(private val collection: FirebaseCollection)
@@ -32,10 +35,43 @@ class FirebaseCreateUserAccountImpl @Inject constructor(private val collection: 
     }
 
     override fun createValuesBrunch() {
-        TODO("Not yet implemented")
+        val values = AccountValuesModel(
+            boxes = 0,
+            emos = 0,
+            emojis = 0
+        )
+        if(mAuth.uid != null){
+            mFireStore
+                .collection("users")
+                .document(mAuth.uid!!)
+                .collection("values")
+                .document("data")
+                .set(values)
+        }
     }
 
     override fun createLevelStatisticBrunch() {
         TODO("Not yet implemented")
+    }
+
+    override fun createUserEmojisBrunch() {
+        val emoji = EmojiShopModel(
+            id = 0,
+            codes = "1F600",
+            text =  "😀",
+            name = "grinning face",
+            category = "Smileys & Emotion (face-smiling)",
+            group = "Smileys & Emotion",
+            subgroup = "face-smiling"
+        )
+
+        if(mAuth.uid != null){
+            mFireStore
+                .collection("users")
+                .document(mAuth.uid!!)
+                .collection("emojis")
+                .document()
+                .set(emoji)
+        }
     }
 }

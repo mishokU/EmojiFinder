@@ -1,7 +1,9 @@
 package com.example.emojifinder.data.db.remote.service
 
+import com.example.emojifinder.data.db.remote.models.account.EmojiShopModelFirebase
 import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.domain.result.Result
+import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.EmailAuthProvider
 import kotlinx.coroutines.tasks.await
@@ -24,6 +26,27 @@ class FirebaseUserData : FirebaseInit() {
 
             Result.Success(main[0])
         } catch (e : Exception){
+            Result.Error(e)
+        }
+    }
+
+    suspend fun fetchUserEmojis() : Result<List<EmojiShopModel>> {
+        return try {
+            val emojisQuery = mFireStore
+                .collection("users")
+                .document(mAuth.uid!!)
+                .collection("emojis")
+                .get()
+                .await()
+
+            val emojisList : MutableList<EmojiShopModel> = mutableListOf()
+            for(emoji in emojisQuery){
+                emojisList.add(emoji.toObject(EmojiShopModel::class.java))
+            }
+            println(emojisList)
+            Result.Success(emojisList)
+
+        } catch (e: Exception){
             Result.Error(e)
         }
     }
@@ -83,5 +106,13 @@ class FirebaseUserData : FirebaseInit() {
             .collection("main")
             .document("data")
             .update("score", score)
+    }
+
+    fun addEmoji(emoji: EmojiShopModel?) {
+        mFireStore.collection("users")
+            .document(mAuth.uid!!)
+            .collection("emojis")
+            .document()
+            .set(emoji!!)
     }
 }

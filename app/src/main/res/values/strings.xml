@@ -62,4 +62,8 @@
     <string name="reset">Reset</string>
     <string name="generate">Generate</string>
     <string name="shop">Shop</string>
+    <string name="filter">Filter</string>
+    <string name="there_is_no_emojis">There is no emojis</string>
+    <string name="buy">Buy</string>
+    <string name="cancel">Cancel</string>
 </resources>

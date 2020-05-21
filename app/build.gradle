@@ -110,6 +110,10 @@ dependencies {
 
     implementation 'com.android.support:gridlayout-v7:22.2.1'
 
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    // For control over item selection of both touch and mouse driven selection
+    implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc01"
+
     //Emoji
     implementation "com.android.support:support-emoji-bundled:$version"
     implementation "com.android.support:support-emoji-appcompat:$version"
@@ -119,5 +123,7 @@ dependencies {
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.0.0'
 
     implementation "com.airbnb.android:lottie:3.0.0"
+
+    implementation 'com.google.code.gson:gson:2.8.6'
 
 }

@@ -78,6 +78,15 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@color/alert_background_color</item>
     </style>
+    
+    <style name="LeftButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:bottomLeftRadius">20dp</item>
+
+    </style>
+
+    <style name="RightButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:bottomRightRadius">20dp</item>
+    </style>
 
 
 

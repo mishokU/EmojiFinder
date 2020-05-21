@@ -10,6 +10,7 @@ import com.example.emojifinder.data.db.remote.service.FirebaseLevelStatisticImpl
 import com.example.emojifinder.data.db.remote.service.FirebaseUserData
 import com.example.emojifinder.domain.auth.CheckOnValid
 import com.example.emojifinder.domain.result.Result
+import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -28,6 +29,10 @@ class AccountViewModel @Inject constructor(
     private val _userMainDataResponse = MutableLiveData<Result<MainAccountModel?>>()
     val userMainDataResponse : LiveData<Result<MainAccountModel?>>
         get() = _userMainDataResponse
+
+    private val _userEmojisResponse = MutableLiveData<Result<List<EmojiShopModel?>>>()
+    val userEmojisResponse : LiveData<Result<List<EmojiShopModel?>>>
+        get() = _userEmojisResponse
 
     var oldEmail : String ?= null
     var oldPassword : String ?= null
@@ -71,7 +76,7 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    fun fetchUserLevelsStatistic() {
+    private fun fetchUserLevelsStatistic() {
         coroutineScope.launch {
             withContext(Dispatchers.Main){
                 _levelsStatisticResponse.value = Result.Loading
@@ -81,6 +86,19 @@ class AccountViewModel @Inject constructor(
 
             withContext(Dispatchers.Main){
                 _levelsStatisticResponse.value = levels
+            }
+        }
+    }
+
+    fun fetchUserEmojis(){
+        coroutineScope.launch {
+            withContext(Dispatchers.Main){
+                _userEmojisResponse.value = Result.Loading
+            }
+            val emojis = userMainData.fetchUserEmojis()
+
+            withContext(Dispatchers.Main){
+                _userEmojisResponse.value = emojis
             }
         }
     }
@@ -100,26 +118,11 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    fun userMainDataResponseComplete() {
-        when(val user = _userMainDataResponse.value){
-            is Result.Success -> {
-                if(user.data != null){
-                    val login: String = ""
-                    val avatar = user.data.avatar
-                    val password = user.data.password
-                    val email = user.data.email
-                    val score = user.data.score
-
-                    _userMainDataResponse.value = Result.Success(MainAccountModel(
-                        login = login,
-                        password = password,
-                        email = email,
-                        score = score,
-                        avatar = avatar
-                    ))
-                }
-            }
+    fun addEmoji(emoji: EmojiShopModel?) {
+        coroutineScope.launch {
+            userMainData.addEmoji(emoji)
         }
     }
 
 }
+

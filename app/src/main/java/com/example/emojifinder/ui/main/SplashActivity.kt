@@ -32,7 +32,7 @@ class SplashActivity : DaggerAppCompatActivity() {
         viewModel.launchDestination.observe(this, EventObserver { destination ->
             when (destination) {
                 LaunchDestination.MAIN_ACTIVITY -> {
-                    intent.putExtra("destination", R.id.mainMenuFragment)
+                    intent.putExtra("destination", R.id.accountAvatarFragment)
                     startActivity(intent)
                     finish()
                 }

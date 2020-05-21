@@ -52,10 +52,9 @@ abstract class ViewModelsModule {
     @ViewModelKey(AccountViewModel::class)
     abstract fun bindAccountViewModel(viewModel: AccountViewModel) : ViewModel
 
-
     @Binds
     @IntoMap
     @ViewModelKey(ShopViewModel::class)
-    abstract fun bindShopViewModel(viewModel : ShopViewModel) : ShopViewModel
+    abstract fun bindShopViewModel(viewModel : ShopViewModel) : ViewModel
 
 }
