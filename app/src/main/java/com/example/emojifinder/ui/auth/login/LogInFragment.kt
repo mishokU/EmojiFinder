@@ -6,7 +6,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,12 +15,11 @@ import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentLogInBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.LogInViewModel
-import com.example.emojifinder.ui.utils.ErrorDialog
+import com.example.emojifinder.ui.game.gameAlerts.ErrorDialog
 import com.example.emojifinder.ui.utils.hideKeyboard
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
-import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject

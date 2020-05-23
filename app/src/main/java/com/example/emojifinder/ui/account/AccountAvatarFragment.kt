@@ -20,7 +20,7 @@ import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.domain.viewModels.ShopViewModel
 import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.example.emojifinder.ui.shop.EmojisRecyclerViewAdapter
-import com.example.emojifinder.ui.utils.ShopEmojiDialog
+import com.example.emojifinder.ui.shop.ShopEmojiDialog
 import com.example.emojifinder.ui.utils.closeFilters
 import com.example.emojifinder.ui.utils.openFilters
 import com.google.android.material.chip.Chip
@@ -165,6 +165,8 @@ class AccountAvatarFragment : DaggerFragment() {
         val categories : MutableList<String> = mutableListOf()
         for(chip in binding.categoriesChipGroup.children){
             if((chip as Chip).isChecked){
+                binding.categoriesChipGroup.removeView(chip)
+                binding.selectedFilters.addView(chip)
                 categories.add(chip.text.toString())
             }
             adapter.filter(categories)
@@ -276,6 +278,14 @@ class AccountAvatarFragment : DaggerFragment() {
             chip.isChipIconVisible = true
             chip.isClickable = true
             chip.isCheckable = true
+
+            chip.setOnCheckedChangeListener { _, isChecked ->
+                if(!isChecked && chip.parent == binding.selectedFilters){
+                    binding.selectedFilters.removeView(chip)
+                    binding.categoriesChipGroup.addView(chip)
+                }
+            }
+
             binding.categoriesChipGroup.addView(chip)
         }
     }

@@ -1,16 +1,11 @@
-package com.example.emojifinder.ui.utils
+package com.example.emojifinder.ui.game.gameAlerts
 
 import android.annotation.SuppressLint
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.example.emojifinder.R
-import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
+import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
@@ -19,12 +14,15 @@ object GameDialogs  {
     lateinit var dialogView : View
     lateinit var alert : AlertDialog
 
-    fun showStartDialog(fragment: DaggerFragment, time: Int){
+    fun showStartDialog(
+        fragment: DaggerFragment,
+        level: SmallLevelModel
+    ){
         val builder = AlertDialog.Builder(fragment.requireContext())
         builder.setCancelable(false)
         val inflater = fragment.layoutInflater
         dialogView = inflater.inflate(R.layout.start_game_layout, null)
-        setGameTime(time)
+        setGameTime(level.time)
         builder.setView(dialogView)
         builder.create()
         alert = builder.show()
@@ -33,7 +31,7 @@ object GameDialogs  {
 
     @SuppressLint("SetTextI18n")
     private fun setGameTime(time: Int) {
-        val hint = this.dialogView.findViewById<TextView>(R.id.hintText)
+        val hint = dialogView.findViewById<TextView>(R.id.hintText)
         hint.text = hint.resources.getString(R.string.game_hint) + " " + time + "seconds"
     }
 
@@ -42,22 +40,22 @@ object GameDialogs  {
         builder.setCancelable(false)
         val inflater = fragment.layoutInflater
 
-        this.dialogView = inflater.inflate(R.layout.exit_game_layout, null)
-        builder.setView(this.dialogView)
+        dialogView = inflater.inflate(R.layout.exit_game_layout, null)
+        builder.setView(dialogView)
         builder.create()
         alert = builder.show()
     }
 
     fun getGameExitButton() : View {
-        return this.dialogView.findViewById(R.id.exit_game_btn)
+        return dialogView.findViewById(R.id.exit_game_btn)
     }
 
     fun getStartGameButton() : MaterialButton {
-        return this.dialogView.findViewById(R.id.start_game_btn)
+        return dialogView.findViewById(R.id.start_game_btn)
     }
 
     fun getResumeGameButton() : View {
-        return this.dialogView.findViewById(R.id.resume_game_btn)
+        return dialogView.findViewById(R.id.resume_game_btn)
     }
 
 }

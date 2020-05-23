@@ -1,12 +1,11 @@
-package com.example.emojifinder.ui.utils
+package com.example.emojifinder.ui.game.gameAlerts
 
 import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.example.emojifinder.R
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.google.android.material.button.MaterialButton
@@ -20,13 +19,12 @@ object EndGameDialog {
         dialogView = Dialog(fragment.requireContext(), R.style.CustomDialog)
         dialogView.setCancelable(false)
         dialogView.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        dialogView.window!!.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        dialogView.window!!.statusBarColor = ContextCompat.getColor(fragment.requireContext(), R.color.main_color)
         // layout to display
         dialogView.setContentView(R.layout.end_game_layout);
 
         // set color transparent
         dialogView.window!!.setBackgroundDrawable(fragment.resources.getDrawable(R.color.alert_background_color));
-
 
         val result = dialogView.findViewById<TextView>(R.id.level_result_et)
         val score = dialogView.findViewById<TextView>(R.id.level_result_score)

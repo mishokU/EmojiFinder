@@ -64,7 +64,8 @@ class AccountFragment : DaggerFragment() {
 
     private fun initButtons() {
         binding.profilePlace.setOnClickListener {
-            this.findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToMainAccountInfoFragment(profile))
+            this.findNavController().navigate(AccountFragmentDirections
+                .actionAccountFragmentToMainAccountInfoFragment(profile))
         }
     }
 

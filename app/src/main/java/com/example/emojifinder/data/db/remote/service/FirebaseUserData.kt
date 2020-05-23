@@ -170,4 +170,13 @@ class FirebaseUserData : FirebaseInit() {
             .document("data")
             .update("avatar", avatar)
     }
+
+    fun updateEmos(emos: Int) {
+        mFireStore
+            .collection("users")
+            .document(mAuth.uid!!)
+            .collection("values")
+            .document("data")
+            .update("emos", emos)
+    }
 }

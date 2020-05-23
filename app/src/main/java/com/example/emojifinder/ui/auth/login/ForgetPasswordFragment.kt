@@ -3,7 +3,6 @@ package com.example.emojifinder.ui.auth.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,7 @@ import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentForgetPasswordBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.LogInViewModel
-import com.example.emojifinder.ui.utils.ErrorDialog
+import com.example.emojifinder.ui.game.gameAlerts.ErrorDialog
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
 import dagger.android.support.DaggerFragment

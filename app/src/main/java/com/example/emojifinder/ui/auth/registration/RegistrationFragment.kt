@@ -15,7 +15,7 @@ import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentRegistrationBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.RegistrationViewModel
-import com.example.emojifinder.ui.utils.ErrorDialog
+import com.example.emojifinder.ui.game.gameAlerts.ErrorDialog
 import com.example.emojifinder.ui.utils.hideKeyboard
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress

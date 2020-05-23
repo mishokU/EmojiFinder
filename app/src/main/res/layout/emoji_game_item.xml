@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <FrameLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp">
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <androidx.emoji.widget.EmojiAppCompatButton
+                android:id="@+id/emoji_game_view"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:background="@drawable/ripple_color_game_emojis"
+                android:layout_margin="5dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+</layout>

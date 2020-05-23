@@ -1,4 +1,4 @@
-package com.example.emojifinder.ui.utils
+package com.example.emojifinder.ui.game.gameAlerts
 
 import android.annotation.SuppressLint
 import android.view.View

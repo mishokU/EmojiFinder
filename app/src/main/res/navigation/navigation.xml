@@ -68,6 +68,9 @@
         <action
             android:id="@+id/action_mainMenuFragment_to_categotyGameFragment"
             app:destination="@id/categotyGameFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_lootBoxesFragment"
+            app:destination="@id/lootBoxesFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -95,7 +98,8 @@
         tools:layout="@layout/fragment_categoty_game" >
         <action
             android:id="@+id/action_categotyGameFragment_to_gameFragment"
-            app:destination="@id/gameFragment" />
+            app:destination="@id/gameFragment"
+            app:enterAnim="@anim/fragment_fade_enter" />
 
 
     </fragment>
@@ -122,6 +126,14 @@
         <argument
             android:name="MainInfo"
             app:argType="com.example.emojifinder.data.db.remote.models.account.MainAccountModel"/>
+        <action
+            android:id="@+id/action_accountAvatarFragment_to_lootBoxesFragment"
+            app:destination="@id/lootBoxesFragment" />
 
     </fragment>
+    <fragment
+        android:id="@+id/lootBoxesFragment"
+        android:name="com.example.emojifinder.ui.boxes.LootBoxesFragment"
+        android:label="fragment_loot_boxes"
+        tools:layout="@layout/fragment_loot_boxes" />
 </navigation>

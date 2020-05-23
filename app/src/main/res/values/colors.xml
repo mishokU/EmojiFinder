@@ -21,4 +21,7 @@
 
     <color name="alert_background_color">#66202022</color>
 
+    <color name="colorStripeStart">#FFF0F4FD</color>
+    <color name="colorStripeEnd">#AB80F3</color>
+
 </resources>
