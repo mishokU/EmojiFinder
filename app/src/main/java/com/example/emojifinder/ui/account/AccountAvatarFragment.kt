@@ -18,6 +18,7 @@ import com.example.emojifinder.databinding.FragmentAccountAvatarBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.domain.viewModels.ShopViewModel
+import com.example.emojifinder.ui.boxes.EmojisBoxDialog
 import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.example.emojifinder.ui.shop.EmojisRecyclerViewAdapter
 import com.example.emojifinder.ui.shop.ShopEmojiDialog
@@ -45,6 +46,7 @@ class AccountAvatarFragment : DaggerFragment() {
     lateinit var profile : MainAccountModel
 
     var generatedList : HashMap<EmojiAppCompatButton, Boolean> = hashMapOf()
+
     var isFilterVisible : Boolean = false
 
     override fun onCreateView(
@@ -56,6 +58,8 @@ class AccountAvatarFragment : DaggerFragment() {
 
         viewModel = injectViewModel(viewModelFactory)
         viewModelShop = injectViewModel(viewModelFactoryShop)
+
+        EmojisBoxDialog.create(this)
 
         setBackButton()
         getUserMainData()
@@ -159,6 +163,9 @@ class AccountAvatarFragment : DaggerFragment() {
             adapter.resetFilters()
             handleFilters()
         }
+        binding.showChest.setOnClickListener {
+            this.findNavController().navigate(R.id.lootBoxesFragment)
+        }
     }
 
     private fun setCheckedFilters() {
@@ -199,6 +206,7 @@ class AccountAvatarFragment : DaggerFragment() {
                     }
                     is Result.Success -> {
                         binding.userEmojisProgressBar.visibility = View.INVISIBLE
+
                         userEmojisAdapter.submitList(userEmojis.data)
 
                         initShopViewModel(userEmojis.data)
@@ -257,7 +265,9 @@ class AccountAvatarFragment : DaggerFragment() {
                     }
                     is Result.Success -> {
                         binding.progressBar.visibility = View.INVISIBLE
+
                         adapter.shopSubmitList(it.data, data)
+
                         generateGroupChips(it.data)
                     }
                     is Result.Error -> {

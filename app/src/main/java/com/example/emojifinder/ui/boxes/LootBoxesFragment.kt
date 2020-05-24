@@ -5,56 +5,76 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.example.emojifinder.R
+import com.example.emojifinder.core.di.utils.injectViewModel
+import com.example.emojifinder.databinding.FragmentLootBoxesBinding
+import com.example.emojifinder.domain.result.Result
+import com.example.emojifinder.domain.viewModels.ShopViewModel
+import com.example.emojifinder.ui.shop.EmojiShopModel
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LootBoxesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class LootBoxesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class LootBoxesFragment : DaggerFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
+    @Inject
+    lateinit var viewModelFactoryShop: ViewModelProvider.Factory
+    lateinit var viewModelShop : ShopViewModel
+
+    lateinit var binding : FragmentLootBoxesBinding
+    lateinit var adapter : LootBoxRecyclerViewAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_loot_boxes, container, false)
+        binding = FragmentLootBoxesBinding.inflate(inflater)
+
+        viewModelShop = injectViewModel(viewModelFactoryShop)
+
+        binding.lifecycleOwner = this
+
+        initAdapter()
+        initShopViewModel()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LootBoxesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LootBoxesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun initAdapter() {
+        adapter = LootBoxRecyclerViewAdapter(LootBoxRecyclerViewAdapter.OnShopItemClickListener{
+
+        })
+        binding.chestRv.adapter = adapter
+    }
+
+    private fun initShopViewModel() {
+        viewModelShop.loadEmojisFromJson()
+        viewModelShop.emojisResponse.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                when(it){
+                    is Result.Loading -> {
+                    //    binding.progressBar.visibility = View.VISIBLE
+                    }
+                    is Result.Success -> {
+                      //  binding.progressBar.visibility = View.INVISIBLE
+
+                        adapter.submitList(it.data)
+
+                        //generateGroupChips(it.data)
+                    }
+                    is Result.Error -> {
+                    //    binding.progressBar.visibility = View.INVISIBLE
+                    }
                 }
             }
+        })
     }
+
+
 }

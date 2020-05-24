@@ -29,23 +29,19 @@ class ShopViewModel @Inject constructor(
         get() = _emojisResponse
 
     init {
+        loadEmojisFromJson()
+    }
+
+    fun loadEmojisFromJson() {
         coroutineScope.launch {
-            loadEmojisFromJson()
-        }
-    }
+            withContext(Dispatchers.Main) {
+                _emojisResponse.value = Result.Loading
+            }
+            val emojis = shopEmojiService.fetchEmojis()
 
-    fun fetchShopEmojis(){
-
-    }
-
-    private suspend fun loadEmojisFromJson() {
-        withContext(Dispatchers.Main){
-            _emojisResponse.value = Result.Loading
-        }
-        val emojis = shopEmojiService.fetchEmojis()
-
-        withContext(Dispatchers.Main){
-            _emojisResponse.value = emojis
+            withContext(Dispatchers.Main) {
+                _emojisResponse.value = emojis
+            }
         }
     }
 }

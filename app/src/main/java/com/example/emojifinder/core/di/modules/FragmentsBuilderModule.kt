@@ -7,6 +7,7 @@ import com.example.emojifinder.ui.account.SettingsFragment
 import com.example.emojifinder.ui.auth.login.LogInFragment
 import com.example.emojifinder.ui.auth.registration.RegistrationFragment
 import com.example.emojifinder.ui.auth.signin.SignInFragment
+import com.example.emojifinder.ui.boxes.LootBoxesFragment
 import com.example.emojifinder.ui.categories.CategoryGameFragment
 import com.example.emojifinder.ui.game.GameFragment
 import com.example.emojifinder.ui.main.MainMenuFragment
@@ -46,5 +47,8 @@ abstract class FragmentsBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAccountAvatarFragment() : AccountAvatarFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeLootBoxesFragment() : LootBoxesFragment
 
 }

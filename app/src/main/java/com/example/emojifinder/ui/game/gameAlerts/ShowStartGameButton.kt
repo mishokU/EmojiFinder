@@ -8,6 +8,7 @@ import android.app.Dialog
 import android.text.BoringLayout
 import android.view.View
 import android.view.Window
+import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
@@ -79,30 +80,34 @@ object ShowStartGameButton {
             buttonText = ""
         }
 
-        initAnimation()
-        setOnClickListener()
+        setOnClickStartListener()
     }
 
     private fun initAnimation() {
         loadingPlace = dialogView.findViewById(R.id.loading_game_place)
-        loadingPlace.animate().alpha(0.0f).setDuration(3000).setListener(
+
+        loadingPlace.animate().apply {
+            alpha(0.0f).setDuration(3000).setListener(
             object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator?) {
                     super.onAnimationEnd(animation)
                     count.playAnimation()
+                    firstPlay = false
                 }
             }
-        ).start()
+        )
+                .startDelay = 1000
+        }
     }
 
-    private fun setOnClickListener() {
+    private fun setOnClickStartListener() {
         count = dialogView.findViewById(R.id.count_down_timer)
 
         start.setOnClickListener {
-
-            firstPlay = false
             if(firstPlay) {
                 initAnimation()
+                firstPlay = false
+                println("here")
             }
         }
     }
@@ -110,7 +115,7 @@ object ShowStartGameButton {
     fun countListener() = count
 
     fun loaded() {
-        start.hideProgress("Loaded")
+        start.hideProgress("Start")
     }
 
 

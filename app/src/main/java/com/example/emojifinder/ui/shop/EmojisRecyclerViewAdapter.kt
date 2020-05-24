@@ -39,6 +39,10 @@ class EmojisRecyclerViewAdapter(
         }
     }
 
+    fun getList() : MutableList<EmojiShopModel> {
+        return adapterlist.currentList
+    }
+
     private lateinit var fullList : List<EmojiShopModel?>
 
     fun shopSubmitList(

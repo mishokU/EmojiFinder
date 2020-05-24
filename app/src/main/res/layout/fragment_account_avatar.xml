@@ -466,6 +466,16 @@
                         android:layout_height="45dp" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/show_chest"
+                        android:text="@string/open_chest"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/blue_color"
+                        android:textColor="@color/background_color"
+                        android:textAllCaps="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp" />
+
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/reset_emojis_btn"
                         android:text="@string/reset"
                         android:layout_weight="1"

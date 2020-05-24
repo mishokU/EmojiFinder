@@ -71,4 +71,5 @@
     <string name="game_hint_prefs">game hint</string>
     <string name="start">Start</string>
     <string name="help">Help</string>
+    <string name="open_chest">Open chest</string>
 </resources>

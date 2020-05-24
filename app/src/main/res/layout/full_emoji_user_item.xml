@@ -40,6 +40,13 @@
                     android:scaleType="center"
                     android:background="@drawable/right_button_emoji_shop" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Your emoji"
+                    android:textSize="16sp"/>
+
             </RelativeLayout>
 
             <RelativeLayout

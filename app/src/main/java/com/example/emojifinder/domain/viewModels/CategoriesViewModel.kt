@@ -38,7 +38,9 @@ class CategoriesViewModel @Inject constructor(
             withContext(Dispatchers.Main){
                 _categoriesResponse.value = Result.Loading
             }
+
             val categories = firebaseCategories.fetchLevels()
+
             withContext(Dispatchers.Main){
                 _categoriesResponse.value = categories
             }
@@ -50,6 +52,7 @@ class CategoriesViewModel @Inject constructor(
             withContext(Dispatchers.Main){
                 _levelResponse.value = Result.Loading
             }
+
             val level = firebaseCategories.fetchLevel(title)
 
             withContext(Dispatchers.Main){
