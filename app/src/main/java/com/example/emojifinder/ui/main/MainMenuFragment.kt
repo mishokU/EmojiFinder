@@ -29,6 +29,7 @@ class MainMenuFragment : DaggerFragment() {
     }
 
     private fun handleButtons() {
+
         binding.startArcadeGameBtn.setOnClickListener {
             this.findNavController().navigate(R.id.gameFragment)
         }
@@ -61,7 +62,7 @@ class MainMenuFragment : DaggerFragment() {
     }
 
     private fun initEmojies() {
-        binding.emojiTextView2.text = EmojiCompat.get().process("\uD83E\uDD0F\uD83C\uDFFF")
+        binding.emojiTextView2.text = Emoji.getEmojiByUnicode(unicode = 0x1F643)
         binding.emojiTextView4.text = Emoji.getEmojiByUnicode(unicode = 0x1F64F)
         binding.emojiTextView6.text = Emoji.getEmojiByUnicode(unicode = 0x1F44D)
         binding.emojiTextView3.text = Emoji.getEmojiByUnicode(unicode = 0x1F764)

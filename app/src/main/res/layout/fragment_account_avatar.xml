@@ -253,6 +253,7 @@
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
                             app:spanCount="5"
+                            android:scrollbars="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                             tools:listitem="@layout/emoji_shop_item"
                             android:padding="5dp" />
@@ -555,6 +556,7 @@
                             android:background="@drawable/your_emojis_style"
                             tools:listitem="@layout/emoji_shop_item"
                             android:padding="5dp"
+                            android:scrollbars="horizontal"
                             app:spanCount="8"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
 
