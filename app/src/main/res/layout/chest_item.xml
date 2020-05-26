@@ -13,12 +13,14 @@
             android:layout_margin="10dp"
             android:background="@drawable/icons8_treasure_chest_96px">
 
-            <androidx.emoji.widget.EmojiAppCompatEditText
+            <androidx.emoji.widget.EmojiAppCompatButton
                 android:id="@+id/chest_emoji"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="\uD83D\uDE19"
-                android:textSize="26sp"
+                android:focusable="false"
+                android:clickable="false"
+                android:background="@null"
+                android:textSize="20sp"
                 android:textAlignment="center"
                 android:layout_centerHorizontal="true" />
 

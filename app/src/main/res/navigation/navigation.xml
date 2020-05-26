@@ -135,5 +135,11 @@
         android:id="@+id/lootBoxesFragment"
         android:name="com.example.emojifinder.ui.boxes.LootBoxesFragment"
         android:label="fragment_loot_boxes"
-        tools:layout="@layout/fragment_loot_boxes" />
+        tools:layout="@layout/fragment_loot_boxes">
+
+        <argument
+            android:name="Values"
+            app:argType="com.example.emojifinder.data.db.remote.models.account.AccountValuesModel"/>
+
+    </fragment>
 </navigation>

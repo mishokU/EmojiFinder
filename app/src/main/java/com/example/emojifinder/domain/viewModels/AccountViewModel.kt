@@ -163,5 +163,24 @@ class AccountViewModel @Inject constructor(
         }
     }
 
+    fun updateUserBoxes(boxesCount: Int) {
+        coroutineScope.launch {
+            userMainData.updateBoxes(boxesCount)
+        }
+    }
+
+    fun updateUserEmojisCount(count: Int) {
+        coroutineScope.launch {
+            userMainData.updateEmojisCount(count)
+        }
+    }
+
+    fun updateUserEmos(emos : Int){
+        coroutineScope.launch {
+            userMainData.updateEmos(emos)
+        }
+    }
+
+
 }
 

@@ -32,7 +32,7 @@ class ShopViewModel @Inject constructor(
         loadEmojisFromJson()
     }
 
-    fun loadEmojisFromJson() {
+    private fun loadEmojisFromJson() {
         coroutineScope.launch {
             withContext(Dispatchers.Main) {
                 _emojisResponse.value = Result.Loading
@@ -44,4 +44,5 @@ class ShopViewModel @Inject constructor(
             }
         }
     }
+
 }

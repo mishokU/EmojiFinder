@@ -25,7 +25,7 @@ import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 import java.util.*
 
-object ShowStartGameButton {
+class showStartGameButton {
 
     lateinit var dialogView : Dialog
     private lateinit var fragment: DaggerFragment
@@ -102,12 +102,10 @@ object ShowStartGameButton {
 
     private fun setOnClickStartListener() {
         count = dialogView.findViewById(R.id.count_down_timer)
-
         start.setOnClickListener {
             if(firstPlay) {
                 initAnimation()
                 firstPlay = false
-                println("here")
             }
         }
     }

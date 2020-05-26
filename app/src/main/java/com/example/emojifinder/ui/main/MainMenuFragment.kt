@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.emoji.text.EmojiCompat
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.databinding.FragmentMainMenuBinding
@@ -60,7 +61,7 @@ class MainMenuFragment : DaggerFragment() {
     }
 
     private fun initEmojies() {
-        binding.emojiTextView2.text = Emoji.getEmojiByUnicode(unicode = 0x1F973)
+        binding.emojiTextView2.text = EmojiCompat.get().process("\uD83E\uDD0F\uD83C\uDFFF")
         binding.emojiTextView4.text = Emoji.getEmojiByUnicode(unicode = 0x1F64F)
         binding.emojiTextView6.text = Emoji.getEmojiByUnicode(unicode = 0x1F44D)
         binding.emojiTextView3.text = Emoji.getEmojiByUnicode(unicode = 0x1F764)

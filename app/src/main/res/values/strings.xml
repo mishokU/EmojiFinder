@@ -71,5 +71,12 @@
     <string name="game_hint_prefs">game hint</string>
     <string name="start">Start</string>
     <string name="help">Help</string>
-    <string name="open_chest">Open chest</string>
+    <string name="open_chest">Chests</string>
+    <string name="roll">Roll</string>
+    <string name="values">Values</string>
+    <string name="emoji_box">EMOJI BOX</string>
+    <string name="open">Open</string>
+    <string name="take">Take</string>
+    <string name="sell">Sell</string>
+    <string name="buy_chest_for_200_emos">Buy chest for 200 Emos</string>
 </resources>

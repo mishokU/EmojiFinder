@@ -12,9 +12,7 @@ import com.example.emojifinder.ui.account.UserLevelRecyclerViewAdapter
 import com.example.emojifinder.ui.shop.EmojiShopModel
 
 class LootBoxRecyclerViewAdapter(private val onClickListener: OnShopItemClickListener) : ListAdapter<EmojiShopModel,
-            LootBoxRecyclerViewAdapter.ShopEmojiViewHolder>(
-        DiffCallback) {
-
+            LootBoxRecyclerViewAdapter.ShopEmojiViewHolder>(DiffCallback) {
 
     companion object DiffCallback: DiffUtil.ItemCallback<EmojiShopModel>()     {
 
@@ -25,6 +23,10 @@ class LootBoxRecyclerViewAdapter(private val onClickListener: OnShopItemClickLis
         override fun areContentsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
             return oldItem.id == newItem.id
         }
+    }
+
+    private fun fling(){
+
     }
 
     private val CALLBACK = object : DiffUtil.ItemCallback<EmojiShopModel>() {
@@ -52,11 +54,19 @@ class LootBoxRecyclerViewAdapter(private val onClickListener: OnShopItemClickLis
         holder.bind(emoji)
     }
 
+    fun animate(i: Int) {
+
+    }
+
     class ShopEmojiViewHolder(private val binding: ChestItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(emojiShop: EmojiShopModel?) {
             binding.chestEmoji.setText(emojiShop?.text)
             binding.executePendingBindings()
+        }
+
+        fun getLayout(): ChestItemBinding {
+            return binding
         }
     }
 

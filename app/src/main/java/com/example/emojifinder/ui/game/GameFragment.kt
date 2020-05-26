@@ -30,7 +30,7 @@ import com.example.emojifinder.domain.viewModels.GameViewModel
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.example.emojifinder.ui.game.gameAlerts.EndGameDialog
 import com.example.emojifinder.ui.game.gameAlerts.GameDialogs
-import com.example.emojifinder.ui.game.gameAlerts.ShowStartGameButton
+import com.example.emojifinder.ui.game.gameAlerts.showStartGameButton
 import com.example.emojifinder.ui.utils.ScaleGesture
 import com.example.emojifinder.ui.utils.ScreenSize
 import dagger.android.support.DaggerFragment
@@ -57,6 +57,7 @@ class GameFragment : DaggerFragment() {
 
     private var list : List<EmojiModel?> = listOf()
     private var levelEditTextList : MutableList<EmojiAppCompatEditText> = mutableListOf()
+    private lateinit var showStartGameButton : showStartGameButton
 
     private var number : Int = 0
     private var keyboardNumber : Int = 0
@@ -77,6 +78,8 @@ class GameFragment : DaggerFragment() {
 
         gameHint = ShowGameHintPrefs(requireActivity())
 
+        showStartGameButton = showStartGameButton()
+
         getGameCategory()
 
         initButtons()
@@ -93,7 +96,7 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun initDialogs() {
-        ShowStartGameButton.create(this, level)
+        showStartGameButton.create(this, level)
     }
 
     private fun initGameKeyBoardAdapter() {
@@ -132,15 +135,15 @@ class GameFragment : DaggerFragment() {
             GameDialogs.showStartDialog(this, level)
             GameDialogs.alert.setOnDismissListener {
                 GameDialogs.alert.dismiss()
-                ShowStartGameButton.show()
+                showStartGameButton.show()
             }
             GameDialogs.getStartGameButton().setOnClickListener {
                 GameDialogs.alert.dismiss()
-                ShowStartGameButton.show()
+                showStartGameButton.show()
             }
             gameHint.isHintShown(true)
         } else {
-            ShowStartGameButton.show()
+            showStartGameButton.show()
         }
 
         setEmptyStatistic()
@@ -150,9 +153,9 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun initStartCircleEndAnimation(){
-        ShowStartGameButton.countListener().addAnimatorListener(object : Animator.AnimatorListener{
+        showStartGameButton.countListener().addAnimatorListener(object : Animator.AnimatorListener{
             override fun onAnimationEnd(animation: Animator?) {
-                ShowStartGameButton.dialogView.dismiss()
+                showStartGameButton.dialogView.dismiss()
                 startTimer()
             }
             override fun onAnimationRepeat(animation: Animator?) {}
@@ -309,7 +312,7 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun hidePlaceholder() {
-        ShowStartGameButton.loaded()
+        showStartGameButton.loaded()
     }
 
     private fun drawLevel(data: List<EmojiModel?>) {
@@ -354,7 +357,6 @@ class GameFragment : DaggerFragment() {
     override fun onResume() {
         super.onResume()
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-
         animation.addPauseListener(onResume = {
             it.resume()
         })

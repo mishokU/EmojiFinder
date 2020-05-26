@@ -2,8 +2,11 @@
 
 package com.example.emojifinder.ui.utils
 
+import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.util.DisplayMetrics
+import android.util.TypedValue
 import com.example.emojifinder.R
 import com.example.emojifinder.data.db.remote.models.EmojiModel
 
@@ -66,5 +69,10 @@ object ScreenSize {
             }
             else -> resources.getDimension(R.dimen.emoji_font)
         }
+    }
+
+    fun dipToPixels(context: Context, dipValue: Float): Float {
+        val metrics: DisplayMetrics = context.resources.displayMetrics
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics)
     }
 }

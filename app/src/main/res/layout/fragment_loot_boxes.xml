@@ -2,114 +2,339 @@
 
 <layout>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.boxes.LootBoxesFragment">
+    <data>
+        <variable
+            name="values"
+            type="com.example.emojifinder.data.db.remote.models.account.AccountValuesModel" />
+    </data>
 
 
-    <RelativeLayout
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/emoji_shop_place_style">
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/main_color"
+        tools:context=".ui.boxes.LootBoxesFragment">
 
-        <RelativeLayout
-            android:id="@+id/shop_place"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/LootboxToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="@drawable/emoji_shop_top_place_style">
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="20dp">
 
-            <ImageView
-                android:id="@+id/cancel_emoji_btn"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/icons8_delete_16px"
-                android:scaleType="center"
-                android:background="@drawable/right_button_emoji_shop" />
-
-            <TextView
+            <RelativeLayout
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Emoji shop"
-                android:textSize="16sp"/>
+                android:layout_height="match_parent"
+                android:background="@drawable/user_values"
+                android:layout_marginEnd="2dp"
+                android:padding="2dp">
 
-        </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginEnd="2dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/emos_pic"/>
+
+                    <TextView
+                        android:id="@+id/emos_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_gravity="center"
+                        android:text="@{String.valueOf(values.emos)}"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/user_values"
+                android:layout_marginEnd="2dp"
+                android:padding="2dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icons8_happy_96px"/>
+
+                    <TextView
+                        android:id="@+id/emojis_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_gravity="center"
+                        android:text="@{String.valueOf(values.emojis)}"/>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/user_values"
+                android:padding="2dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginEnd="2dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icons8_closed_treasure_chest_128px"/>
+
+                    <TextView
+                        android:id="@+id/boxes_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_gravity="center"
+                        android:text="@{String.valueOf(values.boxes)}"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/roll_emoji_btn"
-            android:layout_below="@id/shop_place">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/left_arrow"
-            android:layout_width="20dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_centerVertical="true"
-            android:scaleType="center"
-            android:layout_marginStart="10dp"
-            app:tint="@color/background_color"
-            android:src="@drawable/icons8_back_16px_left"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-        <HorizontalScrollView
+            android:id="@+id/box_place"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/left_arrow"
-            android:layout_toStartOf="@id/right_arrow"
-            android:layout_centerVertical="true">
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/emoji_box_place_style">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/chest_rv"
+            <RelativeLayout
+                android:id="@+id/shop_place"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/emoji_shop_top_place_style">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/emoji_box"
+                    android:textAlignment="center"
+                    android:textColor="@color/background_color"
+                    android:textSize="16sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_above="@id/roll_emoji_place"
+                android:layout_below="@id/shop_place">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/left_arrow"
+                android:layout_width="20dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/chest_item" />
+                android:layout_centerVertical="true"
+                android:scaleType="center"
+                android:layout_marginStart="10dp"
+                app:tint="@color/main_color"
+                android:src="@drawable/icons8_back_16px_left"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
-        </HorizontalScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/chest_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_toEndOf="@id/left_arrow"
+                    android:layout_toStartOf="@id/right_arrow"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/chest_item" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/right_arrow"
-            android:layout_width="20dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_centerVertical="true"
-            android:scaleType="center"
-            android:layout_marginEnd="10dp"
-            app:tint="@color/background_color"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/icons8_back_16px_right"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/right_arrow"
+                    android:layout_width="20dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_centerVertical="true"
+                    android:scaleType="center"
+                    android:layout_marginEnd="10dp"
+                    app:tint="@color/main_color"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/icons8_back_16px_right"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/roll_emoji_place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/roll_emoji_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cornerRadius="20dp"
+                    app:backgroundTint="@color/blue_color"
+                    android:text="@string/roll"
+                    android:textSize="20sp"
+                    android:textAllCaps="false" />
+
+            </RelativeLayout>
+
+
+            <View
+                android:id="@+id/open_chest_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/emoji_box_left_open_chest" />
 
         </RelativeLayout>
 
+        </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/roll_emoji_btn"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cornerRadius="20dp"
-            app:backgroundTint="@color/blue_color"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="Roll"
-            android:layout_alignParentBottom="true"
-            android:textSize="20sp"
-            android:textAllCaps="false"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
 
+            <androidx.emoji.widget.EmojiAppCompatButton
+                android:id="@+id/animated_view"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:textSize="20sp"
+                android:layout_centerInParent="true"
+                android:textAllCaps="false"
+                android:text="@string/open"
+                android:textColor="@color/background_color"
+                android:textAlignment="center"
+                android:background="@drawable/winner_emoji_style"/>
 
-    </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/emoji_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-60dp"
+                android:visibility="invisible"
+                android:orientation="vertical"
+                android:layout_toEndOf="@id/animated_view"
+                android:layout_centerVertical="true">
 
-</FrameLayout>
+                <TextView
+                    android:id="@+id/emoji_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Grinning face"
+                    android:layout_gravity="center"
+                    android:textSize="32sp"
+                    android:textColor="@color/background_color"/>
+
+                <TextView
+                    android:id="@+id/emoji_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Smileys Emotion"
+                    android:layout_gravity="center"
+                    android:textSize="22sp"
+                    android:textColor="@color/background_color" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/emoji_win_buttons"
+                android:layout_width="400dp"
+                android:layout_marginTop="50dp"
+                android:visibility="invisible"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/emoji_text"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="-60dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/take_winning_emoji"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    app:backgroundTint="@color/blue_color"
+                    android:text="@string/take"
+                    android:layout_weight="1"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/sell_winning_emoji"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    app:backgroundTint="@color/red_color"
+                    android:text="@string/sell"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buy_chest_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:alpha="0.8"
+                android:text="@string/buy_chest_for_200_emos"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                app:cornerRadius="20dp"
+                app:backgroundTint="@color/blue_color"
+                android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
 </layout>

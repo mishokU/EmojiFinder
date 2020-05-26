@@ -22,6 +22,7 @@ import com.example.emojifinder.ui.boxes.EmojisBoxDialog
 import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.example.emojifinder.ui.shop.EmojisRecyclerViewAdapter
 import com.example.emojifinder.ui.shop.ShopEmojiDialog
+import com.example.emojifinder.ui.utils.EmojiCost
 import com.example.emojifinder.ui.utils.closeFilters
 import com.example.emojifinder.ui.utils.openFilters
 import com.google.android.material.chip.Chip
@@ -30,6 +31,7 @@ import javax.inject.Inject
 
 
 class AccountAvatarFragment : DaggerFragment() {
+
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -44,6 +46,7 @@ class AccountAvatarFragment : DaggerFragment() {
 
     lateinit var binding : FragmentAccountAvatarBinding
     lateinit var profile : MainAccountModel
+    lateinit var userEmojisCount: String
 
     var generatedList : HashMap<EmojiAppCompatButton, Boolean> = hashMapOf()
 
@@ -71,8 +74,9 @@ class AccountAvatarFragment : DaggerFragment() {
         initShopAdapter()
 
         initUserEmojisViewModel()
-        initUserValuesViewModel()
+
         initShowFilterButton()
+
         initUserMainData()
 
         initGeneratorLeftRightButtons()
@@ -96,9 +100,11 @@ class AccountAvatarFragment : DaggerFragment() {
         binding.leftChangeAvatarBtn.setOnClickListener {
 
         }
+
         binding.rightChangeAvatarBtn.setOnClickListener {
 
         }
+
         binding.saveAvatarBtn.setOnClickListener {
             viewModel.updateUserAvatar(binding.emojiAvatar.text.toString())
             viewModel.fetchMainUserData()
@@ -164,7 +170,9 @@ class AccountAvatarFragment : DaggerFragment() {
             handleFilters()
         }
         binding.showChest.setOnClickListener {
-            this.findNavController().navigate(R.id.lootBoxesFragment)
+            this.findNavController().navigate(AccountAvatarFragmentDirections.actionAccountAvatarFragmentToLootBoxesFragment(
+                getUserValues()
+            ))
         }
     }
 
@@ -209,6 +217,10 @@ class AccountAvatarFragment : DaggerFragment() {
 
                         userEmojisAdapter.submitList(userEmojis.data)
 
+                        userEmojisCount = userEmojis.data.size.toString()
+
+                        initUserValuesViewModel()
+
                         initShopViewModel(userEmojis.data)
                     }
                     is Result.Error -> {
@@ -231,6 +243,8 @@ class AccountAvatarFragment : DaggerFragment() {
                         binding.loadingAvatar.visibility = View.GONE
                         profile = it.data!!
                         binding.profile = it.data
+
+
                     }
                 }
             }
@@ -246,7 +260,9 @@ class AccountAvatarFragment : DaggerFragment() {
 
                     }
                     is Result.Success -> {
-                        binding.values = values.data
+                        binding.emosCount.text = values.data.emos.toString()
+                        binding.boxesCount.text = values.data.boxes.toString()
+                        binding.emojisCount.text = userEmojisCount
                     }
                     is Result.Error -> {
 
@@ -267,7 +283,6 @@ class AccountAvatarFragment : DaggerFragment() {
                         binding.progressBar.visibility = View.INVISIBLE
 
                         adapter.shopSubmitList(it.data, data)
-
                         generateGroupChips(it.data)
                     }
                     is Result.Error -> {
@@ -279,6 +294,7 @@ class AccountAvatarFragment : DaggerFragment() {
     }
 
     private fun generateGroupChips(data: List<EmojiShopModel?>) {
+        binding.categoriesChipGroup.removeAllViews()
         val groups = data.distinctBy {
             it?.group
         }
@@ -295,7 +311,6 @@ class AccountAvatarFragment : DaggerFragment() {
                     binding.categoriesChipGroup.addView(chip)
                 }
             }
-
             binding.categoriesChipGroup.addView(chip)
         }
     }
@@ -310,12 +325,12 @@ class AccountAvatarFragment : DaggerFragment() {
     private fun showEmojiPriceAlert(emoji: EmojiShopModel?) {
         ShopEmojiDialog.showAlert(this, emoji)
         ShopEmojiDialog.getBuyButton().setOnClickListener {
-            val cost = ShopEmojiDialog.getEmojiBuyCost()
+            val cost = EmojiCost.getEmojiBuyCost(ShopEmojiDialog.getBuyButton())
             val userValues = getUserValues()
 
             if(cost < userValues.emos){
                 viewModel.addEmoji(emoji,
-                    ShopEmojiDialog.getEmojiBuyCost(),
+                    EmojiCost.getEmojiBuyCost(ShopEmojiDialog.getBuyButton()),
                     getUserValues()
                 )
 
@@ -392,6 +407,15 @@ class AccountAvatarFragment : DaggerFragment() {
          }
     }
 
+    private fun combineSuccessful(emoji: String?) : Boolean {
+        val emojiButton = EmojiAppCompatButton(requireContext())
+        emojiButton.text = emoji
+        if(emojiButton.lineCount == 1) {
+            return true
+        }
+        return false
+    }
+
     private fun changeButtonState(
         clickedButton: EmojiAppCompatButton
     ) {
@@ -446,7 +470,7 @@ class AccountAvatarFragment : DaggerFragment() {
             if (emoji != null) {
 
                 viewModel.removeEmoji(emoji,
-                    ShopEmojiDialog.getEmojiSellCost(),
+                    EmojiCost.getEmojiSellCost(ShopEmojiDialog.getSaleButton()),
                     getUserValues())
 
                 viewModel.fetchUserEmojis()

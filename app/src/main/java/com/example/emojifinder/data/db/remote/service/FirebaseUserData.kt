@@ -146,12 +146,17 @@ class FirebaseUserData : FirebaseInit() {
 
     fun updateValues(cost: Int, values : AccountValuesModel) {
 
-        if(cost > 0){
-            values.emojis -= 1
-            values.emos += cost
+        if(cost != 0){
+            if(cost > 0){
+                values.emojis -= 1
+                values.emos += cost
+            } else {
+                values.emojis += 1
+                values.emos += cost
+            }
         } else {
             values.emojis += 1
-            values.emos += cost
+            println(values.emojis)
         }
 
         mFireStore
@@ -178,5 +183,24 @@ class FirebaseUserData : FirebaseInit() {
             .collection("values")
             .document("data")
             .update("emos", emos)
+    }
+
+    fun updateBoxes(boxes: Int) {
+        mFireStore
+            .collection("users")
+            .document(mAuth.uid!!)
+            .collection("values")
+            .document("data")
+            .update("boxes", boxes)
+
+    }
+
+    fun updateEmojisCount(count: Int) {
+        mFireStore
+            .collection("users")
+            .document(mAuth.uid!!)
+            .collection("values")
+            .document("data")
+            .update("emojis", count)
     }
 }
