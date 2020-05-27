@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.localization.LocalizeAppFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/localize_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:paddingLeft="10dp"
+                android:background="@color/main_color"
+                android:paddingRight="10dp"
+                android:textAlignment="viewStart"
+                app:titleTextAppearance="@style/Toolbar.TitleText"
+                app:titleTextColor="@color/background_color"
+                app:title="@string/chose_country"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/main_color">
+
+                <androidx.gridlayout.widget.GridLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    app:columnCount="4">
+
+                    <androidx.emoji.widget.EmojiAppCompatButton
+                        android:id="@+id/russian_flag"
+                        android:layout_width="50dp"
+                        android:text="🇷🇺"
+                        android:background="@drawable/emoji_style_active"
+                        android:layout_margin="10dp"
+                        android:textSize="22sp"
+                        android:layout_centerInParent="true"
+                        app:rippleColor="@color/main_ripple_button_color"
+                        android:layout_height="50dp"/>
+
+                    <androidx.emoji.widget.EmojiAppCompatButton
+                        android:id="@+id/american_frag"
+                        android:layout_width="50dp"
+                        android:text="🇺🇸"
+                        android:textSize="22sp"
+                        android:background="@drawable/emoji_style"
+                        android:layout_margin="10dp"
+                        android:layout_centerInParent="true"
+                        app:rippleColor="@color/main_ripple_button_color"
+                        android:layout_height="50dp"/>
+
+                    <androidx.emoji.widget.EmojiAppCompatButton
+                        android:id="@+id/indie_flag"
+                        android:layout_width="50dp"
+                        android:text="🇮🇳"
+                        android:textSize="22sp"
+                        android:background="@drawable/emoji_style"
+                        android:layout_margin="10dp"
+                        android:layout_centerInParent="true"
+                        app:rippleColor="@color/main_ripple_button_color"
+                        android:layout_height="50dp"/>
+
+                    <androidx.emoji.widget.EmojiAppCompatButton
+                        android:id="@+id/dutch_flag"
+                        android:layout_width="50dp"
+                        android:text="🇩🇪"
+                        android:textSize="22sp"
+                        android:background="@drawable/emoji_style"
+                        android:layout_margin="10dp"
+                        android:layout_centerInParent="true"
+                        app:rippleColor="@color/main_ripple_button_color"
+                        android:layout_height="50dp"/>
+
+
+                </androidx.gridlayout.widget.GridLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/save_language_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:text="@string/save"
+                app:backgroundTint="@color/blue_color" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

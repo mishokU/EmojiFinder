@@ -336,6 +336,7 @@ class LootBoxesFragment : DaggerFragment() {
     private fun setBackButton() {
         ((activity) as AppCompatActivity).setSupportActionBar(binding.LootboxToolbar)
         ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        ((activity) as AppCompatActivity).supportActionBar?.title = ""
 
         binding.LootboxToolbar.setNavigationOnClickListener {
             this.findNavController().navigateUp()

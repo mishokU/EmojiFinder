@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -39,11 +40,22 @@ class LogInFragment : DaggerFragment() {
         binding = FragmentLogInBinding.inflate(inflater)
         // Inflate the layout for this fragment
 
+        initToolbar()
+
         handleRegistrationStatus()
         handleLogInButton()
         handleForgetPassword()
 
         return binding.root
+    }
+
+    private fun initToolbar() {
+        ((activity) as AppCompatActivity).setSupportActionBar(binding.loginToolbar)
+        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.loginToolbar.setNavigationOnClickListener {
+            this.findNavController().navigateUp()
+        }
     }
 
     override fun onStart() {

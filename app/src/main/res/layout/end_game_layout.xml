@@ -61,7 +61,7 @@
                 android:textColor="@color/green_color"
                 android:textSize="40sp"
                 android:textAlignment="center"
-                android:text="Victory"/>
+                android:text="@string/victory"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -181,7 +181,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:textSize="32sp"
-                        android:text="Mistakes:"/>
+                        android:text="@string/mistakes"/>
 
                     <TextView
                         android:id="@+id/game_result_mistakes"
@@ -214,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:textSize="32sp"
-                        android:text="@string/level"/>
+                        android:text="@string/game_level"/>
 
                     <TextView
                         android:id="@+id/game_result_level"

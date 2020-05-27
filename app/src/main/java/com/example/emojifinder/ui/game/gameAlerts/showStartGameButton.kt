@@ -15,6 +15,7 @@ import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.example.emojifinder.R
 import com.example.emojifinder.ui.categories.SmallLevelModel
@@ -31,6 +32,7 @@ class showStartGameButton {
     private lateinit var fragment: DaggerFragment
     private lateinit var count : LottieAnimationView
     private lateinit var start : MaterialButton
+    private lateinit var back : MaterialButton
     private lateinit var loadingPlace : RelativeLayout
 
     private var firstPlay : Boolean = true
@@ -73,6 +75,7 @@ class showStartGameButton {
 
     private fun initStartButton(){
         start = dialogView.findViewById(R.id.start_circle_game_button)
+        back = dialogView.findViewById(R.id.back_circle_game_button)
 
         fragment.bindProgressButton(start)
         start.showProgress {
@@ -94,9 +97,7 @@ class showStartGameButton {
                     count.playAnimation()
                     firstPlay = false
                 }
-            }
-        )
-                .startDelay = 1000
+            })
         }
     }
 
@@ -108,12 +109,22 @@ class showStartGameButton {
                 firstPlay = false
             }
         }
+
+        back.setOnClickListener {
+            dialogView.dismiss()
+            fragment.findNavController().navigateUp()
+        }
+
     }
 
     fun countListener() = count
 
     fun loaded() {
-        start.hideProgress("Start")
+        start.hideProgress(fragment.resources.getString(R.string.start))
+    }
+
+    fun error() {
+        start.hideProgress("Error occurred")
     }
 
 

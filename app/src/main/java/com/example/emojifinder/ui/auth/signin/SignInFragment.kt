@@ -47,5 +47,8 @@ class SignInFragment : DaggerFragment() {
         binding.createAccountBtn.setOnClickListener {
             this.findNavController().navigate(R.id.registrationFragment)
         }
+        binding.languageIv.setOnClickListener {
+            this.findNavController().navigate(R.id.localizeAppFragment)
+        }
     }
 }

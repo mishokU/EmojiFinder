@@ -10,6 +10,10 @@ import com.example.emojifinder.ui.auth.signin.SignInFragment
 import com.example.emojifinder.ui.boxes.LootBoxesFragment
 import com.example.emojifinder.ui.categories.CategoryGameFragment
 import com.example.emojifinder.ui.game.GameFragment
+import com.example.emojifinder.ui.help.HelpFragment
+import com.example.emojifinder.ui.help.ReadQAFragment
+import com.example.emojifinder.ui.help.WriteQuestionFragment
+import com.example.emojifinder.ui.localization.LocalizeAppFragment
 import com.example.emojifinder.ui.main.MainMenuFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -44,11 +48,22 @@ abstract class FragmentsBuilderModule {
     @ContributesAndroidInjector
     abstract fun contributeMainAccountInfoFragment() : MainAccountInfoFragment
 
-
     @ContributesAndroidInjector
     abstract fun contributeAccountAvatarFragment() : AccountAvatarFragment
 
     @ContributesAndroidInjector
     abstract fun contributeLootBoxesFragment() : LootBoxesFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeLocalizeFragment() : LocalizeAppFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeHelpFragment() : HelpFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeReadQAFragment() : ReadQAFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeWriteQuestionFragment() : WriteQuestionFragment
 
 }

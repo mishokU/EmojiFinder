@@ -141,18 +141,12 @@
             android:gravity="bottom"
             android:layout_gravity="bottom">
 
-            <com.google.android.material.button.MaterialButton
+            <androidx.emoji.widget.EmojiAppCompatButton
                 android:id="@+id/language_iv"
                 android:layout_width="46dp"
-                style="@style/CustomButtonImage"
-                app:icon="@drawable/flag_round"
-                app:iconSize="40dp"
-                app:iconPadding="0dp"
-                app:rippleColor="@color/main_ripple_button_color"
-                android:backgroundTint="@color/background_color"
-                app:iconGravity="textStart"
-                app:cornerRadius="30dp"
-                app:iconTint="@null"
+                android:text="🇺🇸"
+                android:textSize="22sp"
+                android:background="@drawable/ripple_color_countries"
                 android:layout_height="46dp"/>
 
             <TextView

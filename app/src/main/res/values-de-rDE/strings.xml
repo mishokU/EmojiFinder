@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Emoji Finder</string>
     <string name="title_login">Login Module</string>
@@ -82,19 +83,6 @@
     <string name="mishok_games">Mishok Games</string>
     <string name="exit">Exit</string>
     <string name="start">Start</string>
-    <string name="game_level">Level: </string>
+    <string name="game_level">game_level</string>
     <string name="save_info">Save</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="account">Account</string>
-    <string name="game">Game</string>
-    <string name="statistics">Statistics</string>
-    <string name="other">Other</string>
-    <string name="how_to_delete_account">How to delete account ?</string>
-    <string name="help_forgot_password">I need to log in, but I can’t remember the password. Could you help me ?</string>
-    <string name="bad_nick_name">Why my nick name contains 👶</string>
-    <string name="how_to_play">How to play ?</string>
-    <string name="i_passed_the_level">I passed the level, but the statistics were not recorded, what should I do?</string>
-    <string name="how_to_disable_adds">How to disable adds ?</string>
 </resources>

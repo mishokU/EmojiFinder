@@ -28,6 +28,12 @@
         <action
             android:id="@+id/action_signInFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_localizeAppFragment"
+            app:destination="@id/localizeAppFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
 
     </fragment>
     <fragment
@@ -71,6 +77,9 @@
         <action
             android:id="@+id/action_mainMenuFragment_to_lootBoxesFragment"
             app:destination="@id/lootBoxesFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -142,4 +151,31 @@
             app:argType="com.example.emojifinder.data.db.remote.models.account.AccountValuesModel"/>
 
     </fragment>
+    <fragment
+        android:id="@+id/localizeAppFragment"
+        android:name="com.example.emojifinder.ui.localization.LocalizeAppFragment"
+        android:label="fragment_localize_app"
+        tools:layout="@layout/fragment_localize_app" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.example.emojifinder.ui.help.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" >
+        <action
+            android:id="@+id/action_helpFragment_to_readQAFragment"
+            app:destination="@id/readQAFragment" />
+        <action
+            android:id="@+id/action_helpFragment_to_writeQuestionFragment"
+            app:destination="@id/writeQuestionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/readQAFragment"
+        android:name="com.example.emojifinder.ui.help.ReadQAFragment"
+        android:label="fragment_read_q_a"
+        tools:layout="@layout/fragment_read_q_a" />
+    <fragment
+        android:id="@+id/writeQuestionFragment"
+        android:name="com.example.emojifinder.ui.help.WriteQuestionFragment"
+        android:label="fragment_write_question"
+        tools:layout="@layout/fragment_write_question" />
 </navigation>

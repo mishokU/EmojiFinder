@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#6C787A</color>
 
     <color name="main_color">#4f5154</color>
     <color name="main_ripple_button_color">#696D73</color>

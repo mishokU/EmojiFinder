@@ -1,5 +1,6 @@
 package com.example.emojifinder.ui.main
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,9 +22,10 @@ class MainMenuFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainMenuBinding.inflate(inflater)
-        // Inflate the layout for this fragment
+
         initEmojies()
         handleButtons()
+        setPopularEmojis()
 
         return binding.root
     }
@@ -47,24 +49,47 @@ class MainMenuFragment : DaggerFragment() {
             this.findNavController().navigate(R.id.accountAvatarFragment)
         }
 
+        binding.helpMainBtn.setOnClickListener {
+            this.findNavController().navigate(R.id.helpFragment)
+        }
+
+        binding.exitBtn.setOnClickListener {
+            activity?.finish()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+    }
+
+    private fun setPopularEmojis() {
         binding.emojiTextView2.setOnClickListener {
             binding.emojiTextView2.text = Emoji.getRandomEmoji()
         }
+
         binding.emojiTextView3.setOnClickListener {
             binding.emojiTextView3.text = Emoji.getRandomEmoji()
         }
+
         binding.emojiTextView4.setOnClickListener {
             binding.emojiTextView4.text = Emoji.getRandomEmoji()
         }
+
         binding.emojiTextView6.setOnClickListener {
             binding.emojiTextView6.text = Emoji.getRandomEmoji()
         }
     }
 
     private fun initEmojies() {
-        binding.emojiTextView2.text = Emoji.getEmojiByUnicode(unicode = 0x1F643)
-        binding.emojiTextView4.text = Emoji.getEmojiByUnicode(unicode = 0x1F64F)
-        binding.emojiTextView6.text = Emoji.getEmojiByUnicode(unicode = 0x1F44D)
-        binding.emojiTextView3.text = Emoji.getEmojiByUnicode(unicode = 0x1F764)
+        binding.emojiTextView2.text = Emoji.getEmojiByString("\uD83D\uDE80")
+        binding.emojiTextView4.text = Emoji.getEmojiByString("\uD83D\uDC69")
+        binding.emojiTextView3.text = Emoji.getEmojiByString("\uD83C\uDF6D")
+        binding.emojiTextView6.text = Emoji.getEmojiByString("\uD83C\uDF0E")
     }
 }

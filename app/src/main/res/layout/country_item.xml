@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="70dp"
+        android:layout_height="70dp">
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/language_iv"
+                android:layout_width="46dp"
+                style="@style/CustomButtonImage"
+                app:icon="@drawable/flag_round"
+                app:iconSize="40dp"
+                app:iconPadding="0dp"
+                android:layout_centerInParent="true"
+                app:rippleColor="@color/main_ripple_button_color"
+                android:backgroundTint="@color/background_color"
+                app:iconGravity="textStart"
+                app:cornerRadius="30dp"
+                app:iconTint="@null"
+                android:layout_height="46dp"/>
+
+
+        </RelativeLayout>
+
+    </FrameLayout>
+</layout>

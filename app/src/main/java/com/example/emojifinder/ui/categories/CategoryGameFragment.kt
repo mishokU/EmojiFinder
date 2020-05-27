@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentCategotyGameBinding
 import com.example.emojifinder.domain.viewModels.CategoriesViewModel
@@ -33,7 +34,7 @@ class CategoryGameFragment : DaggerFragment() {
     ): View? {
         binding = FragmentCategotyGameBinding.inflate(inflater)
         binding.lifecycleOwner = this
-        // Inflate the layout for this fragment
+
         initCategories()
         initViewModel()
         initBackButton()
@@ -45,6 +46,7 @@ class CategoryGameFragment : DaggerFragment() {
     private fun initBackButton() {
         ((activity) as AppCompatActivity).setSupportActionBar(binding.toolbar)
         ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        ((activity) as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.emoji_finder_levels)
 
         binding.toolbar.setNavigationOnClickListener {
             this.findNavController().navigateUp()
@@ -55,9 +57,9 @@ class CategoryGameFragment : DaggerFragment() {
     private fun initLevel() {
         viewModel.gameCategory.observe(viewLifecycleOwner, Observer {
             it?.let {
-                this.findNavController().navigate(CategoryGameFragmentDirections.actionCategotyGameFragmentToGameFragment(
-                    it
-                ))
+                this.findNavController().navigate(CategoryGameFragmentDirections
+                    .actionCategotyGameFragmentToGameFragment(it)
+                )
                 viewModel.gameFragmentComplete()
             }
         })
@@ -70,6 +72,7 @@ class CategoryGameFragment : DaggerFragment() {
                 when(result){
                     is Result.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
+                        binding.retryLoadLevelsBtn.visibility = View.INVISIBLE
                     }
                     is Result.Success -> {
                         binding.progressBar.visibility = View.INVISIBLE
@@ -80,6 +83,7 @@ class CategoryGameFragment : DaggerFragment() {
                     is Result.Error -> {
                         binding.progressBar.visibility = View.GONE
                         binding.errorMessage.text = result.exception.message
+                        binding.retryLoadLevelsBtn.visibility = View.VISIBLE
                     }
                 }
             }

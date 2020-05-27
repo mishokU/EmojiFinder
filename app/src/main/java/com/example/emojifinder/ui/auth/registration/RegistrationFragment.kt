@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -37,12 +38,23 @@ class RegistrationFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRegistrationBinding.inflate(inflater)
-        // Inflate the layout for this fragment
+
+        initToolbar()
+
         addTextWatchers()
         handleRegistrationButton()
         handleRegistrationStatus()
 
         return binding.root
+    }
+
+    private fun initToolbar() {
+        ((activity) as AppCompatActivity).setSupportActionBar(binding.registrationToolbar)
+        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.registrationToolbar.setNavigationOnClickListener {
+            this.findNavController().navigateUp()
+        }
     }
 
     private fun addTextWatchers() {

@@ -90,11 +90,11 @@
                     android:layout_gravity="center"
                     android:alpha="0.7"
                     android:textSize="18sp"
+                    android:text="100%"
                     android:gravity="center"
                     android:layout_centerInParent="true"
                     android:textColor="@android:color/white"
-                    android:textAlignment="center"
-                    android:text="100%"/>
+                    android:textAlignment="center" />
 
 
             </RelativeLayout>

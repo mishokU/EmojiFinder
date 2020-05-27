@@ -211,7 +211,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:textColor="@color/main_color"
-                            android:text="@string/level"/>
+                            android:text="@string/game_level"/>
 
                         <TextView
                             android:id="@+id/game_level"

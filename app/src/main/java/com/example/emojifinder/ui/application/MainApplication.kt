@@ -2,10 +2,7 @@ package com.example.emojifinder.ui.application
 
 import android.graphics.Color
 import android.os.StrictMode
-import android.util.Log.d
-import android.view.View
 import androidx.core.provider.FontRequest
-import androidx.emoji.bundled.BundledEmojiCompatConfig
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.text.FontRequestEmojiCompatConfig
 import com.example.emojifinder.BuildConfig
@@ -14,7 +11,6 @@ import com.example.emojifinder.core.di.DaggerAppComponent
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
-import timber.log.Timber.d
 import java.util.*
 
 
@@ -25,6 +21,10 @@ class MainApplication : DaggerApplication() {
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return applicationInjector
     }
+
+//    override fun attachBaseContext(base: Context) {
+//        super.attachBaseContext(LocalizationUtil.applyLanguage(base, "id"))
+//    }
 
     override fun onCreate() {
         // ThreeTenBP for times and dates, called before super to be available for objects

@@ -34,6 +34,10 @@ class CategoriesViewModel @Inject constructor(
 
 
     init {
+        fetchLevels()
+    }
+
+    private fun fetchLevels() {
         coroutineScope.launch {
             withContext(Dispatchers.Main){
                 _categoriesResponse.value = Result.Loading

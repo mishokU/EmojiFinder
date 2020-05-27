@@ -13,7 +13,6 @@
             type="com.example.emojifinder.data.db.remote.models.account.AccountValuesModel" />
     </data>
 
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,6 +35,7 @@
                 app:title="@string/app_name"/>
 
         </com.google.android.material.appbar.AppBarLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -114,7 +114,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:id="@+id/save_avatar_btn"
-                        android:text="@string/save"
+                        app:icon="@drawable/icons8_save_26px"
+                        app:iconSize="20dp"
+                        android:paddingStart="40dp"
                         android:textAllCaps="false"
                         android:layout_marginTop="10dp"
                         android:layout_gravity="center"
@@ -253,7 +255,9 @@
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
                             app:spanCount="5"
-                            android:scrollbars="horizontal"
+                            android:scrollbars="vertical"
+                            android:scrollbarSize="2dp"
+                            android:scrollbarThumbHorizontal="@color/yellow_color"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                             tools:listitem="@layout/emoji_shop_item"
                             android:padding="5dp" />
@@ -556,7 +560,9 @@
                             android:background="@drawable/your_emojis_style"
                             tools:listitem="@layout/emoji_shop_item"
                             android:padding="5dp"
-                            android:scrollbars="horizontal"
+                            android:scrollbarSize="2dp"
+                            android:scrollbarThumbHorizontal="@color/blue_color"
+                            android:scrollbars="vertical"
                             app:spanCount="8"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
 
@@ -610,7 +616,7 @@
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/reset_filters"
                                     android:layout_width="match_parent"
-                                    android:text="Reset"
+                                    android:text="@string/reset"
                                     android:textAlignment="center"
                                     android:textSize="18sp"
                                     android:layout_weight="1"
