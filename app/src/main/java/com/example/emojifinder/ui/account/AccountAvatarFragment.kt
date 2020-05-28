@@ -16,9 +16,11 @@ import com.example.emojifinder.data.db.remote.models.account.AccountValuesModel
 import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.databinding.FragmentAccountAvatarBinding
 import com.example.emojifinder.domain.result.Result
+import com.example.emojifinder.domain.sounds.MusicType
 import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.domain.viewModels.ShopViewModel
 import com.example.emojifinder.ui.boxes.EmojisBoxDialog
+import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.example.emojifinder.ui.shop.EmojisRecyclerViewAdapter
 import com.example.emojifinder.ui.shop.ShopEmojiDialog
@@ -243,8 +245,6 @@ class AccountAvatarFragment : DaggerFragment() {
                         binding.loadingAvatar.visibility = View.GONE
                         profile = it.data!!
                         binding.profile = it.data
-
-
                     }
                 }
             }
@@ -256,16 +256,10 @@ class AccountAvatarFragment : DaggerFragment() {
         viewModel.userValuesResponse.observe(viewLifecycleOwner, Observer {
             it?.let { values ->
                 when(values){
-                    is Result.Loading -> {
-
-                    }
                     is Result.Success -> {
                         binding.emosCount.text = values.data.emos.toString()
                         binding.boxesCount.text = values.data.boxes.toString()
                         binding.emojisCount.text = userEmojisCount
-                    }
-                    is Result.Error -> {
-
                     }
                 }
             }
@@ -396,24 +390,18 @@ class AccountAvatarFragment : DaggerFragment() {
         if(binding.resultGeneratorField.lineCount == 1){
             binding.resultGeneratorField.visibility = View.VISIBLE
             viewModel.addGeneratedEmoji(adapter.getGeneratedEmoji(generatedEmoji))
-
             viewModel.fetchUserEmojis()
             viewModel.fetchUserValues()
+
+            (activity as MainActivity).mediaPlayerPool.play(MusicType.SUCCESSFUL)
 
         } else {
             binding.resultGeneratorField.text = ""
             binding.resultGeneratorField.visibility = View.INVISIBLE
             binding.failedToGenerate.playAnimation()
-         }
-    }
 
-    private fun combineSuccessful(emoji: String?) : Boolean {
-        val emojiButton = EmojiAppCompatButton(requireContext())
-        emojiButton.text = emoji
-        if(emojiButton.lineCount == 1) {
-            return true
+            (activity as MainActivity).mediaPlayerPool.play(MusicType.FAIL)
         }
-        return false
     }
 
     private fun changeButtonState(

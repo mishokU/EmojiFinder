@@ -17,6 +17,7 @@
         <item name="android:statusBarColor">@color/main_color</item>
         <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button</item>
         <item name="android:navigationMode">tabMode</item>
+        <item name="colorControlNormal">@color/background_color</item>
     </style>
 
     <style name="CustomMaterialButton" parent="Widget.MaterialComponents.Button">

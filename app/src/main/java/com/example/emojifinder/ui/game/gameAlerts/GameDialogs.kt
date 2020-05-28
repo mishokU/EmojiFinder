@@ -32,7 +32,7 @@ object GameDialogs  {
     @SuppressLint("SetTextI18n")
     private fun setGameTime(time: Int) {
         val hint = dialogView.findViewById<TextView>(R.id.hintText)
-        hint.text = hint.resources.getString(R.string.game_hint) + " " + time + "seconds"
+        hint.text = hint.resources.getString(R.string.game_hint) + " " + time + " seconds"
     }
 
     fun showExitDialog(fragment : DaggerFragment){

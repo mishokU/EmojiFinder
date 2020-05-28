@@ -1,7 +1,6 @@
 package com.example.emojifinder.ui.main
 
 import android.os.Bundle
-import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -9,6 +8,7 @@ import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import com.example.emojifinder.R
 import com.example.emojifinder.databinding.ActivityMainBinding
+import com.example.emojifinder.domain.sounds.MediaPlayerPool
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -20,8 +20,9 @@ class MainActivity : DaggerAppCompatActivity() {
 
     private lateinit var navigation : NavController
     private lateinit var navGraph: NavGraph
-
     private lateinit var binding : ActivityMainBinding
+
+    lateinit var mediaPlayerPool: MediaPlayerPool
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -36,32 +37,25 @@ class MainActivity : DaggerAppCompatActivity() {
         navGraph.startDestination = intent.getIntExtra("destination", R.id.signInFragment)
         navigation.graph = navGraph
 
-        //hideSystemUI()
+        initMediaPlayer()
+        playBackgroundMusic()
     }
 
-    private fun hideSystemUI() {
-        // Enables regular immersive mode.
-        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
-        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE
-                // Set the content to appear under the system bars so that the
-                // content doesn't resize when the system bars hide and show.
-//                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                // Hide the nav bar and status bar
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
-//                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+    private fun initMediaPlayer() {
+        mediaPlayerPool = MediaPlayerPool(this.application)
     }
 
-    fun showSystemUI() {
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
+    private fun playBackgroundMusic() {
+        mediaPlayerPool.playBackground()
     }
 
-//    override fun onWindowFocusChanged(hasFocus: Boolean) {
-//        super.onWindowFocusChanged(hasFocus)
-//        if (hasFocus) hideSystemUI()
-//    }
+    override fun onPause() {
+        super.onPause()
+        mediaPlayerPool.pauseBackground()
+    }
 
-
+    override fun onResume() {
+        super.onResume()
+        mediaPlayerPool.resumeBackground()
+    }
 }

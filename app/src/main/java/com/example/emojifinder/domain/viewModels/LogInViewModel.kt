@@ -53,8 +53,7 @@ class LogInViewModel @Inject constructor(
         coroutineScope.launch {
             if(CheckOnValid.isEmailValid(email)){
                 _restorePasswordResponse.value = Result.Loading
-                _restorePasswordResponse.value =
-                    firebaseAuthHandler.restorePassword(email.text.toString())
+                _restorePasswordResponse.value = firebaseAuthHandler.restorePassword(email.text.toString())
             }
         }
     }

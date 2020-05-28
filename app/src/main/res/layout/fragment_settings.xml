@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_color"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".ui.account.SettingsFragment">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -32,43 +31,118 @@
             android:layout_height="wrap_content"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <RelativeLayout
-                android:id="@+id/exit_btn"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:layout_marginTop="10dp">
+                android:orientation="vertical">
 
-                <androidx.emoji.widget.EmojiAppCompatButton
-                    android:layout_width="46dp"
-                    android:id="@+id/exit_img"
-                    android:text="🇺🇸"
-                    android:textSize="22sp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/ripple_color_countries"
-                    android:layout_height="46dp"/>
-
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/exit_img"
-                    android:layout_centerVertical="true"
-                    android:text="@string/exit"
-                    android:textSize="22sp"
-                    android:textColor="@android:color/black"/>
+                    android:background="@android:color/white"
+                    android:layout_marginTop="10dp">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/main_ripple_button_color"
-                    android:src="@drawable/icons8_exit_48px_1"/>
+                    <androidx.emoji.widget.EmojiAppCompatButton
+                        android:layout_width="46dp"
+                        android:id="@+id/notifications_img"
+                        android:text="🔔"
+                        android:textSize="22sp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/ripple_color_countries"
+                        android:layout_height="46dp"/>
 
-            </RelativeLayout>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/notifications_img"
+                        android:layout_centerVertical="true"
+                        android:text="@string/notifications"
+                        android:textSize="22sp"
+                        android:textColor="@android:color/black"/>
+
+                    <Switch
+                        android:id="@+id/notifications_switcher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="10dp">
+
+                    <androidx.emoji.widget.EmojiAppCompatButton
+                        android:layout_width="46dp"
+                        android:id="@+id/music_img"
+                        android:text="🔊"
+                        android:textSize="22sp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/ripple_color_countries"
+                        android:layout_height="46dp"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/music_img"
+                        android:layout_centerVertical="true"
+                        android:text="@string/music"
+                        android:textSize="22sp"
+                        android:textColor="@android:color/black"/>
+
+                    <Switch
+                        android:id="@+id/music_switcher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/exit_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="10dp">
+
+                    <androidx.emoji.widget.EmojiAppCompatButton
+                        android:layout_width="46dp"
+                        android:id="@+id/exit_img"
+                        android:text="🇺🇸"
+                        android:textSize="22sp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/ripple_color_countries"
+                        android:layout_height="46dp"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/exit_img"
+                        android:layout_centerVertical="true"
+                        android:text="@string/exit"
+                        android:textSize="22sp"
+                        android:textColor="@android:color/black"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:backgroundTint="@color/main_ripple_button_color"
+                        android:src="@drawable/icons8_exit_48px_1"/>
+
+                </RelativeLayout>
+            </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 

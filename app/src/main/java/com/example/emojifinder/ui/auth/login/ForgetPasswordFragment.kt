@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentForgetPasswordBinding
+import com.example.emojifinder.domain.auth.CheckOnValid
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.LogInViewModel
 import com.example.emojifinder.ui.game.gameAlerts.ErrorDialog
@@ -34,18 +36,29 @@ class ForgetPasswordFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentForgetPasswordBinding.inflate(inflater)
-        // Inflate the layout for this fragment
 
+        initToolbar()
         handleEmailStatus()
         handleButton()
 
         return binding.root
     }
 
+    private fun initToolbar() {
+        ((activity) as AppCompatActivity).setSupportActionBar(binding.loginToolbar)
+        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.loginToolbar.setNavigationOnClickListener {
+            this.findNavController().navigateUp()
+        }
+    }
+
     private fun handleButton() {
         binding.emailForget.addTextChangedListener(emailTextWatcher)
         binding.forgetPasswordBtn.setOnClickListener {
-            viewModel.forgetPassword(binding.emailForget)
+            if(CheckOnValid.isEmailValid(binding.emailForget)){
+                viewModel.forgetPassword(binding.emailForget)
+            }
         }
     }
 

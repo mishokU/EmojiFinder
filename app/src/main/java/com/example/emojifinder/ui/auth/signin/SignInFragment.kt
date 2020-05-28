@@ -50,5 +50,8 @@ class SignInFragment : DaggerFragment() {
         binding.languageIv.setOnClickListener {
             this.findNavController().navigate(R.id.localizeAppFragment)
         }
+        binding.helpIv.setOnClickListener {
+            this.findNavController().navigate(R.id.helpFragment)
+        }
     }
 }

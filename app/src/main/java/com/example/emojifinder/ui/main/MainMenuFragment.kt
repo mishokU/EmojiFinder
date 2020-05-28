@@ -58,16 +58,6 @@ class MainMenuFragment : DaggerFragment() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
-    }
-
-    override fun onResume() {
-        super.onResume()
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-    }
-
     private fun setPopularEmojis() {
         binding.emojiTextView2.setOnClickListener {
             binding.emojiTextView2.text = Emoji.getRandomEmoji()

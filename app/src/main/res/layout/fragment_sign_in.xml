@@ -48,7 +48,7 @@
                 android:textAllCaps="false"
                 android:layout_marginBottom="10dp"
                 android:text="@string/login"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black_color"
                 android:backgroundTint="@color/yellow_color"
                 app:cornerRadius="10dp"/>
@@ -63,7 +63,7 @@
                 android:text="@string/login_with_vk"
                 app:cornerRadius="10dp"
                 android:layout_marginBottom="10dp"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:icon="@drawable/vk_logo"
                 app:iconTint="@null"
                 app:iconSize="40dp"/>
@@ -78,7 +78,7 @@
                 android:textAllCaps="false"
                 android:text="@string/login_with_facebook"
                 app:cornerRadius="10dp"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:icon="@drawable/fb_icon_325x325"
                 app:iconTint="@null"
                 app:iconSize="40dp"/>

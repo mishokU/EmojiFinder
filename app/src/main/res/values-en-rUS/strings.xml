@@ -84,6 +84,35 @@
     <string name="mishok_games">Mishok Games</string>
     <string name="exit">Exit</string>
     <string name="game_level">Level</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="account">Account</string>
+    <string name="game">Game</string>
+    <string name="statistics">Statistics</string>
+    <string name="other">Other</string>
+    <string name="how_to_delete_account">How to delete account ?</string>
+    <string name="help_forgot_password">I need to log in, but I can’t remember the password. Could you help me ?</string>
+    <string name="bad_nick_name">Why my nick name contains 👶</string>
+    <string name="i_passed_the_level">I passed the level, but the statistics were not recorded, what should I do?</string>
+    <string name="how_to_disable_adds">How to disable adds ?</string>
+
     <string name="save_info">Save</string>
     <string name="how_to_play">How to play ?</string>
+    <string name="how_to_disable_adds_answer">To disable ads, you need to buy a VIP account for 2$</string>
+    <string name="i_passed_the_level_answer">If you have completed a level and you have not recorded statistics in your account, then make sure that you have completed the level before the time runs out. Otherwise, you will have to go through it again. If none of the answers help, then write to the mail.</string>
+    <string name="no_answer">There is no answer</string>
+    <string name="how_to_delete_account_answer">To delete an account, launch the application and go to “Settings” and click “Delete data”.  Read the warning carefully, as clicking the “Confirm” button will delete all your data. After deletion, it will be impossible to recover data.</string>
+
+    <string name="how_to_play_answer">If you play a company, then first you wait until the level loads, then click on the \"Start\" button. After the timer ends, you must match the emojis from the bottom menu to the top one selected.  You will win if you find all emojis before time runs out and get 20% of the bill. At the very end, you will see the time, score, number of errors and level number.  You will lose if time runs out and statistics are not recorded.</string>
+    <string name="bad_nick_name_answer">If you see emojis in your name, it means that part of the name was considered unacceptable and replaced with emoji.  Please do not use abusive or inappropriate words in your username, as this is contrary to our code of conduct and may lead to the deletion of your account.</string>
+    <string name="help_forgot_password_answer">If your account is tied to an email address, you can use this email to reset your password.  If your account is not tied to email, please contact our support team. To expedite the consideration of your request, provide the following information: your avatar, the number of chests, the number of emoji, and the number.  Please note that the email address you provide cannot be linked to another account in the game Emoji Search.</string>
+    <string name="name">Name</string>
+    <string name="message">Message</string>
+    <string name="send">Send</string>
+    <string name="attach">Attach</string>
+    <string name="contact">Contact us</string>
+    <string name="answer">Answer</string>
+    <string name="music">Music</string>
+    <string name="notifications">Notifications</string>
+
 </resources>

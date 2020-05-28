@@ -1,7 +1,6 @@
 package com.example.emojifinder.ui.account
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentSettingsBinding
+import com.example.emojifinder.domain.prefs.SettingsPrefs
 import com.example.emojifinder.domain.viewModels.LogInViewModel
+import com.example.emojifinder.ui.main.MainActivity
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -24,17 +25,35 @@ class SettingsFragment : DaggerFragment() {
 
     lateinit var binding: FragmentSettingsBinding
 
+    @Inject
+    lateinit var settingsPrefs: SettingsPrefs
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSettingsBinding.inflate(inflater)
-        // Inflate the layout for this fragment
 
         setLogOutButton()
         setBackButton()
 
+        initSwitchers()
+
         return binding.root
+    }
+
+    private fun initSwitchers() {
+        binding.musicSwitcher.isChecked = settingsPrefs.isPlayMusic()
+        binding.musicSwitcher.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                settingsPrefs.changeMusic(isChecked)
+                (activity as MainActivity).mediaPlayerPool.createPlayers()
+                (activity as MainActivity).mediaPlayerPool.playBackground()
+            } else {
+                (activity as MainActivity).mediaPlayerPool.pauseBackground()
+                settingsPrefs.changeMusic(isChecked)
+            }
+        }
     }
 
     private fun setLogOutButton() {

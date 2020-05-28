@@ -22,10 +22,6 @@ class MainApplication : DaggerApplication() {
         return applicationInjector
     }
 
-//    override fun attachBaseContext(base: Context) {
-//        super.attachBaseContext(LocalizationUtil.applyLanguage(base, "id"))
-//    }
-
     override fun onCreate() {
         // ThreeTenBP for times and dates, called before super to be available for objects
         AndroidThreeTen.init(this)

@@ -38,7 +38,6 @@ class LogInFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLogInBinding.inflate(inflater)
-        // Inflate the layout for this fragment
 
         initToolbar()
 

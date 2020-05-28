@@ -79,7 +79,8 @@
             app:destination="@id/lootBoxesFragment" />
         <action
             android:id="@+id/action_mainMenuFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
+            app:destination="@id/helpFragment"
+            app:enterAnim="@anim/fragment_fade_enter" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -108,7 +109,8 @@
         <action
             android:id="@+id/action_categotyGameFragment_to_gameFragment"
             app:destination="@id/gameFragment"
-            app:enterAnim="@anim/fragment_fade_enter" />
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
 
     </fragment>
@@ -163,7 +165,8 @@
         tools:layout="@layout/fragment_help" >
         <action
             android:id="@+id/action_helpFragment_to_readQAFragment"
-            app:destination="@id/readQAFragment" />
+            app:destination="@id/readQAFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_helpFragment_to_writeQuestionFragment"
             app:destination="@id/writeQuestionFragment" />
@@ -172,7 +175,16 @@
         android:id="@+id/readQAFragment"
         android:name="com.example.emojifinder.ui.help.ReadQAFragment"
         android:label="fragment_read_q_a"
-        tools:layout="@layout/fragment_read_q_a" />
+        tools:layout="@layout/fragment_read_q_a">
+
+        <argument
+            android:name="Help"
+            app:argType="com.example.emojifinder.ui.help.HelpModel"/>
+        <action
+            android:id="@+id/action_readQAFragment_to_writeQuestionFragment"
+            app:destination="@id/writeQuestionFragment" />
+
+    </fragment>
     <fragment
         android:id="@+id/writeQuestionFragment"
         android:name="com.example.emojifinder.ui.help.WriteQuestionFragment"

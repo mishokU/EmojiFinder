@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
+import android.provider.MediaStore
 import com.example.emojifinder.core.di.utils.CoroutineScopeIO
 import com.example.emojifinder.ui.application.MainApplication
 import com.example.emojifinder.data.prefs.PreferenceStorage
@@ -14,11 +15,13 @@ import com.example.emojifinder.data.db.local.emoji_json.ShopEmojiService
 import com.example.emojifinder.data.db.remote.api.FirebaseLevels
 import com.example.emojifinder.data.db.remote.api.FirebaseRegistration
 import com.example.emojifinder.data.db.remote.service.*
+import com.example.emojifinder.domain.prefs.SettingsPrefs
+import com.example.emojifinder.domain.prefs.ShowGameHintPrefs
+import com.example.emojifinder.domain.sounds.MediaPlayerPool
 import com.example.emojifinder.domain.user.FirebaseCreateUserAccount
 import com.example.emojifinder.domain.user.FirebaseCreateUserAccountImpl
 import dagger.Module
 import dagger.Provides
-import dagger.android.support.DaggerApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
@@ -88,6 +91,20 @@ class AppModule {
     @Provides
     fun provideShopEmojiService(application : Application)
             : ShopEmojiService = ShopEmojiService(application)
+
+    @Singleton
+    @Provides
+    fun provideGameSharedPref(application: Application)
+            : ShowGameHintPrefs = ShowGameHintPrefs(application)
+
+    @Singleton
+    @Provides
+    fun provideSettingsSharedPref(application: Application)
+            : SettingsPrefs = SettingsPrefs(application)
+
+    @Singleton
+    @Provides
+    fun provideMediaPlayerPool(application: Application) : MediaPlayerPool = MediaPlayerPool(application)
 
     @CoroutineScopeIO
     @Provides

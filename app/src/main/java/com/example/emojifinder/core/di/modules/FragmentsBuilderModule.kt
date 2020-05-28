@@ -4,6 +4,7 @@ import com.example.emojifinder.ui.account.AccountAvatarFragment
 import com.example.emojifinder.ui.account.MainAccountInfoFragment
 import com.example.emojifinder.ui.account.AccountFragment
 import com.example.emojifinder.ui.account.SettingsFragment
+import com.example.emojifinder.ui.auth.login.ForgetPasswordFragment
 import com.example.emojifinder.ui.auth.login.LogInFragment
 import com.example.emojifinder.ui.auth.registration.RegistrationFragment
 import com.example.emojifinder.ui.auth.signin.SignInFragment
@@ -65,5 +66,8 @@ abstract class FragmentsBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeWriteQuestionFragment() : WriteQuestionFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeForgetPasswordFragment() : ForgetPasswordFragment
 
 }

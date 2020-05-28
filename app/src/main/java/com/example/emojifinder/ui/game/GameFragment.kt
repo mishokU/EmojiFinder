@@ -47,6 +47,7 @@ class GameFragment : DaggerFragment() {
     lateinit var levelViewModelFactory: ViewModelProvider.Factory
     lateinit var levelViewModel : CategoriesViewModel
 
+    @Inject
     lateinit var gameHint : ShowGameHintPrefs
 
     lateinit var binding : FragmentGameBinding
@@ -75,8 +76,6 @@ class GameFragment : DaggerFragment() {
         levelViewModel = injectViewModel(levelViewModelFactory)
 
         binding.gameEmojiField.setOnTouchListener(ScaleGesture(requireContext()))
-
-        gameHint = ShowGameHintPrefs(requireActivity())
 
         showStartGameButton = showStartGameButton()
 
@@ -352,22 +351,6 @@ class GameFragment : DaggerFragment() {
                 binding.gameEmojiField.addView(emojiView)
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-        animation.addPauseListener(onResume = {
-            it.resume()
-        })
-    }
-
-    override fun onPause() {
-        super.onPause()
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
-        animation.addPauseListener(onPause = {
-            it.pause()
-        })
     }
 
     private fun setEmptyStatistic() {

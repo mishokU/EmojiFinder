@@ -114,7 +114,6 @@ class showStartGameButton {
             dialogView.dismiss()
             fragment.findNavController().navigateUp()
         }
-
     }
 
     fun countListener() = count

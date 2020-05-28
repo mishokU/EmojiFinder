@@ -41,7 +41,6 @@ class AccountFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAccountBinding.inflate(inflater)
-        // Inflate the layout for this fragment
 
         viewModel = injectViewModel(viewModelFactory)
         binding.lifecycleOwner = this
@@ -126,7 +125,7 @@ class AccountFragment : DaggerFragment() {
     }
 
     private fun updateUserFullScore(data: List<UserLevelStatistics?>) {
-        var score : Int = 0
+        var score = 0
         for(level in data){
             score += level!!.score
         }

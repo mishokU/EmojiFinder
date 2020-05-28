@@ -52,7 +52,6 @@ class MainAccountInfoFragment : DaggerFragment() {
         setAvatarButton()
         setCheckEmailAndPasswordButtons()
 
-        // Inflate the layout for this fragment
         return binding.root
     }
 

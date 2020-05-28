@@ -173,7 +173,7 @@ class LootBoxesFragment : DaggerFragment() {
                 .scaleYBy(0f)
                 .scaleX(2f)
                 .scaleY(2f)
-                .translationX(-350f)
+                .translationX(-450f)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator?) {
                         emojiText.visibility = View.VISIBLE
@@ -250,7 +250,7 @@ class LootBoxesFragment : DaggerFragment() {
             .scaleX(-1f)
             .scaleY(-1f)
             .setListener(null)
-            .translationX(350f)
+            .translationX(450f)
             .setInterpolator(AccelerateDecelerateInterpolator())
             .duration = 1000
 
@@ -264,9 +264,10 @@ class LootBoxesFragment : DaggerFragment() {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onPause() {
         super.onPause()
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
     }
 
     private fun initAdapter() {
