@@ -330,10 +330,11 @@ class AccountAvatarFragment : DaggerFragment() {
 
                 viewModel.fetchUserEmojis()
                 viewModel.fetchUserValues()
+
+                (activity as MainActivity).mediaPlayerPool.play(MusicType.BUY)
             } else {
                 Toast.makeText(requireContext(),resources.getString(R.string.not_enough_emos), Toast.LENGTH_LONG).show()
             }
-
             ShopEmojiDialog.dialogView.dismiss()
         }
     }
@@ -463,6 +464,8 @@ class AccountAvatarFragment : DaggerFragment() {
 
                 viewModel.fetchUserEmojis()
                 viewModel.fetchUserValues()
+
+                (activity as MainActivity).mediaPlayerPool.play(MusicType.MONEY)
 
                 ShopEmojiDialog.dialogUserView.dismiss()
             }

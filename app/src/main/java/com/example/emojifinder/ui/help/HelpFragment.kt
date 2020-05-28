@@ -48,6 +48,10 @@ class HelpFragment : DaggerFragment() {
         binding.statisticDoNotWrite.setOnClickListener {
             navigate(binding.statisticDoNotWrite.text.toString(), Help.GAME)
         }
+
+        binding.whatIsEmos.setOnClickListener {
+            navigate(binding.whatIsEmos.text.toString(), Help.OTHER)
+        }
     }
 
     private fun navigate(text: String, account: Help) {

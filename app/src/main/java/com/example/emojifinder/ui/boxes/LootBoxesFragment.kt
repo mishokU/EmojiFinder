@@ -26,9 +26,11 @@ import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.data.db.remote.models.account.AccountValuesModel
 import com.example.emojifinder.databinding.FragmentLootBoxesBinding
 import com.example.emojifinder.domain.result.Result
+import com.example.emojifinder.domain.sounds.MusicType
 import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.domain.viewModels.ShopViewModel
 import com.example.emojifinder.shared.utils.Emoji
+import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.example.emojifinder.ui.utils.EmojiCost
 import com.example.emojifinder.ui.utils.ScreenSize
@@ -115,6 +117,7 @@ class LootBoxesFragment : DaggerFragment() {
 
             updateUserEmojisCount()
 
+            (activity as MainActivity).mediaPlayerPool.play(MusicType.WIN)
         }
 
         binding.sellWinningEmoji.setOnClickListener {
@@ -130,6 +133,7 @@ class LootBoxesFragment : DaggerFragment() {
 
             binding.emosCount.text = emos.toString()
 
+            (activity as MainActivity).mediaPlayerPool.play(MusicType.LOSE)
         }
     }
 
@@ -281,19 +285,9 @@ class LootBoxesFragment : DaggerFragment() {
         viewModelShop.emojisResponse.observe(viewLifecycleOwner, Observer {
             it?.let {
                 when(it){
-                    is Result.Loading -> {
-                    //    binding.progressBar.visibility = View.VISIBLE
-                    }
                     is Result.Success -> {
-                      //  binding.progressBar.visibility = View.INVISIBLE
-
                         adapter.submitList(it.data)
-
                         initOpenBoxButton()
-                        //generateGroupChips(it.data)
-                    }
-                    is Result.Error -> {
-                    //    binding.progressBar.visibility = View.INVISIBLE
                     }
                 }
             }

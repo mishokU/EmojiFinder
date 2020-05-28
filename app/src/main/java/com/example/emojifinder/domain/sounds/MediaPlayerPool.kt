@@ -7,7 +7,7 @@ import com.example.emojifinder.R
 import com.example.emojifinder.domain.prefs.SettingsPrefs
 import javax.inject.Inject
 
-enum class MusicType {SUCCESSFUL, FAIL, WIN, LOSE, BUY}
+enum class MusicType {SUCCESSFUL, FAIL, WIN, LOSE, BUY, MONEY }
 
 class MediaPlayerPool @Inject constructor(application: Application) {
 

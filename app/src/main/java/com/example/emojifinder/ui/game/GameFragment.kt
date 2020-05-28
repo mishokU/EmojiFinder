@@ -19,18 +19,22 @@ import androidx.gridlayout.widget.GridLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.data.db.remote.models.EmojiModel
+import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.databinding.FragmentGameBinding
 import com.example.emojifinder.domain.prefs.ShowGameHintPrefs
 import com.example.emojifinder.domain.result.Result
+import com.example.emojifinder.domain.sounds.MusicType
 import com.example.emojifinder.domain.viewModels.CategoriesViewModel
 import com.example.emojifinder.domain.viewModels.GameViewModel
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.example.emojifinder.ui.game.gameAlerts.EndGameDialog
 import com.example.emojifinder.ui.game.gameAlerts.GameDialogs
 import com.example.emojifinder.ui.game.gameAlerts.showStartGameButton
+import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.utils.ScaleGesture
 import com.example.emojifinder.ui.utils.ScreenSize
 import dagger.android.support.DaggerFragment
@@ -173,12 +177,17 @@ class GameFragment : DaggerFragment() {
             GameDialogs.alert.dismiss()
             animation.removeAllListeners()
             animation.cancel()
+
+            (activity as MainActivity).mediaPlayerPool.play(MusicType.LOSE)
+
             this@GameFragment.findNavController().popBackStack()
         }
 
         GameDialogs.getResumeGameButton().setOnClickListener {
             animation.resume()
             GameDialogs.alert.dismiss()
+
+            (activity as MainActivity).mediaPlayerPool.play(MusicType.LOSE)
         }
 
         GameDialogs.alert.setOnDismissListener {
@@ -201,12 +210,14 @@ class GameFragment : DaggerFragment() {
                     animation.removeAllListeners()
                     animation.pause()
 
-                    val statistics = getLevelStatistics("Win")
+                    val statistics = getLevelStatistics(resources.getString(R.string.win_game))
                     EndGameDialog.showEndGameDialog(this, statistics)
                     createEndGameListeners()
 
                     viewModel.writeGameStatistic(level.title, statistics)
                     viewModel.updateEmos(statistics.score / 5)
+
+                    (activity as MainActivity).mediaPlayerPool.play(MusicType.WIN)
 
                 } else {
                     setEmptyStatistic()
@@ -224,7 +235,7 @@ class GameFragment : DaggerFragment() {
         }
 
         EndGameDialog.getNextLevelButton().setOnClickListener {
-            if(EndGameDialog.getNextLevelButton().text == "Exit"){
+            if(EndGameDialog.getNextLevelButton().text == resources.getString(R.string.exit)){
                 EndGameDialog.dialogView.dismiss()
                 this.findNavController().popBackStack()
             } else {
@@ -272,8 +283,9 @@ class GameFragment : DaggerFragment() {
 
     private fun addEndAnimationListener(){
         animation.addListener(onEnd = {
-            val statistics = getLevelStatistics("Lost")
+            val statistics = getLevelStatistics(resources.getString(R.string.game_lost))
             showEndGameDialog(statistics)
+            (activity as MainActivity).mediaPlayerPool.play(MusicType.LOSE)
         })
     }
 

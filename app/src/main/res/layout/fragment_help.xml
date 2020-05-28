@@ -163,6 +163,18 @@
                         android:textColor="@color/main_color"
                         android:text="@string/how_to_disable_adds"/>
 
+                    <androidx.emoji.widget.EmojiAppCompatButton
+                        android:id="@+id/what_is_emos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:background="@null"
+                        android:textAllCaps="false"
+                        android:textAlignment="textStart"
+                        android:textStyle="normal"
+                        android:textColor="@color/main_color"
+                        android:text="@string/what_is_emos"/>
+
                 </LinearLayout>
 
             </LinearLayout>
