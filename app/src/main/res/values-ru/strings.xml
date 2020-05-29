@@ -115,10 +115,13 @@
     <string name="attach">Прикрепить</string>
     <string name="contact">Свяжитесь с нами</string>
     <string name="answer">Ответ</string>
-    <string name="music">Music</string>
-    <string name="notifications">Notifications</string>
-    <string name="win_game">Win</string>
-    <string name="game_lost">Lost</string>
-    <string name="what_is_emos_answer">Emos is game value.\n\n You can buy emojis from the shop with this value</string>
+    <string name="music">Музыка</string>
+    <string name="notifications">Уведомления</string>
+    <string name="win_game">Победа</string>
+    <string name="game_lost">Поражение</string>
+    <string name="what_is_emos">Что такое Эмос в аккаунте?</string>
+    <string name="how_to_combine">Как комбинировать Эмос в магазине?</string>
+    <string name="what_is_emos_answer">Эмос - это игровая валюта\n\nВы можете заработать Эмос либо проходя компанию, либо купив их в магазине.</string>
+    <string name="how_to_combine_answer">Чтобы скомбинировать разные эмодзи в одно, вам нужно сначала заработать Эмос играя в компанию. Когда вы накопите достаточно валюты, вам необходимо купить классический желтый эмодзи в магазине, а потом к нему купить любой цвет.\n\nКогда у вас будут эти эмодзи, просто нажмите на ячейку, чтобы она стала активной, потом нажмите на ваше эмодзи, так проделайте с цветом и с другим классическим эмодзи.\n\nКомбинаций эмодзи очень много.\n\nВажно!\n\nПорядок эмодзи и цвета важен.\n\nНе перепутайте Эмодзи цвета с квадратом.</string>
 
 </resources>

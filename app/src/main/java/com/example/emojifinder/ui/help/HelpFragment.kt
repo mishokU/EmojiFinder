@@ -52,6 +52,10 @@ class HelpFragment : DaggerFragment() {
         binding.whatIsEmos.setOnClickListener {
             navigate(binding.whatIsEmos.text.toString(), Help.OTHER)
         }
+
+        binding.howToCombine.setOnClickListener {
+            navigate(binding.howToCombine.text.toString(), Help.OTHER)
+        }
     }
 
     private fun navigate(text: String, account: Help) {

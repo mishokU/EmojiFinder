@@ -16,6 +16,7 @@ object AnswerHelper {
             resources.getString(R.string.i_passed_the_level) -> resources.getString(R.string.i_passed_the_level_answer)
             resources.getString(R.string.how_to_disable_adds) -> resources.getString(R.string.how_to_disable_adds_answer)
             resources.getString(R.string.what_is_emos) -> resources.getString(R.string.what_is_emos_answer)
+            resources.getString(R.string.how_to_combine) -> resources.getString(R.string.how_to_combine_answer)
             else -> resources.getString(R.string.no_answer)
         }
     }
