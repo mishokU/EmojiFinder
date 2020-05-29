@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_color"
-        tools:context=".ui.account.SettingsFragment">
+        tools:context=".ui.settings.SettingsFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -107,6 +107,42 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/delete_account_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="10dp">
+
+                    <androidx.emoji.widget.EmojiAppCompatButton
+                        android:layout_width="46dp"
+                        android:id="@+id/delete_account_img"
+                        android:text="🚧"
+                        android:textSize="22sp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/ripple_color_countries"
+                        android:layout_height="46dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/delete_account_img"
+                        android:layout_centerVertical="true"
+                        android:text="@string/delete_account"
+                        android:textSize="22sp"
+                        android:textColor="@android:color/black"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:backgroundTint="@color/main_ripple_button_color"
+                        android:src="@drawable/icons8_exit_48px_1"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/exit_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -142,6 +178,7 @@
                         android:src="@drawable/icons8_exit_48px_1"/>
 
                 </RelativeLayout>
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

@@ -118,5 +118,9 @@
     <string name="game_lost">Lost</string>
     <string name="what_is_emos_answer">Emos is game value.\n\nYou can buy emojis from the shop with this value</string>
     <string name="how_to_combine_answer">To combine different emojis into one, you first need to earn Emos by playing in the company. When you accumulate enough currency, you need to buy a classic yellow emoji in the store, and then buy any color for it.\n\nWhen you have these emojis, just click on a cell to make it active, then click on your emoji, so do with color and another classic emoji.\n\nThere are a lot of emoji combinations.\n\nImportant!\nEmoji order and color is important\nDo not confuse color with a square</string>
+    <string name="delete_account">Delete account</string>
+    <string name="your_emoji">Your emoji</string>
+    <string name="leave_account">Do you really want to leave?</string>
+    <string name="delete_account_message">Are you sure you want to delete the account?</string>
 
 </resources>

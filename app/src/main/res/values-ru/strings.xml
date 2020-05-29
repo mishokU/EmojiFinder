@@ -123,5 +123,9 @@
     <string name="how_to_combine">Как комбинировать Эмос в магазине?</string>
     <string name="what_is_emos_answer">Эмос - это игровая валюта\n\nВы можете заработать Эмос либо проходя компанию, либо купив их в магазине.</string>
     <string name="how_to_combine_answer">Чтобы скомбинировать разные эмодзи в одно, вам нужно сначала заработать Эмос играя в компанию. Когда вы накопите достаточно валюты, вам необходимо купить классический желтый эмодзи в магазине, а потом к нему купить любой цвет.\n\nКогда у вас будут эти эмодзи, просто нажмите на ячейку, чтобы она стала активной, потом нажмите на ваше эмодзи, так проделайте с цветом и с другим классическим эмодзи.\n\nКомбинаций эмодзи очень много.\n\nВажно!\n\nПорядок эмодзи и цвета важен.\n\nНе перепутайте Эмодзи цвета с квадратом.</string>
+    <string name="delete_account">Delete account</string>
+    <string name="your_emoji">Your emoji</string>
+    <string name="leave_account">Do you really want to leave?</string>
+    <string name="delete_account_message">Are you sure you want to delete the account?</string>
 
 </resources>

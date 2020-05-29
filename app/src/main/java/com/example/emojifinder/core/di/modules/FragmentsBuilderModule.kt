@@ -3,7 +3,7 @@ package com.example.emojifinder.core.di.modules
 import com.example.emojifinder.ui.account.AccountAvatarFragment
 import com.example.emojifinder.ui.account.MainAccountInfoFragment
 import com.example.emojifinder.ui.account.AccountFragment
-import com.example.emojifinder.ui.account.SettingsFragment
+import com.example.emojifinder.ui.settings.SettingsFragment
 import com.example.emojifinder.ui.auth.login.ForgetPasswordFragment
 import com.example.emojifinder.ui.auth.login.LogInFragment
 import com.example.emojifinder.ui.auth.registration.RegistrationFragment

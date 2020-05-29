@@ -26,7 +26,7 @@ import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 import java.util.*
 
-class showStartGameButton {
+class ShowStartGameButton {
 
     lateinit var dialogView : Dialog
     private lateinit var fragment: DaggerFragment

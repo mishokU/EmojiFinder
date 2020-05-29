@@ -68,4 +68,8 @@ class LogInViewModel @Inject constructor(
             firebaseAuthHandler.logOut()
         }
     }
+
+    fun deleteAccount() {
+
+    }
 }
