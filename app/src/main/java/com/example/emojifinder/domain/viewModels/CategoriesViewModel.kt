@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.emojifinder.core.di.utils.CoroutineScopeIO
 import com.example.emojifinder.data.db.remote.api.FirebaseLevels
-import com.example.emojifinder.data.db.remote.models.EmojiModel
+import com.example.emojifinder.data.db.remote.models.EmojiShopModel
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import kotlinx.coroutines.CoroutineScope
@@ -24,8 +24,8 @@ class CategoriesViewModel @Inject constructor(
     val categoriesResponse : LiveData<Result<List<SmallLevelModel?>>>
         get() = _categoriesResponse
 
-    private val _levelResponse = MutableLiveData<Result<List<EmojiModel?>>>()
-    val levelResponse : LiveData<Result<List<EmojiModel?>>>
+    private val _levelResponse = MutableLiveData<Result<List<EmojiShopModel?>>>()
+    val levelResponse : LiveData<Result<List<EmojiShopModel?>>>
         get() = _levelResponse
 
     private val _gameCategory = MutableLiveData<SmallLevelModel>()

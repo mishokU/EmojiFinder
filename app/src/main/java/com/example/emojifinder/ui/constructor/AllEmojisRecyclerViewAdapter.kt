@@ -1,17 +1,17 @@
-package com.example.emojifinder.ui.game
+package com.example.emojifinder.ui.constructor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.emojifinder.data.db.remote.models.EmojiShopModel
 import com.example.emojifinder.databinding.EmojiGameItemBinding
 import kotlinx.android.synthetic.main.emoji_game_item.view.*
+import com.example.emojifinder.ui.shop.EmojiShopModel
 
 
-class GameKeyBoardRecyclerViewAdapter(private val onClickListener : OnEmojiClickListener) : ListAdapter<EmojiShopModel,
-        GameKeyBoardRecyclerViewAdapter.KeyboardViewHolder>(
+class AllEmojisRecyclerViewAdapter(private val onClickListener : OnEmojiClickListener) : ListAdapter<EmojiShopModel,
+        AllEmojisRecyclerViewAdapter.KeyboardViewHolder>(
     DiffCallback
 ) {
 
@@ -22,9 +22,8 @@ class GameKeyBoardRecyclerViewAdapter(private val onClickListener : OnEmojiClick
         }
 
         override fun areContentsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem.unicode == newItem.unicode
+            return oldItem.id == newItem.id
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : KeyboardViewHolder {
@@ -47,7 +46,7 @@ class GameKeyBoardRecyclerViewAdapter(private val onClickListener : OnEmojiClick
     class KeyboardViewHolder(private val binding: EmojiGameItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(emojiShop: EmojiShopModel?) {
-            binding.emojiGameView.text = emojiShop?.unicode
+            binding.emojiGameView.text = emojiShop?.text
             binding.executePendingBindings()
         }
     }

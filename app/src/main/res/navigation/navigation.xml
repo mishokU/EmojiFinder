@@ -95,7 +95,11 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.emojifinder.ui.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_levelConstructorFragment"
+            app:destination="@id/levelConstructorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
         android:name="com.example.emojifinder.ui.auth.login.ForgetPasswordFragment"
@@ -190,4 +194,9 @@
         android:name="com.example.emojifinder.ui.help.WriteQuestionFragment"
         android:label="fragment_write_question"
         tools:layout="@layout/fragment_write_question" />
+    <fragment
+        android:id="@+id/levelConstructorFragment"
+        android:name="com.example.emojifinder.ui.constructor.LevelConstructorFragment"
+        android:label="fragment_level_constructor"
+        tools:layout="@layout/fragment_level_constructor" />
 </navigation>

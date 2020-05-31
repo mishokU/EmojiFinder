@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/plus"
+        android:title="Plus"
+        android:icon="@drawable/icons8_plus_32px"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/minus"
+        android:title="Minus"
+        android:icon="@drawable/icons8_minus_32px"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/gridOnOff"
+        android:title="Hide Grid"
+        android:icon="@drawable/icons8_grid_32px"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/sent_level"
+        android:title="Sent level"
+        android:icon="@drawable/icons8_sent_26px"
+        app:showAsAction="always"/>
+
+</menu>

@@ -5,7 +5,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.databinding.ActivityMainBinding
 import com.example.emojifinder.domain.sounds.MediaPlayerPool
@@ -39,6 +41,11 @@ class MainActivity : DaggerAppCompatActivity() {
 
         initMediaPlayer()
         playBackgroundMusic()
+    }
+
+    fun navigateFirstTabWithClearStack() {
+        navGraph.startDestination = R.id.signInFragment
+        navigation.graph = navGraph
     }
 
     private fun initMediaPlayer() {

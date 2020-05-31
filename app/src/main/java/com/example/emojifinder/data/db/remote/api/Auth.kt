@@ -9,4 +9,5 @@ interface Auth {
     suspend fun logIn(data : LoginModel) : Result<AuthResult>
     suspend fun logOut() : Result<Unit>
     suspend fun restorePassword(email : String) : Result<Void>
+    suspend fun deleteAccount()
 }

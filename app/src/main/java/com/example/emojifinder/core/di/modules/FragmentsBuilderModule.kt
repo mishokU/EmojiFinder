@@ -10,6 +10,7 @@ import com.example.emojifinder.ui.auth.registration.RegistrationFragment
 import com.example.emojifinder.ui.auth.signin.SignInFragment
 import com.example.emojifinder.ui.boxes.LootBoxesFragment
 import com.example.emojifinder.ui.categories.CategoryGameFragment
+import com.example.emojifinder.ui.constructor.LevelConstructorFragment
 import com.example.emojifinder.ui.game.GameFragment
 import com.example.emojifinder.ui.help.HelpFragment
 import com.example.emojifinder.ui.help.ReadQAFragment
@@ -69,5 +70,8 @@ abstract class FragmentsBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeForgetPasswordFragment() : ForgetPasswordFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeLevelConstructorFragment() : LevelConstructorFragment
 
 }

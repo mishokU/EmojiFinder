@@ -15,6 +15,7 @@ import com.example.emojifinder.domain.prefs.SettingsPrefs
 import com.example.emojifinder.domain.viewModels.LogInViewModel
 import com.example.emojifinder.ui.main.MainActivity
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
@@ -50,7 +51,9 @@ class SettingsFragment : DaggerFragment() {
     private fun initDialogButtons() {
         LogOutDialog.getLogOutButton().setOnClickListener {
             viewModel.logOut()
-            this.findNavController().popBackStack(R.id.settingsFragment, true)
+
+            (activity as MainActivity).navigateFirstTabWithClearStack()
+
             this.findNavController().navigate(R.id.signInFragment)
             LogOutDialog.dialogView.dismiss()
         }
@@ -58,7 +61,7 @@ class SettingsFragment : DaggerFragment() {
         DeleteAccountDialog.getDeleteAccountBtn().setOnClickListener {
             viewModel.deleteAccount()
 
-            this.findNavController().popBackStack(R.id.settingsFragment, true)
+            (activity as MainActivity).navigateFirstTabWithClearStack()
             this.findNavController().navigate(R.id.signInFragment)
 
             DeleteAccountDialog.dialogView.dismiss()
@@ -79,15 +82,6 @@ class SettingsFragment : DaggerFragment() {
         }
     }
 
-//    fun navigateFirstTabWithClearStack() {
-//        val navController = findNavController(R.id.nav_host_main)
-//        val navHostFragment: NavHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_main) as NavHostFragment
-//        val inflater = navHostFragment.navController.navInflater
-//        val graph = inflater.inflate(R.navigation.nav_graph_main)
-//        graph.startDestination = R.id.nav_graph_tab1
-//        navController.graph = graph
-//    }
-
     private fun setLogOutButton() {
         viewModel = injectViewModel(viewModelFactory)
         binding.exitBtn.setOnClickListener {
@@ -95,6 +89,9 @@ class SettingsFragment : DaggerFragment() {
         }
         binding.deleteAccountBtn.setOnClickListener {
             DeleteAccountDialog.open()
+        }
+        binding.suggestLevelBtn.setOnClickListener {
+            this.findNavController().navigate(R.id.levelConstructorFragment)
         }
     }
 

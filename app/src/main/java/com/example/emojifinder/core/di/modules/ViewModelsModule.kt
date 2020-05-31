@@ -57,4 +57,9 @@ abstract class ViewModelsModule {
     @ViewModelKey(ShopViewModel::class)
     abstract fun bindShopViewModel(viewModel : ShopViewModel) : ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(ConstructorViewModel::class)
+    abstract fun bindLevelConstructor(viewModel: ConstructorViewModel) : ViewModel
+
 }

@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="70dp"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
@@ -176,7 +177,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    tools:itemCount="2"
+                    tools:itemCount="10"
                     tools:listitem="@layout/account_level_item"/>
 
             </LinearLayout>
@@ -221,6 +222,27 @@
 
 
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="bottom"
+            android:background="@color/main_color">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/rating_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/top"
+                android:textColor="@color/background_color"
+                app:iconTint="@null"
+                app:iconSize="30dp"
+                app:icon="@drawable/icons8_medal_48px"
+                app:backgroundTint="@color/blue_color"
+                app:cornerRadius="10dp" />
+
+        </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

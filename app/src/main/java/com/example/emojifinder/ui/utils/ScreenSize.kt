@@ -8,7 +8,7 @@ import android.content.res.Resources
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import com.example.emojifinder.R
-import com.example.emojifinder.data.db.remote.models.EmojiModel
+import com.example.emojifinder.data.db.remote.models.EmojiShopModel
 
 object ScreenSize {
 
@@ -31,7 +31,7 @@ object ScreenSize {
 
     fun getScreenSize(
         resources: Resources,
-        list: List<EmojiModel?>
+        list: List<EmojiShopModel?>
     ) : Float {
         return when {
             resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK === Configuration.SCREENLAYOUT_SIZE_LARGE -> {

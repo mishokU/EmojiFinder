@@ -70,6 +70,8 @@ class LogInViewModel @Inject constructor(
     }
 
     fun deleteAccount() {
-
+        coroutineScope.launch {
+            firebaseAuthHandler.deleteAccount()
+        }
     }
 }

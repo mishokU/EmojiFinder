@@ -30,11 +30,15 @@ class FirebaseAuthHandler : Auth, FirebaseInit() {
         } catch (e : Exception){
             Result.Error(e)
         }
-
     }
 
     override suspend fun logOut() : Result<Unit> {
         return Result.Success(mAuth.signOut())
+    }
+
+    override suspend fun deleteAccount() {
+        mAuth.signOut()
+        mUser?.delete()
     }
 
 }

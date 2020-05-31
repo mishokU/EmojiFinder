@@ -12,6 +12,7 @@ import com.example.emojifinder.data.prefs.PreferenceStorage
 import com.example.emojifinder.data.prefs.SharedPreferenceStorage
 import com.example.emojifinder.core.di.utils.CoroutineScopeMain
 import com.example.emojifinder.data.db.local.emoji_json.ShopEmojiService
+import com.example.emojifinder.data.db.local.fake.LevelConstructorService
 import com.example.emojifinder.data.db.remote.api.FirebaseLevels
 import com.example.emojifinder.data.db.remote.api.FirebaseRegistration
 import com.example.emojifinder.data.db.remote.service.*
@@ -101,6 +102,10 @@ class AppModule {
     @Provides
     fun provideSettingsSharedPref(application: Application)
             : SettingsPrefs = SettingsPrefs(application)
+
+    @Singleton
+    @Provides
+    fun provideLevelConstructorService() : LevelConstructorService = LevelConstructorService()
 
     @Singleton
     @Provides

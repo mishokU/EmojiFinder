@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class EmojiModel(
+data class EmojiShopModel(
     val unicode : String,
     val order : Int,
     val x : Int,

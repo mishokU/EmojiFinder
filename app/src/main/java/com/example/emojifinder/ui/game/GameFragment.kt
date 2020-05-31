@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
-import com.example.emojifinder.data.db.remote.models.EmojiModel
+import com.example.emojifinder.data.db.remote.models.EmojiShopModel
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.databinding.FragmentGameBinding
 import com.example.emojifinder.domain.prefs.ShowGameHintPrefs
@@ -57,14 +57,14 @@ class GameFragment : DaggerFragment() {
 
     private lateinit var level : SmallLevelModel
 
-    private var list : List<EmojiModel?> = listOf()
+    private var list : List<EmojiShopModel?> = listOf()
     private var levelEditTextList : MutableList<EmojiAppCompatEditText> = mutableListOf()
     private lateinit var ShowStartGameButton : ShowStartGameButton
 
     private var number : Int = 0
     private var keyboardNumber : Int = 0
 
-    private val randomList : MutableList<EmojiModel?> = mutableListOf()
+    private val randomList : MutableList<EmojiShopModel?> = mutableListOf()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
@@ -192,7 +192,7 @@ class GameFragment : DaggerFragment() {
         }
     }
 
-    private fun createKeyboardLevel(data: List<EmojiModel?>) {
+    private fun createKeyboardLevel(data: List<EmojiShopModel?>) {
        gameKeyboardAdapter.submitList(data)
     }
 
@@ -323,7 +323,7 @@ class GameFragment : DaggerFragment() {
         ShowStartGameButton.loaded()
     }
 
-    private fun drawLevel(data: List<EmojiModel?>) {
+    private fun drawLevel(data: List<EmojiShopModel?>) {
 
         list = data.sortedBy { e -> e?.order }
         randomList.addAll(list)

@@ -1,4 +1,4 @@
-package com.example.emojifinder.ui.game
+package com.example.emojifinder.ui.constructor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,12 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emojifinder.data.db.remote.models.EmojiShopModel
-import com.example.emojifinder.databinding.EmojiGameItemBinding
+import com.example.emojifinder.databinding.EmojiConstructorItemBinding
 import kotlinx.android.synthetic.main.emoji_game_item.view.*
 
-
-class GameKeyBoardRecyclerViewAdapter(private val onClickListener : OnEmojiClickListener) : ListAdapter<EmojiShopModel,
-        GameKeyBoardRecyclerViewAdapter.KeyboardViewHolder>(
+class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiClickListener) : ListAdapter<EmojiShopModel,
+        LevelConstructorRecyclerViewAdapter.KeyboardViewHolder>(
     DiffCallback
 ) {
 
@@ -24,12 +23,11 @@ class GameKeyBoardRecyclerViewAdapter(private val onClickListener : OnEmojiClick
         override fun areContentsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
             return oldItem.unicode == newItem.unicode
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : KeyboardViewHolder {
         return KeyboardViewHolder(
-            EmojiGameItemBinding.inflate(LayoutInflater.from(parent.context))
+            EmojiConstructorItemBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
 
@@ -38,16 +36,13 @@ class GameKeyBoardRecyclerViewAdapter(private val onClickListener : OnEmojiClick
         holder.itemView.setOnClickListener {
             onClickListener.onClick(emoji)
         }
-        holder.itemView.emoji_game_view.setOnClickListener {
-            onClickListener.onClick(emoji)
-        }
         holder.bind(emoji)
     }
 
-    class KeyboardViewHolder(private val binding: EmojiGameItemBinding) :
+    class KeyboardViewHolder(private val binding: EmojiConstructorItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(emojiShop: EmojiShopModel?) {
-            binding.emojiGameView.text = emojiShop?.unicode
+            binding.emojiConstructorBtn.text = emojiShop?.unicode
             binding.executePendingBindings()
         }
     }

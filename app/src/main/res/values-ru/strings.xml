@@ -127,5 +127,9 @@
     <string name="your_emoji">Your emoji</string>
     <string name="leave_account">Do you really want to leave?</string>
     <string name="delete_account_message">Are you sure you want to delete the account?</string>
+    <string name="top">Top</string>
+    <string name="suggest_level">Suggest level</string>
+    <string name="create">Create</string>
+    <string name="constructor">Constructor</string>
 
 </resources>

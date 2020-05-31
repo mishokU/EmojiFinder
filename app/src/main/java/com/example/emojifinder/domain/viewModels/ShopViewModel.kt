@@ -5,13 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.emojifinder.core.di.utils.CoroutineScopeIO
 import com.example.emojifinder.data.db.local.emoji_json.ShopEmojiService
-import com.example.emojifinder.data.db.local.emoji_json.getJsonDataFromAsset
 import com.example.emojifinder.domain.result.Result
-import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.example.emojifinder.ui.shop.EmojiShopModel
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import dagger.android.support.DaggerApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
