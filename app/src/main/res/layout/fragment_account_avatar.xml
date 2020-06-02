@@ -65,7 +65,7 @@
                             android:layout_width="20dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:paddingStart="2dp"
+                            android:paddingStart="0dp"
                             app:icon="@drawable/icons8_back_16px_left"
                             app:iconSize="20dp"
                             app:strokeColor="@color/main_color"
@@ -628,7 +628,6 @@
                                     android:layout_height="50dp"/>
 
                             </LinearLayout>
-
 
                         </RelativeLayout>
 

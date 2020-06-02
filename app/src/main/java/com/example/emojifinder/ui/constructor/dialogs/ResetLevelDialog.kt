@@ -1,4 +1,4 @@
-package com.example.emojifinder.ui.settings
+package com.example.emojifinder.ui.constructor.dialogs
 
 import android.app.Dialog
 import android.view.Window
@@ -7,7 +7,7 @@ import com.example.emojifinder.R
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
-object DeleteAccountDialog {
+object ResetLevelDialog {
 
     lateinit var dialogView : Dialog
     private lateinit var fragment: DaggerFragment
@@ -24,7 +24,7 @@ object DeleteAccountDialog {
 
         dialogView.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         dialogView.window!!.statusBarColor = ContextCompat.getColor(fragment.requireContext(), R.color.main_color)
-        dialogView.setContentView(R.layout.delete_account_dialog)
+        dialogView.setContentView(R.layout.reset_level_dialog)
         dialogView.window!!.setBackgroundDrawable(fragment.resources.getDrawable(R.color.alert_background_color));
         dialogView.window!!.attributes.windowAnimations = R.anim.fragment_fade_enter
 
@@ -36,13 +36,13 @@ object DeleteAccountDialog {
     }
 
     private fun close(){
-        close = dialogView.findViewById(R.id.cancel_delete)
+        close = dialogView.findViewById(R.id.cancel_reset_level)
         close.setOnClickListener {
             dialogView.dismiss()
         }
     }
 
-    fun getDeleteAccountBtn() : MaterialButton {
-        return dialogView.findViewById(R.id.delete_account_btn)
+    fun getResetLevelBtn() : MaterialButton {
+        return dialogView.findViewById(R.id.reset_level_btn)
     }
 }

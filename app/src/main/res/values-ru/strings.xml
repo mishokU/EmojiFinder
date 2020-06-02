@@ -123,13 +123,21 @@
     <string name="how_to_combine">Как комбинировать Эмос в магазине?</string>
     <string name="what_is_emos_answer">Эмос - это игровая валюта\n\nВы можете заработать Эмос либо проходя компанию, либо купив их в магазине.</string>
     <string name="how_to_combine_answer">Чтобы скомбинировать разные эмодзи в одно, вам нужно сначала заработать Эмос играя в компанию. Когда вы накопите достаточно валюты, вам необходимо купить классический желтый эмодзи в магазине, а потом к нему купить любой цвет.\n\nКогда у вас будут эти эмодзи, просто нажмите на ячейку, чтобы она стала активной, потом нажмите на ваше эмодзи, так проделайте с цветом и с другим классическим эмодзи.\n\nКомбинаций эмодзи очень много.\n\nВажно!\n\nПорядок эмодзи и цвета важен.\n\nНе перепутайте Эмодзи цвета с квадратом.</string>
-    <string name="delete_account">Delete account</string>
-    <string name="your_emoji">Your emoji</string>
-    <string name="leave_account">Do you really want to leave?</string>
-    <string name="delete_account_message">Are you sure you want to delete the account?</string>
-    <string name="top">Top</string>
-    <string name="suggest_level">Suggest level</string>
-    <string name="create">Create</string>
-    <string name="constructor">Constructor</string>
+    <string name="delete_account">Удалить аккаунт</string>
+    <string name="your_emoji">Ваш эмодзи</string>
+    <string name="leave_account">Вы правда хотите выйти?</string>
+    <string name="delete_account_message">Вы точно уверены, что хотите удалить аккаутн?</string>
+    <string name="top">Топ</string>
+    <string name="suggest_level">Предложить уровень</string>
+    <string name="create">Создать</string>
+    <string name="constructor">Конструктор</string>
+    <string name="save_level">Сохранить уровень</string>
+    <string name="reset_level">Сбросить все ячейки</string>
+    <string name="you_cannot_restore_this_level_map">Вы не можете восстаносить этот уровень</string>
+    <string name="warning">Предупреждение!</string>
+    <string name="if_you_do_not_want_to_lose">Если вы не хотите потерять этот уровень, тогда вам нужно его сохранить</string>
+    <string name="sent_level">Отправить уровень</string>
+    <string name="now_you_are_sending_your_level_to_the_server_in_the_near_future_the_manager_will_either_accept_it_or_reject_it">Сейчас вы посылаете ваш уровень на сервер, в ближайшем времени, менеджер либо примет его, либо отклонит</string>
+    <string name="sent">Sent</string>
 
 </resources>

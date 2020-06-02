@@ -1,13 +1,14 @@
-package com.example.emojifinder.ui.settings
+package com.example.emojifinder.ui.constructor.dialogs
 
 import android.app.Dialog
 import android.view.Window
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
-object DeleteAccountDialog {
+object ExitLevelDialog {
 
     lateinit var dialogView : Dialog
     private lateinit var fragment: DaggerFragment
@@ -24,7 +25,7 @@ object DeleteAccountDialog {
 
         dialogView.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         dialogView.window!!.statusBarColor = ContextCompat.getColor(fragment.requireContext(), R.color.main_color)
-        dialogView.setContentView(R.layout.delete_account_dialog)
+        dialogView.setContentView(R.layout.leave_constructor_dialog)
         dialogView.window!!.setBackgroundDrawable(fragment.resources.getDrawable(R.color.alert_background_color));
         dialogView.window!!.attributes.windowAnimations = R.anim.fragment_fade_enter
 
@@ -36,13 +37,14 @@ object DeleteAccountDialog {
     }
 
     private fun close(){
-        close = dialogView.findViewById(R.id.cancel_delete)
+        close = dialogView.findViewById(R.id.leave_level_btn)
         close.setOnClickListener {
+            fragment.findNavController().navigateUp()
             dialogView.dismiss()
         }
     }
 
-    fun getDeleteAccountBtn() : MaterialButton {
-        return dialogView.findViewById(R.id.delete_account_btn)
+    fun getSaveLevelBtn() : MaterialButton {
+        return dialogView.findViewById(R.id.save_level_dialog_leave)
     }
 }

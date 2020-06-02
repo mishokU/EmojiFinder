@@ -36,6 +36,7 @@ class MediaPlayerPool @Inject constructor(application: Application) {
         winPlayer = MediaPlayer.create(context, R.raw.level_win)
         losePlayer = MediaPlayer.create(context, R.raw.lost_game)
         failGeneration = MediaPlayer.create(context, R.raw.lost_game)
+        buyEmojiPlayer = MediaPlayer.create(context, R.raw.level_win)
     }
 
     fun playBackground() {

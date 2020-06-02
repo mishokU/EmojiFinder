@@ -192,13 +192,13 @@ class AccountAvatarFragment : DaggerFragment() {
 
     private fun handleFilters() {
         isFilterVisible = if(!isFilterVisible){
-            openFilters(binding.shopRecyclerView, binding.filtersPlace)
+            openFilters(binding.shopRecyclerView, binding.filtersPlace, 100,200)
             binding.filterToggleButton
                 .setImageDrawable(ContextCompat.getDrawable(requireContext(),
                     R.drawable.icons8_filter_100px_close))
             true
         } else {
-            closeFilters(binding.shopRecyclerView, binding.filtersPlace)
+            closeFilters(binding.shopRecyclerView, binding.filtersPlace,100,200)
             binding.filterToggleButton
                 .setImageDrawable(ContextCompat.getDrawable(requireContext(),
                     R.drawable.icons8_filter_100px))

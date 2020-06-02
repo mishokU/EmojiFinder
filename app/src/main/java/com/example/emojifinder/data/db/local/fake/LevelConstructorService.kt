@@ -11,9 +11,13 @@ class LevelConstructorService {
     fun fetchFakeData(): Result<List<EmojiShopModel>> {
         return try {
             val cells = mutableListOf<EmojiShopModel>()
-            for(i : Int in 0..99){
-                val emoji = EmojiShopModel()
-                cells.add(emoji)
+            for(i : Int in 0..9){
+                for(j : Int in 0..9) {
+                    val emoji = EmojiShopModel(
+                        unicode = "", x = i, y = j, order = 0
+                    )
+                    cells.add(emoji)
+                }
             }
             Result.Success(cells)
         }  catch (e : Exception){

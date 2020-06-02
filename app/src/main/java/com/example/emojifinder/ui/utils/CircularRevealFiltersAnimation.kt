@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 fun openFilters(
     shopRecyclerView: RecyclerView,
-    filtersPlace: RelativeLayout
+    filtersPlace: RelativeLayout,
+    xOffset : Int, radiusOffset : Int
 ) {
-    val x: Int = shopRecyclerView.x.toInt() + shopRecyclerView.width - 100
-    val y: Int = shopRecyclerView.y.toInt()
+    val x: Int = shopRecyclerView.x.toInt() + shopRecyclerView.width - xOffset
+    val y: Int = 0
 
     val startRadius = 0
-    val endRadius: Int = filtersPlace.width + 200
+    val endRadius: Int = filtersPlace.width + radiusOffset
 
     val anim = ViewAnimationUtils.createCircularReveal(
         filtersPlace, x, y,
@@ -29,12 +30,13 @@ fun openFilters(
 
 fun closeFilters(
     shopRecyclerView: RecyclerView,
-    filtersPlace: RelativeLayout
+    filtersPlace: RelativeLayout,
+    xOffset : Int, radiusOffset : Int
 ) {
-    val x: Int = shopRecyclerView.x.toInt() + shopRecyclerView.width - 100
-    val y: Int = shopRecyclerView.y.toInt()
+    val x: Int = shopRecyclerView.x.toInt() + shopRecyclerView.width - xOffset
+    val y: Int = 0
 
-    val startRadius: Int = filtersPlace.width + 200
+    val startRadius: Int = filtersPlace.width + radiusOffset
     val endRadius = 0
 
     val anim = ViewAnimationUtils.createCircularReveal(

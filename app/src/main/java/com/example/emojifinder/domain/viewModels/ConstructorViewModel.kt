@@ -6,11 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.example.emojifinder.core.di.utils.CoroutineScopeIO
 import com.example.emojifinder.data.db.local.fake.LevelConstructorService
 import com.example.emojifinder.data.db.remote.models.EmojiShopModel
-import kotlinx.coroutines.CoroutineScope
 import com.example.emojifinder.domain.result.Result
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class ConstructorViewModel @Inject constructor(
@@ -37,5 +34,16 @@ class ConstructorViewModel @Inject constructor(
         withContext(Dispatchers.Main){
             _constructorLevelResponse.value = result
         }
+    }
+
+    fun saveLevel(level: List<EmojiShopModel>) {
+        coroutineScope.launch {
+
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        coroutineScope.cancel()
     }
 }

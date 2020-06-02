@@ -5,10 +5,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class EmojiShopModel(
-    val unicode : String,
-    val order : Int,
+    var unicode : String,
+    var order : Int,
     val x : Int,
     val y : Int
 ) : Parcelable {
-    constructor() : this("", 0,0,0)
+    constructor() : this("", -1,0,0)
 }

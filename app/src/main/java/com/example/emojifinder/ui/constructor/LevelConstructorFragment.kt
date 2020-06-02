@@ -1,8 +1,11 @@
 package com.example.emojifinder.ui.constructor
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -13,9 +16,19 @@ import com.example.emojifinder.databinding.FragmentLevelConstructorBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.ConstructorViewModel
 import com.example.emojifinder.domain.viewModels.ShopViewModel
+import com.example.emojifinder.ui.constructor.dialogs.ExitLevelDialog
+import com.example.emojifinder.ui.constructor.dialogs.ResetLevelDialog
+import com.example.emojifinder.ui.constructor.dialogs.SaveLevelDialog
+import com.example.emojifinder.ui.constructor.dialogs.SentLevelDialog
+import com.example.emojifinder.ui.shop.EmojiShopModel
+import com.example.emojifinder.ui.utils.closeFilters
+import com.example.emojifinder.ui.utils.openFilters
+import com.google.android.material.chip.Chip
 import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.emoji_constructor_item.view.*
 import javax.inject.Inject
+
 
 class LevelConstructorFragment : DaggerFragment() {
 
@@ -23,6 +36,8 @@ class LevelConstructorFragment : DaggerFragment() {
     private lateinit var allEmojisAdapter : AllEmojisRecyclerViewAdapter
     private lateinit var levelAdapter : LevelConstructorRecyclerViewAdapter
 
+    private var isGridActive : Boolean = true
+    private var isFilterVisible : Boolean = false
 
     @Inject
     lateinit var viewModelFactoryShop: ViewModelProvider.Factory
@@ -38,18 +53,81 @@ class LevelConstructorFragment : DaggerFragment() {
     ): View? {
         binding = FragmentLevelConstructorBinding.inflate(inflater)
 
+        ExitLevelDialog.create(this)
+        ResetLevelDialog.create(this)
+        SaveLevelDialog.create(this)
+        SentLevelDialog.create(this)
+
         setBackButton()
 
+        initDialogButtons()
         initAllEmojisAdapter()
         initConstructorAdapter()
 
         getAllEmojisFromJson()
         getLevelEmojis()
 
+        initButtons()
 
         setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+
+
+    private fun initDialogButtons() {
+        ResetLevelDialog.getResetLevelBtn().setOnClickListener {
+            resetEmojis()
+            ResetLevelDialog.dialogView.dismiss()
+        }
+        SaveLevelDialog.getSaveLevelBtn().setOnClickListener {
+            viewModel.saveLevel(levelAdapter.currentList)
+        }
+
+        SentLevelDialog.getSentLevelBtn().setOnClickListener {
+
+        }
+
+        ExitLevelDialog.getSaveLevelBtn().setOnClickListener {
+            ExitLevelDialog.dialogView.dismiss()
+            SaveLevelDialog.open()
+        }
+
+    }
+
+    private fun initButtons() {
+        binding.resetConstructor.setOnClickListener {
+            ResetLevelDialog.open()
+        }
+        binding.saveLevel.setOnClickListener {
+            SaveLevelDialog.open()
+        }
+        binding.filterToggleButton.setOnClickListener {
+            handleFilters()
+        }
+        binding.toCheckedEmoji.setOnClickListener {
+            binding.allEmojisConstructor.smoothScrollToPosition(allEmojisAdapter.getCurrentElement())
+        }
+
+        binding.applyFilters.setOnClickListener {
+            setCheckedFilters()
+            handleFilters()
+        }
+        binding.resetFilters.setOnClickListener {
+            allEmojisAdapter.resetFilters()
+            handleFilters()
+        }
+    }
+
+    private fun setCheckedFilters() {
+        val categories : MutableList<String> = mutableListOf()
+        for(chip in binding.categoriesChipGroup.children){
+            if((chip as Chip).isChecked){
+                categories.add(chip.text.toString())
+            }
+            allEmojisAdapter.filter(categories)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -57,17 +135,92 @@ class LevelConstructorFragment : DaggerFragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun initConstructorAdapter() {
-        levelAdapter = LevelConstructorRecyclerViewAdapter(LevelConstructorRecyclerViewAdapter.OnEmojiClickListener{
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return (when(item.itemId) {
+            R.id.erase -> {
 
+                true
+            }
+            R.id.plus -> {
+                scaleItems(1.0f,1.0f)
+                true
+            }
+            R.id.minus -> {
+                scaleItems(0.8f,0.8f)
+                true
+            }
+            R.id.gridOnOff -> {
+                changeGridStyle()
+                true
+            }
+            R.id.sent_level -> {
+                SentLevelDialog.open()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        })
+    }
+
+    private fun handleHomeButton() {
+        if(!levelAdapter.isEmptyLevel()){
+            ExitLevelDialog.open()
+        } else {
+            this.findNavController().navigateUp()
+        }
+    }
+
+    private fun scaleItems(x : Float, y : Float) {
+        binding.constructorLevelRv.animate().scaleX(x).scaleY(y)
+        // Gets the layout params that will allow you to resize the layout
+        val params  = binding.constructorLevelRv.layoutParams
+        // Changes the height and width to the specified *pixels*
+        params.height = ViewGroup.LayoutParams.MATCH_PARENT
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT
+        binding.constructorLevelRv.layoutParams = params
+        binding.constructorLevelRv.requestLayout()
+    }
+
+    private fun changeGridStyle() {
+        isGridActive = if(isGridActive){
+            setEmojiBackground(R.color.main_color)
+            false
+        } else {
+            setEmojiBackground(R.drawable.stroke_fake)
+            true
+        }
+    }
+
+    private fun resetEmojis() {
+        for(i : Int in 0..99){
+            val holder = binding.constructorLevelRv
+                .findViewHolderForAdapterPosition(i)
+            holder?.itemView?.emoji_constructor_btn?.text =""
+        }
+        levelAdapter.resetOrder()
+    }
+
+    private fun setEmojiBackground(background: Int) {
+        for(i : Int in 0..99){
+            val holder = binding.constructorLevelRv
+                .findViewHolderForAdapterPosition(i)
+            holder?.itemView?.emoji_constructor_btn?.background =
+                ContextCompat.getDrawable(requireContext(), background)
+        }
+    }
+
+    private fun initConstructorAdapter() {
+        levelAdapter = LevelConstructorRecyclerViewAdapter(LevelConstructorRecyclerViewAdapter
+            .OnEmojiClickListener{
         })
         binding.constructorLevelRv.adapter = levelAdapter
     }
 
     private fun initAllEmojisAdapter() {
         allEmojisAdapter = AllEmojisRecyclerViewAdapter(AllEmojisRecyclerViewAdapter.OnEmojiClickListener {
-
-        })
+                emojiShopModel: EmojiShopModel?, id : Int ->
+            allEmojisAdapter.resetBackground(binding.allEmojisConstructor.findViewHolderForAdapterPosition(id))
+            levelAdapter.setActiveElement(emojiShopModel)
+        }, binding.levelProgressBar)
         binding.allEmojisConstructor.adapter = allEmojisAdapter
     }
 
@@ -81,7 +234,8 @@ class LevelConstructorFragment : DaggerFragment() {
                     }
                     is Result.Success -> {
                         binding.levelProgressBar.visibility = View.INVISIBLE
-                        allEmojisAdapter.submitList(it.data)
+                        allEmojisAdapter.allEmojisSubmitList(it.data)
+                        generateGroupChips(it.data)
                     }
                     is Result.Error -> {
 
@@ -89,14 +243,6 @@ class LevelConstructorFragment : DaggerFragment() {
                 }
             }
         })
-    }
-
-    private fun hideGrid(){
-
-    }
-
-    private fun showGrid(){
-
     }
 
     private fun getLevelEmojis() {
@@ -115,13 +261,48 @@ class LevelConstructorFragment : DaggerFragment() {
         })
     }
 
+    private fun generateGroupChips(data: List<EmojiShopModel?>) {
+        binding.categoriesChipGroup.removeAllViews()
+        val groups = data.distinctBy {
+            it?.group
+        }
+        for(model in groups){
+            val chip = Chip(requireContext())
+            chip.text = model?.group
+            chip.isChipIconVisible = true
+            chip.isClickable = true
+            chip.isCheckable = true
+
+            binding.categoriesChipGroup.addView(chip)
+        }
+    }
+
+    private fun handleFilters() {
+        isFilterVisible = if(!isFilterVisible){
+            openFilters(binding.allEmojisConstructor, binding.filtersPlace, 180,300)
+            binding.filterToggleButton
+                .setImageDrawable(ContextCompat.getDrawable(requireContext(),
+                    R.drawable.icons8_filter_100px_close))
+            true
+        } else {
+            closeFilters(binding.allEmojisConstructor, binding.filtersPlace,180,300)
+            binding.filterToggleButton
+                .setImageDrawable(ContextCompat.getDrawable(requireContext(),
+                    R.drawable.icons8_filter_100px))
+            false
+        }
+    }
+
     private fun setBackButton() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.constructorToolbar)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        ((activity) as AppCompatActivity).supportActionBar?.title = ""
+        val activity = ((activity) as AppCompatActivity)
+        activity.setSupportActionBar(binding.constructorToolbar)
+
+        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        activity.supportActionBar?.setDisplayShowHomeEnabled(true)
+        activity.supportActionBar?.title = ""
 
         binding.constructorToolbar.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
+            handleHomeButton()
         }
     }
 

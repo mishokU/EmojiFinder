@@ -128,4 +128,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="create">Create</string>
     <string name="constructor">Constructor</string>
+    <string name="save_level">Save level</string>
+    <string name="reset_level">Reset level</string>
+    <string name="you_cannot_restore_this_level_map">You cannot restore this level map</string>
+    <string name="warning">Warning</string>
+    <string name="if_you_do_not_want_to_lose">If you do not want to lose this level, then you need to save it.</string>
+    <string name="sent_level">Sent level</string>
+    <string name="now_you_are_sending_your_level_to_the_server_in_the_near_future_the_manager_will_either_accept_it_or_reject_it">Now you are sending your level to the server, in the near future, the manager will either accept it or reject it.</string>
+    <string name="sent">Sent</string>
+    <string name="name_your_level">Name your level</string>
+    <string name="set_time_in_seconds">Set time in seconds</string>
 </resources>

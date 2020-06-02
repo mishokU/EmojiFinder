@@ -26,42 +26,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <RelativeLayout
+            <ScrollView
+                android:id="@+id/constructor_level_sv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:scrollbars="none"
                 android:layout_below="@id/constructor_toolbar"
                 android:layout_above="@id/stat_place">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/constructor_level_rv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:spanCount="10"
-                    android:layout_centerInParent="true"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
 
-            </RelativeLayout>
+            </ScrollView>
 
             <LinearLayout
                 android:id="@+id/stat_place"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_above="@id/all_emojis_constructor">
 
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="false"
-                    android:layout_marginStart="5dp"
-                    app:backgroundTint="@color/blue_color"
-                    android:layout_marginEnd="5dp"
-                    android:text="@string/create"
-                    android:layout_weight="1"/>
-
-                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/reset_constructor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
@@ -71,6 +65,7 @@
                     android:layout_weight="1"/>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/save_level"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
@@ -79,6 +74,22 @@
                     android:textAllCaps="false"
                     android:layout_weight="1"/>
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/filter_toggle_button"
+                    android:layout_width="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icons8_filter_100px"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/to_checked_emoji"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/icons8_checked_48px"/>
+
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -86,9 +97,76 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scrollbars="vertical"
+                android:layout_margin="5dp"
                 android:layout_alignParentBottom="true"
                 app:spanCount="8"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+
+            <RelativeLayout
+                android:id="@+id/filters_place"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="5dp"
+                android:visibility="invisible"
+                android:layout_below="@id/stat_place"
+                android:background="@drawable/your_emojis_style">
+
+                <ScrollView
+                    android:id="@+id/chip_group_scroll_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_above="@id/filters_button_place">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/categories_chip_group"
+                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                </ScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:id="@+id/filters_button_place">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/apply_filters"
+                        android:layout_width="match_parent"
+                        android:text="@string/filter"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:textAllCaps="false"
+                        app:backgroundTint="@color/blue_color"
+                        android:textColor="@android:color/white"
+                        android:layout_height="50dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/reset_filters"
+                        android:layout_width="match_parent"
+                        android:text="@string/reset"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:textAllCaps="false"
+                        app:backgroundTint="@color/blue_color"
+                        android:textColor="@android:color/white"
+                        android:layout_height="50dp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/level_progress_bar"

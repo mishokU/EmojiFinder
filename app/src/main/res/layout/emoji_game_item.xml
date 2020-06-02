@@ -9,6 +9,7 @@
         android:layout_height="50dp">
 
         <RelativeLayout
+            android:id="@+id/back_place_emoji"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
