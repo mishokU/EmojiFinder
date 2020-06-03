@@ -2,14 +2,9 @@ package com.example.emojifinder.ui.game.gameAlerts
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.text.BoringLayout
-import android.view.View
 import android.view.Window
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
@@ -122,8 +117,8 @@ class ShowStartGameButton {
         start.hideProgress(fragment.resources.getString(R.string.start))
     }
 
-    fun error() {
-        start.hideProgress("Error occurred")
+    fun error(error: String?) {
+        start.hideProgress(error)
     }
 
 

@@ -56,14 +56,13 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:hint="@string/set_time_in_seconds"
-                app:counterMaxLength="300"
-                android:textColorHint="@color/main_color"
-                app:counterEnabled="true">
+                android:textColorHint="@color/main_color">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/level_constructor_time"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -1,8 +1,8 @@
 package com.example.emojifinder.ui.constructor
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
@@ -81,8 +81,12 @@ class LevelConstructorFragment : DaggerFragment() {
             resetEmojis()
             ResetLevelDialog.dialogView.dismiss()
         }
+
         SaveLevelDialog.getSaveLevelBtn().setOnClickListener {
-            viewModel.saveLevel(levelAdapter.currentList)
+            if(SaveLevelDialog.isNotEmpty()){
+                viewModel.saveLevel(levelAdapter.currentList,SaveLevelDialog.getSmallLevelModel())
+                SaveLevelDialog.dialogView.dismiss()
+            }
         }
 
         SentLevelDialog.getSentLevelBtn().setOnClickListener {
@@ -100,12 +104,19 @@ class LevelConstructorFragment : DaggerFragment() {
         binding.resetConstructor.setOnClickListener {
             ResetLevelDialog.open()
         }
+
         binding.saveLevel.setOnClickListener {
-            SaveLevelDialog.open()
+            if(levelAdapter.isEmptyLevel()) {
+                Toast.makeText(requireContext(), "Level is empty", Toast.LENGTH_SHORT).show()
+            } else {
+                SaveLevelDialog.open()
+            }
         }
+
         binding.filterToggleButton.setOnClickListener {
             handleFilters()
         }
+
         binding.toCheckedEmoji.setOnClickListener {
             binding.allEmojisConstructor.smoothScrollToPosition(allEmojisAdapter.getCurrentElement())
         }
@@ -138,7 +149,6 @@ class LevelConstructorFragment : DaggerFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return (when(item.itemId) {
             R.id.erase -> {
-
                 true
             }
             R.id.plus -> {

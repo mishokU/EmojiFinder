@@ -312,7 +312,7 @@ class GameFragment : DaggerFragment() {
                         createKeyboardLevel(result.data)
                     }
                     is Result.Error -> {
-                        ShowStartGameButton.error()
+                        ShowStartGameButton.error(result.exception.message)
                     }
                 }
             }

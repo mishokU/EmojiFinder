@@ -2,8 +2,10 @@ package com.example.emojifinder.ui.constructor.dialogs
 
 import android.app.Dialog
 import android.view.Window
+import android.widget.EditText
 import androidx.core.content.ContextCompat
 import com.example.emojifinder.R
+import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
@@ -42,7 +44,37 @@ object SaveLevelDialog {
         }
     }
 
+    fun getNameLabel() : EditText {
+        return dialogView.findViewById(R.id.level_name)
+    }
+
+    fun getTimeLabel() : EditText {
+        return dialogView.findViewById(R.id.level_constructor_time)
+    }
+
     fun getSaveLevelBtn() : MaterialButton {
         return dialogView.findViewById(R.id.save_level_dialog)
+    }
+
+    fun isNotEmpty(): Boolean {
+        return if(getNameLabel().text.toString() != "" && getTimeLabel().text.toString() != ""){
+            true
+        } else {
+            if(getNameLabel().text.toString() == ""){
+                getNameLabel().error = fragment.resources.getString(R.string.level_name_is_empty)
+            }
+            if(getTimeLabel().text.toString() == ""){
+                getTimeLabel().error = fragment.resources.getString(R.string.set_level_time)
+            }
+            false
+        }
+    }
+
+    fun getSmallLevelModel(): SmallLevelModel {
+        return SmallLevelModel(
+            id = 0,
+            title = getNameLabel().text.toString(),
+            time = getTimeLabel().text.toString().toInt()
+        )
     }
 }

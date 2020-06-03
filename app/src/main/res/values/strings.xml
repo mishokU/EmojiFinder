@@ -138,4 +138,7 @@
     <string name="sent">Sent</string>
     <string name="name_your_level">Name your level</string>
     <string name="set_time_in_seconds">Set time in seconds</string>
+    <string name="level_name_should_be_unique">Name should be unique</string>
+    <string name="level_name_is_empty">Name your level</string>
+    <string name="set_level_time">Set level time</string>
 </resources>
