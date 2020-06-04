@@ -140,5 +140,6 @@
     <string name="now_you_are_sending_your_level_to_the_server_in_the_near_future_the_manager_will_either_accept_it_or_reject_it">Сейчас вы посылаете ваш уровень на сервер, в ближайшем времени, менеджер либо примет его, либо отклонит</string>
     <string name="sent">Sent</string>
     <string name="set_level_time">Set level time</string>
+    <string name="status">Status</string>
 
 </resources>

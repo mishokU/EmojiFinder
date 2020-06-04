@@ -72,7 +72,7 @@
                     android:id="@+id/first_end_game_star"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    app:lottie_scale="2"
+                    app:lottie_scale="4"
                     app:lottie_autoPlay="true"
                     app:lottie_repeatCount="1"
                     app:lottie_rawRes="@raw/star"/>
@@ -81,7 +81,7 @@
                     android:id="@+id/second_end_game_star"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    app:lottie_scale="2"
+                    app:lottie_scale="4"
                     app:lottie_autoPlay="true"
                     app:lottie_repeatCount="1"
                     app:lottie_rawRes="@raw/star"/>
@@ -90,7 +90,7 @@
                     android:id="@+id/third_end_game_star"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    app:lottie_scale="2"
+                    app:lottie_scale="4"
                     app:lottie_autoPlay="true"
                     app:lottie_repeatCount="1"
                     app:lottie_rawRes="@raw/star"/>
@@ -101,6 +101,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="20dp"
+                app:strokeColor="@color/light_main_color"
+                app:strokeWidth="4dp"
                 app:cardBackgroundColor="@color/main_color"
                 app:cardCornerRadius="25dp">
 
@@ -134,6 +136,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 app:cardBackgroundColor="@color/main_color"
+                app:strokeColor="@color/light_main_color"
+                app:strokeWidth="4dp"
                 android:layout_marginBottom="20dp"
                 app:cardCornerRadius="25dp">
 
@@ -167,6 +171,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 app:cardBackgroundColor="@color/main_color"
+                app:strokeColor="@color/light_main_color"
+                app:strokeWidth="4dp"
                 android:layout_marginBottom="20dp"
                 app:cardCornerRadius="25dp">
 
@@ -201,6 +207,8 @@
                 android:layout_height="60dp"
                 app:cardBackgroundColor="@color/main_color"
                 android:layout_marginBottom="20dp"
+                app:strokeColor="@color/light_main_color"
+                app:strokeWidth="4dp"
                 app:cardCornerRadius="25dp">
 
                 <LinearLayout
@@ -240,6 +248,8 @@
                     android:layout_width="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="5dp"
+                    app:strokeColor="@color/colorAccent"
+                    app:strokeWidth="5dp"
                     android:textAllCaps="false"
                     android:layout_height="60dp"
                     app:cornerRadius="10dp"
@@ -252,6 +262,8 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
+                    app:strokeColor="@color/colorAccent"
+                    app:strokeWidth="5dp"
                     android:textAllCaps="false"
                     android:layout_marginStart="5dp"
                     android:text="@string/next_level"

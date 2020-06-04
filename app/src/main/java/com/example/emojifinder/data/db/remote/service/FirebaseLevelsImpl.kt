@@ -20,37 +20,13 @@ class FirebaseLevelsImpl : FirebaseInit(), FirebaseLevels {
                 .document("level")
                 .get().await()
 
-            Log.d("level", documents.data?.get("level").toString())
-            
             val levelSnapshot : List<EmojiShopModel?> = documents.toObject(ListEmojiShopModel::class.java)!!.level
-
-            Log.d("list ", levelSnapshot.toString())
 
             Result.Success(levelSnapshot)
         } catch (e : Exception){
             Result.Error(e)
         }
     }
-
-//    override suspend fun fetchLevel(title : String?) : Result<List<EmojiShopModel?>>{
-//        return try {
-//            val documents = mFireStore
-//                .collection("categories")
-//                .document(title!!)
-//                .collection("emojis")
-//                .get().await()
-//
-//            println(documents.documents[0].data)
-//
-//            val level : MutableList<EmojiShopModel?> = mutableListOf()
-//            for(document in documents.documents){
-//                level.add(document.toObject(EmojiShopModel::class.java))
-//            }
-//            Result.Success(level)
-//        } catch (e : Exception){
-//            Result.Error(e)
-//        }
-//    }
 
     override suspend fun addFullLevel(level: List<EmojiShopModel>, smallLevelModel: SmallLevelModel?) {
 
@@ -70,16 +46,16 @@ class FirebaseLevelsImpl : FirebaseInit(), FirebaseLevels {
             .document("level").set(map)
     }
 
-    override suspend fun fetchLevels() : Result<List<SmallLevelModel?>>{
+    override suspend fun fetchLevels() : Result<List<SmallLevelModel>>{
         return try {
             val document = mFireStore
                 .collection("levels")
                 .get()
                 .await()
 
-            val list : MutableList<SmallLevelModel?> = mutableListOf()
+            val list : MutableList<SmallLevelModel> = mutableListOf()
             for(data in document.documents){
-                list.add(data.toObject(SmallLevelModel::class.java))
+                list.add(data.toObject(SmallLevelModel::class.java)!!)
             }
 
             Result.Success(list.toList())
@@ -87,22 +63,4 @@ class FirebaseLevelsImpl : FirebaseInit(), FirebaseLevels {
             Result.Error(e)
         }
     }
-
-//    override suspend fun fetchLevels() : Result<List<SmallLevelModel?>>{
-//        return try {
-//            val document = mFireStore
-//                .collection("categories")
-//                .get()
-//                .await()
-//
-//            val list : MutableList<SmallLevelModel?> = mutableListOf()
-//            for(data in document.documents){
-//                list.add(data.toObject(SmallLevelModel::class.java))
-//            }
-//
-//            Result.Success(list.toList())
-//        } catch (e : Exception){
-//            Result.Error(e)
-//        }
-//    }
 }

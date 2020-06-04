@@ -16,6 +16,7 @@ import com.example.emojifinder.databinding.FragmentLevelConstructorBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.ConstructorViewModel
 import com.example.emojifinder.domain.viewModels.ShopViewModel
+import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.example.emojifinder.ui.constructor.dialogs.ExitLevelDialog
 import com.example.emojifinder.ui.constructor.dialogs.ResetLevelDialog
 import com.example.emojifinder.ui.constructor.dialogs.SaveLevelDialog
@@ -38,6 +39,8 @@ class LevelConstructorFragment : DaggerFragment() {
 
     private var isGridActive : Boolean = true
     private var isFilterVisible : Boolean = false
+    private lateinit var saveItemIcon : MenuItem
+    private lateinit var level : SmallLevelModel
 
     @Inject
     lateinit var viewModelFactoryShop: ViewModelProvider.Factory
@@ -53,6 +56,8 @@ class LevelConstructorFragment : DaggerFragment() {
     ): View? {
         binding = FragmentLevelConstructorBinding.inflate(inflater)
 
+        viewModel = injectViewModel(viewModelFactory)
+
         ExitLevelDialog.create(this)
         ResetLevelDialog.create(this)
         SaveLevelDialog.create(this)
@@ -60,12 +65,14 @@ class LevelConstructorFragment : DaggerFragment() {
 
         setBackButton()
 
+
         initDialogButtons()
         initAllEmojisAdapter()
         initConstructorAdapter()
 
         getAllEmojisFromJson()
-        getLevelEmojis()
+
+        getLevel()
 
         initButtons()
 
@@ -74,6 +81,22 @@ class LevelConstructorFragment : DaggerFragment() {
         return binding.root
     }
 
+    private fun getLevel() {
+        if(requireArguments().containsKey("Level")) {
+            level = LevelConstructorFragmentArgs.fromBundle(requireArguments()).Level
+            SaveLevelDialog.setLevel(level)
+            fetchLevel(level)
+        } else {
+            getLevelEmojis()
+        }
+    }
+
+    private fun fetchLevel(level: SmallLevelModel) {
+        viewModel.levelTitle = level.title
+        viewModel.emojis.observe(viewLifecycleOwner, Observer {
+            levelAdapter.submitList(it)
+        })
+    }
 
 
     private fun initDialogButtons() {
@@ -84,8 +107,21 @@ class LevelConstructorFragment : DaggerFragment() {
 
         SaveLevelDialog.getSaveLevelBtn().setOnClickListener {
             if(SaveLevelDialog.isNotEmpty()){
-                viewModel.saveLevel(levelAdapter.currentList,SaveLevelDialog.getSmallLevelModel())
-                SaveLevelDialog.dialogView.dismiss()
+
+                if(SaveLevelDialog.getSmallLevelModel() != null){
+
+                    levelAdapter.setLevelTitleToEmojis(SaveLevelDialog.getNameLabel().text.toString())
+
+                    viewModel.saveLevel(
+                        levelAdapter.currentList,
+                        SaveLevelDialog.getSmallLevelModel()!!
+                    )
+
+                    saveItemIcon.icon = ContextCompat.getDrawable(requireContext(),
+                        R.drawable.icons8_save_26px_green)
+
+                    SaveLevelDialog.dialogView.dismiss()
+                }
             }
         }
 
@@ -143,12 +179,14 @@ class LevelConstructorFragment : DaggerFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         (activity as DaggerAppCompatActivity).menuInflater.inflate(R.menu.constructor_menu, menu)
+        saveItemIcon = menu.findItem(R.id.is_saved)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return (when(item.itemId) {
-            R.id.erase -> {
+            R.id.is_saved -> {
+
                 true
             }
             R.id.plus -> {
@@ -172,6 +210,20 @@ class LevelConstructorFragment : DaggerFragment() {
     }
 
     private fun handleHomeButton() {
+        SaveLevelDialog.getSmallLevelModel()?.let {
+            viewModel.hasDifferences(levelAdapter.currentList,
+                it
+            )
+        }
+//        viewModel.isSimilarList.observe(viewLifecycleOwner, Observer {
+//            if(levelAdapter.currentList.isEmpty()){
+//                this.findNavController().navigateUp()
+//            } else if(it){
+//                ExitLevelDialog.open()
+//            } else if(!it) {
+//                this.findNavController().navigateUp()
+//            }
+//        })
         if(!levelAdapter.isEmptyLevel()){
             ExitLevelDialog.open()
         } else {
@@ -256,7 +308,6 @@ class LevelConstructorFragment : DaggerFragment() {
     }
 
     private fun getLevelEmojis() {
-        viewModel = injectViewModel(viewModelFactory)
         viewModel.constructorLevelResponse.observe(viewLifecycleOwner, Observer {
             it?.let {
                 when(it){

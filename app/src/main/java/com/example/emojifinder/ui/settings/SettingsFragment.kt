@@ -91,7 +91,7 @@ class SettingsFragment : DaggerFragment() {
             DeleteAccountDialog.open()
         }
         binding.suggestLevelBtn.setOnClickListener {
-            this.findNavController().navigate(R.id.levelConstructorFragment)
+            this.findNavController().navigate(R.id.yourLevelsFragment)
         }
     }
 

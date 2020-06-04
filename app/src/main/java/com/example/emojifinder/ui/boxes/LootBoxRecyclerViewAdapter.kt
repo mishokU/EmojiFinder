@@ -25,21 +25,6 @@ class LootBoxRecyclerViewAdapter(private val onClickListener: OnShopItemClickLis
         }
     }
 
-    private fun fling(){
-
-    }
-
-    private val CALLBACK = object : DiffUtil.ItemCallback<EmojiShopModel>() {
-        override fun areItemsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem === newItem
-        }
-
-        override fun areContentsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem.text == newItem.text
-        }
-    }
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ShopEmojiViewHolder {
         return ShopEmojiViewHolder(
             ChestItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -54,19 +39,11 @@ class LootBoxRecyclerViewAdapter(private val onClickListener: OnShopItemClickLis
         holder.bind(emoji)
     }
 
-    fun animate(i: Int) {
-
-    }
-
     class ShopEmojiViewHolder(private val binding: ChestItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(emojiShop: EmojiShopModel?) {
             binding.chestEmoji.setText(emojiShop?.text)
             binding.executePendingBindings()
-        }
-
-        fun getLayout(): ChestItemBinding {
-            return binding
         }
     }
 

@@ -14,7 +14,11 @@ class LevelConstructorService {
             for(i : Int in 0..9){
                 for(j : Int in 0..9) {
                     val emoji = EmojiShopModel(
-                        unicode = "", x = i, y = j, order = 0
+                        title = "",
+                        unicode = "",
+                        x = i,
+                        y = j,
+                        order = 0
                     )
                     cells.add(emoji)
                 }

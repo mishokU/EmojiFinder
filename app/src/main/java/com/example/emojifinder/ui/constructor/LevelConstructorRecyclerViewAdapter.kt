@@ -105,6 +105,12 @@ class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiC
         return items == 0
     }
 
+    fun setLevelTitleToEmojis(title: String) {
+        for(emoji in currentList){
+            emoji.title = title
+        }
+    }
+
     class KeyboardViewHolder(private val binding: EmojiConstructorItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(emojiShop: EmojiShopModel?) {

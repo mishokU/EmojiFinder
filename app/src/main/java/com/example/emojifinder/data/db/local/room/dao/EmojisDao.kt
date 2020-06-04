@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.emojifinder.data.db.local.models.EmojiShopModelLocal
+import kotlinx.coroutines.Deferred
 
 @Dao
 interface EmojisDao {
@@ -16,10 +17,13 @@ interface EmojisDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(list : List<EmojiShopModelLocal>)
 
-    @Query("Select * from levels_table")
-    fun getAlbums() : LiveData<List<EmojiShopModelLocal>>
+    @Query("Select * from levels_table where levelTitle = :title")
+    fun getEmojis(title : String) : LiveData<List<EmojiShopModelLocal>>
 
     @Query("Delete from levels_table")
     fun deleteAll()
+
+    @Query("Delete from levels_table where levelTitle = :title")
+    fun delete(title: String)
 
 }

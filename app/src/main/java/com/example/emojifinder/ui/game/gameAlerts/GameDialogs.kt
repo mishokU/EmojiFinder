@@ -35,27 +35,9 @@ object GameDialogs  {
         hint.text = hint.resources.getString(R.string.game_hint) + " " + time + " seconds"
     }
 
-    fun showExitDialog(fragment : DaggerFragment){
-        val builder = AlertDialog.Builder(fragment.requireContext())
-        builder.setCancelable(false)
-        val inflater = fragment.layoutInflater
-
-        dialogView = inflater.inflate(R.layout.exit_game_layout, null)
-        builder.setView(dialogView)
-        builder.create()
-        alert = builder.show()
-    }
-
-    fun getGameExitButton() : View {
-        return dialogView.findViewById(R.id.exit_game_btn)
-    }
 
     fun getStartGameButton() : MaterialButton {
         return dialogView.findViewById(R.id.start_game_btn)
-    }
-
-    fun getResumeGameButton() : View {
-        return dialogView.findViewById(R.id.resume_game_btn)
     }
 
 }

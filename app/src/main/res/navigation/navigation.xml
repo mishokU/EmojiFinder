@@ -99,6 +99,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_levelConstructorFragment"
             app:destination="@id/levelConstructorFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_yourLevelsFragment"
+            app:destination="@id/yourLevelsFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
@@ -198,5 +201,20 @@
         android:id="@+id/levelConstructorFragment"
         android:name="com.example.emojifinder.ui.constructor.LevelConstructorFragment"
         android:label="fragment_level_constructor"
-        tools:layout="@layout/fragment_level_constructor" />
+        tools:layout="@layout/fragment_level_constructor">
+
+        <argument
+            android:name="Level"
+            app:argType="com.example.emojifinder.ui.categories.SmallLevelModel"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/yourLevelsFragment"
+        android:name="com.example.emojifinder.ui.levels.YourLevelsFragment"
+        android:label="fragment_your_levels"
+        tools:layout="@layout/fragment_your_levels" >
+        <action
+            android:id="@+id/action_yourLevelsFragment_to_levelConstructorFragment"
+            app:destination="@id/levelConstructorFragment" />
+    </fragment>
 </navigation>

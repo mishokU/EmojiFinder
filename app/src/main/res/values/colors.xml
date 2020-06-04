@@ -5,6 +5,9 @@
     <color name="colorAccent">#6C787A</color>
 
     <color name="main_color">#4f5154</color>
+    <color name="dark_main_color">#27292b</color>
+    <color name="light_main_color">#7b7d80</color>
+
     <color name="main_ripple_button_color">#696D73</color>
     <color name="second_text_color">#389aed</color>
     <color name="black_color">#050708</color>

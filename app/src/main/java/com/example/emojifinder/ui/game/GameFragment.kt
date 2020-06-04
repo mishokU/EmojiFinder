@@ -30,6 +30,7 @@ import com.example.emojifinder.domain.viewModels.GameViewModel
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.example.emojifinder.ui.game.gameAlerts.EndGameDialog
 import com.example.emojifinder.ui.game.gameAlerts.GameDialogs
+import com.example.emojifinder.ui.game.gameAlerts.ExitGameDialog
 import com.example.emojifinder.ui.game.gameAlerts.ShowStartGameButton
 import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.utils.ScaleGesture
@@ -168,27 +169,23 @@ class GameFragment : DaggerFragment() {
 
     private fun onBackButton() {
         animation.pause()
-        GameDialogs.showExitDialog(this@GameFragment)
 
-        GameDialogs.getGameExitButton().setOnClickListener {
-            GameDialogs.alert.dismiss()
+        ExitGameDialog.create(this)
+
+        ExitGameDialog.open()
+
+        ExitGameDialog.getGameExitButton().setOnClickListener {
+            ExitGameDialog.dialogView.dismiss()
             animation.removeAllListeners()
             animation.cancel()
-
             (activity as MainActivity).mediaPlayerPool.play(MusicType.LOSE)
-
             this@GameFragment.findNavController().popBackStack()
         }
 
-        GameDialogs.getResumeGameButton().setOnClickListener {
+        ExitGameDialog.getResumeGameButton().setOnClickListener {
             animation.resume()
-            GameDialogs.alert.dismiss()
-
+            ExitGameDialog.dialogView.dismiss()
             (activity as MainActivity).mediaPlayerPool.play(MusicType.LOSE)
-        }
-
-        GameDialogs.alert.setOnDismissListener {
-            animation.resume()
         }
     }
 
@@ -284,6 +281,9 @@ class GameFragment : DaggerFragment() {
             showEndGameDialog(statistics)
             (activity as MainActivity).mediaPlayerPool.play(MusicType.LOSE)
         })
+        animation.addUpdateListener {
+            binding.gameTime.text = it.animatedValue.toString()
+        }
     }
 
     private fun showEndGameDialog(statistics: UserLevelStatistics) {

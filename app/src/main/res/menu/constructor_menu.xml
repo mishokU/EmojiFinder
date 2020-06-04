@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/erase"
-        android:title="Erase"
-        android:icon="@drawable/icons8_erase_48px"
+        android:id="@+id/is_saved"
+        android:title="Is saved"
+        android:icon="@drawable/icons8_save_26px"
         app:showAsAction="always"/>
 
     <item

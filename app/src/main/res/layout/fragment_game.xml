@@ -21,15 +21,32 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ProgressBar
-                android:id="@+id/game_progress_bar"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:progress="100"
-                android:layout_margin="10dp"
-                android:indeterminateBehavior="cycle"
-                android:progressDrawable="@drawable/custom_progress_bar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+            <RelativeLayout
+                android:id="@+id/progress_bar_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/game_progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:progress="100"
+                    android:layout_margin="10dp"
+                    android:indeterminateBehavior="cycle"
+                    android:progressDrawable="@drawable/custom_progress_bar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+                <TextView
+                    android:id="@+id/game_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/main_color"
+                    android:text="10"/>
+
+            </RelativeLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/game_back_button"
@@ -38,7 +55,7 @@
                 android:layout_gravity="start|top"
                 android:layout_marginStart="10dp"
                 android:paddingStart="10dp"
-                android:layout_below="@id/game_progress_bar"
+                android:layout_below="@id/progress_bar_place"
                 android:padding="0dp"
                 app:icon="@drawable/back_24px"
                 app:strokeColor="@color/main_color"
@@ -60,7 +77,7 @@
                 app:cornerRadius="12dp"
                 android:paddingStart="10dp"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@id/game_progress_bar"
+                android:layout_below="@id/progress_bar_place"
                 app:strokeColor="@color/main_color"
                 app:iconTint="@color/background_color"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -70,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:layout_below="@id/game_progress_bar"
+                android:layout_below="@id/progress_bar_place"
                 android:layout_above="@id/stat_place">
 
                 <androidx.gridlayout.widget.GridLayout
@@ -116,21 +133,30 @@
                         android:background="@drawable/game_score_style"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="@color/main_color"
-                            android:text="@string/score"/>
+                            android:layout_gravity="center"
+                            android:gravity="center">
 
-                        <TextView
-                            android:id="@+id/game_score"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:layout_marginStart="5dp"
-                            android:textColor="@color/main_color"
-                            android:text="0"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:layout_gravity="center"
+                                android:textColor="@color/main_color"
+                                android:text="@string/score"/>
+
+                            <TextView
+                                android:id="@+id/game_score"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:layout_marginStart="5dp"
+                                android:textColor="@color/main_color"
+                                android:text="0"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -146,21 +172,29 @@
                         android:background="@drawable/game_score_style"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="@color/main_color"
-                            android:text="@string/time"/>
+                            android:layout_gravity="center"
+                            android:gravity="center">
 
-                        <TextView
-                            android:id="@+id/game_time"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:layout_marginStart="5dp"
-                            android:textColor="@color/main_color"
-                            android:text="10"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:textColor="@color/main_color"
+                                android:text="@string/mistakes"/>
+
+                            <TextView
+                                android:id="@+id/game_mistakes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:layout_marginStart="5dp"
+                                android:textColor="@color/main_color"
+                                android:text="0"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -176,51 +210,30 @@
                         android:background="@drawable/game_score_style"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="@color/main_color"
-                            android:text="@string/mistakes"/>
+                            android:orientation="horizontal"
+                            android:layout_gravity="center"
+                            android:gravity="center">
 
-                        <TextView
-                            android:id="@+id/game_mistakes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:layout_marginStart="5dp"
-                            android:textColor="@color/main_color"
-                            android:text="0"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:textColor="@color/main_color"
+                                android:text="@string/game_level"/>
 
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/game_level"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:layout_marginStart="5dp"
+                                android:textColor="@color/main_color"
+                                android:text="1"/>
 
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="2dp"
-                        android:paddingTop="2dp"
-                        android:paddingBottom="2dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="5dp"
-                        android:background="@drawable/game_score_style"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="@color/main_color"
-                            android:text="@string/game_level"/>
-
-                        <TextView
-                            android:id="@+id/game_level"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:layout_marginStart="5dp"
-                            android:textColor="@color/main_color"
-                            android:text="1"/>
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -239,6 +252,7 @@
                 android:id="@+id/scroll_finder_field"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:scrollbars="vertical"
                 android:layout_alignParentBottom="true"
                 app:spanCount="7"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>

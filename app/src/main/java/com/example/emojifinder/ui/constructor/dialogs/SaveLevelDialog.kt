@@ -5,6 +5,7 @@ import android.view.Window
 import android.widget.EditText
 import androidx.core.content.ContextCompat
 import com.example.emojifinder.R
+import com.example.emojifinder.data.db.local.converter.LevelStatus
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
@@ -70,11 +71,20 @@ object SaveLevelDialog {
         }
     }
 
-    fun getSmallLevelModel(): SmallLevelModel {
-        return SmallLevelModel(
-            id = 0,
-            title = getNameLabel().text.toString(),
-            time = getTimeLabel().text.toString().toInt()
-        )
+    fun getSmallLevelModel(): SmallLevelModel? {
+        if(getTimeLabel().text.toString() != ""){
+            return SmallLevelModel(
+                id = 0,
+                title = getNameLabel().text.toString(),
+                time = getTimeLabel().text.toString().toInt(),
+                status = LevelStatus.WAITING
+            )
+        }
+        return null
+    }
+
+    fun setLevel(level: SmallLevelModel) {
+        getNameLabel().setText(level.title)
+        //getTimeLabel().setText(level.time)
     }
 }

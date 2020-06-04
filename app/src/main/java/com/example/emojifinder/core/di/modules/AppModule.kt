@@ -13,6 +13,7 @@ import com.example.emojifinder.data.prefs.SharedPreferenceStorage
 import com.example.emojifinder.core.di.utils.CoroutineScopeMain
 import com.example.emojifinder.data.db.local.emoji_json.ShopEmojiService
 import com.example.emojifinder.data.db.local.fake.LevelConstructorService
+import com.example.emojifinder.data.db.local.room.database.LevelsDatabase
 import com.example.emojifinder.data.db.remote.api.FirebaseLevels
 import com.example.emojifinder.data.db.remote.api.FirebaseRegistration
 import com.example.emojifinder.data.db.remote.service.*
@@ -110,6 +111,13 @@ class AppModule {
     @Singleton
     @Provides
     fun provideMediaPlayerPool(application: Application) : MediaPlayerPool = MediaPlayerPool(application)
+
+    @Singleton
+    @Provides
+    fun provideLevelsDatabase(application: Application) :
+            LevelsDatabase = LevelsDatabase.getDatabase(application.applicationContext)
+
+
 
     @CoroutineScopeIO
     @Provides

@@ -15,6 +15,7 @@ import com.example.emojifinder.ui.game.GameFragment
 import com.example.emojifinder.ui.help.HelpFragment
 import com.example.emojifinder.ui.help.ReadQAFragment
 import com.example.emojifinder.ui.help.WriteQuestionFragment
+import com.example.emojifinder.ui.levels.YourLevelsFragment
 import com.example.emojifinder.ui.localization.LocalizeAppFragment
 import com.example.emojifinder.ui.main.MainMenuFragment
 import dagger.Module
@@ -73,5 +74,8 @@ abstract class FragmentsBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeLevelConstructorFragment() : LevelConstructorFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeUserLevelsFragment() : YourLevelsFragment
 
 }

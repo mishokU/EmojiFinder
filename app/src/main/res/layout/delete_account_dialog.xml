@@ -50,24 +50,24 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cancel_delete"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cancel"
-                    android:layout_weight="1"
-                    app:strokeWidth="3dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_marginEnd="5dp"
-                    android:textAllCaps="false"/>
-
-                <com.google.android.material.button.MaterialButton
                     android:id="@+id/delete_account_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/yes"
+                    android:layout_marginEnd="5dp"
                     app:backgroundTint="@color/green_color"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cancel_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
+                    app:strokeWidth="3dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:textAllCaps="false"/>
 
             </LinearLayout>
