@@ -34,7 +34,7 @@ object EndGameDialog {
 
         if(statistics != null){
 
-            if(statistics.result == "Lost"){
+            if(statistics.result == result.resources.getString(R.string.game_lost)){
                 result.setTextColor(result.resources.getColor(R.color.red_color))
                 getNextLevelButton().text = result.resources.getText(R.string.exit)
             } else {

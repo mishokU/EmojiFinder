@@ -55,9 +55,19 @@ class UserLevelRecyclerViewAdapter(
         holder.bind(level)
     }
 
-    class LevelViewHolder(private val context: Context,
-                          private val binding: AccountLevelItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    fun collapseAll() {
+
+    }
+
+    fun expandAll() {
+
+    }
+
+    class LevelViewHolder(
+        private val context: Context,
+        private val binding: AccountLevelItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(level: UserLevelStatistics?) {
             binding.level = level
             binding.executePendingBindings()

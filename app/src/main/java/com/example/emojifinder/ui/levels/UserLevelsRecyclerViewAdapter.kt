@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.emojifinder.databinding.UserLevelModelBinding
 import com.example.emojifinder.ui.categories.SmallLevelModel
 
-class UserLevelsRecyclerViewAdapter(private val onClickListener: OnLevelClickListener)
-    : ListAdapter<SmallLevelModel, UserLevelsRecyclerViewAdapter.UserLevelViewHolder>(DiffCallback) {
+class UserLevelsRecyclerViewAdapter(private val onClickListener: OnLevelClickListener,
+                                    private val onLongClickListener : OnDeleteClickListener
+) : ListAdapter<SmallLevelModel, UserLevelsRecyclerViewAdapter.UserLevelViewHolder>(DiffCallback) {
 
     companion object DiffCallback: DiffUtil.ItemCallback<SmallLevelModel>() {
 
@@ -33,6 +34,10 @@ class UserLevelsRecyclerViewAdapter(private val onClickListener: OnLevelClickLis
         holder.itemView.setOnClickListener {
             onClickListener.onClick(emoji)
         }
+        holder.itemView.setOnLongClickListener {
+            onLongClickListener.onLongClick(emoji)
+            true
+        }
         holder.bind(emoji)
     }
 
@@ -46,6 +51,10 @@ class UserLevelsRecyclerViewAdapter(private val onClickListener: OnLevelClickLis
 
     class OnLevelClickListener(val clickListener: (level : SmallLevelModel?) -> Unit) {
         fun onClick(level: SmallLevelModel) = clickListener(level)
+    }
+
+    class OnDeleteClickListener(val longClickListener: (level: SmallLevelModel) -> Unit){
+        fun onLongClick(level: SmallLevelModel) = longClickListener(level)
     }
 
 

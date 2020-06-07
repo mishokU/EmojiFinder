@@ -77,7 +77,7 @@ object SaveLevelDialog {
                 id = 0,
                 title = getNameLabel().text.toString(),
                 time = getTimeLabel().text.toString().toInt(),
-                status = LevelStatus.WAITING
+                status = LevelStatus.SAVED
             )
         }
         return null
@@ -85,6 +85,6 @@ object SaveLevelDialog {
 
     fun setLevel(level: SmallLevelModel) {
         getNameLabel().setText(level.title)
-        //getTimeLabel().setText(level.time)
+        getTimeLabel().setText(level.time.toString())
     }
 }

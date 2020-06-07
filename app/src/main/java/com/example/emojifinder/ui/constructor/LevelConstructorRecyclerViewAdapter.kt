@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emojifinder.data.db.remote.models.EmojiShopModel
 import com.example.emojifinder.databinding.EmojiConstructorItemBinding
+import com.google.common.primitives.Ints.max
 import kotlinx.android.synthetic.main.emoji_constructor_item.view.*
 
 class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiClickListener) : ListAdapter<EmojiShopModel,
@@ -64,19 +65,35 @@ class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiC
             } else {
                 // If position of deleted emoji is first
                 // increase all emojis by 1 in order
-                if(position == 0){
-                    for(item in currentList){
-                        item.order -= 1
+                when {
+                    position == 0 -> {
+                        for(item in currentList){
+                            item.order -= 1
+                        }
+                        order--
+                        emoji.order = -1
+                        button.text = ""
+                        // if position in the middle
                     }
-                // if position in the middle
-                } else {
-                    for(item in currentList.subList(position, currentList.size)){
-                        item.order -= 1
+                    position != currentList.size - 1 -> {
+                        for(item in currentList.subList(position, currentList.size - 1)){
+                            item.order -= 1
+                        }
+                        order--
+                        emoji.order = -1
+                        button.text = ""
+                    }
+                    else -> {
+                        emoji.order = -1
+                        button.text = ""
+                        order--
                     }
                 }
-                order--
-                emoji.order = -1
-                button.text = ""
+            }
+            for(item in currentList){
+                if(item.unicode != ""){
+                    println(item)
+                }
             }
             onClickListener.onClick(emoji)
         }
@@ -109,6 +126,16 @@ class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiC
         for(emoji in currentList){
             emoji.title = title
         }
+    }
+
+    fun setOrder(){
+        var tmpMax = 0
+        for(item in currentList){
+            if(item.order > tmpMax){
+                tmpMax = item.order
+            }
+        }
+        order = tmpMax
     }
 
     class KeyboardViewHolder(private val binding: EmojiConstructorItemBinding) :

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
@@ -32,11 +33,31 @@ class YourLevelsFragment : DaggerFragment() {
     ): View? {
         binding = FragmentYourLevelsBinding.inflate(inflater)
 
+        initToolbar()
+
+        DeleteLevelDialog.create(this)
+
+        initDeleteDialogButton()
         initAdapter()
         initUserLevelsViewModel()
         goToConstructor()
 
         return binding.root
+    }
+
+    private fun initToolbar() {
+        ((activity) as AppCompatActivity).setSupportActionBar(binding.toolbarYourLevels)
+        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.toolbarYourLevels.setNavigationOnClickListener {
+            this.findNavController().navigateUp()
+        }
+    }
+
+    private fun initDeleteDialogButton() {
+        DeleteLevelDialog.getDeleteLevelBtn().setOnClickListener {
+            viewModel.deleteLevel(DeleteLevelDialog.level.title)
+            DeleteLevelDialog.dialogView.dismiss()
+        }
     }
 
     private fun goToConstructor() {
@@ -50,6 +71,8 @@ class YourLevelsFragment : DaggerFragment() {
             this.findNavController().navigate(YourLevelsFragmentDirections.actionYourLevelsFragmentToLevelConstructorFragment(
                 it!!
             ))
+        }, UserLevelsRecyclerViewAdapter.OnDeleteClickListener {
+            DeleteLevelDialog.open(it)
         })
         binding.yourLevelsRv.adapter = adapter
     }

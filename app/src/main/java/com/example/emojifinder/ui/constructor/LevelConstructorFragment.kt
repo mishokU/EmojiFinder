@@ -85,6 +85,7 @@ class LevelConstructorFragment : DaggerFragment() {
         if(requireArguments().containsKey("Level")) {
             level = LevelConstructorFragmentArgs.fromBundle(requireArguments()).Level
             SaveLevelDialog.setLevel(level)
+            SentLevelDialog.setLevel(level)
             fetchLevel(level)
         } else {
             getLevelEmojis()
@@ -95,9 +96,9 @@ class LevelConstructorFragment : DaggerFragment() {
         viewModel.levelTitle = level.title
         viewModel.emojis.observe(viewLifecycleOwner, Observer {
             levelAdapter.submitList(it)
+            levelAdapter.setOrder()
         })
     }
-
 
     private fun initDialogButtons() {
         ResetLevelDialog.getResetLevelBtn().setOnClickListener {
@@ -126,7 +127,10 @@ class LevelConstructorFragment : DaggerFragment() {
         }
 
         SentLevelDialog.getSentLevelBtn().setOnClickListener {
-
+            if(SentLevelDialog.isNotEmpty()){
+                viewModel.sentLevel(levelAdapter.currentList,SentLevelDialog.getSmallLevelModel())
+                SentLevelDialog.dialogView.dismiss()
+            }
         }
 
         ExitLevelDialog.getSaveLevelBtn().setOnClickListener {

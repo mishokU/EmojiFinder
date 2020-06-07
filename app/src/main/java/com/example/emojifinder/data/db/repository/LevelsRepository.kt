@@ -47,10 +47,10 @@ class LevelsRepository  @Inject constructor(
         }
     }
 
-    suspend fun removeLevel(level: List<EmojiShopModel>, smallLevelModel: SmallLevelModel) {
+    suspend fun removeLevel(title : String) {
         withContext(Dispatchers.IO){
-            database.emojisDao().delete(level[0].title)
-            database.levelDao().delete(smallLevelModel.title)
+            database.emojisDao().delete(title)
+            database.levelDao().delete(title)
         }
     }
 
@@ -65,6 +65,7 @@ class LevelsRepository  @Inject constructor(
     suspend fun delete(title : String){
         withContext(Dispatchers.IO){
             database.emojisDao().delete(title)
+            database.levelDao().delete(title)
         }
     }
 
@@ -89,14 +90,17 @@ class LevelsRepository  @Inject constructor(
         } else {
             handleStatus(false)
         }
-
         handleStatus(false)
     }
 
     private suspend fun handleStatus(differ : Boolean){
-        withContext(Dispatchers.Main){
+        withContext(Dispatchers .Main){
             _isSimilarList.value = differ
         }
+    }
+
+    suspend fun sentLevel(level: List<EmojiShopModel>, smallLevelModel: SmallLevelModel?) {
+        firebaseCategories.addFullLevel(level, smallLevelModel)
     }
 
 

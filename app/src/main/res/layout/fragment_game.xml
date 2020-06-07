@@ -44,7 +44,7 @@
                     android:layout_centerInParent="true"
                     android:layout_marginStart="5dp"
                     android:textColor="@color/main_color"
-                    android:text="10"/>
+                    android:text="@{String.valueOf(level.time)}"/>
 
             </RelativeLayout>
 

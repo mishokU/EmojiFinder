@@ -53,7 +53,20 @@ class AccountFragment : DaggerFragment() {
         loadUserMainInfo()
         initButtons()
 
+        initListState()
+
         return binding.root
+    }
+
+    private fun initListState() {
+        binding.levelStateSwitcher.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                adapter.collapseAll()
+                //binding.levelsRecyclerView.getVi
+            } else {
+                adapter.expandAll()
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

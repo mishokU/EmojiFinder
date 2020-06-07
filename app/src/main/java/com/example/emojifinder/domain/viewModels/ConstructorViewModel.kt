@@ -49,8 +49,14 @@ class ConstructorViewModel @Inject constructor(
 
     fun saveLevel(level: List<EmojiShopModel>, smallLevelModel: SmallLevelModel) {
         coroutineScope.launch {
-            levelsRepository.removeLevel(level, smallLevelModel)
+            levelsRepository.removeLevel(smallLevelModel.title)
             levelsRepository.addLevel(level,smallLevelModel)
+        }
+    }
+
+    fun sentLevel(level : List<EmojiShopModel>, smallLevelModel: SmallLevelModel?){
+        coroutineScope.launch {
+            levelsRepository.sentLevel(level, smallLevelModel)
         }
     }
 
@@ -65,6 +71,12 @@ class ConstructorViewModel @Inject constructor(
     ) {
         coroutineScope.launch {
             //levelsRepository.hasDifferences(currentList, smallLevelModel)
+        }
+    }
+
+    fun deleteLevel(title: String) {
+        coroutineScope.launch {
+            levelsRepository.removeLevel(title)
         }
     }
 

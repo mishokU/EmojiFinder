@@ -27,17 +27,19 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/status_place"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/level_id"
+                    android:id="@+id/level_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
                     android:textColor="@color/first_color"
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
-                    android:text="@{String.valueOf(level.id)}"/>
+                    android:text="@{level.title}"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -50,17 +52,29 @@
                     android:text="-"/>
 
                 <TextView
-                    android:id="@+id/level_name"
+                    android:id="@+id/level_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
                     android:textColor="@color/first_color"
                     android:layout_gravity="center"
-                    android:text="@{level.title}"/>
+                    android:text="@{String.valueOf(level.time)}"/>
+
+                <TextView
+                    android:id="@+id/level_time_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:gravity="bottom"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/first_color"
+                    android:layout_gravity="bottom"
+                    android:text="@string/sec"/>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/status_place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -75,17 +89,12 @@
                     android:layout_marginEnd="10dp"
                     android:text="@{level.status.toString()}"/>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/expand_extra_level_statistic_btn"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/status_img"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:paddingStart="5dp"
                     android:gravity="center"
-                    app:icon="@drawable/icons8_back_16px"
-                    app:iconSize="20dp"
-                    app:iconTint="@android:color/black"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_marginEnd="5dp"/>
 
             </LinearLayout>

@@ -255,7 +255,7 @@ class GameFragment : DaggerFragment() {
             time = (animation.currentPlayTime.toDouble() / 1000.0).toString(),
             id = binding.gameLevel.text.toString().toInt(),
             max_score = (20 * list.size),
-            title = level.title!!,
+            title = level.title,
             result = status
         )
     }
