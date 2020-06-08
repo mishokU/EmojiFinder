@@ -16,6 +16,10 @@
             android:name="Category"
             app:argType="com.example.emojifinder.ui.categories.SmallLevelModel"/>
 
+        <argument
+            android:name="Levels"
+            app:argType="com.example.emojifinder.ui.categories.SmallLevelModel[]"/>
+
     </fragment>
     <fragment
         android:id="@+id/signInFragment"

@@ -58,7 +58,7 @@ class CategoryGameFragment : DaggerFragment() {
         viewModel.gameCategory.observe(viewLifecycleOwner, Observer {
             it?.let {
                 this.findNavController().navigate(CategoryGameFragmentDirections
-                    .actionCategotyGameFragmentToGameFragment(it)
+                    .actionCategotyGameFragmentToGameFragment(it, adapter.currentList.toTypedArray())
                 )
                 viewModel.gameFragmentComplete()
             }

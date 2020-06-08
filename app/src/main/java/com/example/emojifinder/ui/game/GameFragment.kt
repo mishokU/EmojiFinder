@@ -28,10 +28,7 @@ import com.example.emojifinder.domain.sounds.MusicType
 import com.example.emojifinder.domain.viewModels.CategoriesViewModel
 import com.example.emojifinder.domain.viewModels.GameViewModel
 import com.example.emojifinder.ui.categories.SmallLevelModel
-import com.example.emojifinder.ui.game.gameAlerts.EndGameDialog
-import com.example.emojifinder.ui.game.gameAlerts.GameDialogs
-import com.example.emojifinder.ui.game.gameAlerts.ExitGameDialog
-import com.example.emojifinder.ui.game.gameAlerts.ShowStartGameButton
+import com.example.emojifinder.ui.game.gameAlerts.*
 import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.utils.ScaleGesture
 import com.example.emojifinder.ui.utils.ScreenSize
@@ -57,6 +54,8 @@ class GameFragment : DaggerFragment() {
     private lateinit var gameKeyboardAdapter : GameKeyBoardRecyclerViewAdapter
 
     private lateinit var level : SmallLevelModel
+    private var levelId : Int = 0
+    private lateinit var levels : List<SmallLevelModel>
 
     private var list : List<EmojiShopModel?> = listOf()
     private var levelEditTextList : MutableList<EmojiAppCompatEditText> = mutableListOf()
@@ -148,7 +147,7 @@ class GameFragment : DaggerFragment() {
         }
 
         setEmptyStatistic()
-        initProgressAnimator()
+        initProgressAnimator(level)
         addEndAnimationListener()
         initStartCircleEndAnimation()
     }
@@ -205,7 +204,7 @@ class GameFragment : DaggerFragment() {
                     animation.pause()
 
                     val statistics = getLevelStatistics(resources.getString(R.string.win_game))
-                    EndGameDialog.showEndGameDialog(this, statistics)
+                    EndGameDialog.showEndGameDialog(this, statistics, getLevelsState())
                     createEndGameListeners()
 
                     viewModel.writeGameStatistic(level.title, statistics)
@@ -222,6 +221,14 @@ class GameFragment : DaggerFragment() {
         }
     }
 
+    private fun getLevelsState(): State {
+        return if(levelId == levels.size - 1){
+            State.FINISHED
+        } else {
+            State.LOST
+        }
+    }
+
     private fun createEndGameListeners() {
         EndGameDialog.getRetryButton().setOnClickListener{
             EndGameDialog.dialogView.dismiss()
@@ -230,11 +237,11 @@ class GameFragment : DaggerFragment() {
 
         EndGameDialog.getNextLevelButton().setOnClickListener {
             if(EndGameDialog.getNextLevelButton().text == resources.getString(R.string.exit)){
-                EndGameDialog.dialogView.dismiss()
                 this.findNavController().popBackStack()
             } else {
                 startNextLevel()
             }
+            EndGameDialog.dialogView.dismiss()
         }
 
         EndGameDialog.getUpperRetryButton().setOnClickListener {
@@ -261,17 +268,18 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun getGameCategory() {
-        level = GameFragmentArgs.fromBundle(
-            requireArguments()
-        ).Category
+        level = GameFragmentArgs.fromBundle(requireArguments()).Category
+        levels = GameFragmentArgs.fromBundle(requireArguments()).Levels.toList()
+        levelId = level.id
+
         binding.gameLevel.text = level.id.toString()
         binding.level = level
     }
 
-    private fun initProgressAnimator() {
+    private fun initProgressAnimator(levelModel: SmallLevelModel) {
         animation = ObjectAnimator
             .ofInt(binding.gameProgressBar, "progress", 100, 0)
-        animation.duration = (level.time * 1000).toLong()
+        animation.duration = (levelModel.time * 1000).toLong()
         animation.interpolator = AccelerateInterpolator()
     }
 
@@ -287,12 +295,21 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun showEndGameDialog(statistics: UserLevelStatistics) {
-        EndGameDialog.showEndGameDialog(this, statistics)
+        EndGameDialog.showEndGameDialog(this, statistics, getLevelsState())
         createEndGameListeners()
     }
 
     private fun startNextLevel() {
-
+        levelId++
+        println(levelId)
+        println(levels.size)
+        if(levelId < levels.size){
+            startGameDialog()
+            levelViewModel.fetchLevel(levels[levelId].title)
+            println(levelId)
+            initProgressAnimator(levels[levelId])
+            println(levelId)
+        }
     }
 
     private fun loadGameLevel(){
@@ -325,6 +342,7 @@ class GameFragment : DaggerFragment() {
 
     private fun drawLevel(data: List<EmojiShopModel?>) {
 
+        binding.gameEmojiField.removeAllViews()
         list = data.sortedBy { e -> e?.order }
         randomList.addAll(list)
         val emojiSize = ScreenSize.getScreenSize(resources, list)

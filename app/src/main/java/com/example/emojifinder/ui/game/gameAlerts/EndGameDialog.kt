@@ -11,11 +11,13 @@ import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
+enum class State{LOST, FINISHED}
+
 object EndGameDialog {
 
     lateinit var dialogView : Dialog
 
-    fun showEndGameDialog(fragment : DaggerFragment, statistics: UserLevelStatistics?) {
+    fun showEndGameDialog(fragment : DaggerFragment, statistics: UserLevelStatistics?, state: State) {
         dialogView = Dialog(fragment.requireContext(), R.style.CustomDialog)
         dialogView.setCancelable(false)
         dialogView.window!!.requestFeature(Window.FEATURE_NO_TITLE)
@@ -40,6 +42,12 @@ object EndGameDialog {
             } else {
                 result.setTextColor(result.resources.getColor(R.color.green_color))
                 getNextLevelButton().text = result.resources.getText(R.string.next_level)
+            }
+
+            if(state == State.LOST){
+                getNextLevelButton().text = result.resources.getText(R.string.next_level)
+            } else {
+                getNextLevelButton().text = result.resources.getText(R.string.exit)
             }
 
             result.text = statistics.result
