@@ -35,7 +35,7 @@ fun asLocalModel(levelModel: SmallLevelModel): SmallLevelModelLocal {
     return SmallLevelModelLocal(
         title = levelModel.title,
         time = levelModel.time,
-        status = LevelStatus.WAITING,
+        status = LevelStatus.SAVED,
         id = levelModel.id
     )
 }

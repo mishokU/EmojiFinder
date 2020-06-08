@@ -3,9 +3,12 @@ package com.example.emojifinder.ui.game.gameAlerts
 import android.app.Dialog
 import android.view.View
 import android.view.Window
+import android.widget.Switch
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
+import com.example.emojifinder.domain.prefs.SettingsPrefs
+import com.example.emojifinder.ui.main.MainActivity
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
@@ -31,8 +34,27 @@ object ExitGameDialog {
 
     }
 
+    fun setMusicSwitcher(settingsPrefs: SettingsPrefs) {
+        val switcher = dialogView.findViewById<Switch>(R.id.exit_music_switcher)
+        switcher.isChecked = settingsPrefs.isPlayMusic()
+        switcher.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                settingsPrefs.changeMusic(isChecked)
+                (fragment.requireActivity() as MainActivity).mediaPlayerPool.createPlayers()
+                (fragment.requireActivity() as MainActivity).mediaPlayerPool.playBackground()
+            } else {
+                (fragment.requireActivity() as MainActivity).mediaPlayerPool.pauseBackground()
+                settingsPrefs.changeMusic(isChecked)
+            }
+        }
+    }
+
     fun open(){
         dialogView.show()
+    }
+
+    fun getMusicSwitcher() : Switch {
+        return dialogView.findViewById(R.id.exit_music_switcher)
     }
 
     fun getGameExitButton() : MaterialButton {

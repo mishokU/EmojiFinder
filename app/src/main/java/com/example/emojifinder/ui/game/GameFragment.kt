@@ -22,6 +22,7 @@ import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.data.db.remote.models.EmojiShopModel
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.databinding.FragmentGameBinding
+import com.example.emojifinder.domain.prefs.SettingsPrefs
 import com.example.emojifinder.domain.prefs.ShowGameHintPrefs
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.sounds.MusicType
@@ -65,6 +66,9 @@ class GameFragment : DaggerFragment() {
     private var keyboardNumber : Int = 0
 
     private val randomList : MutableList<EmojiShopModel?> = mutableListOf()
+
+    @Inject
+    lateinit var settingsPrefs: SettingsPrefs
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
@@ -170,6 +174,7 @@ class GameFragment : DaggerFragment() {
         animation.pause()
 
         ExitGameDialog.create(this)
+        ExitGameDialog.setMusicSwitcher(settingsPrefs)
 
         ExitGameDialog.open()
 
@@ -184,7 +189,6 @@ class GameFragment : DaggerFragment() {
         ExitGameDialog.getResumeGameButton().setOnClickListener {
             animation.resume()
             ExitGameDialog.dialogView.dismiss()
-            (activity as MainActivity).mediaPlayerPool.play(MusicType.LOSE)
         }
     }
 
@@ -301,14 +305,10 @@ class GameFragment : DaggerFragment() {
 
     private fun startNextLevel() {
         levelId++
-        println(levelId)
-        println(levels.size)
         if(levelId < levels.size){
             startGameDialog()
             levelViewModel.fetchLevel(levels[levelId].title)
-            println(levelId)
             initProgressAnimator(levels[levelId])
-            println(levelId)
         }
     }
 
