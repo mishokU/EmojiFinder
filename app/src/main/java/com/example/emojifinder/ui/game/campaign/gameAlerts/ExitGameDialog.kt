@@ -1,11 +1,9 @@
-package com.example.emojifinder.ui.game.gameAlerts
+package com.example.emojifinder.ui.game.campaign.gameAlerts
 
 import android.app.Dialog
-import android.view.View
 import android.view.Window
 import android.widget.Switch
 import androidx.core.content.ContextCompat
-import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.domain.prefs.SettingsPrefs
 import com.example.emojifinder.ui.main.MainActivity

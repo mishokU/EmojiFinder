@@ -33,8 +33,9 @@ class MainMenuFragment : DaggerFragment() {
     private fun handleButtons() {
 
         binding.startArcadeGameBtn.setOnClickListener {
-            this.findNavController().navigate(R.id.gameFragment)
+            this.findNavController().navigate(R.id.arcadeGameFragment)
         }
+
         binding.startCategoryGameBtn.setOnClickListener {
             this.findNavController().navigate(R.id.categotyGameFragment)
         }

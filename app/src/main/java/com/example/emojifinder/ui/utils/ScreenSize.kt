@@ -71,6 +71,48 @@ object ScreenSize {
         }
     }
 
+    fun getScreenSizeAll(
+        resources: Resources,
+        list: List<com.example.emojifinder.ui.shop.EmojiShopModel?>
+    ) : Float {
+        return when {
+            resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK === Configuration.SCREENLAYOUT_SIZE_LARGE -> {
+                when(list.size){
+                    1 -> resources.getDimension(R.dimen.emoji_small_font_one)
+                    in 2..4 -> resources.getDimension(R.dimen.emoji_small_font_two)
+                    in 5..9 -> resources.getDimension(R.dimen.emoji_small_font_nine)
+                    in 10..16 -> resources.getDimension(R.dimen.emoji_small_font_sixteen)
+                    in 17..32 -> resources.getDimension(R.dimen.emoji_small_font_thirty_two)
+                    in 33..64 -> resources.getDimension(R.dimen.emoji_small_font_sixty_four)
+                    else -> resources.getDimension(R.dimen.emoji_small_font)
+                }
+            }
+            resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK === Configuration.SCREENLAYOUT_SIZE_NORMAL -> {
+                when(list.size){
+                    1 -> resources.getDimension(R.dimen.emoji_small_font_one)
+                    in 2..4 -> resources.getDimension(R.dimen.emoji_small_font_two)
+                    in 5..9 -> resources.getDimension(R.dimen.emoji_small_font_nine)
+                    in 10..16 -> resources.getDimension(R.dimen.emoji_small_font_sixteen)
+                    in 17..32 -> resources.getDimension(R.dimen.emoji_small_font_thirty_two)
+                    in 33..64 -> resources.getDimension(R.dimen.emoji_small_font_sixty_four)
+                    else -> resources.getDimension(R.dimen.emoji_small_font)
+                }
+            }
+            resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK === Configuration.SCREENLAYOUT_SIZE_SMALL -> {
+                when(list.size){
+                    1 -> resources.getDimension(R.dimen.emoji_small_font_one)
+                    in 2..4 -> resources.getDimension(R.dimen.emoji_small_font_two)
+                    in 5..9 -> resources.getDimension(R.dimen.emoji_small_font_nine)
+                    in 10..16 -> resources.getDimension(R.dimen.emoji_small_font_sixteen)
+                    in 17..32 -> resources.getDimension(R.dimen.emoji_small_font_thirty_two)
+                    in 33..64 -> resources.getDimension(R.dimen.emoji_small_font_sixty_four)
+                    else -> resources.getDimension(R.dimen.emoji_small_font)
+                }
+            }
+            else -> resources.getDimension(R.dimen.emoji_font)
+        }
+    }
+
     fun dipToPixels(context: Context, dipValue: Float): Float {
         val metrics: DisplayMetrics = context.resources.displayMetrics
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics)

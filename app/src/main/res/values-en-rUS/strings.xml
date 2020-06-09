@@ -141,5 +141,6 @@
     <string name="do_you_sure_you_want_to_delete_this_level">Do you sure you want to delete this level ?</string>
     <string name="sec">sec</string>
     <string name="collapsed">Collapsed</string>
+    <string name="find_all_emojis">Find All Emojis !</string>
 
 </resources>

@@ -148,4 +148,5 @@
     <string name="sec">sec</string>
     <string name="collapsed">Collapsed</string>
     <string name="expanded">Expanded</string>
+    <string name="find_all_emojis">Find All Emojis !</string>
 </resources>

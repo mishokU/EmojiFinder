@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.emojifinder.ui.game.GameFragment"
+        android:name="com.example.emojifinder.ui.game.campaign.gameAlerts.GameFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game">
 
@@ -85,6 +85,9 @@
             android:id="@+id/action_mainMenuFragment_to_helpFragment"
             app:destination="@id/helpFragment"
             app:enterAnim="@anim/fragment_fade_enter" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_arcadeGameFragment"
+            app:destination="@id/arcadeGameFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -221,4 +224,8 @@
             android:id="@+id/action_yourLevelsFragment_to_levelConstructorFragment"
             app:destination="@id/levelConstructorFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/arcadeGameFragment"
+        android:name="com.example.emojifinder.ui.game.arcade.ArcadeGameFragment"
+        android:label="ArcadeGameFragment" />
 </navigation>

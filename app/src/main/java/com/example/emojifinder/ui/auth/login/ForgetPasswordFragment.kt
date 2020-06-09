@@ -17,7 +17,7 @@ import com.example.emojifinder.databinding.FragmentForgetPasswordBinding
 import com.example.emojifinder.domain.auth.CheckOnValid
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.LogInViewModel
-import com.example.emojifinder.ui.game.gameAlerts.ErrorDialog
+import com.example.emojifinder.ui.game.campaign.gameAlerts.ErrorDialog
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
 import dagger.android.support.DaggerFragment
@@ -36,6 +36,8 @@ class ForgetPasswordFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentForgetPasswordBinding.inflate(inflater)
+
+        ErrorDialog.create(this)
 
         initToolbar()
         handleEmailStatus()
@@ -79,7 +81,7 @@ class ForgetPasswordFragment : DaggerFragment() {
                     }
                     is Result.Error -> {
                         binding.forgetPasswordBtn.hideProgress(resources.getString(R.string.forgot_your_password))
-                        ErrorDialog.show(this, it.exception.message)
+                        ErrorDialog.setErrorText(it.exception.message)
                     }
                 }
             }

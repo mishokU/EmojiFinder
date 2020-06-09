@@ -16,7 +16,7 @@ import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentLogInBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.LogInViewModel
-import com.example.emojifinder.ui.game.gameAlerts.ErrorDialog
+import com.example.emojifinder.ui.game.campaign.gameAlerts.ErrorDialog
 import com.example.emojifinder.ui.utils.hideKeyboard
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
@@ -38,6 +38,8 @@ class LogInFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLogInBinding.inflate(inflater)
+
+        ErrorDialog.create(this)
 
         initToolbar()
 
@@ -98,7 +100,7 @@ class LogInFragment : DaggerFragment() {
                     }
                     is Result.Error -> {
                         binding.loginLoginBtn.hideProgress(resources.getString(R.string.login))
-                        ErrorDialog.show(this, it.exception.message)
+                        ErrorDialog.setErrorText(it.exception.message)
                     }
                 }
             }

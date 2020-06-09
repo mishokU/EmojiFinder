@@ -1,12 +1,10 @@
-package com.example.emojifinder.ui.game.gameAlerts
+package com.example.emojifinder.ui.game.campaign.gameAlerts
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.view.Window
-import android.view.animation.AnimationUtils
-import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat

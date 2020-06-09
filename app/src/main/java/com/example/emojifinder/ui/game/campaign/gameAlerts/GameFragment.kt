@@ -1,4 +1,4 @@
-package com.example.emojifinder.ui.game
+package com.example.emojifinder.ui.game.campaign.gameAlerts
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
@@ -29,7 +29,6 @@ import com.example.emojifinder.domain.sounds.MusicType
 import com.example.emojifinder.domain.viewModels.CategoriesViewModel
 import com.example.emojifinder.domain.viewModels.GameViewModel
 import com.example.emojifinder.ui.categories.SmallLevelModel
-import com.example.emojifinder.ui.game.gameAlerts.*
 import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.utils.ScaleGesture
 import com.example.emojifinder.ui.utils.ScreenSize
@@ -104,10 +103,11 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun initGameKeyBoardAdapter() {
-        gameKeyboardAdapter = GameKeyBoardRecyclerViewAdapter(
-            GameKeyBoardRecyclerViewAdapter.OnEmojiClickListener{
-            winOrder(it!!.unicode)
-        })
+        gameKeyboardAdapter =
+            GameKeyBoardRecyclerViewAdapter(
+                GameKeyBoardRecyclerViewAdapter.OnEmojiClickListener {
+                    winOrder(it!!.unicode)
+                })
         binding.scrollFinderField.adapter = gameKeyboardAdapter
     }
 
@@ -272,8 +272,12 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun getGameCategory() {
-        level = GameFragmentArgs.fromBundle(requireArguments()).Category
-        levels = GameFragmentArgs.fromBundle(requireArguments()).Levels.toList()
+        level = GameFragmentArgs.fromBundle(
+            requireArguments()
+        ).Category
+        levels = GameFragmentArgs.fromBundle(
+            requireArguments()
+        ).Levels.toList()
         levelId = level.id
 
         binding.gameLevel.text = level.id.toString()
@@ -306,9 +310,13 @@ class GameFragment : DaggerFragment() {
     private fun startNextLevel() {
         levelId++
         if(levelId < levels.size){
-            startGameDialog()
-            levelViewModel.fetchLevel(levels[levelId].title)
-            initProgressAnimator(levels[levelId])
+            for(level in levels){
+                if(level.id == levelId){
+                    startGameDialog()
+                    levelViewModel.fetchLevel(level.title)
+                    initProgressAnimator(level)
+                }
+            }
         }
     }
 
@@ -343,6 +351,8 @@ class GameFragment : DaggerFragment() {
     private fun drawLevel(data: List<EmojiShopModel?>) {
 
         binding.gameEmojiField.removeAllViews()
+        levelEditTextList = mutableListOf()
+
         list = data.sortedBy { e -> e?.order }
         randomList.addAll(list)
         val emojiSize = ScreenSize.getScreenSize(resources, list)

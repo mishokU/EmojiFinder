@@ -1,9 +1,8 @@
-package com.example.emojifinder.ui.game.gameAlerts
+package com.example.emojifinder.ui.game.campaign.gameAlerts
 
 import android.app.Dialog
 import android.view.View
 import android.view.Window
-import android.view.WindowManager
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.emojifinder.R

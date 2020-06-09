@@ -16,7 +16,7 @@ import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentRegistrationBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.RegistrationViewModel
-import com.example.emojifinder.ui.game.gameAlerts.ErrorDialog
+import com.example.emojifinder.ui.game.campaign.gameAlerts.ErrorDialog
 import com.example.emojifinder.ui.utils.hideKeyboard
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
@@ -38,6 +38,8 @@ class RegistrationFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRegistrationBinding.inflate(inflater)
+
+        ErrorDialog.create(this)
 
         initToolbar()
 
@@ -80,7 +82,7 @@ class RegistrationFragment : DaggerFragment() {
                         this.findNavController().navigate(R.id.mainMenuFragment)
                     }
                     is Result.Error -> {
-                        ErrorDialog.show(this, it.exception.message)
+                        ErrorDialog.setErrorText(it.exception.message)
                         binding.registrationBtn.hideProgress(R.string.registration)
                     }
                 }
