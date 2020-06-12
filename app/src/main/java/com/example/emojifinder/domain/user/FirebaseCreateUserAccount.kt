@@ -58,7 +58,7 @@ class FirebaseCreateUserAccountImpl @Inject constructor(private val collection: 
         val emoji = EmojiShopModel(
             id = 0,
             codes = "1F600",
-            text =  "😀",
+            text =  "\uD83D\uDE02",
             name = "grinning face",
             category = "Smileys & Emotion (face-smiling)",
             group = "Smileys & Emotion",

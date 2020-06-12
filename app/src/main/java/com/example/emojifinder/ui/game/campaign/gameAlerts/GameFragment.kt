@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
+import com.example.emojifinder.data.db.local.converter.toEmojiShopModel
 import com.example.emojifinder.data.db.remote.models.EmojiShopModel
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.databinding.FragmentGameBinding
@@ -26,8 +27,10 @@ import com.example.emojifinder.domain.prefs.SettingsPrefs
 import com.example.emojifinder.domain.prefs.ShowGameHintPrefs
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.sounds.MusicType
+import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.domain.viewModels.CategoriesViewModel
 import com.example.emojifinder.domain.viewModels.GameViewModel
+import com.example.emojifinder.shared.utils.Emoji
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.utils.ScaleGesture
@@ -47,6 +50,10 @@ class GameFragment : DaggerFragment() {
     lateinit var levelViewModel : CategoriesViewModel
 
     @Inject
+    lateinit var viewModelFactoryAccount: ViewModelProvider.Factory
+    lateinit var viewModelAccount : AccountViewModel
+
+    @Inject
     lateinit var gameHint : ShowGameHintPrefs
 
     lateinit var binding : FragmentGameBinding
@@ -56,6 +63,7 @@ class GameFragment : DaggerFragment() {
     private lateinit var level : SmallLevelModel
     private var levelId : Int = 0
     private lateinit var levels : List<SmallLevelModel>
+    private var score = 0
 
     private var list : List<EmojiShopModel?> = listOf()
     private var levelEditTextList : MutableList<EmojiAppCompatEditText> = mutableListOf()
@@ -63,6 +71,7 @@ class GameFragment : DaggerFragment() {
 
     private var number : Int = 0
     private var keyboardNumber : Int = 0
+    private val MAX_KEYBOARD_EMOJIS = 28
 
     private val randomList : MutableList<EmojiShopModel?> = mutableListOf()
 
@@ -93,9 +102,25 @@ class GameFragment : DaggerFragment() {
 
         loadGameLevel()
 
+        loadUserScore()
+
         startGameDialog()
 
         return binding.root
+    }
+
+    private fun loadUserScore() {
+        viewModelAccount = injectViewModel(viewModelFactoryAccount)
+        viewModelAccount.fetchMainUserData()
+        viewModelAccount.userMainDataResponse.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                when(it){
+                    is Result.Success -> {
+                        score = it.data!!.score
+                    }
+                }
+            }
+        })
     }
 
     private fun initDialogs() {
@@ -193,7 +218,18 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun createKeyboardLevel(data: List<EmojiShopModel?>) {
-       gameKeyboardAdapter.submitList(data)
+        val uniqueList = data.distinctBy{
+            it?.unicode
+        }
+       gameKeyboardAdapter.submitList(uniqueList + getRandomExtraEmojis(uniqueList.size))
+    }
+
+    private fun getRandomExtraEmojis(size: Int): List<EmojiShopModel> {
+        return if(size < MAX_KEYBOARD_EMOJIS){
+            Emoji.emojiList.drop(size).toEmojiShopModel()
+        } else {
+            emptyList()
+        }
     }
 
     private fun winOrder(emoji: String) {
@@ -208,10 +244,12 @@ class GameFragment : DaggerFragment() {
                     animation.pause()
 
                     val statistics = getLevelStatistics(resources.getString(R.string.win_game))
+
                     EndGameDialog.showEndGameDialog(this, statistics, getLevelsState())
                     createEndGameListeners()
 
                     viewModel.writeGameStatistic(level.title, statistics)
+                    viewModel.updateScore(score + statistics.score)
                     viewModel.updateEmos(statistics.score / 5)
 
                     (activity as MainActivity).mediaPlayerPool.play(MusicType.WIN)
@@ -220,9 +258,19 @@ class GameFragment : DaggerFragment() {
                     setEmptyStatistic()
                 }
             }
+            playSound(MusicType.CORRECT)
         } else {
+            playSound(MusicType.FAIL)
             binding.gameMistakes.text = (binding.gameMistakes.text.toString().toInt() + 1).toString()
         }
+    }
+
+    private fun playSound(type: MusicType) {
+        (activity as MainActivity).mediaPlayerPool.play(type)
+    }
+
+    private fun stopSound() {
+        (activity as MainActivity).mediaPlayerPool.stop(MusicType.GAME)
     }
 
     private fun getLevelsState(): State {
@@ -295,7 +343,8 @@ class GameFragment : DaggerFragment() {
         animation.addListener(onEnd = {
             val statistics = getLevelStatistics(resources.getString(R.string.game_lost))
             showEndGameDialog(statistics)
-            (activity as MainActivity).mediaPlayerPool.play(MusicType.LOSE)
+            playSound(MusicType.LOSE)
+            stopSound()
         })
         animation.addUpdateListener {
             binding.gameTime.text = it.animatedValue.toString()

@@ -51,10 +51,6 @@ object ExitGameDialog {
         dialogView.show()
     }
 
-    fun getMusicSwitcher() : Switch {
-        return dialogView.findViewById(R.id.exit_music_switcher)
-    }
-
     fun getGameExitButton() : MaterialButton {
         return dialogView.findViewById(R.id.exit_game_btn)
     }

@@ -51,3 +51,15 @@ fun List<SmallLevelModelLocal>.asSmallLevelUI() : List<SmallLevelModel> {
         )
     }
 }
+
+fun List<CharSequence>.toEmojiShopModel(): List<EmojiShopModel> {
+    return map{
+        EmojiShopModel(
+            unicode = it.toString(),
+            title = "",
+            order = 0,
+            x = 0,
+            y = 0
+        )
+    }
+}

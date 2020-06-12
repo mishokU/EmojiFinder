@@ -123,6 +123,8 @@ dependencies {
     //Keyboard
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.0.0'
 
+    //implementation 'com.google.android.gms:play-services-ads:19.1.0'
+
     implementation "com.airbnb.android:lottie:3.0.0"
 
     implementation 'com.google.code.gson:gson:2.8.6'

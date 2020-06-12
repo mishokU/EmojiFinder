@@ -25,6 +25,8 @@ class SettingsFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel : LogInViewModel
 
+
+
     lateinit var binding: FragmentSettingsBinding
 
     @Inject
@@ -92,6 +94,16 @@ class SettingsFragment : DaggerFragment() {
         }
         binding.suggestLevelBtn.setOnClickListener {
             this.findNavController().navigate(R.id.yourLevelsFragment)
+        }
+
+        binding.helpImg.text = "ℹ️"
+        binding.helpBtn.setOnClickListener {
+            this.findNavController().navigate(R.id.helpFragment)
+        }
+
+        binding.privatePolicyImg.text = "\uD83D\uDD75️"
+        binding.privatePolicyBtn.setOnClickListener {
+
         }
     }
 

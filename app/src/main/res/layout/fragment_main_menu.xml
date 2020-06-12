@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="44dp"
             android:text="\uD83D\uDE10"
             android:textColor="@color/background_color"
             android:textSize="52sp"
@@ -180,14 +180,14 @@
             app:rippleColor="@color/red_color" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/exit_btn"
+            android:id="@+id/shop_main_btn"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="84dp"
             android:layout_height="82dp"
             android:layout_below="@id/palette"
             android:layout_marginStart="220dp"
             android:layout_marginBottom="65dp"
-            android:text="@string/exit"
+            android:text="@string/shop"
             app:rippleColor="@null"
             android:textAllCaps="false"
             android:textColor="@color/background_color"
@@ -198,77 +198,6 @@
             app:layout_constraintStart_toStartOf="@+id/palette"
             app:layout_constraintTop_toTopOf="@+id/palette"
             app:layout_constraintVertical_bias="1.0" />
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/palette"
-            app:layout_constraintVertical_bias="0.0">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/terms_of_police_main_btn"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="25dp"
-                android:layout_toEndOf="@id/shop_main_btn"
-                app:backgroundTint="@color/red_color"
-                app:icon="@drawable/police_64px"
-                app:iconSize="40dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/shop_main_btn"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                app:backgroundTint="@color/red_color"
-                app:icon="@drawable/shop_26px"
-                app:iconSize="40dp" />
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/help_main_btn"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginEnd="25dp"
-                android:layout_toStartOf="@id/shop_main_btn"
-                app:backgroundTint="@color/red_color"
-                app:icon="@drawable/help_64px"
-                app:iconSize="40dp" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mishok_games"
-            android:textAlignment="center"
-            android:textColor="@color/background_color"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-            app:layout_constraintVertical_bias="0.82" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

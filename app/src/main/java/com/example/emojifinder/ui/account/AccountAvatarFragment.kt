@@ -1,11 +1,14 @@
 package com.example.emojifinder.ui.account
 
+import android.animation.Animator
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
+import androidx.core.view.iterator
 import androidx.emoji.widget.EmojiAppCompatButton
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -29,6 +32,7 @@ import com.example.emojifinder.ui.utils.closeFilters
 import com.example.emojifinder.ui.utils.openFilters
 import com.google.android.material.chip.Chip
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.emoji_shop_item.view.*
 import javax.inject.Inject
 
 
@@ -66,16 +70,14 @@ class AccountAvatarFragment : DaggerFragment() {
 
         EmojisBoxDialog.create(this)
 
+        initUserEmojisAdapter()
+        initShopAdapter()
+
         setBackButton()
         getUserMainData()
 
         initGeneratorList()
         setGeneratorButtons()
-
-        initUserEmojisAdapter()
-        initShopAdapter()
-
-        initUserEmojisViewModel()
 
         initShowFilterButton()
 
@@ -91,6 +93,7 @@ class AccountAvatarFragment : DaggerFragment() {
         if(requireArguments().containsKey("MainInfo")){
             profile = AccountAvatarFragmentArgs.fromBundle(requireArguments()).MainInfo
             binding.profile = profile
+            initUserEmojisViewModel()
         }
         else {
             viewModel.fetchMainUserData()
@@ -109,6 +112,7 @@ class AccountAvatarFragment : DaggerFragment() {
 
         binding.saveAvatarBtn.setOnClickListener {
             viewModel.updateUserAvatar(binding.emojiAvatar.text.toString())
+            Toast.makeText(requireContext(), "Avatar updated !", Toast.LENGTH_SHORT).show()
             viewModel.fetchMainUserData()
         }
     }
@@ -127,6 +131,19 @@ class AccountAvatarFragment : DaggerFragment() {
                         binding.thirdGeneratorField -> {
                             changeButtonState(binding.secondGeneratorField)
                         }
+
+                        binding.fourthGeneratorField -> {
+                            changeButtonState(binding.thirdGeneratorField)
+                        }
+
+                        binding.fifthGeneratorField -> {
+                            changeButtonState(binding.fourthGeneratorField)
+                        }
+
+                        binding.sixGeneratorField -> {
+                            changeButtonState(binding.fifthGeneratorField)
+                        }
+
                         binding.emojiAvatar -> {
                             changeButtonState(binding.thirdGeneratorField)
                         }
@@ -147,8 +164,21 @@ class AccountAvatarFragment : DaggerFragment() {
                             changeButtonState(binding.thirdGeneratorField)
                         }
                         binding.thirdGeneratorField -> {
+                            changeButtonState(binding.fourthGeneratorField)
+                        }
+
+                        binding.fourthGeneratorField -> {
+                            changeButtonState(binding.fifthGeneratorField)
+                        }
+
+                        binding.fifthGeneratorField -> {
+                            changeButtonState(binding.sixGeneratorField)
+                        }
+
+                        binding.sixGeneratorField -> {
                             changeButtonState(binding.emojiAvatar)
                         }
+
                         binding.emojiAvatar -> {
                             changeButtonState(binding.firstGeneratorField)
                         }
@@ -176,6 +206,18 @@ class AccountAvatarFragment : DaggerFragment() {
                 getUserValues()
             ))
         }
+        binding.failedToGenerate.addAnimatorListener(object : Animator.AnimatorListener{
+
+            override fun onAnimationEnd(animation: Animator?) {
+                binding.resultGeneratorField.visibility = View.VISIBLE
+            }
+
+            override fun onAnimationRepeat(animation: Animator?) {}
+
+            override fun onAnimationCancel(animation: Animator?) {}
+
+            override fun onAnimationStart(animation: Animator?) {}
+        })
     }
 
     private fun setCheckedFilters() {
@@ -217,7 +259,7 @@ class AccountAvatarFragment : DaggerFragment() {
                     is Result.Success -> {
                         binding.userEmojisProgressBar.visibility = View.INVISIBLE
 
-                        userEmojisAdapter.submitList(userEmojis.data)
+                        userEmojisAdapter.submitUserList(profile.avatar, userEmojis.data)
 
                         userEmojisCount = userEmojis.data.size.toString()
 
@@ -245,6 +287,8 @@ class AccountAvatarFragment : DaggerFragment() {
                         binding.loadingAvatar.visibility = View.GONE
                         profile = it.data!!
                         binding.profile = it.data
+
+                        initUserEmojisViewModel()
                     }
                 }
             }
@@ -350,6 +394,10 @@ class AccountAvatarFragment : DaggerFragment() {
         generatedList[binding.firstGeneratorField] = false
         generatedList[binding.secondGeneratorField] = false
         generatedList[binding.thirdGeneratorField] = false
+        generatedList[binding.fourthGeneratorField] = false
+        generatedList[binding.fifthGeneratorField] = false
+        generatedList[binding.sixGeneratorField] = false
+
         generatedList[binding.emojiAvatar] = false
     }
 
@@ -365,6 +413,19 @@ class AccountAvatarFragment : DaggerFragment() {
         binding.thirdGeneratorField.setOnClickListener {
             changeButtonState(binding.thirdGeneratorField)
         }
+
+        binding.fourthGeneratorField.setOnClickListener {
+            changeButtonState(binding.fourthGeneratorField)
+        }
+
+        binding.fifthGeneratorField.setOnClickListener {
+            changeButtonState(binding.fifthGeneratorField)
+        }
+
+        binding.sixGeneratorField.setOnClickListener {
+            changeButtonState(binding.sixGeneratorField)
+        }
+
         binding.emojiAvatar.setOnClickListener {
             changeButtonState(binding.emojiAvatar)
         }
@@ -373,8 +434,11 @@ class AccountAvatarFragment : DaggerFragment() {
             val first = binding.firstGeneratorField.text.toString()
             val second = binding.secondGeneratorField.text.toString()
             val third = binding.thirdGeneratorField.text.toString()
+            val fourth = binding.fourthGeneratorField.text.toString()
+            val fifth = binding.fifthGeneratorField.text.toString()
+            val sixth = binding.sixGeneratorField.text.toString()
 
-            val generatedEmoji = "$first$second$third"
+            val generatedEmoji = "$first$second$third$fourth$fifth$sixth"
 
             changeResultState(generatedEmoji)
         }
@@ -383,6 +447,9 @@ class AccountAvatarFragment : DaggerFragment() {
             binding.firstGeneratorField.text = ""
             binding.secondGeneratorField.text = ""
             binding.thirdGeneratorField.text = ""
+            binding.fourthGeneratorField.text = ""
+            binding.fifthGeneratorField.text = ""
+            binding.sixGeneratorField.text = ""
         }
     }
 

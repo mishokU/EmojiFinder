@@ -24,6 +24,12 @@ class GameViewModel @Inject constructor(
         }
     }
 
+    fun updateScore(score : Int){
+        coroutineScope.launch {
+            userMainData.updateScore(score)
+        }
+    }
+
     fun updateEmos(emos : Int){
         coroutineScope.launch {
             when(val emosValues = userMainData.fetchUserValues()){

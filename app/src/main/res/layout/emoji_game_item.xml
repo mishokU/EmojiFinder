@@ -19,7 +19,7 @@
                 android:id="@+id/emoji_game_view"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textAlignment="center"
                 android:background="@drawable/ripple_color_game_emojis"
                 android:layout_margin="5dp"

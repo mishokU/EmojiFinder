@@ -44,10 +44,6 @@ class GameRecyclerViewAdapter(private val onClickListener : OnEmojiClickListener
         holder.bind(emoji)
     }
 
-    fun changeOpacity(count: Int) {
-
-    }
-
     class GameViewHolder(private val binding: EmojiGameItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(emojiShop: EmojiShopModel?) {

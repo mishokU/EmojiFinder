@@ -37,8 +37,12 @@ class FirebaseAuthHandler : Auth, FirebaseInit() {
     }
 
     override suspend fun deleteAccount() {
+        mFireStore.collection("users")
+            .document(mUser!!.uid)
+            .delete()
+
         mAuth.signOut()
-        mUser?.delete()
+        mUser.delete()
     }
 
 }

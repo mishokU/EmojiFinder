@@ -27,7 +27,6 @@ class AccountFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel : AccountViewModel
 
-
     private val model: SharedViewModel by activityViewModels()
 
     var login : String = ""
@@ -67,6 +66,10 @@ class AccountFragment : DaggerFragment() {
                 adapter.expandAll()
             }
         }
+
+        binding.startPlayBtn.setOnClickListener {
+            this.findNavController().navigate(R.id.categotyGameFragment)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -96,7 +99,6 @@ class AccountFragment : DaggerFragment() {
                     }
                     is Result.Success -> {
                         binding.loadingProfile.visibility = View.GONE
-                        binding.levelDivider.visibility = View.VISIBLE
                         binding.profilePlace.visibility = View.VISIBLE
                         profile = it.data!!
                         binding.profile = it.data
@@ -111,6 +113,7 @@ class AccountFragment : DaggerFragment() {
     }
 
     private fun observeLevelsStatistic() {
+        viewModel.fetchUserLevelsStatistic()
         viewModel.levelsStatisticResponse.observe(viewLifecycleOwner, Observer {
             it?.let {
                 when(it){
@@ -120,14 +123,17 @@ class AccountFragment : DaggerFragment() {
                     is Result.Success -> {
                         binding.loadingLevelsAccount.visibility = View.GONE
                         if(!it.data.isNullOrEmpty()){
+                            binding.levelDivider.visibility = View.VISIBLE
+
                             adapter.submitList(it.data)
-                            updateUserFullScore(it.data)
                         } else {
+                            binding.levelDivider.visibility = View.GONE
                             binding.emptyPlace.visibility = View.VISIBLE
                             binding.errorTextAccount.text = resources.getString(R.string.empty_levels)
                         }
                     }
                     is Result.Error -> {
+                        binding.levelDivider.visibility = View.GONE
                         binding.loadingLevelsAccount.visibility = View.GONE
                         binding.errorTextAccount.visibility = View.VISIBLE
                         binding.errorTextAccount.text = it.exception.message
@@ -137,19 +143,12 @@ class AccountFragment : DaggerFragment() {
         })
     }
 
-    private fun updateUserFullScore(data: List<UserLevelStatistics?>) {
-        var score = 0
-        for(level in data){
-            score += level!!.score
-        }
-        viewModel.updateUserFullScore(score)
-    }
-
     private fun setBackButton() {
         ((activity) as AppCompatActivity).setSupportActionBar(binding.toolbarAccount)
         ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.toolbarAccount.setNavigationOnClickListener {
+            viewModel.statisticResponseComplete()
             this.findNavController().navigateUp()
         }
     }

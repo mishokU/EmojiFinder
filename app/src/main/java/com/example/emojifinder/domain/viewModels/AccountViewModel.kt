@@ -53,6 +53,8 @@ class AccountViewModel @Inject constructor(
         }
     }
 
+
+
     fun updateUserEmailAndPassword(
         new_email: TextInputEditText,
         new_password: TextInputEditText
@@ -81,7 +83,7 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    private fun fetchUserLevelsStatistic() {
+    fun fetchUserLevelsStatistic() {
         coroutineScope.launch {
             withContext(Dispatchers.Main){
                 _levelsStatisticResponse.value = Result.Loading
@@ -129,12 +131,6 @@ class AccountViewModel @Inject constructor(
         _levelsStatisticResponse.value = null
     }
 
-    fun updateUserFullScore(score: Int) {
-        coroutineScope.launch {
-            userMainData.updateScore(score)
-        }
-    }
-
     fun addEmoji(emoji: EmojiShopModel?, cost : Int, values : AccountValuesModel) {
         coroutineScope.launch {
             userMainData.addEmoji(emoji)
@@ -169,18 +165,17 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    fun updateUserEmojisCount(count: Int) {
-        coroutineScope.launch {
-            userMainData.updateEmojisCount(count)
-        }
-    }
-
     fun updateUserEmos(emos : Int){
         coroutineScope.launch {
             userMainData.updateEmos(emos)
         }
     }
 
+    fun updateScore(score: Int) {
+        coroutineScope.launch {
+            userMainData.updateScore(score)
+        }
+    }
 
 }
 

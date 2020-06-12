@@ -19,6 +19,7 @@ class EmojisRecyclerViewAdapter(
 
     private var adapterlist : AsyncListDiffer<EmojiShopModel>
     private var userEmojis : List<EmojiShopModel?> ?= null
+    private var avatar : String ?= null
 
     private val CALLBACK = object : DiffUtil.ItemCallback<EmojiShopModel>() {
         override fun areItemsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
@@ -37,10 +38,6 @@ class EmojisRecyclerViewAdapter(
                 progress.visibility = View.INVISIBLE
             }
         }
-    }
-
-    fun getList() : MutableList<EmojiShopModel> {
-        return adapterlist.currentList
     }
 
     private lateinit var fullList : List<EmojiShopModel?>
@@ -73,12 +70,16 @@ class EmojisRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ShopEmojiViewHolder {
         return ShopEmojiViewHolder(
-            EmojiShopItemBinding.inflate(LayoutInflater.from(parent.context)), userEmojis,isShop
+            EmojiShopItemBinding.inflate(LayoutInflater.from(parent.context)), userEmojis,isShop,avatar
         )
     }
 
     override fun onBindViewHolder(holder: ShopEmojiViewHolder, position: Int){
         val emoji = adapterlist.currentList[position]
+        if(holder.itemView.emoji_view.backgroundTintList ==
+            holder.itemView.resources.getColorStateList(R.color.green_color)) {
+            holder.setIsRecyclable(false)
+        }
         holder.itemView.setOnClickListener {
             onClickListener.onClick(emoji)
         }
@@ -95,7 +96,8 @@ class EmojisRecyclerViewAdapter(
     class ShopEmojiViewHolder(
         private val binding: EmojiShopItemBinding,
         val userEmojis: List<EmojiShopModel?>?,
-        val shop: Boolean
+        val shop: Boolean,
+        val avatar : String?
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(emojiShop: EmojiShopModel?) {
@@ -117,7 +119,12 @@ class EmojisRecyclerViewAdapter(
             }
 
             if(!shop){
-                binding.emojiView.backgroundTintList = null
+                if (emojiShop?.text == avatar) {
+                    binding.emojiView.backgroundTintList =
+                        binding.emojiView.resources.getColorStateList(R.color.green_color)
+                } else {
+                    binding.emojiView.backgroundTintList = null
+                }
             }
         }
     }
@@ -142,4 +149,11 @@ class EmojisRecyclerViewAdapter(
         }
         return null
     }
+
+    fun submitUserList(avatar: String, data: List<EmojiShopModel?>) {
+        this.avatar = avatar
+        this.userEmojis = data
+        adapterlist.submitList(data)
+    }
+
 }

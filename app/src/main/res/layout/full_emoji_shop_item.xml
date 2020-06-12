@@ -103,7 +103,6 @@
                     app:backgroundTint="@color/blue_color"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="5dp"
-                    android:text="200 Emos"
                     android:textSize="20sp"
                     android:textAllCaps="false"
                     android:layout_weight="1"/>

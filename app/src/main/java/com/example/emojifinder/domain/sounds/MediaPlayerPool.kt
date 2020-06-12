@@ -7,7 +7,7 @@ import com.example.emojifinder.R
 import com.example.emojifinder.domain.prefs.SettingsPrefs
 import javax.inject.Inject
 
-enum class MusicType {SUCCESSFUL, FAIL, WIN, LOSE, BUY, MONEY }
+enum class MusicType {SUCCESSFUL, FAIL, WIN, LOSE, BUY, MONEY, CORRECT, GAME }
 
 class MediaPlayerPool @Inject constructor(application: Application) {
 
@@ -21,6 +21,7 @@ class MediaPlayerPool @Inject constructor(application: Application) {
     private lateinit var buyEmojiPlayer : MediaPlayer
     private lateinit var failGeneration : MediaPlayer
     private lateinit var successfulGenerateEmoji : MediaPlayer
+    private lateinit var correctClick : MediaPlayer
 
     var settingsPrefs: SettingsPrefs = SettingsPrefs(application)
 
@@ -37,6 +38,9 @@ class MediaPlayerPool @Inject constructor(application: Application) {
         losePlayer = MediaPlayer.create(context, R.raw.lost_game)
         failGeneration = MediaPlayer.create(context, R.raw.lost_game)
         buyEmojiPlayer = MediaPlayer.create(context, R.raw.level_win)
+        correctClick = MediaPlayer.create(context, R.raw.correct_click)
+        gamePlayer = MediaPlayer.create(context, R.raw.game_music)
+        gamePlayer.isLooping = true
     }
 
     fun playBackground() {
@@ -61,12 +65,41 @@ class MediaPlayerPool @Inject constructor(application: Application) {
 
     fun play(music : MusicType){
         when(music){
-            MusicType.SUCCESSFUL -> successfulGenerateEmoji.start()
-            MusicType.BUY -> buyEmojiPlayer.start()
-            MusicType.FAIL -> failGeneration.start()
-            MusicType.LOSE -> losePlayer.start()
-            MusicType.WIN -> winPlayer.start()
+            MusicType.SUCCESSFUL -> playCorrect(successfulGenerateEmoji)
+            MusicType.BUY -> playCorrect(buyEmojiPlayer)
+            MusicType.FAIL -> playCorrect(failGeneration)
+            MusicType.LOSE -> playCorrect(losePlayer)
+            MusicType.WIN -> playCorrect(winPlayer)
+            MusicType.CORRECT -> playCorrect(correctClick)
+            MusicType.GAME -> playCorrect(gamePlayer)
         }
+    }
+
+    private fun playCorrect(sound: MediaPlayer) {
+        if(sound.isPlaying) {
+            sound.stop()
+            sound.prepare()
+            sound.start()
+        } else {
+            sound.start()
+        }
+    }
+
+    fun stop(music: MusicType) {
+        when(music){
+            MusicType.SUCCESSFUL -> stopMusic(successfulGenerateEmoji)
+            MusicType.BUY -> stopMusic(buyEmojiPlayer)
+            MusicType.FAIL -> stopMusic(failGeneration)
+            MusicType.LOSE -> stopMusic(losePlayer)
+            MusicType.WIN -> stopMusic(winPlayer)
+            MusicType.CORRECT -> stopMusic(correctClick)
+            MusicType.GAME -> stopMusic(gamePlayer)
+        }
+    }
+
+    private fun stopMusic(music: MediaPlayer) {
+        music.stop()
+        music.prepare()
     }
 
 }

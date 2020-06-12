@@ -149,4 +149,6 @@
     <string name="collapsed">Collapsed</string>
     <string name="expanded">Expanded</string>
     <string name="find_all_emojis">Find All Emojis !</string>
+    <string name="emos">Emos:</string>
+    <string name="private_policy">Private policy</string>
 </resources>

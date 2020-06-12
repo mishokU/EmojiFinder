@@ -50,13 +50,6 @@ class MainMenuFragment : DaggerFragment() {
             this.findNavController().navigate(R.id.accountAvatarFragment)
         }
 
-        binding.helpMainBtn.setOnClickListener {
-            this.findNavController().navigate(R.id.helpFragment)
-        }
-
-        binding.exitBtn.setOnClickListener {
-            activity?.finish()
-        }
     }
 
     private fun setPopularEmojis() {

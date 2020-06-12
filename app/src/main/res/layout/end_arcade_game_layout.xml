@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp">
+
+            <TextView
+                android:id="@+id/level_result_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/background_color"
+                android:textSize="40sp"
+                android:layout_marginBottom="40dp"
+                android:textAlignment="center"
+                android:text="Game End !"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                app:strokeColor="@color/light_main_color"
+                app:strokeWidth="4dp"
+                app:cardBackgroundColor="@color/main_color"
+                app:cardCornerRadius="25dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textSize="32sp"
+                        android:text="@string/score"/>
+
+                    <TextView
+                        android:id="@+id/game_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="32sp"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardBackgroundColor="@color/main_color"
+                android:layout_marginBottom="20dp"
+                app:strokeColor="@color/light_main_color"
+                app:strokeWidth="4dp"
+                app:cardCornerRadius="25dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textSize="32sp"
+                        android:text="@string/emos"/>
+
+                    <TextView
+                        android:id="@+id/game_emos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="32sp"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/try_again_btn"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:textAllCaps="false"
+                    android:layout_height="60dp"
+                    app:cornerRadius="10dp"
+                    app:backgroundTint="@color/blue_color"
+                    android:text="@string/try_again" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/exit_arcade_btn"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    app:cornerRadius="10dp"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/exit"
+                    app:backgroundTint="@color/blue_color" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+
+</layout>
