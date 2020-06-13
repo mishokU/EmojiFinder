@@ -44,6 +44,12 @@ abstract class ViewModelsModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(RatingViewModel::class)
+    abstract fun bindRatingViewModel(viewModel : RatingViewModel) : ViewModel
+
+
+    @Binds
+    @IntoMap
     @ViewModelKey(GameViewModel::class)
     abstract fun bindGameViewModel(viewModel: GameViewModel) : ViewModel
 

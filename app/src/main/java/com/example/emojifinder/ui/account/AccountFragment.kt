@@ -82,6 +82,11 @@ class AccountFragment : DaggerFragment() {
             this.findNavController().navigate(AccountFragmentDirections
                 .actionAccountFragmentToMainAccountInfoFragment(profile))
         }
+
+        binding.ratingBtn.setOnClickListener {
+            this.findNavController().navigate(R.id.ratingFragment)
+        }
+
     }
 
     private fun initUserLevelsAdapter() {
@@ -113,7 +118,6 @@ class AccountFragment : DaggerFragment() {
     }
 
     private fun observeLevelsStatistic() {
-        viewModel.fetchUserLevelsStatistic()
         viewModel.levelsStatisticResponse.observe(viewLifecycleOwner, Observer {
             it?.let {
                 when(it){

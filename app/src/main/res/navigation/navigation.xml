@@ -79,9 +79,6 @@
             android:id="@+id/action_mainMenuFragment_to_categotyGameFragment"
             app:destination="@id/categotyGameFragment" />
         <action
-            android:id="@+id/action_mainMenuFragment_to_lootBoxesFragment"
-            app:destination="@id/lootBoxesFragment" />
-        <action
             android:id="@+id/action_mainMenuFragment_to_helpFragment"
             app:destination="@id/helpFragment"
             app:enterAnim="@anim/fragment_fade_enter" />
@@ -97,6 +94,9 @@
         <action
             android:id="@+id/action_accountFragment_to_mainAccountInfoFragment"
             app:destination="@id/mainAccountInfoFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_ratingFragment"
+            app:destination="@id/ratingFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -228,4 +228,9 @@
         android:id="@+id/arcadeGameFragment"
         android:name="com.example.emojifinder.ui.game.arcade.ArcadeGameFragment"
         android:label="ArcadeGameFragment" />
+    <fragment
+        android:id="@+id/ratingFragment"
+        android:name="com.example.emojifinder.ui.rating.RatingFragment"
+        android:label="fragment_rating"
+        tools:layout="@layout/fragment_rating" />
 </navigation>

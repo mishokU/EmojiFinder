@@ -25,11 +25,10 @@ class FirebaseCreateUserAccountImpl @Inject constructor(private val collection: 
             score = 0,
             avatar = "\uD83D\uDE02"
         )
+
         if(mAuth.uid != null){
-            mFireStore.collection("users")
+            mFireStore.collection("score")
                 .document(mAuth.uid!!)
-                .collection("main")
-                .document("data")
                 .set(mainAccountInfo)
         }
     }

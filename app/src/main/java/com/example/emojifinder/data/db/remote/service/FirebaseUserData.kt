@@ -1,7 +1,6 @@
 package com.example.emojifinder.data.db.remote.service
 
 import com.example.emojifinder.data.db.remote.models.account.AccountValuesModel
-import com.example.emojifinder.data.db.remote.models.account.EmojiShopModelFirebase
 import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.ui.shop.EmojiShopModel
@@ -14,18 +13,12 @@ class FirebaseUserData : FirebaseInit() {
 
     suspend fun fetchUserMainInfo() : Result<MainAccountModel> {
         return try {
-            val info = mFireStore.collection("users")
+            val info = mFireStore.collection("score")
                 .document(mAuth.uid!!)
-                .collection("main")
                 .get()
                 .await()
 
-            val main : MutableList<MainAccountModel> = mutableListOf()
-            for(doc in info){
-                main.add(doc.toObject(MainAccountModel::class.java))
-            }
-
-            Result.Success(main[0])
+            Result.Success(info.toObject(MainAccountModel::class.java)!!)
         } catch (e : Exception){
             Result.Error(e)
         }
@@ -53,10 +46,8 @@ class FirebaseUserData : FirebaseInit() {
 
     fun updateLogin(login : String) {
         mFireStore
-            .collection("users")
+            .collection("score")
             .document(mAuth.uid!!)
-            .collection("main")
-            .document("data")
             .update("login", login)
     }
 
@@ -69,10 +60,8 @@ class FirebaseUserData : FirebaseInit() {
         data["password"] = new_password
 
         mFireStore
-            .collection("users")
+            .collection("score")
             .document(mAuth.uid!!)
-            .collection("main")
-            .document("data")
             .update(data as Map<String, Any>)
 
         Result.Success(reauthenticate(
@@ -101,10 +90,8 @@ class FirebaseUserData : FirebaseInit() {
 
     fun updateScore(score: Int) {
         mFireStore
-            .collection("users")
+            .collection("score")
             .document(mUser!!.uid)
-            .collection("main")
-            .document("data")
             .update("score", score)
     }
 
@@ -169,10 +156,8 @@ class FirebaseUserData : FirebaseInit() {
 
     fun updateAvatar(avatar: String) {
         mFireStore
-            .collection("users")
+            .collection("score")
             .document(mUser!!.uid)
-            .collection("main")
-            .document("data")
             .update("avatar", avatar)
     }
 
@@ -193,14 +178,5 @@ class FirebaseUserData : FirebaseInit() {
             .document("data")
             .update("boxes", boxes)
 
-    }
-
-    fun updateEmojisCount(count: Int) {
-        mFireStore
-            .collection("users")
-            .document(mAuth.uid!!)
-            .collection("values")
-            .document("data")
-            .update("emojis", count)
     }
 }

@@ -117,7 +117,9 @@ class AppModule {
     fun provideLevelsDatabase(application: Application) :
             LevelsDatabase = LevelsDatabase.getDatabase(application.applicationContext)
 
-
+    @Singleton
+    @Provides
+    fun provideFirebaseUsers() : FirebaseUsers = FirebaseUsers()
 
     @CoroutineScopeIO
     @Provides

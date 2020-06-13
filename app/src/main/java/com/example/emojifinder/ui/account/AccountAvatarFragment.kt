@@ -431,6 +431,7 @@ class AccountAvatarFragment : DaggerFragment() {
         }
 
         binding.generateEmojiSet.setOnClickListener {
+            val list : MutableList<String> = mutableListOf<String>()
             val first = binding.firstGeneratorField.text.toString()
             val second = binding.secondGeneratorField.text.toString()
             val third = binding.thirdGeneratorField.text.toString()
@@ -439,6 +440,8 @@ class AccountAvatarFragment : DaggerFragment() {
             val sixth = binding.sixGeneratorField.text.toString()
 
             val generatedEmoji = "$first$second$third$fourth$fifth$sixth"
+
+            println(generatedEmoji)
 
             changeResultState(generatedEmoji)
         }

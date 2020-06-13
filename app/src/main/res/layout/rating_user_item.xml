@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="user"
+            type="com.example.emojifinder.data.db.remote.models.account.MainAccountModel" />
+    </data>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_color">
+
+            <RelativeLayout
+                android:id="@+id/user_number_rating_place"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/rating_style_corners">
+
+                <TextView
+                    android:id="@+id/user_number_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/background_color"
+                    android:textSize="14sp"
+                    android:layout_centerInParent="true"
+                    android:textAlignment="center"
+                    android:layout_centerVertical="true"
+                    android:text="10"/>
+
+            </RelativeLayout>
+
+            <androidx.emoji.widget.EmojiAppCompatEditText
+                android:id="@+id/user_emoji_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user.avatar}"
+                android:layout_marginStart="10dp"
+                android:layout_centerVertical="true"
+                android:textSize="18sp"
+                android:layout_toEndOf="@id/user_number_rating_place"/>
+
+            <TextView
+                android:id="@+id/user_rating_nick_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/user_emoji_avatar"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"
+                android:text="@{user.login}"/>
+
+            <TextView
+                android:id="@+id/user_rating"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(user.score)}"
+                android:textColor="@color/background_color"
+                android:textSize="14sp"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/rating_style_corners"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</layout>
