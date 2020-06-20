@@ -23,6 +23,8 @@ import com.example.emojifinder.data.db.local.converter.toEmojiShopModel
 import com.example.emojifinder.data.db.remote.models.EmojiShopModel
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.databinding.FragmentGameBinding
+import com.example.emojifinder.domain.adds.INTERSTITIAL_ID
+import com.example.emojifinder.domain.adds.INTERSTITIAL_VIDEO_ID
 import com.example.emojifinder.domain.prefs.SettingsPrefs
 import com.example.emojifinder.domain.prefs.ShowGameHintPrefs
 import com.example.emojifinder.domain.result.Result
@@ -35,6 +37,8 @@ import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.utils.ScaleGesture
 import com.example.emojifinder.ui.utils.ScreenSize
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -55,6 +59,8 @@ class GameFragment : DaggerFragment() {
 
     @Inject
     lateinit var gameHint : ShowGameHintPrefs
+
+    private lateinit var interstitialAd : InterstitialAd
 
     lateinit var binding : FragmentGameBinding
     private lateinit var animation: ObjectAnimator
@@ -88,6 +94,8 @@ class GameFragment : DaggerFragment() {
         viewModel = injectViewModel(viewModelFactory)
         levelViewModel = injectViewModel(levelViewModelFactory)
 
+        interstitialAd = InterstitialAd(requireContext())
+
         binding.gameEmojiField.setOnTouchListener(ScaleGesture(requireContext()))
 
         ShowStartGameButton = ShowStartGameButton()
@@ -106,8 +114,17 @@ class GameFragment : DaggerFragment() {
 
         startGameDialog()
 
+        initInterstitialAd()
+
         return binding.root
     }
+
+    private fun initInterstitialAd() {
+        interstitialAd.adUnitId = INTERSTITIAL_VIDEO_ID
+        val adRequest = AdRequest.Builder().build()
+        interstitialAd.loadAd(adRequest)
+    }
+
 
     private fun loadUserScore() {
         viewModelAccount = injectViewModel(viewModelFactoryAccount)
@@ -162,13 +179,9 @@ class GameFragment : DaggerFragment() {
     private fun startGameDialog() {
         if(!gameHint.isHintShown()){
             GameDialogs.showStartDialog(this, level)
-            GameDialogs.alert.setOnDismissListener {
-                GameDialogs.alert.dismiss()
-                ShowStartGameButton.show()
-            }
             GameDialogs.getStartGameButton().setOnClickListener {
                 GameDialogs.alert.dismiss()
-                ShowStartGameButton.show()
+                ShowStartGameButton.playCounter()
             }
             gameHint.isHintShown(true)
         } else {
@@ -234,7 +247,7 @@ class GameFragment : DaggerFragment() {
 
     private fun winOrder(emoji: String) {
         if(emoji == list[number]?.unicode){
-            binding.gameScore.text = (binding.gameScore.text.toString().toInt() + 20).toString()
+            binding.gameScore.text = (binding.gameScore.text.toString().toInt() + 10).toString()
             levelEditTextList[number].alpha = 0.4f
             if(++number != list.size) {
                 levelEditTextList[number].alpha = 1.0f
@@ -284,6 +297,7 @@ class GameFragment : DaggerFragment() {
     private fun createEndGameListeners() {
         EndGameDialog.getRetryButton().setOnClickListener{
             EndGameDialog.dialogView.dismiss()
+            interstitialAd.loadAd(AdRequest.Builder().build())
             startGameDialog()
         }
 
@@ -292,12 +306,14 @@ class GameFragment : DaggerFragment() {
                 this.findNavController().popBackStack()
             } else {
                 startNextLevel()
+                interstitialAd.loadAd(AdRequest.Builder().build())
             }
             EndGameDialog.dialogView.dismiss()
         }
 
         EndGameDialog.getUpperRetryButton().setOnClickListener {
             EndGameDialog.dialogView.dismiss()
+            interstitialAd.loadAd(AdRequest.Builder().build())
             startGameDialog()
         }
 
@@ -313,7 +329,7 @@ class GameFragment : DaggerFragment() {
             mistakes = binding.gameMistakes.text.toString().toInt(),
             time = (animation.currentPlayTime.toDouble() / 1000.0).toString(),
             id = binding.gameLevel.text.toString().toInt(),
-            max_score = (20 * list.size),
+            max_score = (10 * list.size),
             title = level.title,
             result = status
         )
@@ -344,10 +360,21 @@ class GameFragment : DaggerFragment() {
             val statistics = getLevelStatistics(resources.getString(R.string.game_lost))
             showEndGameDialog(statistics)
             playSound(MusicType.LOSE)
+            showInertialVideoAd()
+            viewModel.writeGameStatistic(level.title, statistics)
+            viewModel.updateScore(score + statistics.score)
+
             stopSound()
         })
+
         animation.addUpdateListener {
             binding.gameTime.text = it.animatedValue.toString()
+        }
+    }
+
+    private fun showInertialVideoAd() {
+        if(interstitialAd.isLoaded){
+            interstitialAd.show()
         }
     }
 
@@ -361,9 +388,9 @@ class GameFragment : DaggerFragment() {
         if(levelId < levels.size){
             for(level in levels){
                 if(level.id == levelId){
+                    initProgressAnimator(level)
                     startGameDialog()
                     levelViewModel.fetchLevel(level.title)
-                    initProgressAnimator(level)
                 }
             }
         }

@@ -8,4 +8,11 @@
     <string name="find_all_emojis">Find All Emojis !</string>
     <string name="emos">Emos:</string>
     <string name="private_policy">Private policy</string>
+    <string name="invite">Invite</string>
+    <string name="rating">Rating</string>
+    <string name="emojis">Emojis</string>
+    <string name="watch_add_1_chest">Watch add + 1 chest</string>
+    <string name="vip_golder_pass">VIP GOLDER PASS</string>
+    <string name="starter_pack">Starter Pack</string>
+    <string name="huge_pack">Huge Pack</string>
 </resources>

@@ -15,7 +15,7 @@ class FirebaseUsers : FirebaseInit() {
             val users = mFireStore
                 .collection("score")
                 .limit(50)
-                .orderBy("score", Query.Direction.ASCENDING)
+                .orderBy("score", Query.Direction.DESCENDING)
                 .get()
                 .await()
 

@@ -20,6 +20,7 @@ import com.example.emojifinder.ui.levels.YourLevelsFragment
 import com.example.emojifinder.ui.localization.LocalizeAppFragment
 import com.example.emojifinder.ui.main.MainMenuFragment
 import com.example.emojifinder.ui.rating.RatingFragment
+import com.example.emojifinder.ui.shop.ShopFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -85,5 +86,8 @@ abstract class FragmentsBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeRatingFragment() : RatingFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeShopFragment() : ShopFragment
 
 }

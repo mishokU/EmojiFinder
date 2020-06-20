@@ -15,11 +15,12 @@ import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
+import com.google.android.gms.ads.InterstitialAd
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 import java.util.*
 
-class ShowStartGameButton {
+class ShowStartGameButton() {
 
     lateinit var dialogView : Dialog
     private lateinit var fragment: DaggerFragment
@@ -29,6 +30,7 @@ class ShowStartGameButton {
     private lateinit var loadingPlace : RelativeLayout
 
     private var firstPlay : Boolean = true
+    private var backToLevels : Boolean = true
 
     fun create(
         fragment: DaggerFragment,
@@ -41,10 +43,7 @@ class ShowStartGameButton {
 
         dialogView.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         dialogView.window!!.statusBarColor = ContextCompat.getColor(fragment.requireContext(), R.color.main_color)
-        // layout to display
         dialogView.setContentView(R.layout.game_start_alert_dialog)
-
-        // set color transparent
         dialogView.window!!.setBackgroundDrawable(fragment.resources.getDrawable(R.color.alert_background_color));
 
         setGameTitle(level)
@@ -54,8 +53,8 @@ class ShowStartGameButton {
     @SuppressLint("SetTextI18n")
     private fun setGameTitle(level: SmallLevelModel) {
         val title : TextView = dialogView.findViewById(R.id.level_title)
-        val first : String = level.title?.get(0).toString().toUpperCase(Locale.ROOT)
-        val all : String? = level.title?.drop(1)
+        val first : String = level.title[0].toString().toUpperCase(Locale.ROOT)
+        val all : String? = level.title.drop(1)
         title.text = first + all
     }
 
@@ -64,6 +63,10 @@ class ShowStartGameButton {
         if(!firstPlay) {
             count.playAnimation()
         }
+    }
+
+    fun playCounter(){
+        count.playAnimation()
     }
 
     private fun initStartButton(){
@@ -100,12 +103,16 @@ class ShowStartGameButton {
             if(firstPlay) {
                 initAnimation()
                 firstPlay = false
+                backToLevels = false
+
             }
         }
 
         back.setOnClickListener {
-            dialogView.dismiss()
-            fragment.findNavController().navigateUp()
+            if(backToLevels){
+                dialogView.dismiss()
+                fragment.findNavController().navigateUp()
+            }
         }
     }
 

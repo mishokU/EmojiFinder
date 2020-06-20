@@ -176,6 +176,5 @@ class AccountViewModel @Inject constructor(
             userMainData.updateScore(score)
         }
     }
-
 }
 

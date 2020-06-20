@@ -21,6 +21,7 @@
 
     <color name="green_color">#6ed65c</color>
     <color name="chest_sad_color">#ff5a79</color>
+    <color name="progress_bar_time_color">#f3dfe3</color>
 
     <color name="alert_background_color">#66202022</color>
 

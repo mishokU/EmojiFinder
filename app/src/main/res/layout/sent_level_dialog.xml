@@ -13,7 +13,8 @@
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_gravity="center"
+            android:layout_gravity="top"
+            android:layout_marginTop="60dp"
             android:background="@drawable/generator_emoji_style">
 
             <RelativeLayout

@@ -13,6 +13,14 @@
         android:configChanges="orientation"
         android:theme="@style/CustomAppTheme">
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2845388640791569~7021765505"/>
+
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+
         <activity android:name=".ui.main.SplashActivity"
             android:theme="@style/Splash"
             android:configChanges="orientation"

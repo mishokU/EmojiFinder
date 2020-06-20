@@ -24,6 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.666" />
 
+
         <androidx.emoji.widget.EmojiTextView
             android:id="@+id/emojiTextView2"
             android:layout_width="wrap_content"
@@ -46,10 +47,10 @@
             android:textSize="52sp"
             app:layout_constraintBottom_toTopOf="@+id/palette"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.007"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/emojiTextView2"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.322" />
+            app:layout_constraintVertical_bias="0.32" />
 
         <androidx.emoji.widget.EmojiTextView
             android:id="@+id/emojiTextView6"
@@ -159,6 +160,27 @@
             app:rippleColor="@color/blue_color" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/shop_btn"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_below="@id/palette"
+            android:layout_marginStart="142dp"
+            android:text="@string/shop"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            app:icon="@drawable/shop_26px"
+            app:cornerRadius="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/shop_main_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.081"
+            app:layout_constraintStart_toStartOf="@+id/palette"
+            app:layout_constraintTop_toBottomOf="@+id/start_arcade_game_btn"
+            app:layout_constraintVertical_bias="0.68"
+            app:rippleColor="@color/red_color" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/start_arcade_game_btn"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="90dp"
@@ -187,7 +209,7 @@
             android:layout_below="@id/palette"
             android:layout_marginStart="220dp"
             android:layout_marginBottom="65dp"
-            android:text="@string/shop"
+            android:text="@string/emojis"
             app:rippleColor="@null"
             android:textAllCaps="false"
             android:textColor="@color/background_color"
@@ -198,6 +220,17 @@
             app:layout_constraintStart_toStartOf="@+id/palette"
             app:layout_constraintTop_toTopOf="@+id/palette"
             app:layout_constraintVertical_bias="1.0" />
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

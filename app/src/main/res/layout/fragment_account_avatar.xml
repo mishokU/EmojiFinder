@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:elevation="4dp"
                 android:gravity="start"
                 android:textAlignment="viewStart"
                 app:titleTextAppearance="@style/Toolbar.TitleText"
@@ -46,7 +47,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:background="@color/main_color">
 
                 <LinearLayout
@@ -638,7 +638,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="@string/shop"
+                            android:text="@string/emojis"
                             android:layout_marginStart="10dp"
                             android:layout_centerVertical="true"
                             android:textAlignment="center"
@@ -771,6 +771,8 @@
                     </RelativeLayout>
 
                 </LinearLayout>
+
+
 
             </LinearLayout>
 

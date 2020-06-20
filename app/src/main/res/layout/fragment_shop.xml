@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.shop.ShopFragment"
+        android:background="@color/main_color">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="50dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/shop"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textAllCaps="true"
+                android:textColor="@color/background_color"
+                android:layout_margin="10dp"/>
+
+            <RelativeLayout
+                android:id="@+id/vip_button"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/ripple_color_vip">
+
+                <TextView
+                    android:id="@+id/vip_golden_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vip_golder_pass"
+                    android:textAlignment="center"
+                    android:layout_margin="10dp"
+                    android:textSize="22sp"
+                    android:textColor="@color/background_color"
+                    android:layout_centerHorizontal="true"/>
+
+                <ImageView
+                    android:layout_below="@id/vip_golden_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"/>
+
+            </RelativeLayout>
+
+            <HorizontalScrollView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="200dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/shop_corners_style"
+                        android:backgroundTint="@color/colorPrimary">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="@string/starter_pack"
+                            android:textColor="@color/background_color"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_editor_absoluteX="10dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/starterPackBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/shop_corners_style"
+                            android:backgroundTint="@color/background_color"
+                            android:text="149.00 Р"
+                            app:rippleColor="@color/main_ripple_button_color"
+                            android:textColor="@color/main_color"
+                            app:cornerRadius="20dp"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:layout_editor_absoluteX="5dp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="200dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/shop_corners_style"
+                        android:backgroundTint="@color/colorPrimary">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="@string/medium_pack"
+                            android:textColor="@color/background_color"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_editor_absoluteX="10dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/mediumPackBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/shop_corners_style"
+                            android:backgroundTint="@color/background_color"
+                            android:text="249.00 Р"
+                            app:rippleColor="@color/main_ripple_button_color"
+                            android:textColor="@color/main_color"
+                            app:cornerRadius="20dp"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:layout_editor_absoluteX="5dp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="200dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/shop_corners_style"
+                        android:backgroundTint="@color/colorPrimary">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="@string/huge_pack"
+                            android:textColor="@color/background_color"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_editor_absoluteX="10dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/hugePackBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/shop_corners_style"
+                            android:backgroundTint="@color/background_color"
+                            android:text="449.00 Р"
+                            app:rippleColor="@color/main_ripple_button_color"
+                            android:textColor="@color/main_color"
+                            app:cornerRadius="20dp"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:layout_editor_absoluteX="5dp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/shop_corners_style"
+                        android:backgroundTint="@color/colorPrimary">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="+ 1"
+                            android:textColor="@color/background_color"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_editor_absoluteX="10dp" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/chest_for_add"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/shop_corners_style"
+                            android:backgroundTint="@color/background_color"
+                            android:src="@drawable/icons8_movie_projector_32px"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:layout_editor_absoluteX="5dp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/shop_corners_style"
+                        android:backgroundTint="@color/colorPrimary">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="+2000 + 7"
+                            android:textColor="@color/background_color"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_editor_absoluteX="10dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/firstEmoBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/shop_corners_style"
+                            android:backgroundTint="@color/background_color"
+                            android:text="349.00 Р"
+                            app:rippleColor="@color/main_ripple_button_color"
+                            android:textColor="@color/main_color"
+                            app:cornerRadius="15dp"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:layout_editor_absoluteX="5dp" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/shop_corners_style"
+                        android:backgroundTint="@color/colorPrimary">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="+4000 + 20"
+                            android:textColor="@color/background_color"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_editor_absoluteX="10dp" />
+
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/secondEmoBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/shop_corners_style"
+                            android:backgroundTint="@color/background_color"
+                            android:text="549.00 Р"
+                            app:rippleColor="@color/main_ripple_button_color"
+                            android:textColor="@color/main_color"
+                            app:cornerRadius="15dp"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:layout_editor_absoluteX="5dp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/shop_corners_style"
+                        android:backgroundTint="@color/colorPrimary">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="+10000 + 50"
+                            android:textColor="@color/background_color"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_editor_absoluteX="10dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/thirdEmoBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:rippleColor="@color/main_ripple_button_color"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/shop_corners_style"
+                            android:backgroundTint="@color/background_color"
+                            android:textColor="@color/main_color"
+                            app:cornerRadius="15dp"
+                            android:text="999.00 Р"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:layout_editor_absoluteX="5dp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+
+        </LinearLayout>
+
+        </ScrollView>
+
+<!--        <include-->
+<!--            android:id="@+id/googlePayButton"-->
+<!--            layout="@layout/buy_with_googlepay_button"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:visibility="gone"/>-->
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:adSize="BANNER"
+            android:layout_gravity="bottom"
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </FrameLayout>
+
+</layout>

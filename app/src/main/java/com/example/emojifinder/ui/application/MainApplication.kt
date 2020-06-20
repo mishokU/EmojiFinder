@@ -8,6 +8,8 @@ import androidx.emoji.text.FontRequestEmojiCompatConfig
 import com.example.emojifinder.BuildConfig
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.DaggerAppComponent
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
@@ -32,6 +34,13 @@ class MainApplication : DaggerApplication() {
         if (BuildConfig.DEBUG) {
             enableStrictMode()
         }
+
+        val testDeviceIds = listOf("33BE2250B43518CCDA7DE426D04EE231")
+        val configuration = RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
+
+        MobileAds.setRequestConfiguration(configuration)
+        MobileAds.initialize(this) {}
+
 
         super.onCreate()
     }

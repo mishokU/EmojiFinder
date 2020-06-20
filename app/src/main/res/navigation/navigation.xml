@@ -85,6 +85,9 @@
         <action
             android:id="@+id/action_mainMenuFragment_to_arcadeGameFragment"
             app:destination="@id/arcadeGameFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -233,4 +236,9 @@
         android:name="com.example.emojifinder.ui.rating.RatingFragment"
         android:label="fragment_rating"
         tools:layout="@layout/fragment_rating" />
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="com.example.emojifinder.ui.shop.ShopFragment"
+        android:label="fragment_shop"
+        tools:layout="@layout/fragment_shop" />
 </navigation>

@@ -14,6 +14,8 @@ import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentRatingBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.RatingViewModel
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -38,6 +40,8 @@ class RatingFragment : DaggerFragment() {
         setBackButton()
         initUsers()
         fetchUsers()
+
+        addListenerToAdView()
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -48,9 +52,10 @@ class RatingFragment : DaggerFragment() {
             it?.let {
                 when(it){
                     is Result.Loading -> {
-
+                        binding.ratingProgressBar.visibility = View.VISIBLE
                     }
                     is Result.Success -> {
+                        binding.ratingProgressBar.visibility = View.INVISIBLE
                         adapter.submitList(it.data)
                     }
                     is Result.Error -> {
@@ -59,6 +64,11 @@ class RatingFragment : DaggerFragment() {
                 }
             }
         })
+    }
+
+    private fun addListenerToAdView() {
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
     }
 
     private fun initUsers() {

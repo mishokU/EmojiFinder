@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.ArcadeGameLayoutBinding
+import com.example.emojifinder.domain.adds.INTERSTITIAL_ID
 import com.example.emojifinder.domain.prefs.SettingsPrefs
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.sounds.MusicType
@@ -23,6 +24,9 @@ import com.example.emojifinder.domain.viewModels.ShopViewModel
 import com.example.emojifinder.ui.game.campaign.gameAlerts.ExitGameDialog
 import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.shop.EmojiShopModel
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -30,7 +34,9 @@ class ArcadeGameFragment : DaggerFragment() {
 
     private lateinit var binding : ArcadeGameLayoutBinding
     lateinit var userEmojisAdapter : GameRecyclerViewAdapter
+
     private lateinit var animation: ObjectAnimator
+    private lateinit var interstitialAd : InterstitialAd
 
     var emojis : MutableList<EmojiAppCompatEditText> = mutableListOf()
 
@@ -60,6 +66,7 @@ class ArcadeGameFragment : DaggerFragment() {
     ): View? {
         binding = ArcadeGameLayoutBinding.inflate(inflater)
 
+        interstitialAd = InterstitialAd(requireContext())
 
         viewModelAccount = injectViewModel(viewModelFactoryAccount)
 
@@ -75,6 +82,8 @@ class ArcadeGameFragment : DaggerFragment() {
         initViewModel()
 
         loadUserScore()
+
+        initloadAd()
 
         return binding.root
     }
@@ -155,6 +164,9 @@ class ArcadeGameFragment : DaggerFragment() {
             initTimer()
             score = 0
             animation.start()
+
+            interstitialAd.loadAd(AdRequest.Builder().build())
+
             EndGameDialog.dialogView.dismiss()
         }
 
@@ -167,7 +179,7 @@ class ArcadeGameFragment : DaggerFragment() {
     private fun initTimer() {
         animation = ObjectAnimator
             .ofInt(binding.gameProgressBar, "progress", 60, 0)
-        animation.duration = (60 * 1000).toLong()
+        animation.duration = (10 * 1000).toLong()
         animation.interpolator = LinearInterpolator()
 
         animation.addUpdateListener {
@@ -175,9 +187,9 @@ class ArcadeGameFragment : DaggerFragment() {
         }
 
         animation.addListener(onEnd = {
-            openAdvertisement()
             playSound(MusicType.WIN)
             stopSound(MusicType.GAME)
+            loadAd()
             if(score == 0){
                 EndGameDialog.open(score)
             } else {
@@ -188,8 +200,16 @@ class ArcadeGameFragment : DaggerFragment() {
         })
     }
 
-    private fun openAdvertisement() {
+    private fun loadAd() {
+        if(interstitialAd.isLoaded){
+            interstitialAd.show()
+        }
+    }
 
+    private fun initloadAd() {
+        interstitialAd.adUnitId = INTERSTITIAL_ID
+        val adRequest = AdRequest.Builder().build()
+        interstitialAd.loadAd(adRequest)
     }
 
     private fun initFinderEmojis() {

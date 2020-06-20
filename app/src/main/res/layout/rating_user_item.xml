@@ -10,7 +10,7 @@
     <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -56,13 +56,19 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
+                android:maxLines="1"
+                android:textAlignment="textStart"
+                android:ellipsize="end"
+                android:layout_toStartOf="@id/user_rating"
                 android:text="@{user.login}"/>
 
             <TextView
                 android:id="@+id/user_rating"
                 android:layout_width="wrap_content"
+                android:minWidth="60dp"
                 android:layout_alignParentEnd="true"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
                 android:text="@{String.valueOf(user.score)}"
                 android:textColor="@color/background_color"
                 android:textSize="14sp"
@@ -70,6 +76,12 @@
                 android:padding="5dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/rating_style_corners"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/white"
+                android:layout_alignParentBottom="true"/>
 
         </RelativeLayout>
 

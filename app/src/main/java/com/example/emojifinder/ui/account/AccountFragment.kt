@@ -4,19 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.emojifinder.domain.result.Result
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
-import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.databinding.FragmentAccountBinding
+import com.example.emojifinder.domain.adds.BANNER_ID
+import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.AccountViewModel
-import com.example.emojifinder.domain.viewModels.SharedViewModel
+import com.google.android.gms.ads.AdRequest
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -26,8 +25,6 @@ class AccountFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel : AccountViewModel
-
-    private val model: SharedViewModel by activityViewModels()
 
     var login : String = ""
 
@@ -54,7 +51,14 @@ class AccountFragment : DaggerFragment() {
 
         initListState()
 
+        addListenerToAdView()
+
         return binding.root
+    }
+
+    private fun addListenerToAdView() {
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
     }
 
     private fun initListState() {

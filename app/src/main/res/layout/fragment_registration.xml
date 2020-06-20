@@ -24,6 +24,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:textAlignment="viewStart"
+                android:elevation="4dp"
                 style="@style/CustomToolbar"
                 app:titleTextAppearance="@style/Toolbar.TitleText"
                 app:titleTextColor="@color/background_color"
@@ -43,8 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/main_color"
-                android:layout_marginTop="5dp">
+                android:background="@color/main_color">
 
                 <LinearLayout
                     android:layout_width="match_parent"

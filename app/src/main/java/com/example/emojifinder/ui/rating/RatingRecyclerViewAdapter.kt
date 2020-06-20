@@ -10,6 +10,8 @@ import com.example.emojifinder.databinding.RatingUserItemBinding
 
 class RatingRecyclerViewAdapter : ListAdapter<MainAccountModel, RatingRecyclerViewAdapter.RatingViewHolder>(DiffCallback) {
 
+    var users = 0
+
     companion object DiffCallback: DiffUtil.ItemCallback<MainAccountModel>() {
 
         override fun areItemsTheSame(oldItem: MainAccountModel, newItem: MainAccountModel): Boolean {
@@ -22,6 +24,7 @@ class RatingRecyclerViewAdapter : ListAdapter<MainAccountModel, RatingRecyclerVi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RatingViewHolder {
+
         return RatingViewHolder(
             RatingUserItemBinding.inflate(LayoutInflater.from(parent.context))
         )
@@ -29,13 +32,15 @@ class RatingRecyclerViewAdapter : ListAdapter<MainAccountModel, RatingRecyclerVi
 
     override fun onBindViewHolder(holder: RatingViewHolder, position: Int){
         val emoji = getItem(position)
-        holder.bind(emoji)
+        users++
+        holder.bind(emoji,users)
     }
 
     class RatingViewHolder(private val binding: RatingUserItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: MainAccountModel?) {
+        fun bind(user: MainAccountModel?, users : Int) {
             binding.user = user
+            binding.userNumberRating.text = users.toString()
             binding.executePendingBindings()
         }
     }

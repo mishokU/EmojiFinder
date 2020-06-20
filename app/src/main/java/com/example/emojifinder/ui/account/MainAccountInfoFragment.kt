@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +17,7 @@ import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.databinding.FragmentMainAccountInfoBinding
 import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.domain.viewModels.SharedViewModel
+import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.utils.hideKeyboard
 import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.DaggerFragment
@@ -43,6 +45,8 @@ class MainAccountInfoFragment : DaggerFragment() {
 
         viewModel = injectViewModel(viewModelFactory)
 
+
+        changeSoftInput()
         addTextWatchers()
 
         getUserMainData()
@@ -53,6 +57,10 @@ class MainAccountInfoFragment : DaggerFragment() {
         setCheckEmailAndPasswordButtons()
 
         return binding.root
+    }
+
+    private fun changeSoftInput() {
+        (activity as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
     }
 
     private fun setAvatarButton() {
@@ -74,6 +82,11 @@ class MainAccountInfoFragment : DaggerFragment() {
                 viewModel.oldPassword = binding.passwordMainInfo.text.toString()
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
     }
 
     private fun addTextWatchers() {

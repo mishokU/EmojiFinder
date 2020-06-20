@@ -9,7 +9,10 @@ import androidx.emoji.text.EmojiCompat
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.databinding.FragmentMainMenuBinding
+import com.example.emojifinder.domain.adds.BANNER_ID
 import com.example.emojifinder.shared.utils.Emoji
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
 import dagger.android.support.DaggerFragment
 
 
@@ -26,8 +29,19 @@ class MainMenuFragment : DaggerFragment() {
         initEmojies()
         handleButtons()
         setPopularEmojis()
+        addListenerToAdView()
 
         return binding.root
+    }
+
+    private fun addListenerToAdView() {
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+        binding.adView.adListener = object : AdListener() {
+            override fun onAdClosed() {
+                binding.adView.loadAd(AdRequest.Builder().build())
+            }
+        }
     }
 
     private fun handleButtons() {
@@ -48,6 +62,10 @@ class MainMenuFragment : DaggerFragment() {
 
         binding.shopMainBtn.setOnClickListener {
             this.findNavController().navigate(R.id.accountAvatarFragment)
+        }
+
+        binding.shopBtn.setOnClickListener {
+            this.findNavController().navigate(R.id.shopFragment)
         }
 
     }

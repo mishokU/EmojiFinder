@@ -3,7 +3,6 @@ package com.example.emojifinder.ui.boxes
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,17 +24,22 @@ import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.data.db.remote.models.account.AccountValuesModel
 import com.example.emojifinder.databinding.FragmentLootBoxesBinding
+import com.example.emojifinder.domain.adds.REWARDED_VIDEO_ID
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.sounds.MusicType
 import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.domain.viewModels.ShopViewModel
-import com.example.emojifinder.shared.utils.Emoji
 import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.example.emojifinder.ui.utils.EmojiCost
 import com.example.emojifinder.ui.utils.ScreenSize
 import com.example.emojifinder.ui.utils.closeChestPlaceholder
 import com.example.emojifinder.ui.utils.openChestPlaceholder
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.reward.RewardItem
+import com.google.android.gms.ads.reward.RewardedVideoAd
+import com.google.android.gms.ads.reward.RewardedVideoAdListener
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import kotlin.random.Random
@@ -55,6 +59,8 @@ class LootBoxesFragment : DaggerFragment() {
     lateinit var binding : FragmentLootBoxesBinding
     lateinit var adapter : LootBoxRecyclerViewAdapter
     lateinit var values : AccountValuesModel
+
+    private lateinit var mRewardedVideoAd: RewardedVideoAd
 
     var open : Boolean = false
 
@@ -76,10 +82,54 @@ class LootBoxesFragment : DaggerFragment() {
         initShopViewModel()
 
         initBuyChestButton()
+        initWatchAdButton()
 
         setBackButton()
 
+        initRewardedAd()
+
+
         return binding.root
+    }
+
+    private fun initWatchAdButton() {
+        binding.watchAddBtn.setOnClickListener {
+            if(mRewardedVideoAd.isLoaded){
+                mRewardedVideoAd.show()
+            }
+        }
+    }
+
+
+
+    private fun initRewardedAd() {
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(requireContext())
+        mRewardedVideoAd.rewardedVideoAdListener = object : RewardedVideoAdListener {
+
+            override fun onRewardedVideoAdClosed() {}
+
+            override fun onRewardedVideoAdLeftApplication() {}
+
+            override fun onRewardedVideoAdLoaded() {}
+
+            override fun onRewardedVideoAdOpened() {}
+
+            override fun onRewardedVideoCompleted() {
+            }
+
+            override fun onRewarded(p0: RewardItem?) {
+                viewModel.updateUserBoxes(values.boxes + 1)
+                binding.boxesCount.text = (binding.boxesCount.text.toString().toInt() + 1).toString()
+            }
+
+            override fun onRewardedVideoStarted() {}
+
+            override fun onRewardedVideoAdFailedToLoad(p0: Int) {}
+        }
+
+        mRewardedVideoAd.loadAd(
+            REWARDED_VIDEO_ID,
+            AdRequest.Builder().build())
     }
 
     private fun initBuyChestButton() {
@@ -175,9 +225,8 @@ class LootBoxesFragment : DaggerFragment() {
             animatedView.animate()
                 .scaleXBy(0f)
                 .scaleYBy(0f)
-                .scaleX(2f)
-                .scaleY(2f)
-                .translationX(-450f)
+                .scaleX(1.5f)
+                .scaleY(1.5f)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator?) {
                         emojiText.visibility = View.VISIBLE
@@ -234,8 +283,6 @@ class LootBoxesFragment : DaggerFragment() {
         }
     }
 
-
-
     private fun updateUserEmojisCount(){
         val count = binding.emojisCount.text.toString().toInt() + 1
         binding.emojisCount.text = count.toString()
@@ -254,24 +301,21 @@ class LootBoxesFragment : DaggerFragment() {
             .scaleX(-1f)
             .scaleY(-1f)
             .setListener(null)
-            .translationX(450f)
             .setInterpolator(AccelerateDecelerateInterpolator())
             .duration = 1000
 
         bounce(yAxes)
     }
 
-
-    @SuppressLint("SourceLockedOrientationActivity")
-    override fun onStart() {
-        super.onStart()
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
-    }
-
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onPause() {
         super.onPause()
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
+        mRewardedVideoAd.pause(requireContext())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mRewardedVideoAd.resume(requireContext())
     }
 
     private fun initAdapter() {
@@ -336,6 +380,11 @@ class LootBoxesFragment : DaggerFragment() {
         binding.LootboxToolbar.setNavigationOnClickListener {
             this.findNavController().navigateUp()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mRewardedVideoAd.destroy(requireContext())
     }
 
     private fun getUserValues(): AccountValuesModel {
