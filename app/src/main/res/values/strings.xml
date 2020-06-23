@@ -29,12 +29,12 @@
     <string name="okey">Okey</string>
     <string name="loading">loading</string>
     <string name="restore_password">Restore Password</string>
-    <string name="start_arcade_game">Start Arcade Game</string>
-    <string name="start_category_game">Start category game</string>
+    <string name="start_arcade_game">Arcade\nGame</string>
+    <string name="start_category_game">Campaign</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
     <string name="animals">Animals</string>
-    <string name="score">Score:</string>
+    <string name="score">Score</string>
     <string name="time">Time:</string>
     <string name="level">Level:</string>
     <string name="start_the_game">Start the game</string>
@@ -71,7 +71,7 @@
     <string name="open">Open</string>
     <string name="take">Take</string>
     <string name="sell">Sell</string>
-    <string name="buy_chest_for_200_emos">Buy chest for 200 Emos</string>
+    <string name="buy_chest_for_200_emos">200 Emos</string>
     <string name="emoji_finder_levels">Emoji Finder Levels</string>
     <string name="return_to_levels">Return to levels</string>
     <string name="retry">Retry</string>
@@ -124,8 +124,6 @@
     <string name="top">Top</string>
     <string name="suggest_level">Suggest level</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="create">Create</string>
     <string name="constructor">Constructor</string>
     <string name="save_level">Save level</string>
@@ -160,4 +158,7 @@
     <string name="starter_pack">Starter Pack</string>
     <string name="huge_pack">Huge Pack</string>
     <string name="medium_pack">Medium Pack</string>
+    <string name="emoji_shop">Emoji shop</string>
+    <string name="game_end">Game End !</string>
+    <string name="levels">Levels</string>
 </resources>

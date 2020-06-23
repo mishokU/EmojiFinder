@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:minHeight="120dp"
             app:cardBackgroundColor="@color/blue_color"
-            app:strokeColor="@color/main_color"
+            app:strokeColor="@color/light_orange_color"
             app:strokeWidth="2dp"
             app:cardCornerRadius="20dp"
             android:textAllCaps="false"
@@ -42,6 +42,7 @@
                     android:layout_centerInParent="true"
                     android:textAllCaps="false"
                     android:maxLines="2"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:textColor="@color/background_color"
                     android:textAlignment="center"
                     android:text="@{category.title}"/>

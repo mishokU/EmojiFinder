@@ -1,8 +1,10 @@
 package com.example.emojifinder.ui.game.arcade
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -144,8 +146,10 @@ class ArcadeGameFragment : DaggerFragment() {
         ExitGameDialog.open()
 
         ExitGameDialog.getGameExitButton().setOnClickListener {
-            ExitGameDialog.dialogView.dismiss()
             animation.removeAllListeners()
+            Handler().postDelayed({
+                ExitGameDialog.dialogView.dismiss()
+            }, 100)
             animation.cancel()
             (activity as MainActivity).mediaPlayerPool.play(MusicType.LOSE)
             this.findNavController().navigateUp()
@@ -171,19 +175,22 @@ class ArcadeGameFragment : DaggerFragment() {
         }
 
         EndGameDialog.getExitButton().setOnClickListener {
-            EndGameDialog.dialogView.dismiss()
+            Handler().postDelayed({
+                EndGameDialog.dialogView.dismiss()
+            }, 100)
             this.findNavController().navigateUp()
         }
     }
 
+    @SuppressLint("ObjectAnimatorBinding")
     private fun initTimer() {
-        animation = ObjectAnimator
-            .ofInt(binding.gameProgressBar, "progress", 60, 0)
+        binding.gameProgressBar.max = 10 * 100
+        animation = ObjectAnimator.ofInt(binding.gameProgressBar,"progress", 60*100, 0)
         animation.duration = (10 * 1000).toLong()
         animation.interpolator = LinearInterpolator()
 
         animation.addUpdateListener {
-            binding.gameTime.text = it.animatedValue.toString()
+            binding.gameTime.text = (it.animatedValue.toString().toInt() / 100).toString()
         }
 
         animation.addListener(onEnd = {

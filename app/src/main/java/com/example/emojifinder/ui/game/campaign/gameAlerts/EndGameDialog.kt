@@ -1,12 +1,16 @@
 package com.example.emojifinder.ui.game.campaign.gameAlerts
 
 import android.app.Dialog
+import android.opengl.Visibility
+import android.os.Handler
 import android.view.View
 import android.view.Window
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
+import com.example.emojifinder.ui.baseDialog.BaseDialog
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
@@ -14,18 +18,16 @@ enum class State{LOST, FINISHED}
 
 object EndGameDialog {
 
-    lateinit var dialogView : Dialog
+    lateinit var dialogView : BaseDialog
+    lateinit var fragment: DaggerFragment
+    lateinit var exit : MaterialButton
 
     fun showEndGameDialog(fragment : DaggerFragment, statistics: UserLevelStatistics?, state: State) {
-        dialogView = Dialog(fragment.requireContext(), R.style.CustomDialog)
-        dialogView.setCancelable(false)
-        dialogView.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        dialogView.window!!.statusBarColor = ContextCompat.getColor(fragment.requireContext(), R.color.main_color)
-        // layout to display
-        dialogView.setContentView(R.layout.end_game_layout);
+        this.fragment = fragment
 
-        // set color transparent
-        dialogView.window!!.setBackgroundDrawable(fragment.resources.getDrawable(R.color.alert_background_color));
+        dialogView = BaseDialog(fragment.requireContext(), R.style.CustomDialog)
+        dialogView.setCancelable(false)
+        dialogView.setContentView(R.layout.end_game_layout);
 
         val result = dialogView.findViewById<TextView>(R.id.level_result_et)
         val score = dialogView.findViewById<TextView>(R.id.level_result_score)
@@ -43,10 +45,13 @@ object EndGameDialog {
                 getNextLevelButton().text = result.resources.getText(R.string.next_level)
             }
 
+            initExitButton()
+
             if(state == State.LOST){
                 getNextLevelButton().text = result.resources.getText(R.string.next_level)
             } else {
                 getNextLevelButton().text = result.resources.getText(R.string.exit)
+                exit.visibility = View.INVISIBLE
             }
 
             result.text = statistics.result
@@ -67,11 +72,13 @@ object EndGameDialog {
         return dialogView.findViewById(R.id.next_level_btn)
     }
 
-    fun getUpperBackButton() : MaterialButton {
-        return dialogView.findViewById(R.id.upper_back_button)
-    }
-
-    fun getUpperRetryButton() : MaterialButton {
-        return dialogView.findViewById(R.id.upper_retry_button)
+    private fun initExitButton() {
+        exit = dialogView.findViewById(R.id.exit_end_btn)
+        exit.setOnClickListener {
+            fragment.findNavController().navigateUp()
+            Handler().postDelayed({
+                dialogView.dismiss()
+            }, 100)
+        }
     }
 }

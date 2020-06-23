@@ -4,7 +4,9 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#6C787A</color>
 
-    <color name="main_color">#4f5154</color>
+    <color name="main_color">#9A881FFF</color>
+
+
     <color name="dark_main_color">#27292b</color>
     <color name="light_main_color">#7b7d80</color>
 
@@ -12,6 +14,8 @@
     <color name="second_text_color">#389aed</color>
     <color name="black_color">#050708</color>
     <color name="first_color">#4f5154</color>
+
+    <color name="light_orange_color">#BFEAAF61</color>
 
     <color name="timer_delay_color">#ecdde2</color>
     <color name="background_color">#f0f4fd</color>
@@ -23,7 +27,7 @@
     <color name="chest_sad_color">#ff5a79</color>
     <color name="progress_bar_time_color">#f3dfe3</color>
 
-    <color name="alert_background_color">#66202022</color>
+    <color name="alert_background_color">#58202022</color>
 
     <color name="colorStripeStart">#FFF0F4FD</color>
     <color name="colorStripeEnd">#AB80F3</color>

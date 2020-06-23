@@ -8,11 +8,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/background_gradient"
         tools:context=".ui.localization.LocalizeAppFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_layout_top"
+            android:layout_marginBottom="@dimen/margin_layout_bottom"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.Toolbar
@@ -21,8 +24,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="start"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:paddingLeft="10dp"
-                android:background="@color/main_color"
+                android:background="@null"
                 android:paddingRight="10dp"
                 android:textAlignment="viewStart"
                 app:titleTextAppearance="@style/Toolbar.TitleText"
@@ -32,8 +36,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/main_color">
+                android:orientation="vertical">
 
                 <androidx.gridlayout.widget.GridLayout
                     android:layout_width="wrap_content"
@@ -100,6 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:textAllCaps="false"
                 android:textSize="18sp"
                 android:text="@string/save"

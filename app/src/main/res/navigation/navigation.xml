@@ -127,7 +127,7 @@
             android:id="@+id/action_categotyGameFragment_to_gameFragment"
             app:destination="@id/gameFragment"
             app:enterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/fragment_fade_exit" />
 
 
     </fragment>

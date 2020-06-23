@@ -18,11 +18,12 @@
 
         <TextView
             android:id="@+id/errorText"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginTop="15dp"
+            android:padding="10dp"
+            android:background="@drawable/emoji_shop_top_place_style"
             android:text="@string/exit_game_text"
             android:textSize="20sp"
+            android:fontFamily="@font/ru_eng_sriracha"
+            android:textColor="@color/background_color"
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -30,7 +31,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -38,8 +41,9 @@
                 android:layout_centerVertical="true"
                 android:text="@string/music"
                 android:textSize="22sp"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:layout_marginStart="10dp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@color/first_color"/>
 
             <Switch
                 android:id="@+id/exit_music_switcher"
@@ -63,6 +67,7 @@
                 android:layout_weight="1"
                 android:textAllCaps="false"
                 android:layout_marginEnd="5dp"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:backgroundTint="@color/blue_color"
                 android:textColor="@color/background_color"
                 android:layout_width="match_parent"
@@ -74,6 +79,7 @@
                 android:layout_weight="1"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:backgroundTint="@color/red_color"
                 app:backgroundTint="@color/red_color"
                 android:textColor="@color/background_color"

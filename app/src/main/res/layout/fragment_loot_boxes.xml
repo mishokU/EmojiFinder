@@ -14,40 +14,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@color/main_color"
+        android:background="@drawable/background_gradient"
         tools:context=".ui.boxes.LootBoxesFragment">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/LootboxToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical">
-
-
-        <com.google.android.material.button.MaterialButton
-                android:id="@+id/buy_chest_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="5dp"
-                android:alpha="0.8"
-                android:text="@string/buy_chest_for_200_emos"
-                android:textSize="20sp"
-                android:textAllCaps="false"
-                app:cornerRadius="20dp"
-                app:backgroundTint="@color/blue_color" />
 
         <LinearLayout
             android:id="@+id/values_place"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_gravity="center"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="20dp">
@@ -157,7 +137,6 @@
         </LinearLayout>
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -167,9 +146,11 @@
 
         <RelativeLayout
             android:id="@+id/box_place"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            android:layout_marginTop="60dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/emoji_box_place_style">
@@ -191,10 +172,12 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_above="@id/roll_emoji_place"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@id/shop_place">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -202,7 +185,7 @@
                 android:layout_width="20dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_centerVertical="true"
+                android:layout_weight="0"
                 android:scaleType="center"
                 android:layout_marginStart="10dp"
                 app:tint="@color/main_color"
@@ -211,13 +194,33 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/chest_rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:layout_toEndOf="@id/left_arrow"
-                    android:layout_toStartOf="@id/right_arrow"
-                    android:layout_centerVertical="true"
-                    android:orientation="horizontal"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/chest_item" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/second_chest_rv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/chest_item" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/third_chest_rv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/chest_item" />
 
@@ -226,15 +229,14 @@
                     android:layout_width="20dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_centerVertical="true"
                     android:scaleType="center"
                     android:layout_marginEnd="10dp"
                     app:tint="@color/main_color"
-                    android:layout_alignParentEnd="true"
+                    android:layout_weight="0"
                     android:src="@drawable/icons8_back_16px_right"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/roll_emoji_place"
@@ -257,12 +259,12 @@
 
             </RelativeLayout>
 
-
-            <View
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/open_chest_placeholder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/emoji_box_left_open_chest" />
+                app:cardCornerRadius="20dp"
+                android:background="@drawable/background_gradient" />
 
         </RelativeLayout>
 
@@ -273,20 +275,43 @@
             android:layout_height="match_parent"
             android:layout_gravity="center">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/watch_add_btn"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
                 android:layout_marginStart="20dp"
-                android:text="@string/watch_add_1_chest"
-                android:textSize="18sp"
-                android:layout_marginBottom="10dp"
-                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="@dimen/margin_layout_bottom"
+                android:layout_alignParentBottom="true">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/watch_add_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:tint="@color/background_color"
+                    android:background="@drawable/shop_corners_style"
+                    android:backgroundTint="@color/blue_color"
+                    android:src="@drawable/icons8_movie_projector_32px"
+                    android:textAlignment="center"
+                    android:textSize="18sp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buy_chest_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:alpha="0.8"
+                android:text="@string/buy_chest_for_200_emos"
+                android:textSize="20sp"
                 android:textAllCaps="false"
                 app:cornerRadius="20dp"
                 app:backgroundTint="@color/blue_color" />
+
+            </LinearLayout>
 
             <androidx.emoji.widget.EmojiAppCompatButton
                 android:id="@+id/animated_view"

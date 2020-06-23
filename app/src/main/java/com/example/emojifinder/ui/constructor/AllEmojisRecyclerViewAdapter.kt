@@ -65,7 +65,13 @@ class AllEmojisRecyclerViewAdapter(
     override fun onBindViewHolder(holder: KeyboardViewHolder, position: Int){
         val emoji = adapterlist.currentList[position]
         val button = holder.itemView.emoji_game_view
-
+        if(holder.itemView.emoji_game_view.background ==
+            ContextCompat.getDrawable(
+                button.context,
+                R.drawable.checked_emoji_style
+            )) {
+            holder.setIsRecyclable(false)
+        }
         holder.itemView.setOnClickListener {
             setChecked(button)
             onClickListener.onClick(emoji, prevElement)
@@ -84,7 +90,7 @@ class AllEmojisRecyclerViewAdapter(
         if (button != null) {
             button.background = ContextCompat.getDrawable(
                 button.context,
-                R.color.main_color
+                R.color.background_color
             )
         }
     }

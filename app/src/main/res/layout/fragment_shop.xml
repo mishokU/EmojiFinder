@@ -8,13 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.shop.ShopFragment"
-        android:background="@color/main_color">
+        android:background="@drawable/background_gradient">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="50dp">
+            android:layout_marginTop="@dimen/margin_layout_top"
+            android:layout_marginBottom="70dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,6 +22,7 @@
             android:orientation="vertical"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
+            android:layout_marginBottom="30dp"
             android:layout_marginEnd="20dp">
 
             <TextView
@@ -36,7 +37,7 @@
 
             <RelativeLayout
                 android:id="@+id/vip_button"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@drawable/ripple_color_vip">
@@ -99,7 +100,7 @@
                             android:backgroundTint="@color/background_color"
                             android:text="149.00 Р"
                             app:rippleColor="@color/main_ripple_button_color"
-                            android:textColor="@color/main_color"
+                            android:textColor="@color/first_color"
                             app:cornerRadius="20dp"
                             android:textAlignment="center"
                             android:textSize="18sp"
@@ -136,7 +137,7 @@
                             android:backgroundTint="@color/background_color"
                             android:text="249.00 Р"
                             app:rippleColor="@color/main_ripple_button_color"
-                            android:textColor="@color/main_color"
+                            android:textColor="@color/first_color"
                             app:cornerRadius="20dp"
                             android:textAlignment="center"
                             android:textSize="18sp"
@@ -173,7 +174,7 @@
                             android:backgroundTint="@color/background_color"
                             android:text="449.00 Р"
                             app:rippleColor="@color/main_ripple_button_color"
-                            android:textColor="@color/main_color"
+                            android:textColor="@color/first_color"
                             app:cornerRadius="20dp"
                             android:textAlignment="center"
                             android:textSize="18sp"
@@ -260,7 +261,7 @@
                             android:backgroundTint="@color/background_color"
                             android:text="349.00 Р"
                             app:rippleColor="@color/main_ripple_button_color"
-                            android:textColor="@color/main_color"
+                            android:textColor="@color/first_color"
                             app:cornerRadius="15dp"
                             android:textAlignment="center"
                             android:textSize="18sp"
@@ -299,7 +300,7 @@
                             android:backgroundTint="@color/background_color"
                             android:text="549.00 Р"
                             app:rippleColor="@color/main_ripple_button_color"
-                            android:textColor="@color/main_color"
+                            android:textColor="@color/first_color"
                             app:cornerRadius="15dp"
                             android:textAlignment="center"
                             android:textSize="18sp"
@@ -335,7 +336,7 @@
                             android:layout_marginEnd="10dp"
                             android:background="@drawable/shop_corners_style"
                             android:backgroundTint="@color/background_color"
-                            android:textColor="@color/main_color"
+                            android:textColor="@color/first_color"
                             app:cornerRadius="15dp"
                             android:text="999.00 Р"
                             android:textAlignment="center"
@@ -354,18 +355,12 @@
 
         </ScrollView>
 
-<!--        <include-->
-<!--            android:id="@+id/googlePayButton"-->
-<!--            layout="@layout/buy_with_googlepay_button"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:visibility="gone"/>-->
-
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:adSize="BANNER"
+            android:layout_marginBottom="30dp"
             android:layout_gravity="bottom"
             app:adUnitId="ca-app-pub-3940256099942544/6300978111"
             app:layout_constraintBottom_toBottomOf="parent"

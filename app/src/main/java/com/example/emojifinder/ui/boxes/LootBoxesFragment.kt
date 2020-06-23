@@ -84,8 +84,6 @@ class LootBoxesFragment : DaggerFragment() {
         initBuyChestButton()
         initWatchAdButton()
 
-        setBackButton()
-
         initRewardedAd()
 
 
@@ -112,7 +110,11 @@ class LootBoxesFragment : DaggerFragment() {
 
             override fun onRewardedVideoAdLoaded() {}
 
-            override fun onRewardedVideoAdOpened() {}
+            override fun onRewardedVideoAdOpened() {
+                mRewardedVideoAd.loadAd(
+                    REWARDED_VIDEO_ID,
+                    AdRequest.Builder().build())
+            }
 
             override fun onRewardedVideoCompleted() {
             }
@@ -266,6 +268,9 @@ class LootBoxesFragment : DaggerFragment() {
                         binding.emojiGroup.text = emoji.group
 
                         binding.chestRv.smoothScrollToPosition(random)
+                        binding.secondChestRv.smoothScrollToPosition(random + 2)
+                        binding.thirdChestRv.smoothScrollToPosition(random + 4)
+
                         binding.animatedView.text = adapter.currentList[random].text
                     }
                 }
@@ -323,6 +328,8 @@ class LootBoxesFragment : DaggerFragment() {
 
         })
         binding.chestRv.adapter = adapter
+        binding.secondChestRv.adapter = adapter
+        binding.thirdChestRv.adapter = adapter
     }
 
     private fun initShopViewModel() {
@@ -370,16 +377,6 @@ class LootBoxesFragment : DaggerFragment() {
             }
         })
         binding.animatedView.startAnimation(transAnim)
-    }
-
-    private fun setBackButton() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.LootboxToolbar)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        ((activity) as AppCompatActivity).supportActionBar?.title = ""
-
-        binding.LootboxToolbar.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
-        }
     }
 
     override fun onDestroy() {

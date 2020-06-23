@@ -14,12 +14,14 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_color"
+        android:background="@drawable/background_gradient"
         tools:context=".ui.game.campaign.gameAlerts.GameFragment">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_layout_top"
+            android:layout_marginBottom="@dimen/margin_layout_bottom">
 
             <RelativeLayout
                 android:id="@+id/progress_bar_place"
@@ -29,7 +31,7 @@
                 <ProgressBar
                     android:id="@+id/game_progress_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="30dp"
                     android:progress="100"
                     android:layout_margin="10dp"
                     android:indeterminateBehavior="cycle"
@@ -43,10 +45,16 @@
                     android:textSize="14sp"
                     android:layout_centerInParent="true"
                     android:layout_marginStart="5dp"
-                    android:textColor="@color/main_color"
+                    android:textColor="@color/background_color"
                     android:text="@{String.valueOf(level.time)}"/>
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/top_place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress_bar_place">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/game_back_button"
@@ -55,15 +63,113 @@
                 android:layout_gravity="start|top"
                 android:layout_marginStart="10dp"
                 android:paddingStart="10dp"
-                android:layout_below="@id/progress_bar_place"
                 android:padding="0dp"
                 app:icon="@drawable/back_24px"
-                app:strokeColor="@color/main_color"
+                app:strokeColor="@null"
                 app:rippleColor="@color/main_ripple_button_color"
                 app:iconTint="@color/background_color"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:backgroundTint="@android:color/transparent"
                 tools:ignore="RtlSymmetry" />
+
+                <LinearLayout
+                    android:id="@+id/stat_place"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/game_back_button"
+                    android:layout_toStartOf="@id/game_restart_button"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_margin="2dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="5dp"
+                            android:background="@drawable/game_score_style"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:layout_gravity="center"
+                                    android:textColor="@color/first_color"
+                                    android:text="@string/score"/>
+
+                                <TextView
+                                    android:id="@+id/game_score"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:layout_marginStart="5dp"
+                                    android:textColor="@color/first_color" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="5dp"
+                            android:background="@drawable/game_score_style"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:textColor="@color/first_color"
+                                    android:text="@string/mistakes"/>
+
+                                <TextView
+                                    android:id="@+id/game_mistakes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:layout_marginStart="5dp"
+                                    android:textColor="@color/first_color" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/game_restart_button"
@@ -75,20 +181,21 @@
                 android:padding="0dp"
                 app:rippleColor="@color/main_ripple_button_color"
                 app:cornerRadius="12dp"
+                app:strokeColor="@null"
                 android:paddingStart="10dp"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@id/progress_bar_place"
-                app:strokeColor="@color/main_color"
                 app:iconTint="@color/background_color"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:backgroundTint="@android:color/transparent" />
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:layout_below="@id/progress_bar_place"
-                android:layout_above="@id/stat_place">
+                android:layout_below="@id/top_place"
+                android:layout_above="@id/scroll_finder_field">
 
                 <androidx.gridlayout.widget.GridLayout
                     android:id="@+id/game_emoji_field"
@@ -102,137 +209,6 @@
 
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/stat_place"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_above="@id/scroll_finder_field">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_margin="2dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="2dp"
-                        android:paddingBottom="2dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="5dp"
-                        android:background="@drawable/game_score_style"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:layout_gravity="center"
-                                android:textColor="@color/main_color"
-                                android:text="@string/score"/>
-
-                            <TextView
-                                android:id="@+id/game_score"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:layout_marginStart="5dp"
-                                android:textColor="@color/main_color" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="2dp"
-                        android:paddingTop="2dp"
-                        android:paddingBottom="2dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="5dp"
-                        android:background="@drawable/game_score_style"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:textColor="@color/main_color"
-                                android:text="@string/mistakes"/>
-
-                            <TextView
-                                android:id="@+id/game_mistakes"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:layout_marginStart="5dp"
-                                android:textColor="@color/main_color" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="2dp"
-                        android:paddingTop="2dp"
-                        android:paddingBottom="2dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="5dp"
-                        android:background="@drawable/game_score_style"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_gravity="center"
-                            android:gravity="center">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:textColor="@color/main_color"
-                                android:text="@string/game_level"/>
-
-                            <TextView
-                                android:id="@+id/game_level"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:layout_marginStart="5dp"
-                                android:textColor="@color/main_color" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/scroll_finder_field"
                 android:layout_width="match_parent"
@@ -240,7 +216,9 @@
                 android:layout_alignParentBottom="true"
                 app:spanCount="7"
                 android:padding="5dp"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/your_emojis_style"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
 

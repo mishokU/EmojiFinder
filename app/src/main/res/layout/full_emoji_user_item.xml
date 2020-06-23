@@ -44,6 +44,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:fontFamily="@font/ru_eng_sriracha"
+                    android:textColor="@color/background_color"
                     android:text="@string/your_emoji"
                     android:textSize="16sp"/>
 
@@ -78,7 +80,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:textColor="@color/background_color"
+                        android:textColor="@color/first_color"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:textSize="18sp"
                         android:text="@{emoji.name}"/>
 
@@ -87,7 +90,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:textColor="@color/background_color"
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:textColor="@color/first_color"
                         android:textSize="18sp"
                         android:text="@{emoji.group}"/>
 
@@ -106,9 +110,9 @@
                     android:layout_height="wrap_content"
                     app:cornerRadius="20dp"
                     app:backgroundTint="@color/green_color"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="5dp"
-                    android:textSize="20sp"
                     android:textAllCaps="false" />
 
             </LinearLayout>
@@ -128,6 +132,7 @@
                     android:id="@+id/yes_emoji_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     app:cornerRadius="20dp"
                     app:backgroundTint="@color/blue_color"
                     android:layout_marginStart="10dp"
@@ -145,6 +150,7 @@
                     app:backgroundTint="@color/red_color"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:text="@string/no"
                     android:layout_weight="1"
                     android:textSize="20sp"

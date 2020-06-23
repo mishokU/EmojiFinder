@@ -331,6 +331,7 @@ class AccountAvatarFragment : DaggerFragment() {
         })
     }
 
+    @Suppress("DEPRECATION")
     private fun generateGroupChips(data: List<EmojiShopModel?>) {
         binding.categoriesChipGroup.removeAllViews()
         val groups = data.distinctBy {
@@ -342,6 +343,9 @@ class AccountAvatarFragment : DaggerFragment() {
             chip.isChipIconVisible = true
             chip.isClickable = true
             chip.isCheckable = true
+            chip.setTextColor(resources.getColor(R.color.background_color))
+            chip.chipIconTint = resources.getColorStateList(R.color.background_color)
+            chip.chipBackgroundColor = resources.getColorStateList(R.color.blue_color)
 
             chip.setOnCheckedChangeListener { _, isChecked ->
                 if(!isChecked && chip.parent == binding.selectedFilters){
@@ -431,7 +435,6 @@ class AccountAvatarFragment : DaggerFragment() {
         }
 
         binding.generateEmojiSet.setOnClickListener {
-            val list : MutableList<String> = mutableListOf<String>()
             val first = binding.firstGeneratorField.text.toString()
             val second = binding.secondGeneratorField.text.toString()
             val third = binding.thirdGeneratorField.text.toString()
@@ -440,8 +443,6 @@ class AccountAvatarFragment : DaggerFragment() {
             val sixth = binding.sixGeneratorField.text.toString()
 
             val generatedEmoji = "$first$second$third$fourth$fifth$sixth"
-
-            println(generatedEmoji)
 
             changeResultState(generatedEmoji)
         }
@@ -458,7 +459,7 @@ class AccountAvatarFragment : DaggerFragment() {
 
     private fun changeResultState(generatedEmoji: String) {
         binding.resultGeneratorField.text = generatedEmoji
-        if(binding.resultGeneratorField.lineCount == 1){
+        if(binding.resultGeneratorField.lineCount == 1 && generatedEmoji != "" && generatedEmoji.length > 1){
             binding.resultGeneratorField.visibility = View.VISIBLE
             viewModel.addGeneratedEmoji(adapter.getGeneratedEmoji(generatedEmoji))
             viewModel.fetchUserEmojis()

@@ -8,31 +8,32 @@
             type="com.example.emojifinder.domain.viewModels.CategoriesViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_color"
+        android:background="@drawable/background_gradient"
         tools:context=".ui.categories.CategoryGameFragment">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/main_color">
+            android:layout_marginTop="@dimen/margin_layout_top"
+            android:layout_marginBottom="@dimen/margin_layout_bottom"
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="start"
-                android:textAlignment="viewStart"
-                app:titleTextAppearance="@style/Toolbar.TitleText"
-                app:titleTextColor="@color/background_color"
-                app:title="@string/app_name"/>
-
-        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:background="@null"
+            android:fontFamily="@font/ru_eng_sriracha"
+            android:textAlignment="viewStart"
+            app:titleTextColor="@color/background_color"
+            app:title="@string/app_name"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categories_list"
@@ -44,6 +45,8 @@
             tools:itemCount="4"
             app:spanCount="2"
             tools:listitem="@layout/category_cell_item"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -64,6 +67,7 @@
                 android:id="@+id/error_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -75,10 +79,11 @@
                 android:layout_height="wrap_content"
                 app:backgroundTint="@color/blue_color"
                 android:textAllCaps="false"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:layout_marginTop="10dp"
                 android:text="@string/retry"/>
 
         </LinearLayout>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </FrameLayout>
 </layout>

@@ -30,8 +30,8 @@
     <string name="okey">Okey</string>
     <string name="loading">loading</string>
     <string name="restore_password">Restore Password</string>
-    <string name="start_arcade_game">Start Arcade Game</string>
-    <string name="start_category_game">Start category game</string>
+    <string name="start_arcade_game">Arcade Game</string>
+    <string name="start_category_game">Campaign</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
     <string name="animals">Animals</string>
@@ -85,7 +85,6 @@
     <string name="exit">Exit</string>
     <string name="game_level">Level</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="account">Account</string>
     <string name="game">Game</string>
     <string name="statistics">Statistics</string>
@@ -147,9 +146,21 @@
     <string name="invite">Invite</string>
     <string name="rating">Rating</string>
     <string name="emojis">Emojis</string>
+    <string name="what_is_emos">What is Emos in the account ?</string>
+    <string name="how_to_combine">How to combine Emojis in the shop?</string>
+    <string name="name_your_level">Name your level</string>
+    <string name="set_time_in_seconds">Set time in seconds</string>
+    <string name="level_name_should_be_unique">Name should be unique</string>
+    <string name="level_name_is_empty">Name your level</string>
+    <string name="top_top_50">TOP - Top 50</string>
+    <string name="medium_pack">Medium Pack</string>
+    <string name="emoji_shop">Emoji shop</string>
+
     <string name="watch_add_1_chest">Watch add + 1 chest</string>
     <string name="vip_golder_pass">VIP GOLDER PASS</string>
     <string name="starter_pack">Starter Pack</string>
     <string name="huge_pack">Huge Pack</string>
+    <string name="game_end">Game End !</string>
+    <string name="levels">Levels</string>
 
 </resources>

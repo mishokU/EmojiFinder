@@ -39,6 +39,7 @@
                     android:textColor="@color/first_color"
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:text="@{level.title}"/>
 
                 <TextView
@@ -46,9 +47,10 @@
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
                     android:layout_marginStart="10dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/first_color"
                     android:layout_marginEnd="10dp"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:text="-"/>
 
                 <TextView
@@ -58,6 +60,7 @@
                     android:textSize="22sp"
                     android:textColor="@color/first_color"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:text="@{String.valueOf(level.time)}"/>
 
                 <TextView
@@ -69,6 +72,7 @@
                     android:layout_marginStart="5dp"
                     android:textColor="@color/first_color"
                     android:layout_gravity="bottom"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:text="@string/sec"/>
 
             </LinearLayout>
@@ -86,6 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_marginEnd="10dp"
                     android:text="@{level.status.toString()}"/>
 

@@ -7,12 +7,10 @@
                 android:width="5dp"
                 android:color="@color/background_color"/>
             <corners android:radius="20dp"/>
-            <solid android:color="@color/main_color"/>
         </shape>
     </item>
 
     <item android:id="@android:id/progress">
-
         <clip>
             <shape android:shape="rectangle">
                 <stroke android:color="@color/background_color"

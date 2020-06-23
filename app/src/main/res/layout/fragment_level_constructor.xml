@@ -14,15 +14,18 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_color"
+        android:background="@drawable/background_gradient"
         tools:context=".ui.game.campaign.gameAlerts.GameFragment">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_layout_top"
+            android:layout_marginBottom="@dimen/margin_layout_bottom">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/constructor_toolbar"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -61,6 +64,7 @@
                     android:layout_marginEnd="5dp"
                     app:backgroundTint="@color/blue_color"
                     android:text="@string/reset"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:textAllCaps="false"
                     android:layout_weight="1"/>
 
@@ -70,7 +74,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
                     android:text="@string/save_info"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     app:backgroundTint="@color/blue_color"
+
                     android:textAllCaps="false"
                     android:layout_weight="1"/>
 
@@ -98,6 +104,8 @@
                 android:layout_height="200dp"
                 android:scrollbars="vertical"
                 android:layout_margin="5dp"
+                android:padding="5dp"
+                android:background="@drawable/your_emojis_style"
                 android:layout_alignParentBottom="true"
                 app:spanCount="8"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
@@ -143,6 +151,7 @@
                         android:layout_weight="1"
                         android:textAlignment="center"
                         android:textSize="18sp"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:textAllCaps="false"
@@ -156,6 +165,7 @@
                         android:text="@string/reset"
                         android:textAlignment="center"
                         android:textSize="18sp"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:layout_weight="1"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"

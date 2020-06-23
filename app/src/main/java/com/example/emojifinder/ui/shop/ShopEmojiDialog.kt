@@ -3,6 +3,7 @@ package com.example.emojifinder.ui.shop
 import android.app.Dialog
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -10,27 +11,23 @@ import androidx.core.content.ContextCompat
 import androidx.emoji.widget.EmojiAppCompatEditText
 import com.example.emojifinder.R
 import com.example.emojifinder.ui.account.AccountAvatarFragment
+import com.example.emojifinder.ui.baseDialog.BaseDialog
 import com.example.emojifinder.ui.utils.EmojiCost
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
 object ShopEmojiDialog {
 
-    lateinit var dialogView : Dialog
-    lateinit var dialogUserView : Dialog
+    lateinit var dialogView : BaseDialog
+    lateinit var dialogUserView : BaseDialog
 
     fun showAlert(
         fragment: DaggerFragment,
         emoji: EmojiShopModel?
     ){
-        dialogView = Dialog(fragment.requireContext(), R.style.CustomDialog)
-        dialogView.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        dialogView.window!!.statusBarColor = ContextCompat.getColor(fragment.requireContext(), R.color.main_color)
-        // layout to display
+        dialogView = BaseDialog(fragment.requireContext(), R.style.CustomDialog)
         dialogView.setContentView(R.layout.full_emoji_shop_item)
-
-        // set color transparent
-        dialogView.window!!.setBackgroundDrawable(fragment.resources.getDrawable(R.color.alert_background_color))
+        dialogView.setCancelable(true)
 
         val emojiAvatar = dialogView.findViewById<EmojiAppCompatEditText>(R.id.emoji_full_avatar)
         val emojiName = dialogView.findViewById<TextView>(R.id.emoji_full_name)
@@ -52,12 +49,12 @@ object ShopEmojiDialog {
 
     private fun emojiCost(emoji: EmojiShopModel?): CharSequence? {
         return when(emoji?.text?.length){
-            in 1..2 -> "100 Emos"
-            in 2..4 -> "200 Emos"
-            in 6..8 -> "250 Emos"
-            in 8..10 -> "300 Emos"
-            in 10..12 -> "350 Emos"
-            else -> "200 Emos"
+            in 1..2 -> "100"
+            in 2..4 -> "200"
+            in 6..8 -> "250"
+            in 8..10 -> "300"
+            in 10..12 -> "350"
+            else -> "200"
         }
     }
 
@@ -79,14 +76,8 @@ object ShopEmojiDialog {
     }
 
     fun showUserAlert(fragment: AccountAvatarFragment, emoji: EmojiShopModel?) {
-        dialogUserView = Dialog(fragment.requireContext(), R.style.CustomDialog)
-        dialogUserView.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        dialogUserView.window!!.statusBarColor = ContextCompat.getColor(fragment.requireContext(), R.color.main_color)
-        // layout to display
+        dialogUserView = BaseDialog(fragment.requireContext(), R.style.CustomDialog)
         dialogUserView.setContentView(R.layout.full_emoji_user_item)
-
-        // set color transparent
-        dialogUserView.window!!.setBackgroundDrawable(fragment.resources.getDrawable(R.color.alert_background_color))
 
         val emojiAvatar = dialogUserView.findViewById<EmojiAppCompatEditText>(R.id.emoji_full_avatar)
         val emojiName = dialogUserView.findViewById<TextView>(R.id.emoji_full_name)

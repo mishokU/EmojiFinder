@@ -2,15 +2,16 @@ package com.example.emojifinder.ui.main
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.databinding.ActivityMainBinding
 import com.example.emojifinder.domain.payment.LOAD_PAYMENT_DATA_REQUEST_CODE
@@ -20,6 +21,7 @@ import com.google.android.gms.wallet.PaymentData
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
+
 
 class MainActivity : DaggerAppCompatActivity() {
 
@@ -47,6 +49,15 @@ class MainActivity : DaggerAppCompatActivity() {
 
         initMediaPlayer()
         playBackgroundMusic()
+        enableFullScreen()
+    }
+
+    private fun enableFullScreen() {
+        val w: Window = window // in Activity's onCreate() for instance
+        w.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

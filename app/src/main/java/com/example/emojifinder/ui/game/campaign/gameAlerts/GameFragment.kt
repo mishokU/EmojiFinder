@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import androidx.activity.OnBackPressedCallback
 import androidx.core.animation.addListener
+import androidx.core.content.res.ResourcesCompat
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.widget.EmojiAppCompatEditText
 import androidx.gridlayout.widget.GridLayout
@@ -23,7 +24,6 @@ import com.example.emojifinder.data.db.local.converter.toEmojiShopModel
 import com.example.emojifinder.data.db.remote.models.EmojiShopModel
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.databinding.FragmentGameBinding
-import com.example.emojifinder.domain.adds.INTERSTITIAL_ID
 import com.example.emojifinder.domain.adds.INTERSTITIAL_VIDEO_ID
 import com.example.emojifinder.domain.prefs.SettingsPrefs
 import com.example.emojifinder.domain.prefs.ShowGameHintPrefs
@@ -310,17 +310,6 @@ class GameFragment : DaggerFragment() {
             }
             EndGameDialog.dialogView.dismiss()
         }
-
-        EndGameDialog.getUpperRetryButton().setOnClickListener {
-            EndGameDialog.dialogView.dismiss()
-            interstitialAd.loadAd(AdRequest.Builder().build())
-            startGameDialog()
-        }
-
-        EndGameDialog.getUpperBackButton().setOnClickListener {
-            EndGameDialog.dialogView.dismiss()
-            this.findNavController().popBackStack()
-        }
     }
 
     private fun getLevelStatistics(status : String): UserLevelStatistics {
@@ -328,7 +317,7 @@ class GameFragment : DaggerFragment() {
             score = binding.gameScore.text.toString().toInt(),
             mistakes = binding.gameMistakes.text.toString().toInt(),
             time = (animation.currentPlayTime.toDouble() / 1000.0).toString(),
-            id = binding.gameLevel.text.toString().toInt(),
+            id = levelId,
             max_score = (10 * list.size),
             title = level.title,
             result = status
@@ -342,15 +331,15 @@ class GameFragment : DaggerFragment() {
         levels = GameFragmentArgs.fromBundle(
             requireArguments()
         ).Levels.toList()
-        levelId = level.id
 
-        binding.gameLevel.text = level.id.toString()
+        levelId = level.id
         binding.level = level
     }
 
     private fun initProgressAnimator(levelModel: SmallLevelModel) {
-        animation = ObjectAnimator
-            .ofInt(binding.gameProgressBar, "progress", 100, 0)
+        binding.gameProgressBar.max = levelModel.time * 100
+        binding.gameProgressBar.progress = levelModel.time * 100
+        animation = ObjectAnimator.ofInt(binding.gameProgressBar, "progress", levelModel.time * 100, 0)
         animation.duration = (levelModel.time * 1000).toLong()
         animation.interpolator = AccelerateInterpolator()
     }
@@ -361,14 +350,17 @@ class GameFragment : DaggerFragment() {
             showEndGameDialog(statistics)
             playSound(MusicType.LOSE)
             showInertialVideoAd()
-            viewModel.writeGameStatistic(level.title, statistics)
-            viewModel.updateScore(score + statistics.score)
+
+            if(number != 0){
+                viewModel.writeGameStatistic(level.title, statistics)
+                viewModel.updateScore(score + statistics.score)
+            }
 
             stopSound()
         })
 
         animation.addUpdateListener {
-            binding.gameTime.text = it.animatedValue.toString()
+            binding.gameTime.text = (it.animatedValue.toString().toInt() / 100).toString()
         }
     }
 
@@ -388,6 +380,7 @@ class GameFragment : DaggerFragment() {
         if(levelId < levels.size){
             for(level in levels){
                 if(level.id == levelId){
+                    this.level = level
                     initProgressAnimator(level)
                     startGameDialog()
                     levelViewModel.fetchLevel(level.title)
@@ -408,7 +401,6 @@ class GameFragment : DaggerFragment() {
                         binding.levelProgressBar.visibility = View.GONE
 
                         hidePlaceholder()
-
                         drawLevel(result.data)
                         createKeyboardLevel(result.data)
                     }
@@ -436,6 +428,7 @@ class GameFragment : DaggerFragment() {
         for(emoji in list){
             if(emoji != null){
                 val emojiView = EmojiAppCompatEditText(requireContext())
+
                 emojiView.isFocusable = false
                 emojiView.isSingleLine = true
                 emojiView.maxEmojiCount = 1

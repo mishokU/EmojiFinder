@@ -6,13 +6,14 @@ import android.widget.Switch
 import androidx.core.content.ContextCompat
 import com.example.emojifinder.R
 import com.example.emojifinder.domain.prefs.SettingsPrefs
+import com.example.emojifinder.ui.baseDialog.BaseDialog
 import com.example.emojifinder.ui.main.MainActivity
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
 object ExitGameDialog {
 
-    lateinit var dialogView : Dialog
+    lateinit var dialogView : BaseDialog
     private lateinit var fragment: DaggerFragment
 
     fun create(fragment: DaggerFragment){
@@ -21,15 +22,9 @@ object ExitGameDialog {
     }
 
     private fun createDialog() {
-        dialogView = Dialog(fragment.requireContext(), R.style.CustomDialog)
+        dialogView = BaseDialog(fragment.requireContext(), R.style.CustomDialog)
         dialogView.setCancelable(false)
-
-        dialogView.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        dialogView.window!!.statusBarColor = ContextCompat.getColor(fragment.requireContext(), R.color.main_color)
         dialogView.setContentView(R.layout.exit_game_layout)
-        dialogView.window!!.setBackgroundDrawable(fragment.resources.getDrawable(R.color.alert_background_color));
-        dialogView.window!!.attributes.windowAnimations = R.anim.fragment_fade_enter
-
     }
 
     fun setMusicSwitcher(settingsPrefs: SettingsPrefs) {

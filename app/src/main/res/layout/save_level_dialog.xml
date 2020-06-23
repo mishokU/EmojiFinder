@@ -19,7 +19,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:background="@drawable/emoji_shop_top_place_style">
 
                 <TextView
@@ -27,6 +27,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/save_level"
                     android:textSize="22sp"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_centerInParent="true"
                     android:textColor="@color/background_color"/>
 
@@ -39,13 +40,14 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:hint="@string/name_your_level"
-                android:textColorHint="@color/main_color"
+                android:textColorHint="@color/first_color"
                 app:counterMaxLength="40"
                 app:counterEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/level_name"
                     android:layout_width="match_parent"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -56,11 +58,12 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:hint="@string/set_time_in_seconds"
-                android:textColorHint="@color/main_color">
+                android:textColorHint="@color/first_color">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/level_constructor_time"
                     android:layout_width="match_parent"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_height="wrap_content"
                     android:inputType="number"/>
 
@@ -77,6 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:text="@string/save_info"
                     app:backgroundTint="@color/green_color"
                     android:layout_weight="1"/>
@@ -85,6 +89,7 @@
                     android:id="@+id/cancel_save_level"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_marginStart="5dp"
                     android:text="@string/cancel"
                     app:rippleColor="@color/main_ripple_button_color"

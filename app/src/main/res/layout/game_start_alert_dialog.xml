@@ -33,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:textSize="36sp"
                 android:layout_marginBottom="50dp"/>
 
@@ -54,6 +55,7 @@
                     android:textAlignment="center"
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     app:backgroundTint="@color/blue_color"
                     android:textAllCaps="false"
                     android:textSize="30sp"
@@ -67,6 +69,7 @@
                     android:textAlignment="center"
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     app:backgroundTint="@color/blue_color"
                     android:textAllCaps="false"
                     android:textSize="22sp"

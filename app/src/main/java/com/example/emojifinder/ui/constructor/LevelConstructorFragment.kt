@@ -1,10 +1,12 @@
 package com.example.emojifinder.ui.constructor
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.children
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -248,7 +250,7 @@ class LevelConstructorFragment : DaggerFragment() {
 
     private fun changeGridStyle() {
         isGridActive = if(isGridActive){
-            setEmojiBackground(R.color.main_color)
+            setEmojiBackground(null)
             false
         } else {
             setEmojiBackground(R.drawable.stroke_fake)
@@ -265,12 +267,16 @@ class LevelConstructorFragment : DaggerFragment() {
         levelAdapter.resetOrder()
     }
 
-    private fun setEmojiBackground(background: Int) {
+    private fun setEmojiBackground(background: Int?) {
         for(i : Int in 0..99){
             val holder = binding.constructorLevelRv
                 .findViewHolderForAdapterPosition(i)
-            holder?.itemView?.emoji_constructor_btn?.background =
-                ContextCompat.getDrawable(requireContext(), background)
+            if(background != null){
+                holder?.itemView?.emoji_constructor_btn?.background =
+                    ContextCompat.getDrawable(requireContext(), background)
+            } else {
+                holder?.itemView?.emoji_constructor_btn?.background = null
+            }
         }
     }
 
@@ -315,9 +321,6 @@ class LevelConstructorFragment : DaggerFragment() {
         viewModel.constructorLevelResponse.observe(viewLifecycleOwner, Observer {
             it?.let {
                 when(it){
-                    is Result.Loading -> {
-
-                    }
                     is Result.Success -> {
                         levelAdapter.submitList(it.data)
                     }
@@ -334,6 +337,7 @@ class LevelConstructorFragment : DaggerFragment() {
         for(model in groups){
             val chip = Chip(requireContext())
             chip.text = model?.group
+            chip.typeface = ResourcesCompat.getFont(requireContext(), R.font.ru_eng_sriracha)
             chip.isChipIconVisible = true
             chip.isClickable = true
             chip.isCheckable = true

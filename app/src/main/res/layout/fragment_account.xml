@@ -13,26 +13,29 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.account.AccountFragment">
+        tools:context=".ui.account.AccountFragment"
+        android:background="@drawable/background_gradient">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/main_color">
+            android:layout_marginBottom="@dimen/margin_layout_bottom"
+            android:layout_marginTop="@dimen/margin_layout_top"
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_account"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="4dp"
-                android:layout_gravity="center"
-                android:gravity="start"
-                android:textAlignment="viewStart"
-                app:titleTextAppearance="@style/Toolbar.TitleText"
-                app:titleTextColor="@color/background_color"
-                app:title="@string/app_name"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:fontFamily="@font/ru_eng_sriracha"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:textAlignment="viewStart"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            app:titleTextColor="@color/background_color"
+            app:title="@string/app_name"/>
 
-        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -48,14 +51,15 @@
                 <RelativeLayout
                     android:id="@+id/go_to_main_info_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/main_color">
+                    android:layout_height="wrap_content">
 
                     <RelativeLayout
                         android:id="@+id/profile_place"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:focusable="true"
                         android:background="@drawable/ripple_color_account">
 
@@ -88,6 +92,7 @@
                                 android:textSize="22sp"
                                 android:ellipsize="end"
                                 android:maxLines="1"
+                                android:fontFamily="@font/ru_eng_sriracha"
                                 android:textColor="@color/background_color"
                                 android:text="@{profile.login}"/>
 
@@ -100,6 +105,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="18sp"
+                                    android:fontFamily="@font/ru_eng_sriracha"
                                     android:textColor="@color/background_color"
                                     android:text="@string/score"/>
 
@@ -108,6 +114,7 @@
                                     android:layout_height="wrap_content"
                                     android:textSize="18sp"
                                     android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/ru_eng_sriracha"
                                     android:textColor="@color/background_color"
                                     android:text="@{String.valueOf(profile.score)}"/>
 
@@ -141,6 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:visibility="gone"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:layout_centerInParent="true"
                         android:text="@string/some_error_ocure"/>
 
@@ -152,23 +160,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginStart="10dp">
 
                     <View
                         android:layout_width="6dp"
-                        android:layout_height="32dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
                         android:background="@drawable/divider_style"/>
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_color"
+                        android:layout_height="40dp"
+                        android:paddingBottom="-55dp"
+                        android:textColor="@color/background_color"
                         android:textSize="26sp"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:layout_marginStart="10dp"
                         android:layout_gravity="center"
-                        android:text="@string/level"/>
+                        android:text="@string/levels"/>
 
                     <Switch
                         android:id="@+id/level_state_switcher"
@@ -177,6 +188,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"
+                        android:textColorHighlight="@color/main_color"
                         android:textOn="@string/collapsed"
                         android:textOff="@string/expanded" />
 
@@ -186,6 +198,8 @@
                     android:id="@+id/levels_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
@@ -195,6 +209,8 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading_levels_account"
@@ -229,6 +245,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="@string/start"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:textAllCaps="false"
                 android:layout_gravity="center"
                 app:backgroundTint="@color/blue_color"/>
@@ -240,7 +257,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="bottom"
-            android:background="@color/main_color">
+            android:layout_marginBottom="@dimen/margin_layout_bottom"
+            android:background="@android:color/transparent">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/rating_btn"
@@ -248,6 +266,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/top"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:textColor="@color/background_color"
                 app:iconTint="@null"
                 app:iconSize="30dp"
@@ -263,7 +282,7 @@
             android:layout_height="wrap_content"
             app:adSize="BANNER"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="40dp"
             app:adUnitId="ca-app-pub-3940256099942544/6300978111"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

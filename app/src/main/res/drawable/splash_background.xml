@@ -2,7 +2,7 @@
 <layer-list
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:drawable="@color/main_color"/>
+    <item android:drawable="@drawable/background_gradient"/>
 
     <item
         android:gravity="center">

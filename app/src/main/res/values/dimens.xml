@@ -14,7 +14,7 @@
     <dimen name="emoji_medium_font">10sp</dimen>
     <dimen name="emoji_huge_font">8sp</dimen>
 
-
-
+    <dimen name="margin_layout_top">30dp</dimen>
+    <dimen name="margin_layout_bottom">35dp</dimen>
 
 </resources>

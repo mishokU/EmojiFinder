@@ -18,7 +18,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:background="@drawable/emoji_shop_top_place_style">
 
                 <TextView
@@ -27,6 +27,7 @@
                     android:text="@string/reset_level"
                     android:textSize="22sp"
                     android:layout_centerInParent="true"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:textColor="@color/background_color"/>
 
             </RelativeLayout>
@@ -38,10 +39,11 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:layout_marginStart="5dp"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:layout_marginEnd="5dp"
                 android:layout_marginTop="10dp"
                 android:textSize="22sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@color/first_color"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,6 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/reset"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     app:backgroundTint="@color/green_color"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
@@ -64,6 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/cancel"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_weight="1"
                     app:rippleColor="@color/main_ripple_button_color"
                     android:textColor="@color/main_ripple_button_color"

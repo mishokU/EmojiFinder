@@ -25,6 +25,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/warning"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:textSize="22sp"
                     android:layout_centerInParent="true"
                     android:textColor="@color/background_color"/>
@@ -37,11 +38,12 @@
                 android:text="@string/if_you_do_not_want_to_lose"
                 android:layout_gravity="center"
                 android:textAlignment="center"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginTop="10dp"
                 android:textSize="20sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@color/first_color"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
                     android:text="@string/save_info"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     app:backgroundTint="@color/green_color"
                     android:layout_weight="1"/>
 
@@ -62,6 +65,7 @@
                     android:id="@+id/leave_level_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_marginStart="5dp"
                     app:backgroundTint="@color/red_color"
                     android:text="@string/exit"

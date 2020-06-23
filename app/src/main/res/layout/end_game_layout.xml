@@ -8,42 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/upper_back_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="55dp"
-            android:paddingStart="10dp"
-            android:padding="0dp"
-            app:cornerRadius="12dp"
-            app:icon="@drawable/back_24px"
-            app:strokeColor="@color/main_color"
-            app:rippleColor="@color/main_ripple_button_color"
-            app:iconTint="@color/background_color"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:backgroundTint="@android:color/transparent"
-            tools:ignore="RtlSymmetry" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/upper_retry_button"
-            android:layout_width="50dp"
-            android:layout_marginTop="55dp"
-            android:layout_height="50dp"
-            app:icon="@drawable/icons8_synchronize_32px_1"
-            android:layout_marginEnd="10dp"
-            android:padding="0dp"
-            app:rippleColor="@color/main_ripple_button_color"
-            app:cornerRadius="12dp"
-            android:layout_gravity="end|top"
-            android:paddingStart="10dp"
-            app:strokeColor="@color/main_color"
-            app:iconTint="@color/background_color"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:backgroundTint="@android:color/transparent"
-            tools:ignore="RtlSymmetry" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,48 +24,16 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/green_color"
                 android:textSize="40sp"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:layout_marginBottom="20dp"
                 android:textAlignment="center"
                 android:text="@string/victory"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/first_end_game_star"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    app:lottie_scale="4"
-                    app:lottie_autoPlay="true"
-                    app:lottie_repeatCount="1"
-                    app:lottie_rawRes="@raw/star"/>
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/second_end_game_star"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    app:lottie_scale="4"
-                    app:lottie_autoPlay="true"
-                    app:lottie_repeatCount="1"
-                    app:lottie_rawRes="@raw/star"/>
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/third_end_game_star"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    app:lottie_scale="4"
-                    app:lottie_autoPlay="true"
-                    app:lottie_repeatCount="1"
-                    app:lottie_rawRes="@raw/star"/>
-
-            </LinearLayout>
-
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="70dp"
                 android:layout_marginBottom="20dp"
-                app:strokeColor="@color/light_main_color"
+                app:strokeColor="@color/light_orange_color"
                 app:strokeWidth="4dp"
                 app:cardBackgroundColor="@color/main_color"
                 app:cardCornerRadius="25dp">
@@ -117,6 +49,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:textSize="32sp"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:text="@string/score"/>
 
                     <TextView
@@ -124,6 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="20"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:layout_marginStart="10dp"
                         android:textColor="@android:color/white"
                         android:textSize="32sp"/>
@@ -134,9 +68,9 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="70dp"
                 app:cardBackgroundColor="@color/main_color"
-                app:strokeColor="@color/light_main_color"
+                app:strokeColor="@color/light_orange_color"
                 app:strokeWidth="4dp"
                 android:layout_marginBottom="20dp"
                 app:cardCornerRadius="25dp">
@@ -152,6 +86,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:textSize="32sp"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:text="@string/time"/>
 
                     <TextView
@@ -159,6 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="4:30"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:layout_marginStart="10dp"
                         android:textColor="@android:color/white"
                         android:textSize="32sp"/>
@@ -169,12 +105,12 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:cardBackgroundColor="@color/main_color"
-                app:strokeColor="@color/light_main_color"
-                app:strokeWidth="4dp"
+                android:layout_height="70dp"
                 android:layout_marginBottom="20dp"
-                app:cardCornerRadius="25dp">
+                app:cardBackgroundColor="@color/main_color"
+                app:cardCornerRadius="25dp"
+                app:strokeColor="@color/light_orange_color"
+                app:strokeWidth="4dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -185,18 +121,20 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/mistakes"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:textColor="@android:color/white"
-                        android:textSize="32sp"
-                        android:text="@string/mistakes"/>
+                        android:textSize="32sp" />
 
                     <TextView
                         android:id="@+id/game_result_mistakes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20"
                         android:layout_marginStart="10dp"
+                        android:text="20"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:textColor="@android:color/white"
-                        android:textSize="32sp"/>
+                        android:textSize="32sp" />
 
                 </LinearLayout>
 
@@ -204,10 +142,10 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="70dp"
                 app:cardBackgroundColor="@color/main_color"
-                android:layout_marginBottom="20dp"
-                app:strokeColor="@color/light_main_color"
+                android:layout_marginBottom="10dp"
+                app:strokeColor="@color/light_orange_color"
                 app:strokeWidth="4dp"
                 app:cardCornerRadius="25dp">
 
@@ -222,6 +160,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:textSize="32sp"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:text="@string/game_level"/>
 
                     <TextView
@@ -240,31 +179,56 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/try_again_btn"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:layout_height="60dp"
+                        android:textSize="20sp"
+                        app:cornerRadius="10dp"
+                        app:backgroundTint="@color/blue_color"
+                        android:text="@string/try_again" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/next_level_btn"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:textAllCaps="false"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/next_level"
+                        app:backgroundTint="@color/blue_color"
+                        app:cornerRadius="10dp"/>
+
+                </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/try_again_btn"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:id="@+id/exit_end_btn"
+                    android:layout_width="150dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:textAllCaps="false"
+                    android:layout_gravity="center"
                     android:layout_height="60dp"
+                    android:textSize="20sp"
                     app:cornerRadius="10dp"
                     app:backgroundTint="@color/blue_color"
-                    android:text="@string/try_again" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/next_level_btn"
-                    android:layout_weight="1"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:textAllCaps="false"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/next_level"
-                    app:backgroundTint="@color/blue_color"
-                    app:cornerRadius="10dp"/>
+                    android:text="@string/exit" />
 
             </LinearLayout>
 

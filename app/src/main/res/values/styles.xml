@@ -14,11 +14,15 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/main_color</item>
+        <item name="android:statusBarColor">#B301BCEF</item>
         <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button</item>
-        <item name="android:navigationMode">tabMode</item>
+        <item name="android:windowTranslucentNavigation">true</item>
         <item name="colorControlNormal">@color/background_color</item>
-        <item name="android:navigationBarColor">@color/main_color</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="CustomTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/sriracha</item>
     </style>
 
     <style name="CustomMaterialButton" parent="Widget.MaterialComponents.Button">

@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.os.Handler
 import android.view.Window
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -15,12 +16,11 @@ import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
-import com.google.android.gms.ads.InterstitialAd
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 import java.util.*
 
-class ShowStartGameButton() {
+class ShowStartGameButton {
 
     lateinit var dialogView : Dialog
     private lateinit var fragment: DaggerFragment
@@ -110,8 +110,10 @@ class ShowStartGameButton() {
 
         back.setOnClickListener {
             if(backToLevels){
-                dialogView.dismiss()
                 fragment.findNavController().navigateUp()
+                Handler().postDelayed({
+                    dialogView.dismiss()
+                }, 100)
             }
         }
     }

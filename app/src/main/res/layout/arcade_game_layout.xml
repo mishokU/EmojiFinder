@@ -14,12 +14,14 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_color"
+        android:background="@drawable/background_gradient"
         tools:context=".ui.game.campaign.gameAlerts.GameFragment">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_layout_top"
+            android:layout_marginBottom="@dimen/margin_layout_bottom">
 
             <RelativeLayout
                 android:id="@+id/progress_bar_place"
@@ -64,7 +66,7 @@
                     android:paddingStart="10dp"
                     android:padding="0dp"
                     app:icon="@drawable/back_24px"
-                    app:strokeColor="@color/main_color"
+                    app:strokeColor="@null"
                     app:rippleColor="@color/main_ripple_button_color"
                     app:iconTint="@color/background_color"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -79,6 +81,7 @@
                     android:layout_toStartOf="@id/game_restart_button"
                     android:layout_centerVertical="true"
                     android:textSize="26sp"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:textColor="@color/background_color"
                     android:textAlignment="center"
                     android:text="@string/find_all_emojis"/>
@@ -95,7 +98,7 @@
                     app:cornerRadius="12dp"
                     android:paddingStart="10dp"
                     android:layout_alignParentEnd="true"
-                    app:strokeColor="@color/main_color"
+                    app:strokeColor="@null"
                     app:iconTint="@color/background_color"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     app:backgroundTint="@android:color/transparent" />

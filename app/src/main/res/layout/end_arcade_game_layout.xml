@@ -25,15 +25,16 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/background_color"
                 android:textSize="40sp"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:layout_marginBottom="40dp"
                 android:textAlignment="center"
-                android:text="Game End !"/>
+                android:text="@string/game_end"/>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="70dp"
                 android:layout_marginBottom="20dp"
-                app:strokeColor="@color/light_main_color"
+                app:strokeColor="@color/light_orange_color"
                 app:strokeWidth="4dp"
                 app:cardBackgroundColor="@color/main_color"
                 app:cardCornerRadius="25dp">
@@ -47,15 +48,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/score"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:textColor="@android:color/white"
-                        android:textSize="32sp"
-                        android:text="@string/score"/>
+                        android:textSize="32sp" />
 
                     <TextView
                         android:id="@+id/game_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:layout_marginStart="10dp"
                         android:textColor="@android:color/white"
                         android:textSize="32sp"/>
@@ -66,10 +70,10 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="70dp"
                 app:cardBackgroundColor="@color/main_color"
                 android:layout_marginBottom="20dp"
-                app:strokeColor="@color/light_main_color"
+                app:strokeColor="@color/light_orange_color"
                 app:strokeWidth="4dp"
                 app:cardCornerRadius="25dp">
 
@@ -84,6 +88,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:textSize="32sp"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:text="@string/emos"/>
 
                     <TextView
@@ -91,6 +96,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:layout_marginStart="10dp"
                         android:textColor="@android:color/white"
                         android:textSize="32sp"/>
@@ -113,6 +119,7 @@
                     android:textAllCaps="false"
                     android:layout_height="60dp"
                     app:cornerRadius="10dp"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     app:backgroundTint="@color/blue_color"
                     android:text="@string/try_again" />
 
@@ -122,6 +129,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     app:cornerRadius="10dp"
                     android:textAllCaps="false"
                     android:layout_marginStart="5dp"

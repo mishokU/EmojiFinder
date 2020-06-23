@@ -14,7 +14,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_color"
+        android:background="@drawable/background_gradient"
         tools:context=".ui.auth.signin.SignInFragment">
 
         <androidx.core.widget.NestedScrollView
@@ -46,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:textAllCaps="false"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:layout_marginBottom="10dp"
                 android:text="@string/login"
                 android:textSize="16sp"
@@ -123,6 +124,7 @@
                 app:rippleColor="@color/main_ripple_button_color"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:textColor="@color/background_color"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:text="@string/create_account"
                 android:textSize="20sp"
                 android:textAllCaps="false"
@@ -156,6 +158,7 @@
                 android:textColor="@color/background_color"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:layout_toEndOf="@id/language_iv"
                 android:text="@string/language"/>
 
@@ -182,6 +185,7 @@
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/background_color"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:layout_marginStart="5dp"
                 android:text="@string/help"/>
 

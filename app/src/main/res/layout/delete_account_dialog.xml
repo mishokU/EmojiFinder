@@ -9,7 +9,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="220dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_gravity="center"
@@ -18,7 +18,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:background="@drawable/emoji_shop_top_place_style">
 
                 <TextView
@@ -26,6 +26,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/delete_account"
                     android:textSize="22sp"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_centerInParent="true"
                     android:textColor="@color/background_color"/>
 
@@ -39,9 +40,11 @@
                 android:textAlignment="center"
                 android:text="@string/delete_account_message"
                 android:layout_gravity="center"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:includeFontPadding="false"
                 android:layout_marginTop="10dp"
                 android:textSize="22sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@color/first_color"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,6 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/yes"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_marginEnd="5dp"
                     app:backgroundTint="@color/green_color"
                     android:layout_weight="1"
@@ -64,6 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/cancel"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
                     app:strokeWidth="3dp"
