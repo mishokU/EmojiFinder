@@ -17,6 +17,9 @@ class FirebaseAuthHandler : Auth, FirebaseInit() {
     override suspend fun logIn(data : LoginModel) : Result<AuthResult> {
         return try {
             val result = mAuth.signInWithEmailAndPassword(data.email, data.password).await()
+
+            downloadLanguage()
+
             Result.Success(result)
         }catch (e : Exception){
             Result.Error(e)

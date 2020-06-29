@@ -162,5 +162,7 @@
     <string name="huge_pack">Huge Pack</string>
     <string name="game_end">Game End !</string>
     <string name="levels">Levels</string>
+    <string name="claim">CLAIM 2X</string>
+    <string name="claim_simple">claim</string>
 
 </resources>

@@ -176,5 +176,11 @@ class AccountViewModel @Inject constructor(
             userMainData.updateScore(score)
         }
     }
+
+    fun updateUserEmojis(emojisCount: Int) {
+        coroutineScope.launch {
+            userMainData.updateEmojis(emojisCount)
+        }
+    }
 }
 

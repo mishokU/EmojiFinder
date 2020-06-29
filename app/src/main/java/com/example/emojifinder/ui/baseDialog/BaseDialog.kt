@@ -6,6 +6,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.alpha
 import com.example.emojifinder.R
 
 var ui_flags: Int = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
@@ -23,9 +24,10 @@ open class BaseDialog(context: Context, customDialog: Int) : Dialog(context, cus
 
     private fun setWindowConfig() {
         window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        window!!.statusBarColor = ContextCompat.getColor(context, R.color.alert_background_color)
-        window!!.navigationBarColor = ContextCompat.getColor(context, R.color.alert_background_color)
-        window!!.setBackgroundDrawable(context.resources.getDrawable(R.color.alert_background_color))
+        window!!.statusBarColor = ContextCompat.getColor(context, android.R.color.transparent)
+        window!!.navigationBarColor = ContextCompat.getColor(context, android.R.color.transparent)
+        window!!.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        window!!.attributes.windowAnimations = android.R.anim.slide_in_left
     }
 
     override fun show() {

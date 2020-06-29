@@ -156,11 +156,16 @@
                                 android:layout_centerInParent="true"
                                 android:layout_gravity="center">
 
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:layout_marginEnd="4dp"
+                                <androidx.emoji.widget.EmojiAppCompatEditText
+                                    android:id="@+id/emos_et"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
                                     android:layout_gravity="center"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    android:textSize="20sp"
+                                    android:background="@null"
                                     android:src="@drawable/emos_pic"/>
 
                                 <TextView
@@ -191,12 +196,15 @@
                                 android:layout_centerInParent="true"
                                 android:layout_gravity="center">
 
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:layout_marginEnd="5dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/icons8_happy_96px"/>
+                                <androidx.emoji.widget.EmojiAppCompatEditText
+                                    android:id="@+id/emoji_et"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    android:background="@null"
+                                    android:layout_gravity="center" />
 
                                 <TextView
                                     android:id="@+id/emojis_count"
@@ -226,12 +234,15 @@
                                 android:layout_centerInParent="true"
                                 android:layout_gravity="center">
 
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_marginEnd="4dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/icons8_closed_treasure_chest_128px"/>
+                                <androidx.emoji.widget.EmojiAppCompatEditText
+                                    android:id="@+id/emoji_box_et"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:background="@null"
+                                    android:layout_marginEnd="10dp"
+                                    android:focusable="false"
+                                    android:layout_gravity="center" />
 
                             <TextView
                                 android:id="@+id/boxes_count"

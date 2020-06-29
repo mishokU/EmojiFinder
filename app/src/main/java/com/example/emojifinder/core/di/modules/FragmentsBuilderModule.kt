@@ -11,6 +11,7 @@ import com.example.emojifinder.ui.auth.signin.SignInFragment
 import com.example.emojifinder.ui.boxes.LootBoxesFragment
 import com.example.emojifinder.ui.categories.CategoryGameFragment
 import com.example.emojifinder.ui.constructor.LevelConstructorFragment
+import com.example.emojifinder.ui.daily.DailyWinningsFragment
 import com.example.emojifinder.ui.game.arcade.ArcadeGameFragment
 import com.example.emojifinder.ui.game.campaign.gameAlerts.GameFragment
 import com.example.emojifinder.ui.help.HelpFragment
@@ -20,6 +21,7 @@ import com.example.emojifinder.ui.levels.YourLevelsFragment
 import com.example.emojifinder.ui.localization.LocalizeAppFragment
 import com.example.emojifinder.ui.main.MainMenuFragment
 import com.example.emojifinder.ui.rating.RatingFragment
+import com.example.emojifinder.ui.settings.LogOutFragment
 import com.example.emojifinder.ui.shop.ShopFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -89,5 +91,11 @@ abstract class FragmentsBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeShopFragment() : ShopFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeDailyFragment() : DailyWinningsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeLogOutFragment() : LogOutFragment
 
 }

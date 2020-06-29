@@ -88,6 +88,9 @@ class SettingsFragment : DaggerFragment() {
         viewModel = injectViewModel(viewModelFactory)
         binding.exitBtn.setOnClickListener {
             LogOutDialog.open()
+            //this.findNavController().navigate(R.id.logOutFragment)
+//            val logOutFragment = LogOutFragment()
+//           logOutFragment.show()
         }
         binding.deleteAccountBtn.setOnClickListener {
             DeleteAccountDialog.open()

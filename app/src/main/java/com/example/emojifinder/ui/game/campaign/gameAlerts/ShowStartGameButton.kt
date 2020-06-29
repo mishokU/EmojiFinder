@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.example.emojifinder.R
+import com.example.emojifinder.ui.baseDialog.BaseDialog
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
@@ -22,7 +23,7 @@ import java.util.*
 
 class ShowStartGameButton {
 
-    lateinit var dialogView : Dialog
+    lateinit var dialogView : BaseDialog
     private lateinit var fragment: DaggerFragment
     private lateinit var count : LottieAnimationView
     private lateinit var start : MaterialButton
@@ -38,13 +39,9 @@ class ShowStartGameButton {
 
         this.fragment = fragment
 
-        dialogView = Dialog(fragment.requireContext(), R.style.CustomDialog)
+        dialogView = BaseDialog(fragment.requireContext(), R.style.CustomDialog)
         dialogView.setCancelable(false)
-
-        dialogView.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        dialogView.window!!.statusBarColor = ContextCompat.getColor(fragment.requireContext(), R.color.main_color)
         dialogView.setContentView(R.layout.game_start_alert_dialog)
-        dialogView.window!!.setBackgroundDrawable(fragment.resources.getDrawable(R.color.alert_background_color));
 
         setGameTitle(level)
         initStartButton()
@@ -104,7 +101,6 @@ class ShowStartGameButton {
                 initAnimation()
                 firstPlay = false
                 backToLevels = false
-
             }
         }
 

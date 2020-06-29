@@ -161,4 +161,9 @@
     <string name="emoji_shop">Emoji shop</string>
     <string name="game_end">Game End !</string>
     <string name="levels">Levels</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="claim">CLAIM 2x</string>
+    <string name="claim_simple">claim</string>
 </resources>

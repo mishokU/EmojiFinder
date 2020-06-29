@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/gameFragment">
+    app:startDestination="@id/dailyWinningsFragment">
 
     <fragment
         android:id="@+id/gameFragment"
@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_mainMenuFragment_to_shopFragment"
             app:destination="@id/shopFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_dailyWinningsFragment"
+            app:destination="@id/dailyWinningsFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -101,6 +104,12 @@
             android:id="@+id/action_accountFragment_to_ratingFragment"
             app:destination="@id/ratingFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/logOutFragment"
+        android:name="com.example.emojifinder.ui.settings.LogOutFragment"
+        android:label="LogOutFragment" />
+
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.emojifinder.ui.settings.SettingsFragment"
@@ -112,6 +121,11 @@
         <action
             android:id="@+id/action_settingsFragment_to_yourLevelsFragment"
             app:destination="@id/yourLevelsFragment" />
+
+        <action
+            android:id="@+id/action_settingsFragment_to_logOutFragment"
+            app:destination="@id/logOutFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
@@ -241,4 +255,21 @@
         android:name="com.example.emojifinder.ui.shop.ShopFragment"
         android:label="fragment_shop"
         tools:layout="@layout/fragment_shop" />
+    <fragment
+        android:id="@+id/dailyWinningsFragment"
+        android:name="com.example.emojifinder.ui.daily.DailyWinningsFragment"
+        android:label="fragment_daily_winnings"
+        tools:layout="@layout/fragment_daily_winnings" >
+
+        <argument
+            android:name="Daily"
+            app:argType="com.example.emojifinder.ui.daily.DailyUI"/>
+
+        <action
+            android:id="@+id/action_dailyWinningsFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+
+
+    </fragment>
+
 </navigation>

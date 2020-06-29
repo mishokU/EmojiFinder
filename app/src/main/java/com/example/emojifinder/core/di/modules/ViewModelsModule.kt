@@ -68,4 +68,9 @@ abstract class ViewModelsModule {
     @ViewModelKey(ConstructorViewModel::class)
     abstract fun bindLevelConstructor(viewModel: ConstructorViewModel) : ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(DailyViewModel::class)
+    abstract fun bindDailyViewModel(viewModel : DailyViewModel) : ViewModel
+
 }

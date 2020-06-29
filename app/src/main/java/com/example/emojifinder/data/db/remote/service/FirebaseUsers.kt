@@ -1,6 +1,5 @@
 package com.example.emojifinder.data.db.remote.service
 
-import android.util.Log
 import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.domain.result.Result
 import com.google.firebase.firestore.Query

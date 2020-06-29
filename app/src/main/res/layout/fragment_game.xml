@@ -197,15 +197,22 @@
                 android:layout_below="@id/top_place"
                 android:layout_above="@id/scroll_finder_field">
 
-                <androidx.gridlayout.widget.GridLayout
-                    android:id="@+id/game_emoji_field"
+                <ScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:alpha="1"
-                    app:alignmentMode="alignMargins"
-                    app:columnCount="10"
-                    app:rowCount="10" />
+                    android:layout_centerInParent="true">
+
+                    <androidx.gridlayout.widget.GridLayout
+                        android:id="@+id/game_emoji_field"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:alpha="1"
+                        app:alignmentMode="alignMargins"
+                        app:columnCount="10"
+                        app:rowCount="10" />
+
+                </ScrollView>
 
             </RelativeLayout>
 

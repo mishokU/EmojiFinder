@@ -23,6 +23,10 @@ class ShopViewModel @Inject constructor(
     val emojisResponse : LiveData<Result<List<EmojiShopModel?>>>
         get() = _emojisResponse
 
+    private val _emojisDailyResponse = MutableLiveData<Result<List<EmojiShopModel?>>>()
+    val emojisDailyResponse : LiveData<Result<List<EmojiShopModel?>>>
+        get() = _emojisDailyResponse
+
     init {
         loadEmojisFromJson()
     }
@@ -33,9 +37,20 @@ class ShopViewModel @Inject constructor(
                 _emojisResponse.value = Result.Loading
             }
             val emojis = shopEmojiService.fetchEmojis()
-
             withContext(Dispatchers.Main) {
                 _emojisResponse.value = emojis
+            }
+        }
+    }
+
+    fun loadDailyEmojisFromJson() {
+        coroutineScope.launch {
+            withContext(Dispatchers.Main) {
+                _emojisDailyResponse.value = Result.Loading
+            }
+            val emojis = shopEmojiService.fetchDailyEmojis()
+            withContext(Dispatchers.Main) {
+                _emojisDailyResponse.value = emojis
             }
         }
     }

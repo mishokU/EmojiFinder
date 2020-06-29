@@ -36,8 +36,4 @@ class FirebaseLevelStatisticImpl : FirebaseInit() {
             Result.Error(e)
         }
     }
-
-    fun update(score: Int) {
-
-    }
 }

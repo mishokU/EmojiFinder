@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
@@ -27,7 +28,6 @@ class MainActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
     private lateinit var navigation : NavController
     private lateinit var navGraph: NavGraph
     private lateinit var binding : ActivityMainBinding
@@ -42,10 +42,14 @@ class MainActivity : DaggerAppCompatActivity() {
         val navHostFragment = nav_host_fragment as NavHostFragment
         val graphInflater = navHostFragment.navController.navInflater
 
+
+
         navGraph = graphInflater.inflate(R.navigation.navigation)
         navigation = navHostFragment.navController
         navGraph.startDestination = intent.getIntExtra("destination", R.id.signInFragment)
         navigation.graph = navGraph
+
+
 
         initMediaPlayer()
         playBackgroundMusic()

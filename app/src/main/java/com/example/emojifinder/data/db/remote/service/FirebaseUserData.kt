@@ -179,4 +179,13 @@ class FirebaseUserData : FirebaseInit() {
             .update("boxes", boxes)
 
     }
+
+    fun updateEmojis(emojisCount: Int) {
+        mFireStore
+            .collection("users")
+            .document(mAuth.uid!!)
+            .collection("values")
+            .document("data")
+            .update("emojis", emojisCount)
+    }
 }

@@ -12,6 +12,7 @@ import com.example.emojifinder.data.prefs.PreferenceStorage
 import com.example.emojifinder.data.prefs.SharedPreferenceStorage
 import com.example.emojifinder.core.di.utils.CoroutineScopeMain
 import com.example.emojifinder.data.db.local.emoji_json.ShopEmojiService
+import com.example.emojifinder.data.db.local.fake.FakeDailyItems
 import com.example.emojifinder.data.db.local.fake.LevelConstructorService
 import com.example.emojifinder.data.db.local.room.database.LevelsDatabase
 import com.example.emojifinder.data.db.remote.api.FirebaseLevels
@@ -120,6 +121,10 @@ class AppModule {
     @Singleton
     @Provides
     fun provideFirebaseUsers() : FirebaseUsers = FirebaseUsers()
+
+    @Singleton
+    @Provides
+    fun provideFakeDaily() : FakeDailyItems = FakeDailyItems()
 
     @CoroutineScopeIO
     @Provides

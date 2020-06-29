@@ -68,6 +68,7 @@
                         android:id="@+id/email_log_in"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
                         android:textColor="@color/background_color"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -86,6 +87,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
+                        android:maxLines="1"
                         android:textColor="@color/background_color"/>
 
                 </com.google.android.material.textfield.TextInputLayout>

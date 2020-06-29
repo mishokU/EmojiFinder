@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import androidx.activity.OnBackPressedCallback
 import androidx.core.animation.addListener
-import androidx.core.content.res.ResourcesCompat
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.widget.EmojiAppCompatEditText
 import androidx.gridlayout.widget.GridLayout
@@ -35,6 +34,7 @@ import com.example.emojifinder.domain.viewModels.GameViewModel
 import com.example.emojifinder.shared.utils.Emoji
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.example.emojifinder.ui.main.MainActivity
+import com.example.emojifinder.ui.utils.MyAnimatorListener
 import com.example.emojifinder.ui.utils.ScaleGesture
 import com.example.emojifinder.ui.utils.ScreenSize
 import com.google.android.gms.ads.AdRequest
@@ -93,6 +93,9 @@ class GameFragment : DaggerFragment() {
 
         viewModel = injectViewModel(viewModelFactory)
         levelViewModel = injectViewModel(levelViewModelFactory)
+
+        CampaignGameHint.create(this)
+
 
         interstitialAd = InterstitialAd(requireContext())
 
@@ -178,9 +181,9 @@ class GameFragment : DaggerFragment() {
 
     private fun startGameDialog() {
         if(!gameHint.isHintShown()){
-            GameDialogs.showStartDialog(this, level)
-            GameDialogs.getStartGameButton().setOnClickListener {
-                GameDialogs.alert.dismiss()
+            CampaignGameHint.show(level)
+            CampaignGameHint.getStartGameButton().setOnClickListener {
+                CampaignGameHint.dialogView.dismiss()
                 ShowStartGameButton.playCounter()
             }
             gameHint.isHintShown(true)
@@ -195,16 +198,12 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun initStartCircleEndAnimation(){
-        ShowStartGameButton.countListener().addAnimatorListener(object : Animator.AnimatorListener{
+        ShowStartGameButton.countListener().addAnimatorListener(object : MyAnimatorListener() {
             override fun onAnimationEnd(animation: Animator?) {
+                super.onAnimationEnd(animation)
                 ShowStartGameButton.dialogView.dismiss()
                 startTimer()
             }
-            override fun onAnimationRepeat(animation: Animator?) {}
-
-            override fun onAnimationCancel(animation: Animator?) {}
-
-            override fun onAnimationStart(animation: Animator?) {}
         })
     }
 

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="values"
+            type="com.example.emojifinder.data.db.remote.models.account.AccountValuesModel" />
+    </data>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.daily.DailyWinningsFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_layout_top"
+            android:layout_marginBottom="@dimen/margin_layout_bottom"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center"
+                android:layout_margin="20dp"
+                android:layout_marginEnd="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/loading_values_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        app:lottie_autoPlay="true"
+                        android:layout_weight="1"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/loading_values"/>
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/loading_values_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/loading_values"/>
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/loading_values_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        app:lottie_autoPlay="true"
+                        android:layout_weight="1"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/loading_values"/>
+
+                </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/values_place"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="30dp">
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                android:padding="2dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center">
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emos_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_gravity="center"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:background="@null"
+                        android:src="@drawable/emos_pic"/>
+
+                    <TextView
+                        android:id="@+id/emos_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:textColor="@color/first_color"
+                        android:layout_gravity="center"
+                        android:text="@{String.valueOf(values.emos)}"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                android:padding="2dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center">
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emoji_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:background="@null"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:id="@+id/emojis_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:textColor="@color/first_color"
+                        android:layout_gravity="center"
+                        android:text="@{String.valueOf(values.emojis)}"/>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="2dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center">
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emoji_box_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:background="@null"
+                        android:layout_marginEnd="10dp"
+                        android:focusable="false"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:id="@+id/boxes_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:textColor="@color/first_color"
+                        android:layout_gravity="center"
+                        android:text="@{String.valueOf(values.boxes)}"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/days_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="24sp"
+                android:text="DAY 1"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:textColor="@color/first_color"/>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/daily_winnings_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:spanCount="5"
+                    tools:listitem="@layout/daily_item"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+
+                <LinearLayout
+                    android:id="@+id/emojis_daily_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"
+                    android:layout_centerInParent="true">
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/first_daily_emoji"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="10dp"
+                        android:visibility="gone"
+                        android:textAlignment="center"
+                        android:background="@drawable/winner_emoji_style"
+                        android:textSize="24sp"/>
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/second_daily_emoji"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="10dp"
+                        android:visibility="gone"
+                        android:textAlignment="center"
+                        android:background="@drawable/winner_emoji_style"
+                        android:textSize="24sp"/>
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/third_daily_emoji"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="10dp"
+                        android:visibility="gone"
+                        android:textAlignment="center"
+                        android:background="@drawable/winner_emoji_style"
+                        android:textSize="24sp"/>
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/fourth_daily_emoji"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="10dp"
+                        android:visibility="gone"
+                        android:textAlignment="center"
+                        android:background="@drawable/winner_emoji_style"
+                        android:textSize="24sp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/double_claim_btn"
+                android:layout_width="200dp"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                app:backgroundTint="@color/green_color"
+                app:cornerRadius="10dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/ru_eng_sriracha"
+                app:icon="@drawable/icons8_movie_projector_32px"
+                android:text="@string/claim"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/claim_btn"
+                android:layout_width="150dp"
+                app:cornerRadius="10dp"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:text="@string/claim_simple"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

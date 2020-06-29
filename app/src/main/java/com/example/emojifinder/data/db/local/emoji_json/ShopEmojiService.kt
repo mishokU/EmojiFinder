@@ -24,4 +24,16 @@ class ShopEmojiService @Inject constructor(val application : Application) {
         }
     }
 
+    fun fetchDailyEmojis() : Result<List<EmojiShopModel>> {
+        return try {
+            val jsonFileString = getJsonDataFromAsset(application, "emoji_daily.json")
+            val gson = Gson()
+            val listEmojiType = object : TypeToken<List<EmojiShopModel>>() {}.type
+            val emojis: List<EmojiShopModel> = gson.fromJson(jsonFileString, listEmojiType)
+            Result.Success(emojis)
+        } catch (e : Exception){
+            Result.Error(e)
+        }
+    }
+
 }

@@ -10,6 +10,7 @@ import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.data.db.remote.models.account.AccountValuesModel
 import com.example.emojifinder.databinding.FragmentShopBinding
+import com.example.emojifinder.domain.adds.MyRewardedVideoListener
 import com.example.emojifinder.domain.adds.REWARDED_VIDEO_ID
 import com.example.emojifinder.domain.payment.*
 import com.example.emojifinder.domain.result.Result
@@ -121,26 +122,10 @@ class ShopFragment : DaggerFragment() {
 
     private fun initRewardedAd() {
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(requireContext())
-        mRewardedVideoAd.rewardedVideoAdListener = object : RewardedVideoAdListener {
-
-            override fun onRewardedVideoAdClosed() {}
-
-            override fun onRewardedVideoAdLeftApplication() {}
-
-            override fun onRewardedVideoAdLoaded() {}
-
-            override fun onRewardedVideoAdOpened() {}
-
-            override fun onRewardedVideoCompleted() {
-            }
-
+        mRewardedVideoAd.rewardedVideoAdListener = object : MyRewardedVideoListener() {
             override fun onRewarded(p0: RewardItem?) {
                 viewModel.updateUserBoxes(values.boxes + 1)
             }
-
-            override fun onRewardedVideoStarted() {}
-
-            override fun onRewardedVideoAdFailedToLoad(p0: Int) {}
         }
 
         mRewardedVideoAd.loadAd(

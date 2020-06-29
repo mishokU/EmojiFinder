@@ -5,12 +5,13 @@ import android.view.Window
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
+import com.example.emojifinder.ui.baseDialog.BaseDialog
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
 object ExitLevelDialog {
 
-    lateinit var dialogView : Dialog
+    lateinit var dialogView : BaseDialog
     private lateinit var fragment: DaggerFragment
     private lateinit var close : MaterialButton
 
@@ -20,15 +21,9 @@ object ExitLevelDialog {
     }
 
     private fun createDialog() {
-        dialogView = Dialog(fragment.requireContext(), R.style.CustomDialog)
+        dialogView = BaseDialog(fragment.requireContext(), R.style.CustomDialog)
         dialogView.setCancelable(false)
-
-        dialogView.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        dialogView.window!!.statusBarColor = ContextCompat.getColor(fragment.requireContext(), R.color.main_color)
         dialogView.setContentView(R.layout.leave_constructor_dialog)
-        dialogView.window!!.setBackgroundDrawable(fragment.resources.getDrawable(R.color.alert_background_color));
-        dialogView.window!!.attributes.windowAnimations = R.anim.fragment_fade_enter
-
         close()
     }
 

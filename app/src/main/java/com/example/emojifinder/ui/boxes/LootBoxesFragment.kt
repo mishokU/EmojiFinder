@@ -24,6 +24,7 @@ import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.data.db.remote.models.account.AccountValuesModel
 import com.example.emojifinder.databinding.FragmentLootBoxesBinding
+import com.example.emojifinder.domain.adds.MyRewardedVideoListener
 import com.example.emojifinder.domain.adds.REWARDED_VIDEO_ID
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.sounds.MusicType
@@ -102,31 +103,18 @@ class LootBoxesFragment : DaggerFragment() {
 
     private fun initRewardedAd() {
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(requireContext())
-        mRewardedVideoAd.rewardedVideoAdListener = object : RewardedVideoAdListener {
-
-            override fun onRewardedVideoAdClosed() {}
-
-            override fun onRewardedVideoAdLeftApplication() {}
-
-            override fun onRewardedVideoAdLoaded() {}
-
+        mRewardedVideoAd.rewardedVideoAdListener = object : MyRewardedVideoListener() {
             override fun onRewardedVideoAdOpened() {
+                super.onRewardedVideoAdOpened()
                 mRewardedVideoAd.loadAd(
                     REWARDED_VIDEO_ID,
                     AdRequest.Builder().build())
             }
-
-            override fun onRewardedVideoCompleted() {
-            }
-
             override fun onRewarded(p0: RewardItem?) {
+                super.onRewarded(p0)
                 viewModel.updateUserBoxes(values.boxes + 1)
                 binding.boxesCount.text = (binding.boxesCount.text.toString().toInt() + 1).toString()
             }
-
-            override fun onRewardedVideoStarted() {}
-
-            override fun onRewardedVideoAdFailedToLoad(p0: Int) {}
         }
 
         mRewardedVideoAd.loadAd(
@@ -239,7 +227,6 @@ class LootBoxesFragment : DaggerFragment() {
 
             openChestPlaceholder(boxPlace, openChestPlaceholder)
         }
-
     }
 
     private fun initOpenBoxButton() {

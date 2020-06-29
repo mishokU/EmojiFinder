@@ -32,30 +32,37 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:orientation="vertical"
-                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-
-                <TextView
-                    android:id="@+id/problem_title"
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ru_eng_sriracha"
-                    android:textSize="30sp"/>
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/answer_to_problem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ru_eng_sriracha"
-                    android:layout_marginTop="20dp"
-                    android:textSize="16sp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:orientation="vertical"
+                        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/problem_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ru_eng_sriracha"
+                            android:textSize="30sp"/>
+
+                        <TextView
+                            android:id="@+id/answer_to_problem"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ru_eng_sriracha"
+                            android:layout_marginTop="20dp"
+                            android:textSize="16sp"/>
+
+                    </LinearLayout>
+
+                </ScrollView>
+
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>

@@ -36,7 +36,7 @@
     <string name="level">Уровни</string>
     <string name="start_the_game">Начать игру</string>
     <string name="hint">Подсказка</string>
-    <string name="game_hint">Цель игры: найти одинаковые эмодзи по порядку, первый выделенный</string>
+    <string name="game_hint">Цель игры: найти одинаковые эмодзи по порядку выделимости за </string>
     <string name="start_game">Начать игру</string>
     <string name="exit_game_text">Если вы выйдете сейчас, вы потеряете весь прогресс</string>
     <string name="finish">Завершить</string>
@@ -165,5 +165,7 @@
     <string name="huge_pack">Huge Pack</string>
     <string name="game_end">Конец игры !</string>
     <string name="levels">Уровни</string>
+    <string name="claim">CLAIM</string>
+    <string name="claim_simple">claim</string>
 
 </resources>

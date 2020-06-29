@@ -1,5 +1,6 @@
 package com.example.emojifinder.ui.main
 
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,15 +11,21 @@ import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.databinding.FragmentMainMenuBinding
 import com.example.emojifinder.domain.adds.BANNER_ID
+import com.example.emojifinder.domain.prefs.DailyWinningsPrefs
 import com.example.emojifinder.shared.utils.Emoji
+import com.example.emojifinder.ui.daily.DailyUI
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 
 class MainMenuFragment : DaggerFragment() {
 
     lateinit var binding : FragmentMainMenuBinding
+
+    @Inject
+    lateinit var daily : DailyWinningsPrefs
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,13 +33,25 @@ class MainMenuFragment : DaggerFragment() {
     ): View? {
         binding = FragmentMainMenuBinding.inflate(inflater)
 
+
+
         initEmojies()
         handleButtons()
         setPopularEmojis()
         addListenerToAdView()
+        dailyWinnings()
 
         return binding.root
     }
+
+    private fun dailyWinnings() {
+        if(daily.isNextDay()){
+            this.findNavController().navigate(MainMenuFragmentDirections.actionMainMenuFragmentToDailyWinningsFragment(
+                DailyUI(daily.getDay())
+            ))
+        }
+    }
+
 
     private fun addListenerToAdView() {
         val adRequest = AdRequest.Builder().build()

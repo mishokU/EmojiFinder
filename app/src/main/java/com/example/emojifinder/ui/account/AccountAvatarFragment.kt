@@ -86,6 +86,8 @@ class AccountAvatarFragment : DaggerFragment() {
         initGeneratorLeftRightButtons()
         initAvatarLeftRightButtons()
 
+        initValues()
+
         return binding.root
     }
 
@@ -98,6 +100,12 @@ class AccountAvatarFragment : DaggerFragment() {
         else {
             viewModel.fetchMainUserData()
         }
+    }
+
+    private fun initValues() {
+        binding.emojiBoxEt.setText("\uD83C\uDF81")
+        binding.emosEt.setText("\uD83D\uDCB0")
+        binding.emojiEt.setText("\uD83D\uDE00")
     }
 
 
@@ -113,7 +121,6 @@ class AccountAvatarFragment : DaggerFragment() {
         binding.saveAvatarBtn.setOnClickListener {
             viewModel.updateUserAvatar(binding.emojiAvatar.text.toString())
             Toast.makeText(requireContext(), "Avatar updated !", Toast.LENGTH_SHORT).show()
-            viewModel.fetchMainUserData()
         }
     }
 

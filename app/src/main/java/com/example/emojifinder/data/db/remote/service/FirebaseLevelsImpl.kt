@@ -21,6 +21,9 @@ class FirebaseLevelsImpl : FirebaseInit(), FirebaseLevels {
                 .get().await()
 
             val levelSnapshot : List<EmojiShopModel?> = documents.toObject(ListEmojiShopModel::class.java)!!.level
+            for(level in levelSnapshot){
+                mNaturalLanguage.translate(level!!.title)
+            }
 
             Result.Success(levelSnapshot)
         } catch (e : Exception){
@@ -55,7 +58,11 @@ class FirebaseLevelsImpl : FirebaseInit(), FirebaseLevels {
 
             val list : MutableList<SmallLevelModel> = mutableListOf()
             for(data in document.documents){
-                list.add(data.toObject(SmallLevelModel::class.java)!!)
+                val level = data.toObject(SmallLevelModel::class.java)!!
+                mNaturalLanguage.translate(level.title)
+                println(level.title)
+
+                list.add(level)
             }
 
             Result.Success(list.toList())

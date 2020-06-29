@@ -1,12 +1,8 @@
 package com.example.emojifinder.ui.game.campaign.gameAlerts
 
-import android.app.Dialog
-import android.opengl.Visibility
 import android.os.Handler
 import android.view.View
-import android.view.Window
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics

@@ -45,18 +45,18 @@ class ArcadeGameFragment : DaggerFragment() {
     lateinit var allEmojis : MutableList<EmojiShopModel?>
     lateinit var oneLevelEmojis : MutableList<EmojiShopModel?>
 
-    var findEmojis = 0
+    private var findEmojis = 0
     var score = 0
-    var userScore = 0
-    var userEmos = 0
+    private var userScore = 0
+    private var userEmos = 0
 
     @Inject
     lateinit var viewModelFactoryShop: ViewModelProvider.Factory
-    lateinit var viewModelShop : ShopViewModel
+    private lateinit var viewModelShop : ShopViewModel
 
     @Inject
     lateinit var viewModelFactoryAccount: ViewModelProvider.Factory
-    lateinit var viewModelAccount : AccountViewModel
+    private lateinit var viewModelAccount : AccountViewModel
 
     @Inject
     lateinit var settingsPrefs: SettingsPrefs

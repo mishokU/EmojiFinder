@@ -105,7 +105,6 @@
 
             </RelativeLayout>
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/game_emoji_field_rv"
                 android:layout_width="match_parent"
@@ -113,6 +112,7 @@
                 android:layout_above="@id/finder_place"
                 android:layout_below="@id/intro_place"
                 android:layout_centerInParent="true"
+                android:scrollbars="horizontal"
                 android:layout_margin="10dp"
                 android:nestedScrollingEnabled="false"
                 android:padding="5dp"
