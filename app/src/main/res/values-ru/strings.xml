@@ -165,7 +165,9 @@
     <string name="huge_pack">Huge Pack</string>
     <string name="game_end">Конец игры !</string>
     <string name="levels">Уровни</string>
-    <string name="claim">CLAIM</string>
-    <string name="claim_simple">claim</string>
+    <string name="claim">ЗАБРАТЬ</string>
+    <string name="claim_simple">ЗАБРАТЬ</string>
+    <string name="daily_title">Эмодзи не могут вас дождаться !</string>
+    <string name="daily_description">"У вас бесплатный подарок в игре 🎁\nСпешите забрать его 🍉"</string>
 
 </resources>

@@ -87,7 +87,7 @@ dependencies {
     testImplementation "androidx.room:room-ktx:$roomVersion"
     testImplementation "androidx.room:room-runtime:$roomVersion"
 
-    // Dagger
+    //Dagger
     implementation "com.google.dagger:dagger-android:$dagger"
     implementation "com.google.dagger:dagger-android-support:$dagger"
     implementation "com.google.dagger:dagger:$dagger"
@@ -95,7 +95,6 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger"
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
 
     // Date and time API for Java.
     implementation "com.jakewharton.threetenabp:threetenabp:$rootProject.threetenabpVersion"

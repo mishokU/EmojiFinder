@@ -1,16 +1,12 @@
 package com.example.emojifinder.ui.main
 
-import android.content.Context
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.emoji.text.EmojiCompat
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.databinding.FragmentMainMenuBinding
-import com.example.emojifinder.domain.adds.BANNER_ID
 import com.example.emojifinder.domain.prefs.DailyWinningsPrefs
 import com.example.emojifinder.shared.utils.Emoji
 import com.example.emojifinder.ui.daily.DailyUI
@@ -33,8 +29,6 @@ class MainMenuFragment : DaggerFragment() {
     ): View? {
         binding = FragmentMainMenuBinding.inflate(inflater)
 
-
-
         initEmojies()
         handleButtons()
         setPopularEmojis()
@@ -51,7 +45,6 @@ class MainMenuFragment : DaggerFragment() {
             ))
         }
     }
-
 
     private fun addListenerToAdView() {
         val adRequest = AdRequest.Builder().build()
@@ -86,7 +79,6 @@ class MainMenuFragment : DaggerFragment() {
         binding.shopBtn.setOnClickListener {
             this.findNavController().navigate(R.id.shopFragment)
         }
-
     }
 
     private fun setPopularEmojis() {

@@ -137,6 +137,8 @@
         android:name="com.example.emojifinder.ui.categories.CategoryGameFragment"
         android:label="fragment_categoty_game"
         tools:layout="@layout/fragment_categoty_game" >
+
+
         <action
             android:id="@+id/action_categotyGameFragment_to_gameFragment"
             app:destination="@id/gameFragment"
