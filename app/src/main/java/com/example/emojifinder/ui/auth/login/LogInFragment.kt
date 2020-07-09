@@ -41,22 +41,11 @@ class LogInFragment : DaggerFragment() {
 
         ErrorDialog.create(this)
 
-        initToolbar()
-
         handleRegistrationStatus()
         handleLogInButton()
         handleForgetPassword()
 
         return binding.root
-    }
-
-    private fun initToolbar() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.loginToolbar)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.loginToolbar.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
-        }
     }
 
     override fun onStart() {
@@ -70,6 +59,9 @@ class LogInFragment : DaggerFragment() {
     private fun handleForgetPassword() {
         binding.forgotPasswordBtn.setOnClickListener {
             this.findNavController().navigate(R.id.forgetPasswordFragment)
+        }
+        binding.registrationLogin.setOnClickListener {
+            this.findNavController().navigate(R.id.registrationFragment)
         }
     }
 

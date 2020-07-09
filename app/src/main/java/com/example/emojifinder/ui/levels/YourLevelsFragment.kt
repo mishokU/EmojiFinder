@@ -33,8 +33,6 @@ class YourLevelsFragment : DaggerFragment() {
     ): View? {
         binding = FragmentYourLevelsBinding.inflate(inflater)
 
-        initToolbar()
-
         DeleteLevelDialog.create(this)
 
         initDeleteDialogButton()
@@ -43,14 +41,6 @@ class YourLevelsFragment : DaggerFragment() {
         goToConstructor()
 
         return binding.root
-    }
-
-    private fun initToolbar() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.toolbarYourLevels)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbarYourLevels.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
-        }
     }
 
     private fun initDeleteDialogButton() {

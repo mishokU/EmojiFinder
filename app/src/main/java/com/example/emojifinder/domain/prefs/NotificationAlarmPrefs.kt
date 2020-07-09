@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.SharedPreferences
 import javax.inject.Inject
 
-class NotificationAlarmPrefs (val application: Application) {
+class NotificationAlarmPrefs @Inject constructor(val application: Application) {
 
     private var PRIVATE_MODE = 0
     private val PREF_NAME = "alarm"

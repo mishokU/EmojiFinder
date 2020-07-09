@@ -1,80 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradient"
+        android:background="@color/backgroundDesignColor"
         tools:context=".ui.help.WriteQuestionFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="@dimen/margin_layout_top"
-            android:layout_marginBottom="@dimen/margin_layout_bottom">
+            android:layout_marginBottom="@dimen/margin_layout_bottom"
+            android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/help_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:titleTextColor="@color/background_color"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginTop="20dp"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textField"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/background_color"
-                android:hint="@string/name">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/user_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ru_eng_sriracha"
-                    android:textColor="@color/background_color"
-                    android:backgroundTint="@color/background_color"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emailField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/background_color"
-                android:hint="@string/email">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/user_email"
-                    android:layout_width="match_parent"
-                    android:fontFamily="@font/ru_eng_sriracha"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/background_color"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <EditText
-                android:id="@+id/message"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/ru_eng_sriracha"
-                android:textColorHint="@color/background_color"
-                android:hint="@string/message"/>
+                android:maxLines="1"
+                android:text="@string/ask_question"
+                android:textColor="@color/textOrangeColor"
+                android:textSize="46sp" />
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textField"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/name"
+                    android:textColorHint="@color/first_color"
+                    app:boxStrokeColor="@color/background_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/user_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/icons8_account_24px"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/textOrangeColor"
+                        android:maxLines="1"
+                        android:textColor="@color/buttonBlueColor" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailField"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:textColorHint="@color/first_color"
+                    app:boxStrokeColor="@color/background_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/user_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/email_24px"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/textOrangeColor"
+                        android:maxLines="1"
+                        android:textColor="@color/buttonBlueColor" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/message"
+                    android:textColorHint="@color/first_color"
+                    app:boxStrokeColor="@color/background_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/icons8_new_message_24px_1"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/textOrangeColor"
+                        android:maxLines="1"
+                        android:textColor="@color/buttonBlueColor" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sent_question_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/ru_eng_sriracha"
+                app:cornerRadius="10dp"
+                android:textAllCaps="false"
+                android:text="@string/sent"
+                app:backgroundTint="@color/buttonBlueColor"/>
 
         </LinearLayout>
 

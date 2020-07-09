@@ -5,4 +5,7 @@
     <corners android:radius="25dp"/>
     <solid android:color="@color/background_color"/>
 
+    <stroke android:color="@color/buttonBlueColor"
+        android:width="2dp"/>
+
 </shape>

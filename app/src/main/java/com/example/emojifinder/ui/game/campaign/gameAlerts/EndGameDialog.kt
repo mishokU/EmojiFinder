@@ -3,6 +3,7 @@ package com.example.emojifinder.ui.game.campaign.gameAlerts
 import android.os.Handler
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
@@ -16,7 +17,7 @@ object EndGameDialog {
 
     lateinit var dialogView : BaseDialog
     lateinit var fragment: DaggerFragment
-    lateinit var exit : MaterialButton
+    lateinit var exit : AppCompatImageButton
 
     fun showEndGameDialog(fragment : DaggerFragment, statistics: UserLevelStatistics?, state: State) {
         this.fragment = fragment
@@ -35,18 +36,13 @@ object EndGameDialog {
 
             if(statistics.result == result.resources.getString(R.string.game_lost)){
                 result.setTextColor(result.resources.getColor(R.color.red_color))
-                getNextLevelButton().text = result.resources.getText(R.string.exit)
             } else {
                 result.setTextColor(result.resources.getColor(R.color.green_color))
-                getNextLevelButton().text = result.resources.getText(R.string.next_level)
             }
 
             initExitButton()
 
-            if(state == State.LOST){
-                getNextLevelButton().text = result.resources.getText(R.string.next_level)
-            } else {
-                getNextLevelButton().text = result.resources.getText(R.string.exit)
+            if(state != State.LOST){
                 exit.visibility = View.INVISIBLE
             }
 
@@ -61,15 +57,15 @@ object EndGameDialog {
     }
 
     fun getRetryButton() : View {
-        return dialogView.findViewById(R.id.try_again_btn)
+        return dialogView.findViewById(R.id.try_campaign_again_btn)
     }
 
-    fun getNextLevelButton() : MaterialButton {
-        return dialogView.findViewById(R.id.next_level_btn)
+    fun getNextLevelButton() : View {
+        return dialogView.findViewById(R.id.next_campaign_level_btn)
     }
 
     private fun initExitButton() {
-        exit = dialogView.findViewById(R.id.exit_end_btn)
+        exit = dialogView.findViewById(R.id.exit_campaign_end_btn)
         exit.setOnClickListener {
             fragment.findNavController().navigateUp()
             Handler().postDelayed({

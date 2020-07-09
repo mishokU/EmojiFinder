@@ -8,240 +8,177 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_gradient"
-        tools:context=".ui.main.MainMenuFragment"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        tools:context=".ui.main.MainMenuFragment">
 
-        <androidx.emoji.widget.EmojiTextView
-            android:id="@+id/emojiTextView3"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="\uD83D\uDE19"
-            android:textColor="@color/background_color"
-            android:textSize="52sp"
-            app:layout_constraintBottom_toTopOf="@+id/palette"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.078"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.666" />
+            app:layout_constraintVertical_bias="0.471">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/settings_main_btn"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_weight="0"
+                android:background="@drawable/ripple_color_settings"
+                app:srcCompat="@drawable/settings_btn" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/emoji_finder_title" />
+
+            <RelativeLayout
+                android:id="@+id/profile_main_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_weight="0"
+                android:background="@drawable/main_menu_emoji_style">
+
+                <androidx.emoji.widget.EmojiAppCompatButton
+                    android:id="@+id/profile_emoji"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="5dp"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:textAlignment="center"
+                    android:textSize="40sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
 
-        <androidx.emoji.widget.EmojiTextView
-            android:id="@+id/emojiTextView2"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="44dp"
-            android:text="\uD83D\uDE10"
-            android:textColor="@color/background_color"
-            android:textSize="52sp"
-            app:layout_constraintBottom_toTopOf="@+id/palette"
-            app:layout_constraintStart_toEndOf="@+id/emojiTextView3" />
-
-        <androidx.emoji.widget.EmojiTextView
-            android:id="@+id/emojiTextView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:text="\uD83D\uDE10"
-            android:textColor="@color/background_color"
-            android:textSize="52sp"
-            app:layout_constraintBottom_toTopOf="@+id/palette"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/emojiTextView2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.32" />
-
-        <androidx.emoji.widget.EmojiTextView
-            android:id="@+id/emojiTextView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="\uD83D\uDE10"
-            android:textColor="@color/background_color"
-            android:textSize="52sp"
-            app:layout_constraintBottom_toTopOf="@+id/palette"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.269"
-            app:layout_constraintStart_toEndOf="@+id/emojiTextView4"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.666" />
-
-        <ImageView
-            android:id="@+id/palette"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
-            android:layout_centerInParent="true"
-            android:layout_margin="20dp"
-            android:padding="10dp"
-            android:src="@drawable/palette"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/main_menu_frame"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.683">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottieAnimationView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/exit_btn"
-            app:layout_constraintEnd_toEndOf="@+id/palette"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/start_category_game_btn"
-            app:layout_constraintTop_toTopOf="@+id/start_arcade_game_btn"
-            app:layout_constraintVertical_bias="0.0"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/stars_animation" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/start_arcade_game_btn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="40dp"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:textAllCaps="false"
+                android:text="@string/arcade_game"
+                android:textSize="20sp"
+                app:backgroundTint="@color/buttonBlueColor" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/settings_main_btn"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="90dp"
-            android:layout_height="75dp"
-            android:layout_below="@id/palette"
-            android:layout_marginStart="105dp"
-            android:fontFamily="@font/ru_eng_sriracha"
-            android:layout_marginBottom="27dp"
-            android:text="@string/settings"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            app:cornerRadius="50dp"
-            app:layout_constraintBottom_toBottomOf="@+id/palette"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/palette"
-            app:layout_constraintTop_toTopOf="@+id/palette"
-            app:layout_constraintVertical_bias="0.973"
-            app:rippleColor="@color/green_color" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/start_category_game_btn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="40dp"
+                android:textAllCaps="false"
+                android:text="@string/campaign"
+                android:textSize="20sp"
+                app:backgroundTint="@color/buttonBlueColor" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/profile_main_btn"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="90dp"
-            android:layout_height="80dp"
-            android:layout_below="@id/palette"
-            android:layout_marginStart="47dp"
-            android:layout_marginBottom="115dp"
-            android:fontFamily="@font/ru_eng_sriracha"
-            android:text="@string/profile"
-            android:textAllCaps="false"
-            android:textColor="@color/main_color"
-            android:textSize="14sp"
-            app:cornerRadius="50dp"
-            app:layout_constraintBottom_toBottomOf="@+id/palette"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/palette"
-            app:layout_constraintTop_toTopOf="@+id/palette"
-            app:layout_constraintVertical_bias="1.0"
-            app:rippleColor="@color/yellow_color" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/start_category_game_btn"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="90dp"
-            android:layout_height="75dp"
-            android:layout_below="@id/palette"
-            android:layout_marginStart="63dp"
-            android:fontFamily="@font/ru_eng_sriracha"
-            android:layout_marginBottom="202dp"
-            android:text="@string/start_category_game"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            app:cornerRadius="50dp"
-            app:layout_constraintBottom_toBottomOf="@+id/palette"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.026"
-            app:layout_constraintStart_toStartOf="@+id/palette"
-            app:layout_constraintTop_toTopOf="@+id/palette"
-            app:layout_constraintVertical_bias="1.0"
-            app:rippleColor="@color/blue_color" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/shop_main_btn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="40dp"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:textAllCaps="false"
+                android:text="@string/emojis"
+                android:textSize="20sp"
+                app:backgroundTint="@color/buttonBlueColor" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/shop_btn"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_below="@id/palette"
-            android:layout_marginStart="142dp"
-            android:text="@string/shop"
-            android:fontFamily="@font/ru_eng_sriracha"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="24sp"
-            app:icon="@drawable/shop_26px"
-            app:cornerRadius="50dp"
-            app:layout_constraintBottom_toTopOf="@+id/shop_main_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.081"
-            app:layout_constraintStart_toStartOf="@+id/palette"
-            app:layout_constraintTop_toBottomOf="@+id/start_arcade_game_btn"
-            app:layout_constraintVertical_bias="0.68"
-            app:rippleColor="@color/red_color" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/start_arcade_game_btn"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="90dp"
-            android:layout_height="75dp"
-            android:layout_below="@id/palette"
-            android:fontFamily="@font/ru_eng_sriracha"
-            android:layout_marginStart="149dp"
-            android:layout_marginBottom="263dp"
-            android:text="@string/start_arcade_game"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            app:cornerRadius="50dp"
-            app:layout_constraintBottom_toBottomOf="@+id/palette"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/palette"
-            app:layout_constraintTop_toTopOf="@+id/palette"
-            app:layout_constraintVertical_bias="1.0"
-            app:rippleColor="@color/red_color" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/shop_btn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="40dp"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:textAllCaps="false"
+                android:text="@string/shop"
+                android:textSize="20sp"
+                app:backgroundTint="@color/buttonBlueColor" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/shop_main_btn"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="84dp"
-            android:layout_height="82dp"
-            android:layout_below="@id/palette"
-            android:layout_marginStart="217dp"
-            android:fontFamily="@font/ru_eng_sriracha"
-            android:layout_marginBottom="68dp"
-            android:text="@string/emojis"
-            android:textAllCaps="false"
-            android:textColor="@color/background_color"
-            app:cornerRadius="40dp"
-            app:layout_constraintBottom_toBottomOf="@+id/palette"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/palette"
-            app:layout_constraintTop_toTopOf="@+id/palette"
-            app:layout_constraintVertical_bias="1.0"
-            app:rippleColor="@null" />
+        </LinearLayout>
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="45dp"
             app:adSize="BANNER"
             app:adUnitId="ca-app-pub-3940256099942544/6300978111"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/palette"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintVertical_bias="0.07999998"
+            app:srcCompat="@drawable/main_screen_tape" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/ru_eng_sriracha"
+            android:text="@string/menu"
+            android:textColor="@android:color/white"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
+            app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/appCompatImageView"
+            app:layout_constraintVertical_bias="0.258" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

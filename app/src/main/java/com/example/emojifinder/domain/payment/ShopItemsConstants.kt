@@ -12,7 +12,7 @@ const val STARTER_PACK_ID = "00001"
 const val MEDIUM_PACK_PRICE = "249.00"
 const val MEDIUM_PACK_ID = "00002"
 
-const val HUGE_PACK_PRICE = "449.00"
+const val VIP_PACK_PRICE = "449.00"
 const val HUGE_PACK_ID = "00003"
 
 const val FIRST_EMO_PRICE = "349.00"

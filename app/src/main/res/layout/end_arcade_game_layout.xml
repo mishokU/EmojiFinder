@@ -1,43 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+<FrameLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:background="@android:color/transparent"
             android:layout_gravity="center"
             android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp">
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/main_menu_frame"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/level_result_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/background_color"
-                android:textSize="40sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:fontFamily="@font/ru_eng_sriracha"
-                android:layout_marginBottom="40dp"
+                android:text="@string/game_end"
                 android:textAlignment="center"
-                android:text="@string/game_end"/>
+                android:textColor="@color/textOrangeColor"
+                android:textSize="40sp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                app:strokeColor="@color/light_orange_color"
-                app:strokeWidth="4dp"
-                app:cardBackgroundColor="@color/main_color"
-                app:cardCornerRadius="25dp">
+                app:cardBackgroundColor="@color/buttonBlueColor"
+                app:cardCornerRadius="20dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -48,9 +46,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:text="@string/score"
                         android:textAlignment="center"
-                        android:fontFamily="@font/ru_eng_sriracha"
                         android:textColor="@android:color/white"
                         android:textSize="32sp" />
 
@@ -58,11 +56,11 @@
                         android:id="@+id/game_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
-                        android:fontFamily="@font/ru_eng_sriracha"
                         android:layout_marginStart="10dp"
-                        android:textColor="@android:color/white"
-                        android:textSize="32sp"/>
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:text="0"
+                        android:textColor="@color/textOrangeColor"
+                        android:textSize="32sp" />
 
                 </LinearLayout>
 
@@ -70,12 +68,12 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                app:cardBackgroundColor="@color/main_color"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                app:strokeColor="@color/light_orange_color"
-                app:strokeWidth="4dp"
-                app:cardCornerRadius="25dp">
+                app:cardBackgroundColor="@color/buttonBlueColor"
+                app:cardCornerRadius="20dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -86,20 +84,20 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:textSize="32sp"
                         android:fontFamily="@font/ru_eng_sriracha"
-                        android:text="@string/emos"/>
+                        android:text="@string/emos"
+                        android:textColor="@android:color/white"
+                        android:textSize="32sp" />
 
                     <TextView
                         android:id="@+id/game_emos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
-                        android:fontFamily="@font/ru_eng_sriracha"
                         android:layout_marginStart="10dp"
-                        android:textColor="@android:color/white"
-                        android:textSize="32sp"/>
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:text="0"
+                        android:textColor="@color/textOrangeColor"
+                        android:textSize="32sp" />
 
                 </LinearLayout>
 
@@ -108,37 +106,42 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/try_again_btn"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="5dp"
-                    android:textAllCaps="false"
-                    android:layout_height="60dp"
-                    app:cornerRadius="10dp"
-                    android:fontFamily="@font/ru_eng_sriracha"
-                    app:backgroundTint="@color/blue_color"
-                    android:text="@string/try_again" />
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/try_arcade_game_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/restart_lvl_img" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/exit_arcade_btn"
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/resume_end_arcade_game_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:fontFamily="@font/ru_eng_sriracha"
-                    app:cornerRadius="10dp"
-                    android:textAllCaps="false"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/exit"
-                    app:backgroundTint="@color/blue_color" />
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/resume_game_img" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/exit_arcade_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/exit_game_img" />
 
             </LinearLayout>
 
         </LinearLayout>
+
     </FrameLayout>
 
-</layout>

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="profile"
             type="com.example.emojifinder.data.db.remote.models.account.MainAccountModel" />
     </data>
 
     <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/backgroundDesignColor"
         android:fitsSystemWindows="true"
-        android:background="@drawable/background_gradient"
         tools:context=".ui.account.MainAccountInfoFragment">
 
         <LinearLayout
@@ -25,21 +25,62 @@
             android:layout_marginBottom="30dp"
             android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_main_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="4dp"
-            android:layout_gravity="center"
-            android:fontFamily="@font/ru_eng_sriracha"
-            android:gravity="start"
-            android:textAlignment="viewStart"
-            app:titleTextAppearance="@style/Toolbar.TitleText"
-            app:titleTextColor="@color/background_color"
-            app:title="@string/app_name"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/ru_eng_sriracha"
+                    android:maxLines="2"
+                    android:text="@string/profile_settings"
+                    android:textColor="@color/textOrangeColor"
+                    android:textSize="46sp" />
+
+                <RelativeLayout
+                    android:id="@+id/go_to_user_avatar"
+                    android:layout_width="300dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/account_emoji_style"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <androidx.emoji.widget.EmojiAppCompatButton
+                        android:id="@+id/profile_emoji_avatar_main"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="10dp"
+                        android:background="@null"
+                        android:maxLines="1"
+                        android:src="@drawable/emoji_finder"
+                        android:text="@{profile.avatar}"
+                        android:textAlignment="center"
+                        android:textSize="40sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        app:srcCompat="@drawable/edit_property_64px"
+                        app:tint="@color/textOrangeColor" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
 
-        <androidx.core.widget.NestedScrollView
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
@@ -49,73 +90,38 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <RelativeLayout
-                        android:id="@+id/go_to_user_avatar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:focusable="true"
-                        android:background="@drawable/ripple_color_account">
-
-                        <androidx.emoji.widget.EmojiAppCompatEditText
-                            android:id="@+id/profile_emoji_avatar_main"
-                            android:layout_margin="10dp"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:focusable="false"
-                            android:clickable="false"
-                            android:layout_centerInParent="true"
-                            android:text="@{profile.avatar}"
-                            android:textSize="28sp"
-                            android:textAlignment="center"
-                            android:maxLines="1"
-                            android:background="@drawable/account_emoji_style"
-                            android:src="@drawable/emoji_finder" />
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:layout_toEndOf="@id/profile_emoji_avatar_main"
-                            android:layout_alignBottom="@id/profile_emoji_avatar_main"
-                            android:src="@drawable/edit_property_64px"
-                            app:tint="@color/background_color" />
-
-                    </RelativeLayout>
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:layout_marginTop="5dp">
+                        android:layout_marginTop="5dp"
+                        android:background="@android:color/transparent">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
                             android:layout_marginBottom="20dp"
-                            android:layout_marginStart="40dp"
-                            android:layout_marginEnd="40dp">
+                            android:orientation="vertical">
 
                             <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:textColorHint="@color/background_color"
-                                app:boxStrokeColor="@color/background_color"
-                                android:hint="@string/login">
+                                android:hint="@string/login"
+                                android:textColorHint="@color/first_color"
+                                app:boxStrokeColor="@color/buttonBlueColor">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/login_registration"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/icons8_account_24px"
+                                    android:drawablePadding="10dp"
+                                    android:drawableTint="@color/textOrangeColor"
                                     android:maxLines="1"
-                                    android:fontFamily="@font/ru_eng_sriracha"
                                     android:text="@{profile.login}"
-                                    android:textColor="@color/background_color"/>
+                                    android:textColor="@color/buttonBlueColor" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,73 +133,79 @@
                         android:id="@+id/update_login_btn"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
                         android:backgroundTint="@color/blue_color"
-                        android:text="@string/update"
-                        android:fontFamily="@font/ru_eng_sriracha"
-                        android:textSize="18sp"
                         android:enabled="false"
                         android:textAllCaps="false"
-                        android:layout_marginStart="40dp"
-                        android:layout_marginEnd="40dp"
-                        android:layout_marginTop="10dp"/>
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:text="@string/update"
+                        android:textSize="18sp" />
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:layout_marginTop="5dp">
+                        android:background="@android:color/transparent">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
                             android:layout_marginBottom="20dp"
-                            android:layout_marginStart="40dp"
-                            android:layout_marginEnd="40dp">
+                            android:orientation="vertical">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/email_main_info_til"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:hint="@string/email"
+                                android:textColorHint="@color/first_color"
                                 android:visibility="gone"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:textColorHint="@color/background_color"
                                 app:boxStrokeColor="@color/background_color"
-                                app:passwordToggleEnabled="true"
-                                android:hint="@string/email">
+                                app:passwordToggleEnabled="true">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/email_registration"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="textPassword"
+                                    android:drawableStart="@drawable/icons8_lock_24px"
+                                    android:drawablePadding="10dp"
+                                    android:drawableTint="@color/textOrangeColor"
                                     android:fontFamily="@font/ru_eng_sriracha"
+                                    android:inputType="textPassword"
+                                    android:maxLines="1"
                                     android:text="@{profile.email}"
-                                    android:textColor="@color/background_color"/>
+                                    android:textColor="@color/buttonBlueColor" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/password_main_info_til"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:textColorHint="@color/background_color"
-                                app:boxStrokeColor="@color/background_color"
+                                android:hint="@string/password"
+                                android:textColorHint="@color/first_color"
                                 android:visibility="gone"
-                                app:passwordToggleEnabled="true"
-                                android:hint="@string/password">
+                                app:boxStrokeColor="@color/buttonBlueColor"
+                                app:passwordToggleEnabled="true">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/password_main_info"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="textPassword"
-                                    android:text="@{profile.password}"
+                                    android:drawableStart="@drawable/icons8_lock_24px"
+                                    android:drawablePadding="10dp"
+                                    android:drawableTint="@color/textOrangeColor"
                                     android:fontFamily="@font/ru_eng_sriracha"
-                                    android:textColor="@color/background_color"/>
+                                    android:inputType="textPassword"
+                                    android:maxLines="1"
+                                    android:text="@{profile.password}"
+                                    android:textColor="@color/buttonBlueColor" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -206,30 +218,33 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="14sp"
-                                    android:fontFamily="@font/ru_eng_sriracha"
                                     android:layout_marginBottom="5dp"
-                                    android:text="@string/if_you_want_to_change_password_or_email_write_current_password"/>
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:text="@string/if_you_want_to_change_password_or_email_write_current_password"
+                                    android:textColor="@color/first_color"
+                                    android:textSize="14sp" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     android:id="@+id/current_password_main_info_til"
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                    android:textColorHint="@color/background_color"
-                                    app:boxStrokeColor="@color/background_color"
-                                    app:passwordToggleEnabled="true"
-                                    android:hint="@string/current_password">
+                                    android:hint="@string/current_password"
+                                    android:textColorHint="@color/first_color"
+                                    app:boxStrokeColor="@color/buttonBlueColor"
+                                    app:passwordToggleEnabled="true">
 
                                     <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/current_password"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:maxLines="1"
+                                        android:drawableStart="@drawable/icons8_lock_24px"
+                                        android:drawablePadding="10dp"
+                                        android:drawableTint="@color/textOrangeColor"
                                         android:fontFamily="@font/ru_eng_sriracha"
                                         android:inputType="textPassword"
-                                        android:textColor="@color/background_color"/>
+                                        android:maxLines="1"
+                                        android:textColor="@color/buttonBlueColor" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -237,13 +252,12 @@
                                     android:id="@+id/check_password_btn"
                                     android:layout_width="match_parent"
                                     android:layout_height="60dp"
+                                    android:layout_marginTop="10dp"
                                     android:backgroundTint="@color/blue_color"
-                                    android:text="@string/check_password"
                                     android:fontFamily="@font/ru_eng_sriracha"
-                                    android:textSize="18sp"
+                                    android:text="@string/check_password"
                                     android:textAllCaps="false"
-                                    android:layout_marginTop="10dp"/>
-
+                                    android:textSize="18sp" />
 
 
                             </LinearLayout>
@@ -256,19 +270,18 @@
                         android:id="@+id/save_email_password_btn"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
                         android:backgroundTint="@color/blue_color"
-                        android:text="@string/save_info"
-                        android:textSize="16sp"
                         android:enabled="false"
-                        android:fontFamily="@font/ru_eng_sriracha"
                         android:textAllCaps="false"
-                        android:layout_marginStart="40dp"
-                        android:layout_marginEnd="40dp"
-                        android:layout_marginTop="10dp"/>
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:text="@string/save_info"
+                        android:textSize="16sp" />
 
-        </LinearLayout>
+                </LinearLayout>
 
-        </androidx.core.widget.NestedScrollView>
+            </ScrollView>
 
         </LinearLayout>
 

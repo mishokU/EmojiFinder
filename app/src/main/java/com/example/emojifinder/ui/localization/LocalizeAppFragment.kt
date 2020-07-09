@@ -27,7 +27,6 @@ class LocalizeAppFragment : DaggerFragment() {
         // Inflate the layout for this fragment
         binding = FragmentLocalizeAppBinding.inflate(inflater)
 
-        initToolbar()
         initArrayOfCountries()
         initCountries()
         initSaveLanguageButton()
@@ -98,15 +97,4 @@ class LocalizeAppFragment : DaggerFragment() {
             }
         }
     }
-
-
-    private fun initToolbar() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.localizeToolbar)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.localizeToolbar.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
-        }
-    }
-
 }

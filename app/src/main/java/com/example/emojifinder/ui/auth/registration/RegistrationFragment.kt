@@ -41,22 +41,11 @@ class RegistrationFragment : DaggerFragment() {
 
         ErrorDialog.create(this)
 
-        initToolbar()
-
         addTextWatchers()
         handleRegistrationButton()
         handleRegistrationStatus()
 
         return binding.root
-    }
-
-    private fun initToolbar() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.registrationToolbar)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.registrationToolbar.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
-        }
     }
 
     private fun addTextWatchers() {
@@ -100,6 +89,10 @@ class RegistrationFragment : DaggerFragment() {
                     binding.repeatPasswordRegistration
                 )
             ((activity as DaggerAppCompatActivity)).hideKeyboard()
+        }
+
+        binding.loginRegistrationBtn.setOnClickListener {
+            this.findNavController().navigate(R.id.logInFragment)
         }
     }
 

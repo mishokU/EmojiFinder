@@ -26,7 +26,6 @@ class ReadQAFragment : DaggerFragment() {
         getQuestionFromBundle()
 
         initFab()
-        initToolbar()
 
         return binding.root
     }
@@ -38,19 +37,9 @@ class ReadQAFragment : DaggerFragment() {
     }
 
     private fun initFab() {
-        binding.writeQuestion.setOnClickListener {
-            this.findNavController().navigate(R.id.writeQuestionFragment)
-        }
-    }
-
-    private fun initToolbar() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.readQaToolbar)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        ((activity) as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.answer)
-
-        binding.readQaToolbar.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
-        }
+//        binding.writeQuestion.setOnClickListener {
+//            this.findNavController().navigate(R.id.writeQuestionFragment)
+//        }
     }
 
 }

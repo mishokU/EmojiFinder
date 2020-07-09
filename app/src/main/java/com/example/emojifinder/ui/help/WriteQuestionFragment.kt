@@ -26,9 +26,7 @@ class WriteQuestionFragment : DaggerFragment() {
 
         binding = FragmentWriteQuestionBinding.inflate(inflater)
 
-        initToolbar()
         initEditTextsWatcher()
-
         setHasOptionsMenu(true)
 
         return binding.root
@@ -65,16 +63,6 @@ class WriteQuestionFragment : DaggerFragment() {
             Toast.makeText(requireContext(),"Send", Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(requireContext(),resources.getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun initToolbar() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.helpToolbar)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        ((activity) as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.contact)
-
-        binding.helpToolbar.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
         }
     }
 

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
@@ -15,7 +14,6 @@ import com.example.emojifinder.domain.prefs.SettingsPrefs
 import com.example.emojifinder.domain.viewModels.LogInViewModel
 import com.example.emojifinder.ui.main.MainActivity
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
@@ -24,8 +22,6 @@ class SettingsFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel : LogInViewModel
-
-
 
     lateinit var binding: FragmentSettingsBinding
 
@@ -43,7 +39,6 @@ class SettingsFragment : DaggerFragment() {
 
         initDialogButtons()
         setLogOutButton()
-        setBackButton()
 
         initSwitchers()
 
@@ -88,9 +83,6 @@ class SettingsFragment : DaggerFragment() {
         viewModel = injectViewModel(viewModelFactory)
         binding.exitBtn.setOnClickListener {
             LogOutDialog.open()
-            //this.findNavController().navigate(R.id.logOutFragment)
-//            val logOutFragment = LogOutFragment()
-//           logOutFragment.show()
         }
         binding.deleteAccountBtn.setOnClickListener {
             DeleteAccountDialog.open()
@@ -109,14 +101,4 @@ class SettingsFragment : DaggerFragment() {
 
         }
     }
-
-    private fun setBackButton() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.toolbarSettings)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.toolbarSettings.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
-        }
-    }
-
 }

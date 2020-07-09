@@ -15,62 +15,62 @@ import dagger.multibindings.IntoMap
 abstract class ViewModelsModule {
 
     @Binds
-    abstract fun bindViewModelFactory(factory : ViewModelFactory) : ViewModelProvider.Factory
+    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
     @Binds
     @IntoMap
     @ViewModelKey(LaunchViewModel::class)
-    abstract fun bindLaunchViewModel(viewModel: LaunchViewModel) : ViewModel
+    abstract fun bindLaunchViewModel(viewModel: LaunchViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(LogInViewModel::class)
-    abstract fun bindLogInViewModel(viewModel: LogInViewModel) : ViewModel
+    abstract fun bindLogInViewModel(viewModel: LogInViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(RegistrationViewModel::class)
-    abstract fun bindRegistrationViewModel(viewModel: RegistrationViewModel) : ViewModel
+    abstract fun bindRegistrationViewModel(viewModel: RegistrationViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(SignInViewModel::class)
-    abstract fun bindSignInViewModel(viewModel : SignInViewModel) : ViewModel
+    abstract fun bindSignInViewModel(viewModel: SignInViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(CategoriesViewModel::class)
-    abstract fun bindCategoriesViewModel(viewModel: CategoriesViewModel) : ViewModel
+    abstract fun bindCategoriesViewModel(viewModel: CategoriesViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(RatingViewModel::class)
-    abstract fun bindRatingViewModel(viewModel : RatingViewModel) : ViewModel
+    abstract fun bindRatingViewModel(viewModel: RatingViewModel): ViewModel
 
 
     @Binds
     @IntoMap
     @ViewModelKey(GameViewModel::class)
-    abstract fun bindGameViewModel(viewModel: GameViewModel) : ViewModel
+    abstract fun bindGameViewModel(viewModel: GameViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(AccountViewModel::class)
-    abstract fun bindAccountViewModel(viewModel: AccountViewModel) : ViewModel
+    abstract fun bindAccountViewModel(viewModel: AccountViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(ShopViewModel::class)
-    abstract fun bindShopViewModel(viewModel : ShopViewModel) : ViewModel
+    abstract fun bindShopViewModel(viewModel: ShopViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(ConstructorViewModel::class)
-    abstract fun bindLevelConstructor(viewModel: ConstructorViewModel) : ViewModel
+    abstract fun bindLevelConstructor(viewModel: ConstructorViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(DailyViewModel::class)
-    abstract fun bindDailyViewModel(viewModel : DailyViewModel) : ViewModel
+    abstract fun bindDailyViewModel(viewModel: DailyViewModel): ViewModel
 
 }

@@ -16,7 +16,7 @@
             android:id="@+id/item_main_place"
             android:layout_width="match_parent"
             android:layout_marginTop="5dp"
-            android:background="@drawable/generator_emoji_style"
+            android:background="@drawable/constructor_emoji_item_style"
             android:layout_marginBottom="5dp"
             android:layout_height="50dp">
 
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
-                    android:textColor="@color/first_color"
+                    android:textColor="@android:color/white"
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/ru_eng_sriracha"
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
                     android:layout_marginStart="10dp"
-                    android:textColor="@color/first_color"
+                    android:textColor="@android:color/white"
                     android:layout_marginEnd="10dp"
                     android:layout_gravity="center"
                     android:fontFamily="@font/ru_eng_sriracha"
@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
-                    android:textColor="@color/first_color"
+                    android:textColor="@android:color/white"
                     android:layout_gravity="center"
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:text="@{String.valueOf(level.time)}"/>
@@ -70,7 +70,7 @@
                     android:textSize="16sp"
                     android:gravity="bottom"
                     android:layout_marginStart="5dp"
-                    android:textColor="@color/first_color"
+                    android:textColor="@android:color/white"
                     android:layout_gravity="bottom"
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:text="@string/sec"/>
@@ -92,6 +92,7 @@
                     android:textSize="22sp"
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_marginEnd="10dp"
+                    android:textColor="@android:color/white"
                     android:text="@{level.status.toString()}"/>
 
                 <androidx.appcompat.widget.AppCompatImageView

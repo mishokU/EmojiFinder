@@ -13,40 +13,56 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradient"
+        android:background="@color/backgroundDesignColor"
         tools:context=".ui.categories.CategoryGameFragment">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_layout_top"
             android:layout_marginBottom="@dimen/margin_layout_bottom"
             android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            <TextView
+                android:id="@+id/titleCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:maxLines="1"
+                android:text="@string/campaign"
+                android:textColor="@color/textOrangeColor"
+                android:textSize="46sp" />
+
+        <com.example.emojifinder.ui.categories.HorizontalCarouselRecyclerView
+            android:id="@+id/categories_list"
+            android:layout_above="@id/play_level_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="start"
-            android:background="@null"
-            android:fontFamily="@font/ru_eng_sriracha"
-            android:textAlignment="viewStart"
-            app:titleTextColor="@color/background_color"
-            app:title="@string/app_name"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categories_list"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_below="@id/titleCategories"
             android:layout_margin="20dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:itemCount="4"
-            app:spanCount="2"
+            android:layout_centerInParent="true"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
             tools:listitem="@layout/category_cell_item"/>
 
-        </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/play_level_btn"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:cornerRadius="15dp"
+                app:backgroundTint="@color/textOrangeColor"
+                android:textColor="@android:color/white"
+                android:textAllCaps="false"
+                android:textSize="22sp"
+                android:text="@string/play"
+                android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"

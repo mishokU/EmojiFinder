@@ -2,55 +2,62 @@
 
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradient"
+        android:background="@color/backgroundDesignColor"
         tools:context=".ui.levels.YourLevelsFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="@dimen/margin_layout_top"
-            android:layout_marginBottom="@dimen/margin_layout_bottom">
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="@dimen/margin_layout_bottom"
+            android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_your_levels"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:titleTextAppearance="@style/Toolbar.TitleText"
-            app:titleTextColor="@color/background_color"
-            app:title=""/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/constructor"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:fontFamily="@font/ru_eng_sriracha"
-                app:backgroundTint="@color/blue_color"
-                android:text="@string/constructor"/>
+                android:maxLines="2"
+                android:text="@string/user_levels"
+                android:textColor="@color/textOrangeColor"
+                android:textSize="46sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/your_levels_rv"
-                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/user_level_model"/>
+                android:orientation="vertical"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/your_levels_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/constructor"
+                    android:layout_alignParentTop="true"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                    tools:listitem="@layout/user_level_model" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/constructor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:fontFamily="@font/ru_eng_sriracha"
+                    android:text="@string/constructor"
+                    android:textColor="@android:color/white"
+                    app:cornerRadius="10dp"
+                    android:textAllCaps="false"
+                    app:backgroundTint="@color/textOrangeColor" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

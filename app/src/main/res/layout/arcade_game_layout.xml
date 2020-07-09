@@ -14,7 +14,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradient"
+        android:background="@color/backgroundDesignColor"
         tools:context=".ui.game.campaign.gameAlerts.GameFragment">
 
         <RelativeLayout
@@ -68,7 +68,7 @@
                     app:icon="@drawable/back_24px"
                     app:strokeColor="@null"
                     app:rippleColor="@color/main_ripple_button_color"
-                    app:iconTint="@color/background_color"
+                    app:iconTint="@color/textOrangeColor"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     app:backgroundTint="@android:color/transparent"
                     tools:ignore="RtlSymmetry" />
@@ -82,7 +82,7 @@
                     android:layout_centerVertical="true"
                     android:textSize="26sp"
                     android:fontFamily="@font/ru_eng_sriracha"
-                    android:textColor="@color/background_color"
+                    android:textColor="@color/buttonBlueColor"
                     android:textAlignment="center"
                     android:text="@string/find_all_emojis"/>
 
@@ -99,7 +99,7 @@
                     android:paddingStart="10dp"
                     android:layout_alignParentEnd="true"
                     app:strokeColor="@null"
-                    app:iconTint="@color/background_color"
+                    app:iconTint="@color/textOrangeColor"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     app:backgroundTint="@android:color/transparent" />
 

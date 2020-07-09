@@ -31,24 +31,10 @@
                     android:textColor="@color/background_color"/>
 
             </RelativeLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/you_cannot_restore_this_level_map"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:layout_marginStart="5dp"
-                android:fontFamily="@font/ru_eng_sriracha"
-                android:layout_marginEnd="5dp"
-                android:layout_marginTop="10dp"
-                android:textSize="22sp"
-                android:textColor="@color/first_color"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="15dp"
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
@@ -57,10 +43,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/reset"
                     android:fontFamily="@font/ru_eng_sriracha"
-                    app:backgroundTint="@color/green_color"
+                    app:backgroundTint="@color/textOrangeColor"
                     android:layout_marginEnd="5dp"
+                    android:textAllCaps="false"
                     android:layout_weight="1"
-                    android:textAllCaps="false"/>
+                    app:cornerRadius="10dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cancel_reset_level"
@@ -69,12 +56,13 @@
                     android:text="@string/cancel"
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_weight="1"
+                    android:textAllCaps="false"
+                    app:cornerRadius="10dp"
                     app:rippleColor="@color/main_ripple_button_color"
                     android:textColor="@color/main_ripple_button_color"
                     android:layout_marginStart="5dp"
                     app:strokeWidth="3dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:textAllCaps="false"/>
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
             </LinearLayout>
 

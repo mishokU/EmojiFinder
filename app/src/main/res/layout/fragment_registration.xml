@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradient"
+        android:background="@color/backgroundDesignColor"
         tools:context=".ui.auth.login.LogInFragment">
 
         <LinearLayout
@@ -18,134 +16,163 @@
             android:layout_marginBottom="@dimen/margin_layout_bottom"
             android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/registration_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="start"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textAlignment="viewStart"
-            android:elevation="4dp"
-            android:background="@null"
-            style="@style/CustomToolbar"
-            app:titleTextAppearance="@style/Toolbar.TitleText"
-            app:titleTextColor="@color/background_color"
-            app:title="@string/app_name"/>
-
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:maxLines="1"
+                android:text="@string/registration"
+                android:textColor="@color/textOrangeColor"
+                android:textSize="46sp" />
+
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="40dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginEnd="40dp">
+                    android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:textColorHint="@color/background_color"
-                        app:boxStrokeColor="@color/background_color"
-                        android:hint="@string/login">
+                        android:layout_height="wrap_content">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/login_registration"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/background_color"/>
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:orientation="vertical">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/login"
+                                android:textColorHint="@color/first_color"
+                                app:boxStrokeColor="@color/background_color">
 
-                    <com.google.android.material.textfield.TextInputLayout
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/login_registration"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:drawableStart="@drawable/icons8_account_24px"
+                                    android:drawablePadding="10dp"
+                                    android:drawableTint="@color/textOrangeColor"
+                                    android:maxLines="1"
+                                    android:textColor="@color/buttonBlueColor" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/email"
+                                android:textColorHint="@color/first_color"
+                                app:boxStrokeColor="@color/buttonBlueColor">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/email_registration"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/email_24px"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:drawableTint="@color/textOrangeColor"
+                                    android:maxLines="1"
+                                    android:textColor="@color/buttonBlueColor" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/password"
+                                android:textColorHint="@color/first_color"
+                                app:boxStrokeColor="@color/buttonBlueColor"
+                                app:passwordToggleEnabled="true">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/password_registration"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/icons8_lock_24px"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:drawableTint="@color/textOrangeColor"
+                                    android:inputType="textPassword"
+                                    android:maxLines="1"
+                                    android:textColor="@color/buttonBlueColor" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/repeat_password"
+                                android:textColorHint="@color/first_color"
+                                app:boxStrokeColor="@color/buttonBlueColor"
+                                app:passwordToggleEnabled="true">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/repeat_password_registration"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/icons8_lock_24px"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:drawableTint="@color/textOrangeColor"
+                                    android:inputType="textPassword"
+                                    android:maxLines="1"
+                                    android:textColor="@color/buttonBlueColor" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/registration_btn"
                         android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="40dp"
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:backgroundTint="@color/blue_color"
+                        android:enabled="false"
+                        android:text="@string/registration"
+                        android:textAllCaps="false"
+                        android:textSize="20sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/login_registration_btn"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:textColorHint="@color/background_color"
-                        app:boxStrokeColor="@color/background_color"
-                        android:hint="@string/email">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/email_registration"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/background_color"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:textColorHint="@color/background_color"
-                        app:boxStrokeColor="@color/background_color"
-                        app:passwordToggleEnabled="true"
-                        android:hint="@string/password">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/password_registration"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPassword"
-                            android:textColor="@color/background_color"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:textColorHint="@color/background_color"
-                        app:boxStrokeColor="@color/background_color"
-                        app:passwordToggleEnabled="true"
-                        android:hint="@string/repeat_password">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/repeat_password_registration"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPassword"
-                            android:textColor="@color/background_color"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
+                        android:layout_gravity="center"
+                        android:text="@string/login"
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
+                        app:strokeColor="@color/background_color" />
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/registration_btn"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/blue_color"
-                android:text="@string/registration"
-                android:textSize="20sp"
-                android:enabled="false"
-                android:textAllCaps="false"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginTop="10dp"/>
-
-        </LinearLayout>
-
-        </androidx.core.widget.NestedScrollView>
+            </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
 

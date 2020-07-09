@@ -7,7 +7,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradient"
+        android:background="@android:color/white"
         tools:context=".ui.settings.SettingsFragment">
 
         <LinearLayout
@@ -17,355 +17,381 @@
             android:layout_marginBottom="@dimen/margin_layout_bottom"
             android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_settings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:titleTextAppearance="@style/Toolbar.TitleText"
-            app:titleTextColor="@color/background_color"
-            app:title="@string/app_name"/>
-
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:maxLines="1"
+                android:text="@string/settings"
+                android:textColor="@color/textOrangeColor"
+                android:textSize="46sp" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/suggest_level_btn"
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="25dp"
-                    android:background="@android:color/white"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_margin="20dp"
+                    android:background="@drawable/main_menu_frame"
+                    android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.emoji.widget.EmojiAppCompatButton
-                        android:layout_width="46dp"
-                        android:id="@+id/level_img"
-                        android:text="💫"
-                        android:textSize="22sp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/ripple_color_countries"
-                        android:layout_height="46dp"/>
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/suggest_level_btn"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/level_img"
-                        android:fontFamily="@font/ru_eng_sriracha"
-                        android:layout_centerVertical="true"
-                        android:text="@string/suggest_level"
-                        android:textSize="22sp"
-                        android:textColor="@color/first_color"/>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginEnd="10dp"
-                        android:backgroundTint="@color/main_ripple_button_color"
-                        android:src="@drawable/icons8_concept_48px"/>
+                        app:cardCornerRadius="25dp">
 
-                </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                </com.google.android.material.card.MaterialCardView>
+                            <androidx.emoji.widget.EmojiAppCompatButton
+                                android:id="@+id/level_img"
+                                android:layout_width="46dp"
+                                android:layout_height="46dp"
+                                android:layout_margin="10dp"
+                                android:background="@null"
+                                android:text="💫"
+                                android:textSize="22sp" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/help_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="25dp"
-                    android:background="@android:color/white"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@id/level_img"
+                                android:layout_toStartOf="@id/constructor_img"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/ru_eng_sriracha"
+                                android:text="@string/constructor"
+                                android:textColor="@color/first_color"
+                                android:textSize="22sp" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/constructor_img"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="10dp"
+                                android:backgroundTint="@color/main_ripple_button_color"
+                                android:src="@drawable/icons8_concept_48px" />
 
-                    <androidx.emoji.widget.EmojiAppCompatButton
-                        android:layout_width="46dp"
-                        android:id="@+id/help_img"
-                        android:text="ℹ"
-                        android:textSize="22sp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/ripple_color_countries"
-                        android:layout_height="46dp"/>
+                        </RelativeLayout>
 
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/help_btn"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/help_img"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/ru_eng_sriracha"
-                        android:text="@string/help"
-                        android:textSize="22sp"
-                        android:textColor="@color/first_color"/>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:backgroundTint="@color/main_ripple_button_color"
-                        android:src="@drawable/help_64px"
-                        app:tint="@color/first_color"/>
+                        android:background="@android:color/white"
+                        app:cardCornerRadius="25dp">
 
-                </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="25dp"
-                    android:background="@android:color/white"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.emoji.widget.EmojiAppCompatButton
-                        android:layout_width="46dp"
-                        android:id="@+id/notifications_img"
-                        android:text="🔔"
-                        android:textSize="22sp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/ripple_color_countries"
-                        android:layout_height="46dp"/>
+                            <androidx.emoji.widget.EmojiAppCompatButton
+                                android:id="@+id/help_img"
+                                android:layout_width="46dp"
+                                android:layout_height="46dp"
+                                android:layout_margin="10dp"
+                                android:background="@null"
+                                android:text="ℹ"
+                                android:textSize="22sp" />
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@id/help_img"
+                                android:fontFamily="@font/ru_eng_sriracha"
+                                android:text="@string/help"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textColor="@color/first_color"
+                                android:textSize="22sp" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="10dp"
+                                android:backgroundTint="@color/main_ripple_button_color"
+                                android:src="@drawable/help_64px"
+                                app:tint="@color/first_color" />
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/notifications_img"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/ru_eng_sriracha"
-                        android:text="@string/notifications"
-                        android:textSize="22sp"
-                        android:textColor="@color/first_color"/>
-
-                    <Switch
-                        android:id="@+id/notifications_switcher"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="10dp" />
-
-                </RelativeLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="25dp"
-                    android:background="@android:color/white"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.emoji.widget.EmojiAppCompatButton
-                        android:layout_width="46dp"
-                        android:id="@+id/music_img"
-                        android:text="🔊"
-                        android:textSize="22sp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/ripple_color_countries"
-                        android:layout_height="46dp"/>
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/music_img"
-                        android:layout_centerVertical="true"
-                        android:text="@string/music"
-                        android:textSize="22sp"
-                        android:fontFamily="@font/ru_eng_sriracha"
-                        android:textColor="@color/first_color"/>
-
-                    <Switch
-                        android:id="@+id/music_switcher"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="10dp" />
-
-                </RelativeLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/delete_account_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="25dp"
-                    android:background="@android:color/white"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.emoji.widget.EmojiAppCompatButton
-                        android:layout_width="46dp"
-                        android:id="@+id/delete_account_img"
-                        android:text="🚧"
-                        android:textSize="22sp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/ripple_color_countries"
-                        android:layout_height="46dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/delete_account_img"
-                        android:layout_centerVertical="true"
-                        android:text="@string/delete_account"
-                        android:textSize="22sp"
-                        android:fontFamily="@font/ru_eng_sriracha"
-                        android:textColor="@color/first_color"/>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:backgroundTint="@color/main_ripple_button_color"
-                        android:src="@drawable/icons8_exit_48px_1"/>
+                        android:background="@android:color/white"
+                        app:cardCornerRadius="25dp">
 
-                </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/exit_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="25dp"
-                    android:background="@android:color/white"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.emoji.widget.EmojiAppCompatButton
-                        android:layout_width="46dp"
-                        android:id="@+id/exit_img"
-                        android:text="🇺🇸"
-                        android:textSize="22sp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/ripple_color_countries"
-                        android:layout_height="46dp"/>
+                            <androidx.emoji.widget.EmojiAppCompatButton
+                                android:id="@+id/notifications_img"
+                                android:layout_width="46dp"
+                                android:layout_height="46dp"
+                                android:layout_margin="10dp"
+                                android:background="@null"
+                                android:text="🔔"
+                                android:textSize="22sp" />
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@id/notifications_img"
+                                android:fontFamily="@font/ru_eng_sriracha"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:layout_toStartOf="@id/notifications_switcher"
+                                android:text="@string/notifications"
+                                android:textColor="@color/first_color"
+                                android:textSize="22sp" />
+
+                            <Switch
+                                android:id="@+id/notifications_switcher"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:thumbTint="@color/textOrangeColor"
+                                android:trackTint="@color/buttonBlueColor"
+                                android:layout_marginEnd="10dp" />
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/exit_img"
-                        android:layout_centerVertical="true"
-                        android:text="@string/exit"
-                        android:textSize="22sp"
-                        android:fontFamily="@font/ru_eng_sriracha"
-                        android:textColor="@color/first_color"/>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:backgroundTint="@color/main_ripple_button_color"
-                        android:src="@drawable/icons8_exit_48px_1"/>
+                        android:background="@android:color/white"
+                        app:cardCornerRadius="25dp">
 
-                </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/private_policy_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="25dp"
-                    android:background="@android:color/white"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.emoji.widget.EmojiAppCompatButton
-                        android:layout_width="46dp"
-                        android:id="@+id/private_policy_img"
-                        android:text="ℹ"
-                        android:textSize="22sp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/ripple_color_countries"
-                        android:layout_height="46dp"/>
+                            <androidx.emoji.widget.EmojiAppCompatButton
+                                android:id="@+id/music_img"
+                                android:layout_width="46dp"
+                                android:layout_height="46dp"
+                                android:layout_margin="10dp"
+                                android:background="@null"
+                                android:text="🔊"
+                                android:textSize="22sp" />
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@id/music_img"
+                                android:fontFamily="@font/ru_eng_sriracha"
+                                android:text="@string/music"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textColor="@color/first_color"
+                                android:textSize="22sp" />
+
+                            <Switch
+                                android:id="@+id/music_switcher"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:thumbTint="@color/textOrangeColor"
+                                android:trackTint="@color/buttonBlueColor"
+                                android:layout_marginEnd="10dp" />
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/delete_account_btn"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/private_policy_img"
-                        android:layout_centerVertical="true"
-                        android:text="@string/private_policy"
-                        android:textSize="22sp"
-                        android:fontFamily="@font/ru_eng_sriracha"
-                        android:textColor="@color/first_color"/>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:backgroundTint="@color/main_ripple_button_color"
-                        android:src="@drawable/police_64px"
-                        app:tint="@color/first_color"/>
+                        android:background="@android:color/white"
+                        app:cardCornerRadius="25dp">
 
-                </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                </com.google.android.material.card.MaterialCardView>
+                            <androidx.emoji.widget.EmojiAppCompatButton
+                                android:id="@+id/delete_account_img"
+                                android:layout_width="46dp"
+                                android:layout_height="46dp"
+                                android:layout_margin="10dp"
+                                android:background="@null"
+                                android:text="🚧"
+                                android:textSize="22sp" />
 
-            </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@id/delete_account_img"
+                                android:fontFamily="@font/ru_eng_sriracha"
+                                android:text="@string/delete_account"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:layout_toStartOf="@id/delete_acc_img"
+                                android:textColor="@color/first_color"
+                                android:textSize="22sp" />
 
-        </androidx.core.widget.NestedScrollView>
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/delete_acc_img"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="10dp"
+                                android:backgroundTint="@color/main_ripple_button_color"
+                                android:src="@drawable/icons8_exit_48px_1" />
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/exit_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@android:color/white"
+                        app:cardCornerRadius="25dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.emoji.widget.EmojiAppCompatButton
+                                android:id="@+id/exit_img"
+                                android:layout_width="46dp"
+                                android:layout_height="46dp"
+                                android:layout_margin="10dp"
+                                android:background="@null"
+                                android:text="🇺🇸"
+                                android:textSize="22sp" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@id/exit_img"
+                                android:fontFamily="@font/ru_eng_sriracha"
+                                android:text="@string/exit"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textColor="@color/first_color"
+                                android:textSize="22sp" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="10dp"
+                                android:backgroundTint="@color/main_ripple_button_color"
+                                android:src="@drawable/icons8_exit_48px_1" />
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/private_policy_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@android:color/white"
+                        app:cardCornerRadius="25dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.emoji.widget.EmojiAppCompatButton
+                                android:id="@+id/private_policy_img"
+                                android:layout_width="46dp"
+                                android:layout_height="46dp"
+                                android:layout_margin="10dp"
+                                android:background="@null"
+                                android:text="ℹ"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@id/private_policy_img"
+                                android:fontFamily="@font/ru_eng_sriracha"
+                                android:text="@string/private_policy"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textColor="@color/first_color"
+                                android:textSize="22sp" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="10dp"
+                                android:backgroundTint="@color/main_ripple_button_color"
+                                android:src="@drawable/police_64px"
+                                app:tint="@color/first_color" />
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
 

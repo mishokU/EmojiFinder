@@ -1,6 +1,5 @@
 package com.example.emojifinder.data.db.remote.service
 
-import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguage
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOptions
 import java.util.*

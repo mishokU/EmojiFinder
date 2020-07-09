@@ -8,8 +8,8 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityModule {
     @ContributesAndroidInjector(modules = [FragmentsBuilderModule::class])
-    abstract fun contributeMainActivity() : MainActivity
+    abstract fun contributeMainActivity(): MainActivity
 
     @ContributesAndroidInjector
-    abstract fun contributeSplashScreen() : SplashActivity
+    abstract fun contributeSplashScreen(): SplashActivity
 }

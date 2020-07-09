@@ -39,20 +39,10 @@ class ForgetPasswordFragment : DaggerFragment() {
 
         ErrorDialog.create(this)
 
-        initToolbar()
         handleEmailStatus()
         handleButton()
 
         return binding.root
-    }
-
-    private fun initToolbar() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.loginToolbar)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.loginToolbar.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
-        }
     }
 
     private fun handleButton() {

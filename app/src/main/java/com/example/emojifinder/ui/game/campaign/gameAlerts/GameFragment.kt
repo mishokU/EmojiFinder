@@ -96,7 +96,6 @@ class GameFragment : DaggerFragment() {
 
         CampaignGameHint.create(this)
 
-
         interstitialAd = InterstitialAd(requireContext())
 
         binding.gameEmojiField.setOnTouchListener(ScaleGesture(requireContext()))
@@ -301,12 +300,8 @@ class GameFragment : DaggerFragment() {
         }
 
         EndGameDialog.getNextLevelButton().setOnClickListener {
-            if(EndGameDialog.getNextLevelButton().text == resources.getString(R.string.exit)){
-                this.findNavController().popBackStack()
-            } else {
-                startNextLevel()
-                interstitialAd.loadAd(AdRequest.Builder().build())
-            }
+            startNextLevel()
+            interstitialAd.loadAd(AdRequest.Builder().build())
             EndGameDialog.dialogView.dismiss()
         }
     }

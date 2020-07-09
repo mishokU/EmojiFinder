@@ -67,10 +67,12 @@
                 android:layout_weight="1"
                 android:textAllCaps="false"
                 android:layout_marginEnd="5dp"
+                android:textSize="18sp"
                 android:fontFamily="@font/ru_eng_sriracha"
-                android:backgroundTint="@color/blue_color"
+                android:backgroundTint="@color/textOrangeColor"
                 android:textColor="@color/background_color"
                 android:layout_width="match_parent"
+                app:cornerRadius="10dp"
                 android:layout_height="wrap_content" />
 
             <com.google.android.material.button.MaterialButton
@@ -79,9 +81,11 @@
                 android:layout_weight="1"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:textSize="18sp"
                 android:fontFamily="@font/ru_eng_sriracha"
                 android:backgroundTint="@color/red_color"
                 app:backgroundTint="@color/red_color"
+                app:cornerRadius="10dp"
                 android:textColor="@color/background_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

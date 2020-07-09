@@ -15,6 +15,7 @@ import com.example.emojifinder.databinding.FragmentAccountBinding
 import com.example.emojifinder.domain.adds.BANNER_ID
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.AccountViewModel
+import com.example.emojifinder.ui.shop.EmojisRecyclerViewAdapter
 import com.google.android.gms.ads.AdRequest
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -32,6 +33,10 @@ class AccountFragment : DaggerFragment() {
     lateinit var profile : MainAccountModel
     lateinit var adapter: UserLevelRecyclerViewAdapter
 
+    lateinit var userAdapter : EmojisRecyclerViewAdapter
+    lateinit var userEmojisAdapter : EmojisRecyclerViewAdapter
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,17 +48,35 @@ class AccountFragment : DaggerFragment() {
 
         binding.profilePlace.visibility = View.INVISIBLE
 
-        setBackButton()
+        initUserValuesViewModel()
+        initValues()
         initUserLevelsAdapter()
         observeLevelsStatistic()
         loadUserMainInfo()
         initButtons()
 
         initListState()
+        initUserEmojisAdapter()
+
+        initUserEmojisViewModel()
 
         addListenerToAdView()
 
         return binding.root
+    }
+
+    private fun initUserEmojisAdapter(){
+        userEmojisAdapter = EmojisRecyclerViewAdapter(EmojisRecyclerViewAdapter.OnShopItemClickListener{
+            //handleEmojiNavigator(it)
+        }, binding.userEmojisProgressBar,false)
+        binding.userEmojisPlaceRv.adapter = userEmojisAdapter
+    }
+
+    private fun initValues() {
+        binding.emojiBoxEt.setText("\uD83C\uDF81")
+        binding.emosEt.setText("\uD83D\uDCB0")
+        binding.emojiEt.setText("\uD83D\uDE00")
+        binding.scoreEmoji.setText("\uD83C\uDFAF")
     }
 
     private fun addListenerToAdView() {
@@ -62,18 +85,24 @@ class AccountFragment : DaggerFragment() {
     }
 
     private fun initListState() {
-        binding.levelStateSwitcher.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                adapter.collapseAll()
-                //binding.levelsRecyclerView.getVi
-            } else {
-                adapter.expandAll()
-            }
-        }
-
         binding.startPlayBtn.setOnClickListener {
             this.findNavController().navigate(R.id.categotyGameFragment)
         }
+    }
+
+    private fun initUserValuesViewModel() {
+        viewModel.fetchUserValues()
+        viewModel.userValuesResponse.observe(viewLifecycleOwner, Observer {
+            it?.let { values ->
+                when(values){
+                    is Result.Success -> {
+                        binding.emosCount.text = values.data.emos.toString()
+                        binding.boxesCount.text = values.data.boxes.toString()
+                        binding.emojisCount.text = values.data.emojis.toString()
+                    }
+                }
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -121,6 +150,32 @@ class AccountFragment : DaggerFragment() {
         })
     }
 
+    private fun initUserEmojisViewModel(){
+        viewModel.fetchUserEmojis()
+        viewModel.userEmojisResponse.observe(viewLifecycleOwner, Observer {
+            it?.let { userEmojis ->
+                when(userEmojis){
+                    is Result.Loading -> {
+                        binding.userEmojisProgressBar.visibility = View.VISIBLE
+                    }
+                    is Result.Success -> {
+                        binding.userEmojisProgressBar.visibility = View.INVISIBLE
+
+                        userEmojisAdapter.submitUserList(profile.avatar, userEmojis.data)
+                        //userEmojisCount = userEmojis.data.size.toString()
+
+                        initUserValuesViewModel()
+                        //initShopViewModel(userEmojis.data)
+                    }
+                    is Result.Error -> {
+                        binding.userEmojisProgressBar.visibility = View.INVISIBLE
+                        binding.errorMessage.text = userEmojis.exception.message
+                    }
+                }
+            }
+        })
+    }
+
     private fun observeLevelsStatistic() {
         viewModel.levelsStatisticResponse.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -131,17 +186,13 @@ class AccountFragment : DaggerFragment() {
                     is Result.Success -> {
                         binding.loadingLevelsAccount.visibility = View.GONE
                         if(!it.data.isNullOrEmpty()){
-                            binding.levelDivider.visibility = View.VISIBLE
-
                             adapter.submitList(it.data)
                         } else {
-                            binding.levelDivider.visibility = View.GONE
                             binding.emptyPlace.visibility = View.VISIBLE
                             binding.errorTextAccount.text = resources.getString(R.string.empty_levels)
                         }
                     }
                     is Result.Error -> {
-                        binding.levelDivider.visibility = View.GONE
                         binding.loadingLevelsAccount.visibility = View.GONE
                         binding.errorTextAccount.visibility = View.VISIBLE
                         binding.errorTextAccount.text = it.exception.message
@@ -150,15 +201,4 @@ class AccountFragment : DaggerFragment() {
             }
         })
     }
-
-    private fun setBackButton() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.toolbarAccount)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.toolbarAccount.setNavigationOnClickListener {
-            viewModel.statisticResponseComplete()
-            this.findNavController().navigateUp()
-        }
-    }
-
 }

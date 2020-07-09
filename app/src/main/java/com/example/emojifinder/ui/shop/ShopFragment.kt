@@ -51,12 +51,25 @@ class ShopFragment : DaggerFragment() {
 
         viewModel = injectViewModel(viewModelFactory)
 
+        initEmojis()
         initAccountValues()
-
         initRewardedAd()
-        addListenerToAdView()
+        //addListenerToAdView()
         addButtons()
+
         return binding.root
+    }
+
+    private fun initEmojis() {
+        binding.emosEt.setText("\uD83D\uDCB0")
+        binding.boxEt.setText("\uD83C\uDF81")
+
+        binding.mediumBoxEt.setText("\uD83C\uDF81")
+        binding.mediumEmosEt.setText("\uD83D\uDCB0")
+
+        binding.noAddsEmoji.setText("⛔")
+        binding.vipEmosEmoji.setText("\uD83D\uDCB0")
+        binding.vipEmoji.setText("\uD83D\uDE00")
     }
 
     private fun initAccountValues() {
@@ -72,9 +85,6 @@ class ShopFragment : DaggerFragment() {
     }
 
     private fun addButtons() {
-        binding.vipButton.setOnClickListener {
-
-        }
         binding.chestForAdd.setOnClickListener {
             if(mRewardedVideoAd.isLoaded){
                 mRewardedVideoAd.show()
@@ -87,19 +97,8 @@ class ShopFragment : DaggerFragment() {
         binding.mediumPackBtn.setOnClickListener {
             createTransactionInfo(MEDIUM_PACK_PRICE)
         }
-        binding.hugePackBtn.setOnClickListener {
-            createTransactionInfo(HUGE_PACK_PRICE)
-        }
-        binding.firstEmoBtn.setOnClickListener {
-            createTransactionInfo(FIRST_EMO_PRICE)
-        }
-
-        binding.secondEmoBtn.setOnClickListener {
-            createTransactionInfo(SECOND_EMO_PRICE)
-        }
-
-        binding.thirdEmoBtn.setOnClickListener {
-            createTransactionInfo(THIRD_EMO_PRICE)
+        binding.vipPackBtn.setOnClickListener {
+            createTransactionInfo(VIP_PACK_PRICE)
         }
     }
 
@@ -133,14 +132,14 @@ class ShopFragment : DaggerFragment() {
             AdRequest.Builder().build())
     }
 
-    private fun addListenerToAdView() {
-        val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
-        binding.adView.adListener = object : AdListener() {
-            override fun onAdClosed() {
-                binding.adView.loadAd(AdRequest.Builder().build())
-            }
-        }
-    }
+//    private fun addListenerToAdView() {
+//        val adRequest = AdRequest.Builder().build()
+//        binding.adView.loadAd(adRequest)
+//        binding.adView.adListener = object : AdListener() {
+//            override fun onAdClosed() {
+//                binding.adView.loadAd(AdRequest.Builder().build())
+//            }
+//        }
+//    }
 
 }

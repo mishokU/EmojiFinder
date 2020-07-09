@@ -48,7 +48,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="15dp"
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
@@ -57,16 +57,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
                     android:text="@string/save_info"
+                    android:textAllCaps="false"
+                    app:cornerRadius="10dp"
                     android:fontFamily="@font/ru_eng_sriracha"
-                    app:backgroundTint="@color/green_color"
+                    app:backgroundTint="@color/textOrangeColor"
                     android:layout_weight="1"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/leave_level_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textAllCaps="false"
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_marginStart="5dp"
+                    app:cornerRadius="10dp"
                     app:backgroundTint="@color/red_color"
                     android:text="@string/exit"
                     app:strokeWidth="3dp"

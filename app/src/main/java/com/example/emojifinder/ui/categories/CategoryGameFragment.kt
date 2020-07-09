@@ -22,11 +22,10 @@ class CategoryGameFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var viewModel : CategoriesViewModel
+    lateinit var viewModel: CategoriesViewModel
 
     lateinit var adapter: CategoryRecyclerViewAdapter
-    lateinit var binding : FragmentCategotyGameBinding
-
+    lateinit var binding: FragmentCategotyGameBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,28 +36,20 @@ class CategoryGameFragment : DaggerFragment() {
 
         initCategories()
         initViewModel()
-        initBackButton()
         initLevel()
 
         return binding.root
     }
 
-    private fun initBackButton() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        ((activity) as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.emoji_finder_levels)
-
-        binding.toolbar.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
-        }
-    }
-
-
     private fun initLevel() {
         viewModel.gameCategory.observe(viewLifecycleOwner, Observer {
             it?.let {
-                this.findNavController().navigate(CategoryGameFragmentDirections
-                    .actionCategotyGameFragmentToGameFragment(it, adapter.currentList.toTypedArray())
+                this.findNavController().navigate(
+                    CategoryGameFragmentDirections
+                        .actionCategotyGameFragmentToGameFragment(
+                            it,
+                            adapter.items.toTypedArray()
+                        )
                 )
                 viewModel.gameFragmentComplete()
             }
@@ -69,7 +60,7 @@ class CategoryGameFragment : DaggerFragment() {
         viewModel = injectViewModel(viewModelFactory)
         viewModel.categoriesResponse.observe(viewLifecycleOwner, Observer {
             it?.let { result ->
-                when(result){
+                when (result) {
                     is Result.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
                         binding.retryLoadLevelsBtn.visibility = View.INVISIBLE
@@ -78,7 +69,7 @@ class CategoryGameFragment : DaggerFragment() {
                         binding.progressBar.visibility = View.INVISIBLE
                         binding.errorMessage.visibility = View.INVISIBLE
 
-                        adapter.submitList(result.data)
+                        adapter.setLevels(result.data as List<SmallLevelModel>)
                     }
                     is Result.Error -> {
                         binding.progressBar.visibility = View.GONE
@@ -91,10 +82,10 @@ class CategoryGameFragment : DaggerFragment() {
     }
 
     private fun initCategories() {
-        adapter = CategoryRecyclerViewAdapter(CategoryRecyclerViewAdapter.OnCategoryClickListener{
+        adapter = CategoryRecyclerViewAdapter(CategoryRecyclerViewAdapter.OnCategoryClickListener {
             viewModel.showGameFragment(it)
         })
-        binding.categoriesList.adapter = adapter
+        binding.categoriesList.initialize(adapter)
     }
 
 }

@@ -1,9 +1,5 @@
 package com.example.emojifinder.ui.application
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.StrictMode
 import androidx.core.provider.FontRequest
@@ -12,28 +8,22 @@ import androidx.emoji.text.FontRequestEmojiCompatConfig
 import com.example.emojifinder.BuildConfig
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.DaggerAppComponent
-import com.example.emojifinder.domain.notifications.NotificationReceiver
-import com.example.emojifinder.domain.notifications.NotificationsService
-import com.example.emojifinder.domain.prefs.NotificationAlarmPrefs
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
-import java.lang.reflect.Array.get
 import java.util.*
 
 
 class MainApplication : DaggerApplication() {
 
-    private val applicationInjector = DaggerAppComponent.builder().application(this).build()
+    private val applicationInjector =
+        DaggerAppComponent.builder().application(this).build()
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return applicationInjector
     }
-
-    lateinit var alarmPrefs: NotificationAlarmPrefs
-    lateinit var notificationsService: NotificationsService
 
     override fun onCreate() {
         // ThreeTenBP for times and dates, called before super to be available for objects
@@ -52,18 +42,7 @@ class MainApplication : DaggerApplication() {
         MobileAds.setRequestConfiguration(configuration)
         MobileAds.initialize(this) {}
 
-        setNotifications()
-
         super.onCreate()
-    }
-
-    private fun setNotifications() {
-        alarmPrefs = NotificationAlarmPrefs(this)
-        if(!alarmPrefs.isStarted()){
-            notificationsService = NotificationsService(this)
-        } else {
-            alarmPrefs.setStarted()
-        }
     }
 
     private fun initEmojies() {

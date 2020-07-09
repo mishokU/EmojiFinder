@@ -38,10 +38,10 @@ object EndGameDialog {
     }
 
     fun getRetryButton() : View {
-        return dialogView.findViewById(R.id.try_again_btn)
+        return dialogView.findViewById(R.id.try_arcade_game_btn)
     }
 
-    fun getExitButton() : MaterialButton {
+    fun getExitButton() : View {
         return dialogView.findViewById(R.id.exit_arcade_btn)
     }
 }

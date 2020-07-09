@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Поиск Эмодзи</string>
     <string name="title_login">Login Module</string>
-    <string name="login">Логин</string>
+    <string name="login">Вход</string>
     <string name="login_with_vk">Войти через VK</string>
     <string name="create_account">Создать аккаунт</string>
     <string name="login_with_facebook">Войти через Facebook</string>
@@ -165,9 +165,30 @@
     <string name="huge_pack">Huge Pack</string>
     <string name="game_end">Конец игры !</string>
     <string name="levels">Уровни</string>
-    <string name="claim">ЗАБРАТЬ</string>
+    <string name="claim">ЗАБРАТЬ 2X</string>
     <string name="claim_simple">ЗАБРАТЬ</string>
     <string name="daily_title">Эмодзи не могут вас дождаться !</string>
-    <string name="daily_description">"У вас бесплатный подарок в игре 🎁\nСпешите забрать его 🍉"</string>
+    <string name="daily_description">"У вас бесплатный подарок в игре 🎁 🍉"</string>
+    <string name="arcade_game_hint">Найдите как можно больше эмодзи за 60 секунд, кликнув на них</string>
+    <string name="emoji">emoji</string>
+    <string name="finder">FINDER</string>
+    <string name="menu">Menu</string>
+    <string name="campaign">Campaign</string>
+    <string name="get_free_chest">GET FREE CHEST</string>
+    <string name="_249_9">249.9 Р</string>
+    <string name="starter_box_count">5</string>
+    <string name="starter_emos_count">1000</string>
+    <string name="medium_emos_count">2000</string>
+    <string name="medium_box_count">10</string>
+    <string name="_199_9">199.9 Р</string>
+    <string name="advertisements">Advertisements</string>
+    <string name="profile_settings">Profile Settings</string>
+    <string name="login_updated">Login updated</string>
+    <string name="email_and_password_updated">Email and Password updated</string>
+    <string name="user_levels">User Levels</string>
+    <string name="ask_question">Ask Question</string>
+    <string name="another_question">Another Question?</string>
+    <string name="arcade_game">Arcade Game</string>
+    <string name="play">Play</string>
 
 </resources>

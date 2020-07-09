@@ -7,49 +7,67 @@
             name="category"
             type="com.example.emojifinder.ui.categories.SmallLevelModel" />
     </data>
+
+
     <FrameLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="150dp"
-        android:layout_height="150dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="34dp"
+        android:paddingTop="124dp"
+        android:paddingBottom="64dp"
+        android:paddingEnd="34dp">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:minWidth="120dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:minHeight="120dp"
-            app:cardBackgroundColor="@color/blue_color"
-            app:strokeColor="@color/light_orange_color"
-            app:strokeWidth="2dp"
-            app:cardCornerRadius="20dp"
-            android:textAllCaps="false"
-            android:textColor="@color/background_color"
-            android:textAlignment="center"
-            android:layout_margin="10dp">
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:orientation="vertical">
+                android:src="@color/chest_sad_color"/>
 
-                <TextView
-                    android:id="@+id/level_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_centerInParent="true"
-                    android:textAllCaps="false"
-                    android:maxLines="2"
-                    android:fontFamily="@font/ru_eng_sriracha"
-                    android:textColor="@color/background_color"
-                    android:textAlignment="center"
-                    android:text="@{category.title}"/>
+            <TextView
+                android:id="@+id/level_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:textColor="@color/textOrangeColor"
+                android:textAlignment="center"
+                android:text="@{String.valueOf(category.id)}"/>
 
-            </RelativeLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/level_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:maxLines="1"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:textColor="@color/textOrangeColor"
+                android:textAlignment="center"
+                android:text="@{category.title}"/>
+
+            <TextView
+                android:id="@+id/level_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(category.time)}"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:textColor="@color/buttonBlueColor"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
 
     </FrameLayout>
 

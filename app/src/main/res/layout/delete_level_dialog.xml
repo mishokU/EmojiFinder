@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:text="@string/delete"
-                    app:backgroundTint="@color/green_color"
+                    app:backgroundTint="@color/textOrangeColor"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:textAllCaps="false"/>

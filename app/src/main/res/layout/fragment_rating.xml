@@ -7,7 +7,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradient"
+        android:background="@color/backgroundDesignColor"
         tools:context=".ui.rating.RatingFragment">
 
         <LinearLayout
@@ -17,24 +17,17 @@
             android:layout_marginBottom="@dimen/margin_layout_bottom"
             android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_account"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/ru_eng_sriracha"
-            android:gravity="start"
-            android:elevation="2dp"
-            android:textAlignment="viewStart"
-            app:titleTextAppearance="@style/Toolbar.TitleText"
-            app:titleTextColor="@color/background_color"
-            app:title="@string/app_name"/>
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="70dp"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rating"
+                android:textSize="46sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:textColor="@color/textOrangeColor"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,17 +36,19 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp">
+                    android:layout_height="match_parent">
 
                     <LinearLayout
+                        android:id="@+id/top_place"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
+                        android:layout_centerHorizontal="true"
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
+                            android:layout_gravity="center"
                             android:src="@drawable/icons8_medal_48px"/>
 
                         <TextView
@@ -63,67 +58,67 @@
                             android:fontFamily="@font/ru_eng_sriracha"
                             android:layout_marginStart="10dp"
                             android:textSize="26sp"
-                            android:textColor="@color/background_color"/>
+                            android:textColor="@color/textOrangeColor"/>
 
                     </LinearLayout>
 
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@id/top_place"
+                        android:layout_above="@id/invite_player_place"
+                        android:background="@drawable/main_menu_frame">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rating_rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:orientation="vertical"
-                    tools:itemCount="10"
-                    tools:listitem="@layout/rating_user_item"/>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rating_rv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="5dp"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:orientation="vertical"
+                            tools:itemCount="10"
+                            tools:listitem="@layout/rating_user_item"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/invite_player_place"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentBottom="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/invite_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="@string/invite"
+                            android:textAllCaps="false"
+                            android:fontFamily="@font/ru_eng_sriracha"
+                            android:textColor="@color/background_color"
+                            app:backgroundTint="@color/textOrangeColor"
+                            app:cornerRadius="10dp" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
-        </androidx.core.widget.NestedScrollView>
-
         </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="30dp">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/invite_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/invite"
-                android:textAllCaps="false"
-                android:textColor="@color/background_color"
-                app:backgroundTint="@color/blue_color"
-                app:cornerRadius="10dp" />
-
-        </RelativeLayout>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/rating_progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_centerInParent="true"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/loading_dots"/>
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:adSize="BANNER"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="35dp"
-            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
 
     </FrameLayout>
 </layout>

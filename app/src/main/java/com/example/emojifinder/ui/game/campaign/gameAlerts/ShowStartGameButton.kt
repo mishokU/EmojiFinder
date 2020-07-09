@@ -3,9 +3,7 @@ package com.example.emojifinder.ui.game.campaign.gameAlerts
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.os.Handler
-import android.view.Window
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat

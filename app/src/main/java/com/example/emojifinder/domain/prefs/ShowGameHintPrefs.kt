@@ -22,4 +22,15 @@ class ShowGameHintPrefs @Inject constructor(application: Application) {
     fun isHintShown(shown: Boolean) {
         sharedPref.edit().putBoolean("hint", shown).apply()
     }
+
+    fun isArcadeHintShown() : Boolean {
+        if(sharedPref.contains("arcade_hint")){
+            return true
+        }
+        return false
+    }
+
+    fun isArcadeHintShown(shown: Boolean) {
+        sharedPref.edit().putBoolean("arcade_hint", shown).apply()
+    }
 }

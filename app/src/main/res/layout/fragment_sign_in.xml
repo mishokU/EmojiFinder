@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.emojifinder.domain.viewModels.SignInViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,170 +25,141 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="40dp"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:padding="10dp"
-                android:layout_marginBottom="10dp"
-                app:srcCompat="@drawable/emoji_finder"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/login_btn"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:textAllCaps="false"
-                android:fontFamily="@font/ru_eng_sriracha"
-                android:layout_marginBottom="10dp"
-                android:text="@string/login"
-                android:textSize="16sp"
-                android:textColor="@color/black_color"
-                android:backgroundTint="@color/yellow_color"
-                app:cornerRadius="10dp"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/login_with_vk_btn"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                style="@style/CustomMaterialIcon"
-                app:backgroundTint="@color/blue_color"
-                android:textAllCaps="false"
-                android:text="@string/login_with_vk"
-                app:cornerRadius="10dp"
-                android:layout_marginBottom="10dp"
-                android:textSize="16sp"
-                app:icon="@drawable/vk_logo"
-                app:iconTint="@null"
-                app:iconSize="40dp"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/login_with_facebook_btn"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                style="@style/CustomMaterialIcon"
-                app:backgroundTint="@color/blue_color"
-                android:layout_marginBottom="10dp"
-                android:textAllCaps="false"
-                android:text="@string/login_with_facebook"
-                app:cornerRadius="10dp"
-                android:textSize="16sp"
-                app:icon="@drawable/fb_icon_325x325"
-                app:iconTint="@null"
-                app:iconSize="40dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/background_color"/>
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical">
 
-                <TextView
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/emoji_finder_logo" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="-40dp"
+                        android:layout_marginBottom="40dp"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/emoji_finder_title" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/login_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:backgroundTint="@color/buttonBlueColor"
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:text="@string/login"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"
+                        app:cornerRadius="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:background="@color/background_color" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/ru_eng_sriracha"
+                            android:gravity="center"
+                            android:text="@string/or"
+                            android:textColor="@color/buttonBlueColor" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:background="@color/background_color" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/create_account_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:backgroundTint="@color/buttonBlueColor"
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:text="@string/registration"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"
+                        app:cornerRadius="10dp" />
+
+                </LinearLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/background_color"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/or"/>
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="60dp"
+                    android:gravity="bottom">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:background="@color/background_color"/>
+                    <androidx.emoji.widget.EmojiAppCompatButton
+                        android:id="@+id/language_iv"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:background="@drawable/ripple_color_countries"
+                        android:text="🇺🇸"
+                        android:textSize="22sp" />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/language_iv"
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:text="@string/language"
+                        android:textColor="@color/background_color"
+                        android:textSize="18sp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/create_account_btn"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:rippleColor="@color/main_ripple_button_color"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:textColor="@color/background_color"
-                android:fontFamily="@font/ru_eng_sriracha"
-                android:text="@string/create_account"
-                android:textSize="20sp"
-                android:textAllCaps="false"
-                app:strokeColor="@color/background_color"
-                app:cornerRadius="10dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/help_iv"
+                        style="@style/CustomButtonImage"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:layout_alignParentEnd="true"
+                        android:backgroundTint="@android:color/white"
+                        app:cornerRadius="30dp"
+                        app:icon="@drawable/help_64px"
+                        app:iconGravity="textStart"
+                        app:iconPadding="0dp"
+                        app:iconSize="40dp"
+                        app:iconTint="@color/buttonBlueColor"
+                        app:rippleColor="@color/main_ripple_button_color" />
 
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_toStartOf="@id/help_iv"
+                        android:fontFamily="@font/ru_eng_sriracha"
+                        android:text="@string/help"
+                        android:textColor="@color/background_color"
+                        android:textSize="18sp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="60dp"
-            android:gravity="bottom"
-            android:layout_gravity="bottom">
-
-            <androidx.emoji.widget.EmojiAppCompatButton
-                android:id="@+id/language_iv"
-                android:layout_width="46dp"
-                android:text="🇺🇸"
-                android:textSize="22sp"
-                android:background="@drawable/ripple_color_countries"
-                android:layout_height="46dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/background_color"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/ru_eng_sriracha"
-                android:layout_toEndOf="@id/language_iv"
-                android:text="@string/language"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/help_iv"
-                android:layout_width="46dp"
-                style="@style/CustomButtonImage"
-                app:icon="@drawable/help_64px"
-                android:layout_alignParentEnd="true"
-                app:iconSize="40dp"
-                app:iconPadding="0dp"
-                app:rippleColor="@color/main_ripple_button_color"
-                android:backgroundTint="@color/background_color"
-                app:iconGravity="textStart"
-                app:cornerRadius="30dp"
-                app:iconTint="@color/main_color"
-                android:layout_height="46dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_toStartOf="@id/help_iv"
-                android:layout_marginEnd="10dp"
-                android:textColor="@color/background_color"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/ru_eng_sriracha"
-                android:layout_marginStart="5dp"
-                android:text="@string/help"/>
-
-        </RelativeLayout>
+                </RelativeLayout>
             </LinearLayout>
 
 

@@ -45,8 +45,10 @@
             android:text="@string/okey"
             android:fontFamily="@font/ru_eng_sriracha"
             android:layout_margin="20dp"
-            android:backgroundTint="@color/blue_color"
-            app:backgroundTint="@color/blue_color"
+            app:backgroundTint="@color/textOrangeColor"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            app:cornerRadius="10dp"
             android:textColor="@color/background_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

@@ -6,10 +6,11 @@ import android.content.Intent
 import android.os.Build
 import com.example.emojifinder.ui.application.MainApplication
 import java.util.*
+import javax.inject.Inject
 
-class NotificationsService(val application: Application) {
+class NotificationsService @Inject constructor(val application: Application) {
 
-    init {
+    fun create(){
         createNotificationChannel()
         initCalendar()
     }
@@ -47,7 +48,6 @@ class NotificationsService(val application: Application) {
             val channel = NotificationChannel("d", name, importance).apply {
                 description = descriptionText
             }
-
             // Register the channel with the system
             val notificationManager: NotificationManager = application.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)

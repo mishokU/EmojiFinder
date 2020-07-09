@@ -14,6 +14,10 @@
     <color name="second_text_color">#389aed</color>
     <color name="black_color">#050708</color>
     <color name="first_color">#4f5154</color>
+    <color name="textOrangeColor">#FFD000</color>
+
+    <color name="buttonBlueColor">#46A5D1</color>
+    <color name="backgroundDesignColor">#F0F1F1</color>
 
     <color name="light_orange_color">#BFEAAF61</color>
 

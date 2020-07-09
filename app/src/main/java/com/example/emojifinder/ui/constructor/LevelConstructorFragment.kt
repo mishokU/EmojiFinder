@@ -1,6 +1,8 @@
 package com.example.emojifinder.ui.constructor
 
+import android.graphics.PorterDuff
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -46,7 +48,7 @@ class LevelConstructorFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactoryShop: ViewModelProvider.Factory
-    lateinit var viewModelShop : ShopViewModel
+    private lateinit var viewModelShop : ShopViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -186,6 +188,15 @@ class LevelConstructorFragment : DaggerFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         (activity as DaggerAppCompatActivity).menuInflater.inflate(R.menu.constructor_menu, menu)
         saveItemIcon = menu.findItem(R.id.is_saved)
+        for(item in menu.children){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                item.iconTintList = ContextCompat.getColorStateList(requireContext(), R.color.buttonBlueColor)
+            } else {
+                val iconDrawable = item.icon
+                iconDrawable.mutate()
+                iconDrawable.setColorFilter(resources.getColor(R.color.buttonBlueColor), PorterDuff.Mode.SRC_ATOP)
+            }
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -341,7 +352,9 @@ class LevelConstructorFragment : DaggerFragment() {
             chip.isChipIconVisible = true
             chip.isClickable = true
             chip.isCheckable = true
-
+            chip.setTextColor(resources.getColor(R.color.background_color))
+            chip.chipIconTint = resources.getColorStateList(R.color.background_color)
+            chip.chipBackgroundColor = resources.getColorStateList(R.color.blue_color)
             binding.categoriesChipGroup.addView(chip)
         }
     }

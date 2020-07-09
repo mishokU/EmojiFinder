@@ -164,6 +164,23 @@
     <string name="levels">Levels</string>
     <string name="claim">CLAIM 2X</string>
     <string name="claim_simple">claim</string>
-    <string name="daily_description">"You have free gift in the game 🎁 Hurry up to find them all 🍉"</string>
+    <string name="daily_description">"You have free gift in the game 🎁 🍉"</string>
+    <string name="arcade_game_hint">Find as many emojis as possible in 60 seconds by clicking on them</string>
+    <string name="emoji">Emoji</string>
+    <string name="finder">FINDER</string>
+    <string name="menu">Menu</string>
+    <string name="campaign">Campaign</string>
+    <string name="get_free_chest">GET FREE CHEST</string>
+    <string name="_249_9">249.9 Р</string>
+    <string name="_199_9">199.9 Р</string>
+    <string name="advertisements">Adds</string>
+    <string name="profile_settings">Profile Settings</string>
+    <string name="login_updated">Login updated</string>
+    <string name="email_and_password_updated">Email and Password updated</string>
+    <string name="user_levels">User Levels</string>
+    <string name="ask_question">Ask Question</string>
+    <string name="another_question">Another Question?</string>
+    <string name="arcade_game">Arcade Game</string>
+    <string name="play">Play</string>
 
 </resources>

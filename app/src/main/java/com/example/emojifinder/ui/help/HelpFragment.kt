@@ -19,12 +19,8 @@ class HelpFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHelpBinding.inflate(inflater)
-        // Inflate the layout for this fragment
-
-        initToolbar()
         initQuestionsButton()
         initFab()
-
         return binding.root
     }
 
@@ -72,16 +68,6 @@ class HelpFragment : DaggerFragment() {
     private fun initFab() {
         binding.writeQuestion.setOnClickListener {
             this.findNavController().navigate(R.id.writeQuestionFragment)
-        }
-    }
-
-    private fun initToolbar() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.helpToolbar)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        ((activity) as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.help)
-
-        binding.helpToolbar.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
         }
     }
 }

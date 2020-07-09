@@ -1,27 +1,15 @@
 package com.example.emojifinder.ui.categories
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emojifinder.databinding.CategoryCellItemBinding
 
-class CategoryRecyclerViewAdapter(private val onClickListener : OnCategoryClickListener) : ListAdapter<SmallLevelModel,
-        CategoryRecyclerViewAdapter.CategoriesViewHolder>(
-    DiffCallback
-) {
+class CategoryRecyclerViewAdapter(private val onClickListener : OnCategoryClickListener)
+    : RecyclerView.Adapter<CategoryRecyclerViewAdapter.CategoriesViewHolder>() {
 
-    companion object DiffCallback: DiffUtil.ItemCallback<SmallLevelModel>()     {
-
-        override fun areItemsTheSame(oldItem: SmallLevelModel, newItem: SmallLevelModel): Boolean {
-            return oldItem === newItem
-        }
-
-        override fun areContentsTheSame(oldItem: SmallLevelModel, newItem: SmallLevelModel): Boolean {
-            return oldItem.id == newItem.id
-        }
-    }
+    var items: List<SmallLevelModel> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : CategoriesViewHolder {
         return CategoriesViewHolder(
@@ -30,22 +18,31 @@ class CategoryRecyclerViewAdapter(private val onClickListener : OnCategoryClickL
     }
 
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int){
-        val song = getItem(position)
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(song)
+            onClickListener.onClick(items[position])
         }
-        holder.bind(song)
+        holder.bind(items[position])
+    }
+
+    fun setLevels(newItems: List<SmallLevelModel>) {
+        items = newItems
+        notifyDataSetChanged()
     }
 
     class CategoriesViewHolder(private val binding: CategoryCellItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(category: SmallLevelModel?) {
             binding.category = category
             binding.executePendingBindings()
+            binding.levelId.text = "Level " + binding.levelId.text
+            binding.levelTime.text = "" + binding.levelTime.text + " sec"
         }
     }
 
     class OnCategoryClickListener(val clickListener: (track: SmallLevelModel?) -> Unit) {
         fun onClick(track: SmallLevelModel) = clickListener(track)
     }
+
+    override fun getItemCount(): Int = items.size
 }

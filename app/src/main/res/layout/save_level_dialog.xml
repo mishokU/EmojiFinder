@@ -33,38 +33,53 @@
 
             </RelativeLayout>
 
-
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:hint="@string/name_your_level"
                 android:textColorHint="@color/first_color"
-                app:counterMaxLength="40"
+                app:counterMaxLength="20"
+                app:boxStrokeColor="@color/buttonBlueColor"
                 app:counterEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/level_name"
                     android:layout_width="match_parent"
+                    android:drawableStart="@drawable/icons8_name_tag_24px"
+                    android:drawablePadding="10dp"
+                    android:textColorHint="@color/first_color"
+                    android:drawableTint="@color/textOrangeColor"
                     android:fontFamily="@font/ru_eng_sriracha"
+                    android:maxLines="1"
+                    android:textColor="@color/buttonBlueColor"
                     android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                app:boxStrokeColor="@color/buttonBlueColor"
                 android:hint="@string/set_time_in_seconds"
                 android:textColorHint="@color/first_color">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/level_constructor_time"
                     android:layout_width="match_parent"
-                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:textColorHint="@color/first_color"
+                    android:drawableStart="@drawable/icons8_time_24px"
+                    android:drawableTint="@color/textOrangeColor"
+                    android:fontFamily="@font/ru_eng_sriracha"
+                    android:maxLines="1"
+                    android:textColor="@color/buttonBlueColor"
                     android:inputType="number"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -82,7 +97,9 @@
                     android:layout_marginEnd="5dp"
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:text="@string/save_info"
-                    app:backgroundTint="@color/green_color"
+                    android:textAllCaps="false"
+                    app:cornerRadius="10dp"
+                    app:backgroundTint="@color/textOrangeColor"
                     android:layout_weight="1"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -92,6 +109,8 @@
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_marginStart="5dp"
                     android:text="@string/cancel"
+                    android:textAllCaps="false"
+                    app:cornerRadius="10dp"
                     app:rippleColor="@color/main_ripple_button_color"
                     android:textColor="@color/main_ripple_button_color"
                     app:strokeWidth="3dp"

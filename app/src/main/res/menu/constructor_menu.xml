@@ -6,30 +6,35 @@
         android:id="@+id/is_saved"
         android:title="Is saved"
         android:icon="@drawable/icons8_save_26px"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        android:iconTint="@color/buttonBlueColor"/>
 
     <item
         android:id="@+id/plus"
         android:title="Plus"
         android:icon="@drawable/icons8_plus_32px"
+        android:iconTint="@color/buttonBlueColor"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/minus"
         android:title="Minus"
         android:icon="@drawable/icons8_minus_32px"
+        android:iconTint="@color/buttonBlueColor"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/gridOnOff"
         android:title="Hide Grid"
         android:icon="@drawable/icons8_grid_32px"
+        android:iconTint="@color/buttonBlueColor"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/sent_level"
         android:title="Sent level"
         android:icon="@drawable/icons8_sent_26px"
+        android:iconTint="@color/buttonBlueColor"
         app:showAsAction="always"/>
 
 </menu>

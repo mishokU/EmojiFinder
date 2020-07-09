@@ -19,6 +19,7 @@ import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.ArcadeGameLayoutBinding
 import com.example.emojifinder.domain.adds.INTERSTITIAL_ID
 import com.example.emojifinder.domain.prefs.SettingsPrefs
+import com.example.emojifinder.domain.prefs.ShowGameHintPrefs
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.sounds.MusicType
 import com.example.emojifinder.domain.viewModels.AccountViewModel
@@ -35,15 +36,13 @@ import javax.inject.Inject
 class ArcadeGameFragment : DaggerFragment() {
 
     private lateinit var binding : ArcadeGameLayoutBinding
-    lateinit var userEmojisAdapter : GameRecyclerViewAdapter
-
+    private lateinit var userEmojisAdapter : GameRecyclerViewAdapter
     private lateinit var animation: ObjectAnimator
     private lateinit var interstitialAd : InterstitialAd
+    private lateinit var allEmojis : MutableList<EmojiShopModel?>
+    private lateinit var oneLevelEmojis : MutableList<EmojiShopModel?>
 
     var emojis : MutableList<EmojiAppCompatEditText> = mutableListOf()
-
-    lateinit var allEmojis : MutableList<EmojiShopModel?>
-    lateinit var oneLevelEmojis : MutableList<EmojiShopModel?>
 
     private var findEmojis = 0
     var score = 0
@@ -61,6 +60,9 @@ class ArcadeGameFragment : DaggerFragment() {
     @Inject
     lateinit var settingsPrefs: SettingsPrefs
 
+    @Inject
+    lateinit var showGameHintPrefs: ShowGameHintPrefs
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,13 +74,14 @@ class ArcadeGameFragment : DaggerFragment() {
 
         viewModelAccount = injectViewModel(viewModelFactoryAccount)
 
+        ArcadeGameHint.create(this)
         EndGameDialog.create(this)
 
         initEndGameButtons()
 
         initButtons()
 
-        initTimer()
+        showGameHint()
         initFinderEmojis()
         initAdapter()
         initViewModel()
@@ -88,6 +91,20 @@ class ArcadeGameFragment : DaggerFragment() {
         initloadAd()
 
         return binding.root
+    }
+
+    private fun showGameHint() {
+        if(!showGameHintPrefs.isArcadeHintShown()){
+            ArcadeGameHint.show()
+            ArcadeGameHint.getStartGameButton().setOnClickListener {
+                initTimer()
+                animation.start()
+                showGameHintPrefs.isArcadeHintShown(true)
+                ArcadeGameHint.dialogView.dismiss()
+            }
+        } else {
+            initTimer()
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -279,10 +296,8 @@ class ArcadeGameFragment : DaggerFragment() {
             .scaleY(1.4f)
             .scaleX(1.4f)
             .withEndAction {
-
                 score += 10
                 binding.scoreText.text = (score).toString()
-
                 binding.scoreText
                     .animate()
                     .scaleY(1.0f)
@@ -305,8 +320,9 @@ class ArcadeGameFragment : DaggerFragment() {
 
                         allEmojis = it.data as MutableList<EmojiShopModel?>
                         createGamePlace(allEmojis)
-                        animation.start()
-                        //playSound(MusicType.GAME)
+                        if(showGameHintPrefs.isArcadeHintShown()){
+                            animation.start()
+                        }
                     }
 
                     is Result.Error -> {

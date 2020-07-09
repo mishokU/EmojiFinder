@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.databinding.FragmentMainMenuBinding
+import com.example.emojifinder.domain.notifications.NotificationsService
 import com.example.emojifinder.domain.prefs.DailyWinningsPrefs
+import com.example.emojifinder.domain.prefs.NotificationAlarmPrefs
 import com.example.emojifinder.shared.utils.Emoji
 import com.example.emojifinder.ui.daily.DailyUI
 import com.google.android.gms.ads.AdListener
@@ -21,7 +23,13 @@ class MainMenuFragment : DaggerFragment() {
     lateinit var binding : FragmentMainMenuBinding
 
     @Inject
+    lateinit var alarmPrefs: NotificationAlarmPrefs
+    @Inject
+    lateinit var notificationsService: NotificationsService
+
+    @Inject
     lateinit var daily : DailyWinningsPrefs
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,13 +37,21 @@ class MainMenuFragment : DaggerFragment() {
     ): View? {
         binding = FragmentMainMenuBinding.inflate(inflater)
 
-        initEmojies()
         handleButtons()
-        setPopularEmojis()
         addListenerToAdView()
         dailyWinnings()
 
+        setNotifications()
+
         return binding.root
+    }
+
+    private fun setNotifications() {
+        if(!alarmPrefs.isStarted()){
+            notificationsService.create()
+        } else {
+            alarmPrefs.setStarted()
+        }
     }
 
     private fun dailyWinnings() {
@@ -57,7 +73,6 @@ class MainMenuFragment : DaggerFragment() {
     }
 
     private fun handleButtons() {
-
         binding.startArcadeGameBtn.setOnClickListener {
             this.findNavController().navigate(R.id.arcadeGameFragment)
         }
@@ -79,30 +94,13 @@ class MainMenuFragment : DaggerFragment() {
         binding.shopBtn.setOnClickListener {
             this.findNavController().navigate(R.id.shopFragment)
         }
-    }
 
-    private fun setPopularEmojis() {
-        binding.emojiTextView2.setOnClickListener {
-            binding.emojiTextView2.text = Emoji.getRandomEmoji()
+        binding.profileEmoji.setText("\uD83C\uDF81")
+        binding.profileMainBtn.setOnClickListener {
+            this.findNavController().navigate(R.id.accountFragment)
         }
-
-        binding.emojiTextView3.setOnClickListener {
-            binding.emojiTextView3.text = Emoji.getRandomEmoji()
+        binding.profileEmoji.setOnClickListener {
+            this.findNavController().navigate(R.id.accountFragment)
         }
-
-        binding.emojiTextView4.setOnClickListener {
-            binding.emojiTextView4.text = Emoji.getRandomEmoji()
-        }
-
-        binding.emojiTextView6.setOnClickListener {
-            binding.emojiTextView6.text = Emoji.getRandomEmoji()
-        }
-    }
-
-    private fun initEmojies() {
-        binding.emojiTextView2.text = Emoji.getEmojiByString("\uD83D\uDE80")
-        binding.emojiTextView4.text = Emoji.getEmojiByString("\uD83D\uDC69")
-        binding.emojiTextView3.text = Emoji.getEmojiByString("\uD83C\uDF6D")
-        binding.emojiTextView6.text = Emoji.getEmojiByString("\uD83C\uDF0E")
     }
 }

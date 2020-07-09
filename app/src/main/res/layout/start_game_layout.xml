@@ -7,6 +7,9 @@
     android:layout_margin="20dp"
     app:cardCornerRadius="20dp"
     android:layout_gravity="center"
+    android:elevation="5dp"
+    app:strokeColor="@color/buttonBlueColor"
+    app:strokeWidth="2dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -41,9 +44,14 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/start_game_btn"
             android:text="@string/start_game"
+            app:cornerRadius="10dp"
             android:fontFamily="@font/ru_eng_sriracha"
-            android:layout_margin="10dp"
-            app:backgroundTint="@color/blue_color"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:insetBottom="20dp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="10dp"
+            app:backgroundTint="@color/textOrangeColor"
             android:textColor="@color/background_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

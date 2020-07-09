@@ -19,6 +19,7 @@ import com.example.emojifinder.data.db.local.room.database.LevelsDatabase
 import com.example.emojifinder.data.db.remote.api.FirebaseLevels
 import com.example.emojifinder.data.db.remote.api.FirebaseRegistration
 import com.example.emojifinder.data.db.remote.service.*
+import com.example.emojifinder.domain.notifications.NotificationsService
 import com.example.emojifinder.domain.prefs.NotificationAlarmPrefs
 import com.example.emojifinder.domain.prefs.SettingsPrefs
 import com.example.emojifinder.domain.prefs.ShowGameHintPrefs
@@ -35,17 +36,17 @@ import javax.inject.Singleton
 class AppModule {
 
     @Provides
-    fun provideContext(application: MainApplication) : Context {
+    fun provideContext(application: MainApplication): Context {
         return application.applicationContext
     }
 
     @Singleton
     @Provides
-    fun provideFirebaseUserData() : FirebaseUserData = FirebaseUserData()
+    fun provideFirebaseUserData(): FirebaseUserData = FirebaseUserData()
 
     @Singleton
     @Provides
-    fun provideFirebaseAuthHandler() : FirebaseAuthHandler =
+    fun provideFirebaseAuthHandler(): FirebaseAuthHandler =
         FirebaseAuthHandler()
 
     @Singleton
@@ -58,15 +59,15 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideFirebaseStatistics() : FirebaseLevelStatisticImpl = FirebaseLevelStatisticImpl()
+    fun provideFirebaseStatistics(): FirebaseLevelStatisticImpl = FirebaseLevelStatisticImpl()
 
     @Singleton
     @Provides
-    fun provideFirebaseCategories() : FirebaseLevels = FirebaseLevelsImpl()
+    fun provideFirebaseCategories(): FirebaseLevels = FirebaseLevelsImpl()
 
     @Singleton
     @Provides
-    fun provideFirebaseCollection() : FirebaseCollection = FirebaseCollection()
+    fun provideFirebaseCollection(): FirebaseCollection = FirebaseCollection()
 
     @Singleton
     @Provides
@@ -94,7 +95,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideShopEmojiService(application : Application)
+    fun provideShopEmojiService(application: Application)
             : ShopEmojiService = ShopEmojiService(application)
 
     @Singleton
@@ -109,20 +110,21 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideLevelConstructorService() : LevelConstructorService = LevelConstructorService()
+    fun provideLevelConstructorService(): LevelConstructorService = LevelConstructorService()
 
     @Singleton
     @Provides
-    fun provideMediaPlayerPool(application: Application) : MediaPlayerPool = MediaPlayerPool(application)
+    fun provideMediaPlayerPool(application: Application): MediaPlayerPool =
+        MediaPlayerPool(application)
 
     @Singleton
     @Provides
-    fun provideLevelsDatabase(application: Application) :
+    fun provideLevelsDatabase(application: Application):
             LevelsDatabase = LevelsDatabase.getDatabase(application.applicationContext)
 
     @Singleton
     @Provides
-    fun provideFirebaseUsers() : FirebaseUsers = FirebaseUsers()
+    fun provideFirebaseUsers(): FirebaseUsers = FirebaseUsers()
 
     @Singleton
     @Provides
@@ -131,7 +133,12 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideFakeDaily() : FakeDailyItems = FakeDailyItems()
+    fun provideNotificationService(application: Application):
+            NotificationsService = NotificationsService(application)
+
+    @Singleton
+    @Provides
+    fun provideFakeDaily(): FakeDailyItems = FakeDailyItems()
 
     @CoroutineScopeIO
     @Provides

@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.emoji_shop_item.view.*
 
 class EmojisRecyclerViewAdapter(
     private val onClickListener: OnShopItemClickListener,
-    private val progress: LottieAnimationView,
+    private val progress: LottieAnimationView?,
     val isShop: Boolean
 ) :
     RecyclerView.Adapter<EmojisRecyclerViewAdapter.ShopEmojiViewHolder>() {
@@ -35,7 +35,7 @@ class EmojisRecyclerViewAdapter(
         adapterlist = AsyncListDiffer(this, CALLBACK)
         adapterlist.addListListener { previousList, currentList ->
             if(previousList != currentList){
-                progress.visibility = View.INVISIBLE
+                progress?.visibility = View.INVISIBLE
             }
         }
     }
@@ -54,7 +54,7 @@ class EmojisRecyclerViewAdapter(
     fun filter(categories: MutableList<String>) {
         val list : MutableList<EmojiShopModel> = mutableListOf()
         if(categories.size != 0){
-            progress.visibility = View.VISIBLE
+            progress?.visibility = View.VISIBLE
             for(category in categories) {
                 for(emoji in fullList){
                     if(emoji?.group == category){

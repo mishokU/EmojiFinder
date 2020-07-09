@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -45,13 +46,9 @@ class MainAccountInfoFragment : DaggerFragment() {
 
         viewModel = injectViewModel(viewModelFactory)
 
-
         changeSoftInput()
         addTextWatchers()
-
         getUserMainData()
-
-        setBackButton()
         setSaveButton()
         setAvatarButton()
         setCheckEmailAndPasswordButtons()
@@ -65,6 +62,11 @@ class MainAccountInfoFragment : DaggerFragment() {
 
     private fun setAvatarButton() {
         binding.goToUserAvatar.setOnClickListener {
+            this.findNavController().navigate(MainAccountInfoFragmentDirections.actionMainAccountInfoFragmentToAccountAvatarFragment(
+                profile
+            ))
+        }
+        binding.profileEmojiAvatarMain.setOnClickListener {
             this.findNavController().navigate(MainAccountInfoFragmentDirections.actionMainAccountInfoFragmentToAccountAvatarFragment(
                 profile
             ))
@@ -99,6 +101,8 @@ class MainAccountInfoFragment : DaggerFragment() {
         binding.updateLoginBtn.setOnClickListener {
             viewModelShared.updateLoginView(binding.loginRegistration.text.toString())
             viewModel.updateLogin(binding.loginRegistration)
+            Toast.makeText(requireContext(),resources.getString(R.string.login_updated), Toast.LENGTH_SHORT).show()
+            ((activity as DaggerAppCompatActivity)).hideKeyboard()
         }
 
         binding.saveEmailPasswordBtn.setOnClickListener {
@@ -106,6 +110,7 @@ class MainAccountInfoFragment : DaggerFragment() {
                 binding.emailRegistration,
                 binding.passwordMainInfo
             )
+            Toast.makeText(requireContext(),resources.getString(R.string.email_and_password_updated), Toast.LENGTH_SHORT).show()
             ((activity as DaggerAppCompatActivity)).hideKeyboard()
         }
     }
@@ -113,15 +118,6 @@ class MainAccountInfoFragment : DaggerFragment() {
     private fun getUserMainData() {
         profile = MainAccountInfoFragmentArgs.fromBundle(requireArguments()).MainInfo
         binding.profile = profile
-    }
-
-    private fun setBackButton() {
-        ((activity) as AppCompatActivity).setSupportActionBar(binding.toolbarMainInfo)
-        ((activity) as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.toolbarMainInfo.setNavigationOnClickListener {
-            this.findNavController().navigateUp()
-        }
     }
 
     private val registrationTextWatcher = object : TextWatcher {

@@ -106,11 +106,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/logOutFragment"
-        android:name="com.example.emojifinder.ui.settings.LogOutFragment"
-        android:label="LogOutFragment" />
-
-    <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.emojifinder.ui.settings.SettingsFragment"
         android:label="fragment_settings"
@@ -121,10 +116,6 @@
         <action
             android:id="@+id/action_settingsFragment_to_yourLevelsFragment"
             app:destination="@id/yourLevelsFragment" />
-
-        <action
-            android:id="@+id/action_settingsFragment_to_logOutFragment"
-            app:destination="@id/logOutFragment" />
 
     </fragment>
     <fragment

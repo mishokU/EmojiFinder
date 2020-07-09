@@ -2,13 +2,12 @@
 
 <layout>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@drawable/background_gradient"
+        android:background="@color/backgroundDesignColor"
         tools:context=".ui.help.ReadQAFragment">
 
         <LinearLayout
@@ -18,29 +17,39 @@
             android:layout_marginBottom="@dimen/margin_layout_bottom"
             android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/read_qa_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:titleTextColor="@color/background_color"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:maxLines="1"
+                android:text="@string/answer"
+                android:textColor="@color/textOrangeColor"
+                android:textSize="46sp" />
 
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp">
+                android:layout_marginEnd="10dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/buttonBlueColor"
+                app:cardCornerRadius="20dp">
 
                 <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp"
                         android:orientation="vertical"
+                        android:padding="20dp"
                         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
 
@@ -49,15 +58,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ru_eng_sriracha"
-                            android:textSize="30sp"/>
+                            android:textSize="30sp" />
 
                         <TextView
                             android:id="@+id/answer_to_problem"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/ru_eng_sriracha"
                             android:layout_marginTop="20dp"
-                            android:textSize="16sp"/>
+                            android:fontFamily="@font/ru_eng_sriracha"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
@@ -66,16 +75,6 @@
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/write_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginBottom="@dimen/margin_layout_bottom"
-            app:backgroundTint="@color/main_color"
-            android:src="@drawable/icons8_pencil_24px"
-            android:layout_marginEnd="16dp"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
