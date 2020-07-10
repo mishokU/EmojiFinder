@@ -5,8 +5,8 @@ import androidx.room.TypeConverter
 class StatusConverter {
 
     @TypeConverter
-    fun fromStatus(status : LevelStatus) : String {
-        return when(status){
+    fun fromStatus(status: LevelStatus): String {
+        return when (status) {
             LevelStatus.ACCEPTED -> "accepted"
             LevelStatus.DENIED -> "denied"
             LevelStatus.WAITING -> "waiting"
@@ -15,8 +15,8 @@ class StatusConverter {
     }
 
     @TypeConverter
-    fun toStatus(status : String) : LevelStatus {
-        return when(status){
+    fun toStatus(status: String): LevelStatus {
+        return when (status) {
             "accepted" -> LevelStatus.ACCEPTED
             "denied" -> LevelStatus.DENIED
             "waiting" -> LevelStatus.WAITING

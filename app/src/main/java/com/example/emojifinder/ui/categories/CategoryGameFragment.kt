@@ -82,9 +82,10 @@ class CategoryGameFragment : DaggerFragment() {
     }
 
     private fun initCategories() {
-        adapter = CategoryRecyclerViewAdapter(CategoryRecyclerViewAdapter.OnCategoryClickListener {
-            viewModel.showGameFragment(it)
-        })
+        adapter = CategoryRecyclerViewAdapter(CategoryRecyclerViewAdapter
+            .OnCategoryClickListener {
+                viewModel.showGameFragment(it)
+            })
         binding.categoriesList.initialize(adapter)
     }
 

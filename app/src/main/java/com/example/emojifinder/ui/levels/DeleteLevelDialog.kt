@@ -1,10 +1,7 @@
 package com.example.emojifinder.ui.levels
 
-import android.app.Dialog
-import android.view.Window
-import androidx.core.content.ContextCompat
 import com.example.emojifinder.R
-import com.example.emojifinder.ui.baseDialog.BaseDialog
+import com.example.emojifinder.ui.base.BaseDialog
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment

@@ -1,5 +1,6 @@
 package com.example.emojifinder.domain.viewModels
 
+import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -54,9 +55,13 @@ class ConstructorViewModel @Inject constructor(
         }
     }
 
-    fun sentLevel(level : List<EmojiShopModel>, smallLevelModel: SmallLevelModel?){
+    fun sentLevel(
+        level: List<EmojiShopModel>,
+        smallLevelModel: SmallLevelModel?,
+        image: Bitmap?
+    ){
         coroutineScope.launch {
-            levelsRepository.sentLevel(level, smallLevelModel)
+            levelsRepository.sentLevel(level, smallLevelModel, image)
         }
     }
 

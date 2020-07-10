@@ -6,7 +6,7 @@ import com.example.emojifinder.data.db.remote.models.EmojiShopModel
 import com.example.emojifinder.ui.categories.SmallLevelModel
 
 
-fun List<EmojiShopModelLocal>.asEmojiShopModel() : List<EmojiShopModel> {
+fun List<EmojiShopModelLocal>.asEmojiShopModel(): List<EmojiShopModel> {
     return map {
         EmojiShopModel(
             title = it.levelTitle,
@@ -19,7 +19,7 @@ fun List<EmojiShopModelLocal>.asEmojiShopModel() : List<EmojiShopModel> {
 }
 
 fun List<EmojiShopModel>.asLocalModel(): List<EmojiShopModelLocal> {
-    return map{
+    return map {
         EmojiShopModelLocal(
             levelTitle = it.title,
             x = it.x,
@@ -36,24 +36,25 @@ fun asLocalModel(levelModel: SmallLevelModel): SmallLevelModelLocal {
         title = levelModel.title,
         time = levelModel.time,
         status = LevelStatus.SAVED,
-        id = levelModel.id
+        id = levelModel.id,
+        url = levelModel.url
     )
 }
 
-fun List<SmallLevelModelLocal>.asSmallLevelUI() : List<SmallLevelModel> {
+fun List<SmallLevelModelLocal>.asSmallLevelUI(): List<SmallLevelModel> {
     return map {
         SmallLevelModel(
             status = it.status,
             id = it.id,
             title = it.title,
-            time = it.time
-
+            time = it.time,
+            url = it.url
         )
     }
 }
 
 fun List<CharSequence>.toEmojiShopModel(): List<EmojiShopModel> {
-    return map{
+    return map {
         EmojiShopModel(
             unicode = it.toString(),
             title = "",

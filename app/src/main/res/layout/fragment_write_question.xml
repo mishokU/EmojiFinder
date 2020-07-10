@@ -105,10 +105,12 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/sent_question_btn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_height="60dp"
                 android:fontFamily="@font/ru_eng_sriracha"
                 app:cornerRadius="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
                 android:textAllCaps="false"
                 android:text="@string/sent"
                 app:backgroundTint="@color/buttonBlueColor"/>

@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.example.emojifinder.R
-import com.example.emojifinder.ui.baseDialog.BaseDialog
+import com.example.emojifinder.ui.base.BaseDialog
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress

@@ -18,14 +18,14 @@ class FirebaseTranslator : FirebaseInit() {
         .setTargetLanguage(deviceLanguage())
         .build()
 
-    private fun deviceLanguage(): Int {
-        println(Locale.getDefault().language)
-        return when(Locale.getDefault().language){
-            "en" -> FirebaseTranslateLanguage.EN
-            "ru" -> FirebaseTranslateLanguage.RU
-            else -> FirebaseTranslateLanguage.EN
-        }
-    }
+//    private fun deviceLanguage(): Int {
+//        println(Locale.getDefault().language)
+//        return when(Locale.getDefault().language){
+//            "en" -> FirebaseTranslateLanguage.EN
+//            "ru" -> FirebaseTranslateLanguage.RU
+//            else -> FirebaseTranslateLanguage.EN
+//        }
+//    }
 
 
 }

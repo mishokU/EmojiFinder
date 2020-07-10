@@ -7,8 +7,7 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
-import com.example.emojifinder.ui.baseDialog.BaseDialog
-import com.google.android.material.button.MaterialButton
+import com.example.emojifinder.ui.base.BaseDialog
 import dagger.android.support.DaggerFragment
 
 enum class State{LOST, FINISHED}

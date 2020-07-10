@@ -2,7 +2,7 @@ package com.example.emojifinder.ui.constructor.dialogs
 
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
-import com.example.emojifinder.ui.baseDialog.BaseDialog
+import com.example.emojifinder.ui.base.BaseDialog
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 

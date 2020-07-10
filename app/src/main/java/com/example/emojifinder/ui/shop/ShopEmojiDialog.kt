@@ -2,16 +2,13 @@ package com.example.emojifinder.ui.shop
 
 import android.app.Dialog
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.emoji.widget.EmojiAppCompatEditText
 import com.example.emojifinder.R
 import com.example.emojifinder.ui.account.AccountAvatarFragment
-import com.example.emojifinder.ui.baseDialog.BaseDialog
+import com.example.emojifinder.ui.base.BaseDialog
 import com.example.emojifinder.ui.utils.EmojiCost
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment

@@ -187,4 +187,5 @@
     <string name="another_question">Another Question?</string>
     <string name="arcade_game">Arcade Game</string>
     <string name="play">Play</string>
+    <string name="set_level_picture">Set level picture</string>
 </resources>

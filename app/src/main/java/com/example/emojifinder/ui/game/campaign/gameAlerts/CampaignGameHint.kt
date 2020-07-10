@@ -1,11 +1,9 @@
 package com.example.emojifinder.ui.game.campaign.gameAlerts
 
 import android.annotation.SuppressLint
-import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import com.example.emojifinder.R
-import com.example.emojifinder.ui.baseDialog.BaseDialog
+import com.example.emojifinder.ui.base.BaseDialog
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment

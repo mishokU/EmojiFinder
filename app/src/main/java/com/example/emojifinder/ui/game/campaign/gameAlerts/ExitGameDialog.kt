@@ -1,12 +1,9 @@
 package com.example.emojifinder.ui.game.campaign.gameAlerts
 
-import android.app.Dialog
-import android.view.Window
 import android.widget.Switch
-import androidx.core.content.ContextCompat
 import com.example.emojifinder.R
 import com.example.emojifinder.domain.prefs.SettingsPrefs
-import com.example.emojifinder.ui.baseDialog.BaseDialog
+import com.example.emojifinder.ui.base.BaseDialog
 import com.example.emojifinder.ui.main.MainActivity
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment

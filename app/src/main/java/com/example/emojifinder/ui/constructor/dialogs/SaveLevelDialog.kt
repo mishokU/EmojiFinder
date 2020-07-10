@@ -1,12 +1,12 @@
 package com.example.emojifinder.ui.constructor.dialogs
 
-import android.app.Dialog
-import android.view.Window
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.widget.EditText
-import androidx.core.content.ContextCompat
+import android.widget.ImageButton
 import com.example.emojifinder.R
 import com.example.emojifinder.data.db.local.converter.LevelStatus
-import com.example.emojifinder.ui.baseDialog.BaseDialog
+import com.example.emojifinder.ui.base.BaseDialog
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
@@ -44,7 +44,7 @@ object SaveLevelDialog {
         return dialogView.findViewById(R.id.level_name)
     }
 
-    fun getTimeLabel() : EditText {
+    private fun getTimeLabel() : EditText {
         return dialogView.findViewById(R.id.level_constructor_time)
     }
 
@@ -72,7 +72,8 @@ object SaveLevelDialog {
                 id = 0,
                 title = getNameLabel().text.toString(),
                 time = getTimeLabel().text.toString().toInt(),
-                status = LevelStatus.SAVED
+                status = LevelStatus.SAVED,
+                url = ""
             )
         }
         return null

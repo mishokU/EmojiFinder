@@ -1,14 +1,11 @@
 package com.example.emojifinder.ui.boxes
 
-import android.app.Dialog
-import android.view.Window
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emojifinder.R
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.ShopViewModel
-import com.example.emojifinder.ui.baseDialog.BaseDialog
+import com.example.emojifinder.ui.base.BaseDialog
 import dagger.android.support.DaggerFragment
 
 object EmojisBoxDialog {

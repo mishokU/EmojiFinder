@@ -11,15 +11,17 @@ import com.example.emojifinder.data.db.local.models.SmallLevelModelLocal
 import com.example.emojifinder.data.db.local.room.dao.EmojisDao
 import com.example.emojifinder.data.db.local.room.dao.LevelMainInfoDao
 
-@Database(entities = [EmojiShopModelLocal::class, SmallLevelModelLocal::class],
-    version = 3, exportSchema = false)
+@Database(
+    entities = [EmojiShopModelLocal::class, SmallLevelModelLocal::class],
+    version = 3, exportSchema = false
+)
 @TypeConverters(
     StatusConverter::class
 )
 abstract class LevelsDatabase : RoomDatabase() {
 
     abstract fun emojisDao(): EmojisDao
-    abstract fun levelDao() : LevelMainInfoDao
+    abstract fun levelDao(): LevelMainInfoDao
 
     companion object {
 
@@ -30,7 +32,7 @@ abstract class LevelsDatabase : RoomDatabase() {
             synchronized(this) {
                 var instance = INSTANCE
 
-                if(instance == null){
+                if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         LevelsDatabase::class.java,

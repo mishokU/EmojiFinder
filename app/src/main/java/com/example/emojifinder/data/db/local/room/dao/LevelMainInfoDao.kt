@@ -14,10 +14,10 @@ interface LevelMainInfoDao {
     fun insert(level: SmallLevelModelLocal)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(list : List<SmallLevelModelLocal>)
+    fun insertAll(list: List<SmallLevelModelLocal>)
 
     @Query("Select * from small_levels_table")
-    fun getLevels() : LiveData<List<SmallLevelModelLocal>>
+    fun getLevels(): LiveData<List<SmallLevelModelLocal>>
 
     @Query("Delete from small_levels_table")
     fun deleteAll()

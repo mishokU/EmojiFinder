@@ -1,23 +1,28 @@
 package com.example.emojifinder.ui.constructor.dialogs
 
-import android.app.Dialog
-import android.view.Window
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.RippleDrawable
+import android.net.Uri
+import android.util.Log
 import android.widget.EditText
-import androidx.core.content.ContextCompat
+import android.widget.ImageButton
 import com.example.emojifinder.R
 import com.example.emojifinder.data.db.local.converter.LevelStatus
-import com.example.emojifinder.ui.baseDialog.BaseDialog
+import com.example.emojifinder.ui.base.BaseDialog
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
 object SentLevelDialog {
 
-    lateinit var dialogView : BaseDialog
+    lateinit var dialogView: BaseDialog
     private lateinit var fragment: DaggerFragment
-    private lateinit var close : MaterialButton
+    private lateinit var close: MaterialButton
+    private lateinit var image: ImageButton
+    private lateinit var imageUri : Uri
 
-    fun create(fragment: DaggerFragment){
+    fun create(fragment: DaggerFragment) {
         this.fragment = fragment
         createDialog()
     }
@@ -26,55 +31,66 @@ object SentLevelDialog {
         dialogView = BaseDialog(fragment.requireContext(), R.style.CustomDialog)
         dialogView.setCancelable(false)
         dialogView.setContentView(R.layout.sent_level_dialog)
+
+        close = dialogView.findViewById(R.id.cancel_sent_level)
+        image = dialogView.findViewById(R.id.level_sent_picture)
         close()
     }
 
-    fun open(){
+    fun open() {
         dialogView.show()
     }
 
-    fun getNameLabel() : EditText {
+    private fun getNameLabel(): EditText {
         return dialogView.findViewById(R.id.level_name_sent)
     }
 
-    fun getTimeLabel() : EditText {
+    private fun getTimeLabel(): EditText {
         return dialogView.findViewById(R.id.level_constructor_time_sent)
     }
 
+    fun getLevelPicture(): ImageButton {
+        return image
+    }
+
     fun isNotEmpty(): Boolean {
-        return if(getNameLabel().text.toString() != "" && getTimeLabel().text.toString() != ""){
+        return if (getNameLabel().text.toString() != "" && getTimeLabel().text.toString() != "") {
             true
         } else {
-            if(getNameLabel().text.toString() == ""){
+            if (getNameLabel().text.toString() == "") {
                 getNameLabel().error = fragment.resources.getString(R.string.level_name_is_empty)
             }
-            if(getTimeLabel().text.toString() == ""){
+            if (getTimeLabel().text.toString() == "") {
                 getTimeLabel().error = fragment.resources.getString(R.string.set_level_time)
             }
             false
         }
     }
 
+    fun setImage(data: Uri?) {
+        image.setImageURI(data)
+    }
+
     fun getSmallLevelModel(): SmallLevelModel? {
-        if(getTimeLabel().text.toString() != ""){
+        if (getTimeLabel().text.toString() != "") {
             return SmallLevelModel(
                 id = 0,
                 title = getNameLabel().text.toString(),
                 time = getTimeLabel().text.toString().toInt(),
-                status = LevelStatus.ACCEPTED
+                status = LevelStatus.ACCEPTED,
+                url = "image/${getNameLabel().text}"
             )
         }
         return null
     }
 
-    private fun close(){
-        close = dialogView.findViewById(R.id.cancel_sent_level)
+    private fun close() {
         close.setOnClickListener {
             dialogView.dismiss()
         }
     }
 
-    fun getSentLevelBtn() : MaterialButton {
+    fun getSentLevelBtn(): MaterialButton {
         return dialogView.findViewById(R.id.sent_level_dialog)
     }
 
@@ -82,4 +98,6 @@ object SentLevelDialog {
         getNameLabel().setText(level.title)
         getTimeLabel().setText(level.time.toString())
     }
+
+    fun getImage(): Bitmap? = (image.drawable as BitmapDrawable).bitmap
 }

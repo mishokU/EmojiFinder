@@ -15,10 +15,10 @@ interface EmojisDao {
     fun insert(albumLocalModel: EmojiShopModelLocal)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(list : List<EmojiShopModelLocal>)
+    fun insertAll(list: List<EmojiShopModelLocal>)
 
     @Query("Select * from levels_table where levelTitle = :title")
-    fun getEmojis(title : String) : LiveData<List<EmojiShopModelLocal>>
+    fun getEmojis(title: String): LiveData<List<EmojiShopModelLocal>>
 
     @Query("Delete from levels_table")
     fun deleteAll()

@@ -18,7 +18,7 @@ class FirebaseAuthHandler : Auth, FirebaseInit() {
         return try {
             val result = mAuth.signInWithEmailAndPassword(data.email, data.password).await()
 
-            downloadLanguage()
+            //downloadLanguage()
 
             Result.Success(result)
         }catch (e : Exception){

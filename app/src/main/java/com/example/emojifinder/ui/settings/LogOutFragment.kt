@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
 import com.example.emojifinder.R
-import com.example.emojifinder.ui.baseDialog.BaseDialog
 import dagger.android.support.DaggerDialogFragment
 
 

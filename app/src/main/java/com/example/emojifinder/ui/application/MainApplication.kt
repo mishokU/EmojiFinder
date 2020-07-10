@@ -8,6 +8,7 @@ import androidx.emoji.text.FontRequestEmojiCompatConfig
 import com.example.emojifinder.BuildConfig
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.DaggerAppComponent
+import com.example.emojifinder.domain.glide.MyAppGlideModule
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
 import com.jakewharton.threetenabp.AndroidThreeTen
