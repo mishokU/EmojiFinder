@@ -25,16 +25,16 @@ class AccountFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var viewModel : AccountViewModel
+    lateinit var viewModel: AccountViewModel
 
-    var login : String = ""
+    var login: String = ""
 
-    lateinit var binding : FragmentAccountBinding
-    lateinit var profile : MainAccountModel
+    lateinit var binding: FragmentAccountBinding
+    lateinit var profile: MainAccountModel
     lateinit var adapter: UserLevelRecyclerViewAdapter
 
-    lateinit var userAdapter : EmojisRecyclerViewAdapter
-    lateinit var userEmojisAdapter : EmojisRecyclerViewAdapter
+    lateinit var userAdapter: EmojisRecyclerViewAdapter
+    lateinit var userEmojisAdapter: EmojisRecyclerViewAdapter
 
 
     override fun onCreateView(
@@ -65,15 +65,16 @@ class AccountFragment : DaggerFragment() {
         return binding.root
     }
 
-    private fun initUserEmojisAdapter(){
-        userEmojisAdapter = EmojisRecyclerViewAdapter(EmojisRecyclerViewAdapter.OnShopItemClickListener{
-            //handleEmojiNavigator(it)
-        }, binding.userEmojisProgressBar,false)
+    private fun initUserEmojisAdapter() {
+        userEmojisAdapter = EmojisRecyclerViewAdapter(
+            EmojisRecyclerViewAdapter.OnShopItemClickListener {},
+            binding.userEmojisProgressBar, false
+        )
         binding.userEmojisPlaceRv.adapter = userEmojisAdapter
     }
 
     private fun initValues() {
-        binding.emojiBoxEt.setText("\uD83C\uDF81")
+        binding.emojiBoxEt.setText("\uD83C\uDF9F️")
         binding.emosEt.setText("\uD83D\uDCB0")
         binding.emojiEt.setText("\uD83D\uDE00")
         binding.scoreEmoji.setText("\uD83C\uDFAF")
@@ -94,7 +95,7 @@ class AccountFragment : DaggerFragment() {
         viewModel.fetchUserValues()
         viewModel.userValuesResponse.observe(viewLifecycleOwner, Observer {
             it?.let { values ->
-                when(values){
+                when (values) {
                     is Result.Success -> {
                         binding.emosCount.text = values.data.emos.toString()
                         binding.boxesCount.text = values.data.boxes.toString()
@@ -112,8 +113,10 @@ class AccountFragment : DaggerFragment() {
 
     private fun initButtons() {
         binding.profilePlace.setOnClickListener {
-            this.findNavController().navigate(AccountFragmentDirections
-                .actionAccountFragmentToMainAccountInfoFragment(profile))
+            this.findNavController().navigate(
+                AccountFragmentDirections
+                    .actionAccountFragmentToMainAccountInfoFragment(profile)
+            )
         }
 
         binding.ratingBtn.setOnClickListener {
@@ -123,15 +126,17 @@ class AccountFragment : DaggerFragment() {
     }
 
     private fun initUserLevelsAdapter() {
-        adapter = UserLevelRecyclerViewAdapter(UserLevelRecyclerViewAdapter.OnLevelClickListener {},
-            requireContext())
+        adapter = UserLevelRecyclerViewAdapter(
+            UserLevelRecyclerViewAdapter.OnLevelClickListener {},
+            requireContext()
+        )
         binding.levelsRecyclerView.adapter = adapter
     }
 
     private fun loadUserMainInfo() {
         viewModel.userMainDataResponse.observe(viewLifecycleOwner, Observer {
             it?.let {
-                when(it){
+                when (it) {
                     is Result.Loading -> {
                         binding.loadingProfile.visibility = View.VISIBLE
                     }
@@ -150,11 +155,11 @@ class AccountFragment : DaggerFragment() {
         })
     }
 
-    private fun initUserEmojisViewModel(){
+    private fun initUserEmojisViewModel() {
         viewModel.fetchUserEmojis()
         viewModel.userEmojisResponse.observe(viewLifecycleOwner, Observer {
             it?.let { userEmojis ->
-                when(userEmojis){
+                when (userEmojis) {
                     is Result.Loading -> {
                         binding.userEmojisProgressBar.visibility = View.VISIBLE
                     }
@@ -179,17 +184,18 @@ class AccountFragment : DaggerFragment() {
     private fun observeLevelsStatistic() {
         viewModel.levelsStatisticResponse.observe(viewLifecycleOwner, Observer {
             it?.let {
-                when(it){
+                when (it) {
                     is Result.Loading -> {
                         binding.loadingLevelsAccount.visibility = View.VISIBLE
                     }
                     is Result.Success -> {
                         binding.loadingLevelsAccount.visibility = View.GONE
-                        if(!it.data.isNullOrEmpty()){
+                        if (!it.data.isNullOrEmpty()) {
                             adapter.submitList(it.data)
                         } else {
                             binding.emptyPlace.visibility = View.VISIBLE
-                            binding.errorTextAccount.text = resources.getString(R.string.empty_levels)
+                            binding.errorTextAccount.text =
+                                resources.getString(R.string.empty_levels)
                         }
                     }
                     is Result.Error -> {

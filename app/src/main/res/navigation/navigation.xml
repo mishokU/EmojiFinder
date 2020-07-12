@@ -70,9 +70,6 @@
             android:id="@+id/action_mainMenuFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
         <action
-            android:id="@+id/action_mainMenuFragment_to_gameFragment"
-            app:destination="@id/gameFragment" />
-        <action
             android:id="@+id/action_mainMenuFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <action
@@ -132,9 +129,7 @@
 
         <action
             android:id="@+id/action_categotyGameFragment_to_gameFragment"
-            app:destination="@id/gameFragment"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@anim/fragment_fade_exit" />
+            app:destination="@id/gameFragment" />
 
 
     </fragment>

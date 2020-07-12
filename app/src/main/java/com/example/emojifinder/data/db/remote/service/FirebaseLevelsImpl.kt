@@ -12,7 +12,7 @@ import java.lang.Exception
 
 class FirebaseLevelsImpl : FirebaseInit(), FirebaseLevels {
 
-    override suspend fun fetchLevel(title: String?) : Result<List<EmojiShopModel?>>{
+    override suspend fun fetchLevel(title: String?) : Result<List<EmojiShopModel>>{
         return try {
             val documents = mFireStore
                 .collection("levels")
@@ -21,7 +21,7 @@ class FirebaseLevelsImpl : FirebaseInit(), FirebaseLevels {
                 .document("level")
                 .get().await()
 
-            val levelSnapshot : List<EmojiShopModel?> = documents.toObject(ListEmojiShopModel::class.java)!!.level
+            val levelSnapshot : List<EmojiShopModel> = documents.toObject(ListEmojiShopModel::class.java)!!.level
             for(level in levelSnapshot){
                 //mNaturalLanguage.translate(level!!.title)
             }

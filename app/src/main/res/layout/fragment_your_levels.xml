@@ -40,6 +40,8 @@
                     android:layout_height="wrap_content"
                     android:layout_above="@id/constructor"
                     android:layout_alignParentTop="true"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                     tools:listitem="@layout/user_level_model" />

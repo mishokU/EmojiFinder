@@ -22,13 +22,6 @@ object EmojisBoxDialog {
     }
 
     fun createRecyclerView(shopEmojis: ShopViewModel) {
-
-        val recyclerView : RecyclerView = dialogView.findViewById(R.id.chest_rv)
-        adapter = LootBoxRecyclerViewAdapter(LootBoxRecyclerViewAdapter.OnShopItemClickListener{
-
-        })
-        recyclerView.adapter = adapter
-
         fetchEmojis(shopEmojis)
         showDialog()
     }

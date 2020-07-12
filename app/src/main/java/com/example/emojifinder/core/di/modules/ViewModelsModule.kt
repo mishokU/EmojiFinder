@@ -10,6 +10,7 @@ import com.example.emojifinder.domain.viewModels.SharedViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import javax.inject.Singleton
 
 @Module
 abstract class ViewModelsModule {
@@ -65,6 +66,7 @@ abstract class ViewModelsModule {
 
     @Binds
     @IntoMap
+    @Singleton
     @ViewModelKey(ConstructorViewModel::class)
     abstract fun bindLevelConstructor(viewModel: ConstructorViewModel): ViewModel
 

@@ -210,6 +210,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:spanCount="5"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
                     tools:listitem="@layout/daily_item"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
 

@@ -27,16 +27,4 @@ open class BaseDialog(context: Context, customDialog: Int) : Dialog(context, cus
         window!!.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         window!!.attributes.windowAnimations = android.R.anim.slide_in_left
     }
-
-    override fun show() {
-//        window!!.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-//            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-        //window!!.decorView.systemUiVisibility = ui_flags
-
-        // Show the dialog with NavBar hidden.
-        super.show()
-
-        // Set the dialog to focusable again.
-        //window!!.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-    }
 }

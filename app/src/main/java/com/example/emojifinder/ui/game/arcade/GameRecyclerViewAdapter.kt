@@ -10,30 +10,31 @@ import com.example.emojifinder.ui.shop.EmojiShopModel
 import kotlinx.android.synthetic.main.emoji_game_item.view.*
 
 
-class GameRecyclerViewAdapter(private val onClickListener : OnEmojiClickListener) : ListAdapter<EmojiShopModel,
-        GameRecyclerViewAdapter.GameViewHolder>(
-    DiffCallback
-) {
+class GameRecyclerViewAdapter(private val onClickListener: OnEmojiClickListener) :
+    ListAdapter<EmojiShopModel,
+            GameRecyclerViewAdapter.GameViewHolder>(
+        DiffCallback
+    ) {
 
-    companion object DiffCallback: DiffUtil.ItemCallback<EmojiShopModel>()     {
+    companion object DiffCallback : DiffUtil.ItemCallback<EmojiShopModel>() {
 
         override fun areItemsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem === newItem
+            return oldItem.text == newItem.text
         }
 
         override fun areContentsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem.text == newItem.text
+            return oldItem == newItem
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : GameViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         return GameViewHolder(
             EmojiGameItemBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
 
-    override fun onBindViewHolder(holder: GameViewHolder, position: Int){
+    override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val emoji = getItem(position)
         holder.itemView.setOnClickListener {
             onClickListener.onClick(emoji)

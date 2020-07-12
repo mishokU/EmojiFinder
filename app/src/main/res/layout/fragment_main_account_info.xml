@@ -62,7 +62,6 @@
                         android:layout_margin="10dp"
                         android:background="@null"
                         android:maxLines="1"
-                        android:src="@drawable/emoji_finder"
                         android:text="@{profile.avatar}"
                         android:textAlignment="center"
                         android:textSize="40sp" />

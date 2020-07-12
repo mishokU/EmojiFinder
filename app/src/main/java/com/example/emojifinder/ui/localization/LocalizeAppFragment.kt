@@ -36,7 +36,7 @@ class LocalizeAppFragment : DaggerFragment() {
 
     private fun initSaveLanguageButton() {
         binding.saveLanguageBtn.setOnClickListener {
-            //LocaleHelper.setLocale(requireContext(), getSelectedLanguage())
+            LocaleHelper.setLocale(requireContext(), getSelectedLanguage())
             //requireActivity().recreate()
         }
     }

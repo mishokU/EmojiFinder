@@ -10,30 +10,31 @@ import com.example.emojifinder.databinding.EmojiGameItemBinding
 import kotlinx.android.synthetic.main.emoji_game_item.view.*
 
 
-class GameKeyBoardRecyclerViewAdapter(private val onClickListener : OnEmojiClickListener) : ListAdapter<EmojiShopModel,
-        GameKeyBoardRecyclerViewAdapter.KeyboardViewHolder>(
-    DiffCallback
-) {
+class GameKeyBoardRecyclerViewAdapter(private val onClickListener: OnEmojiClickListener) :
+    ListAdapter<EmojiShopModel,
+            GameKeyBoardRecyclerViewAdapter.KeyboardViewHolder>(
+        DiffCallback
+    ) {
 
-    companion object DiffCallback: DiffUtil.ItemCallback<EmojiShopModel>()     {
+    companion object DiffCallback : DiffUtil.ItemCallback<EmojiShopModel>() {
 
         override fun areItemsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem === newItem
+            return oldItem.order == newItem.order
         }
 
         override fun areContentsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem.unicode == newItem.unicode
+            return oldItem == newItem
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : KeyboardViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KeyboardViewHolder {
         return KeyboardViewHolder(
             EmojiGameItemBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
 
-    override fun onBindViewHolder(holder: KeyboardViewHolder, position: Int){
+    override fun onBindViewHolder(holder: KeyboardViewHolder, position: Int) {
         val emoji = getItem(position)
         holder.itemView.setOnClickListener {
             onClickListener.onClick(emoji)

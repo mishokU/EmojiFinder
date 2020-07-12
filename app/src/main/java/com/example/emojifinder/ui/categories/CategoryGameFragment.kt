@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentCategotyGameBinding
 import com.example.emojifinder.domain.viewModels.CategoriesViewModel
-import com.example.emojifinder.domain.viewModels.LogInViewModel
 import dagger.android.support.DaggerFragment
 import com.example.emojifinder.domain.result.Result
+import com.example.emojifinder.ui.game.campaign.gameAlerts.ShowStartGameButton
 import javax.inject.Inject
 
 
@@ -44,13 +42,11 @@ class CategoryGameFragment : DaggerFragment() {
     private fun initLevel() {
         viewModel.gameCategory.observe(viewLifecycleOwner, Observer {
             it?.let {
-                this.findNavController().navigate(
-                    CategoryGameFragmentDirections
-                        .actionCategotyGameFragmentToGameFragment(
-                            it,
-                            adapter.items.toTypedArray()
-                        )
-                )
+                this.findNavController().navigate( CategoryGameFragmentDirections
+                    .actionCategotyGameFragmentToGameFragment(
+                        it,
+                        adapter.items.toTypedArray()
+                    ))
                 viewModel.gameFragmentComplete()
             }
         })
@@ -68,7 +64,6 @@ class CategoryGameFragment : DaggerFragment() {
                     is Result.Success -> {
                         binding.progressBar.visibility = View.INVISIBLE
                         binding.errorMessage.visibility = View.INVISIBLE
-
                         adapter.setLevels(result.data as List<SmallLevelModel>)
                     }
                     is Result.Error -> {

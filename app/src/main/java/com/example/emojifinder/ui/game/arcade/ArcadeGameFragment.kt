@@ -15,6 +15,7 @@ import androidx.emoji.widget.EmojiAppCompatEditText
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.ArcadeGameLayoutBinding
 import com.example.emojifinder.domain.adds.INTERSTITIAL_ID
@@ -74,8 +75,10 @@ class ArcadeGameFragment : DaggerFragment() {
 
         viewModelAccount = injectViewModel(viewModelFactoryAccount)
 
-        ArcadeGameHint.create(this)
         EndGameDialog.create(this)
+
+        initAudioButton()
+        setMusicSwitcher()
 
         initEndGameButtons()
 
@@ -95,6 +98,7 @@ class ArcadeGameFragment : DaggerFragment() {
 
     private fun showGameHint() {
         if(!showGameHintPrefs.isArcadeHintShown()){
+            ArcadeGameHint.create(this)
             ArcadeGameHint.show()
             ArcadeGameHint.getStartGameButton().setOnClickListener {
                 initTimer()
@@ -158,8 +162,6 @@ class ArcadeGameFragment : DaggerFragment() {
         animation.pause()
 
         ExitGameDialog.create(this)
-        ExitGameDialog.setMusicSwitcher(settingsPrefs)
-
         ExitGameDialog.open()
 
         ExitGameDialog.getGameExitButton().setOnClickListener {
@@ -201,9 +203,9 @@ class ArcadeGameFragment : DaggerFragment() {
 
     @SuppressLint("ObjectAnimatorBinding")
     private fun initTimer() {
-        binding.gameProgressBar.max = 10 * 100
+        binding.gameProgressBar.max = 60 * 100
         animation = ObjectAnimator.ofInt(binding.gameProgressBar,"progress", 60*100, 0)
-        animation.duration = (10 * 1000).toLong()
+        animation.duration = (60 * 1000).toLong()
         animation.interpolator = LinearInterpolator()
 
         animation.addUpdateListener {
@@ -307,6 +309,29 @@ class ArcadeGameFragment : DaggerFragment() {
             }.duration = 500
     }
 
+    private fun setMusicSwitcher() {
+        binding.arcadeGameAudioBtn.setOnClickListener {
+            if(settingsPrefs.isPlayMusic()){
+                (requireActivity() as MainActivity).mediaPlayerPool.pauseBackground()
+                settingsPrefs.changeMusic(!settingsPrefs.isPlayMusic())
+                initAudioButton()
+            } else {
+                settingsPrefs.changeMusic(!settingsPrefs.isPlayMusic())
+                (requireActivity() as MainActivity).mediaPlayerPool.createPlayers()
+                (requireActivity() as MainActivity).mediaPlayerPool.playBackground()
+                initAudioButton()
+            }
+        }
+    }
+
+    private fun initAudioButton() {
+        if(settingsPrefs.isPlayMusic()){
+            binding.arcadeGameAudioBtn.icon = resources.getDrawable(R.drawable.icons8_audio_24px)
+        } else {
+            binding.arcadeGameAudioBtn.icon = resources.getDrawable(R.drawable.icons8_no_audio_24px)
+        }
+    }
+
     private fun initViewModel() {
         viewModelShop = injectViewModel(viewModelFactoryShop)
         viewModelShop.emojisResponse.observe(viewLifecycleOwner, Observer {
@@ -316,17 +341,11 @@ class ArcadeGameFragment : DaggerFragment() {
                         binding.levelProgressBar.visibility = View.VISIBLE
                     }
                     is Result.Success -> {
-                        binding.levelProgressBar.visibility = View.INVISIBLE
-
                         allEmojis = it.data as MutableList<EmojiShopModel?>
                         createGamePlace(allEmojis)
                         if(showGameHintPrefs.isArcadeHintShown()){
                             animation.start()
                         }
-                    }
-
-                    is Result.Error -> {
-
                     }
                 }
             }
@@ -352,7 +371,7 @@ class ArcadeGameFragment : DaggerFragment() {
             emoji.setText(random?.text)
             emoji.alpha = 0.5f
         }
-
+        binding.levelProgressBar.visibility = View.GONE
     }
 
 }

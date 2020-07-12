@@ -1,395 +1,460 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="values"
             type="com.example.emojifinder.data.db.remote.models.account.AccountValuesModel" />
     </data>
 
     <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@drawable/background_gradient"
+        android:background="@color/backgroundDesignColor"
         tools:context=".ui.boxes.LootBoxesFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
-            android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/values_place"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="20dp">
-
-            <RelativeLayout
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/user_values"
-                android:layout_marginEnd="2dp"
-                android:padding="2dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/emos_pic"/>
-
-                    <TextView
-                        android:id="@+id/emos_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/background_color"
-                        android:layout_gravity="center"
-                        android:text="@{String.valueOf(values.emos)}"/>
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/user_values"
-                android:layout_marginEnd="2dp"
-                android:padding="2dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/icons8_happy_96px"/>
-
-                    <TextView
-                        android:id="@+id/emojis_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/background_color"
-                        android:layout_gravity="center"
-                        android:text="@{String.valueOf(values.emojis)}"/>
-
-                </LinearLayout>
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/user_values"
-                android:padding="2dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/icons8_closed_treasure_chest_128px"/>
-
-                    <TextView
-                        android:id="@+id/boxes_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/background_color"
-                        android:layout_gravity="center"
-                        android:text="@{String.valueOf(values.boxes)}"/>
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/box_place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="100dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/emoji_box_place_style">
+            android:layout_marginBottom="@dimen/margin_layout_bottom"
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/shop_place"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/emoji_shop_top_place_style">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/emoji_box"
-                    android:textAlignment="center"
-                    android:textColor="@color/background_color"
-                    android:textSize="16sp"/>
-
-            </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:maxLines="2"
+                android:text="@string/check_your_luck"
+                android:textColor="@color/textOrangeColor"
+                android:textSize="40sp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_above="@id/roll_emoji_place"
-                android:orientation="horizontal"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/shop_place">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/left_arrow"
-                android:layout_width="20dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_weight="0"
-                android:scaleType="center"
-                android:layout_marginStart="10dp"
-                app:tint="@color/main_color"
-                android:src="@drawable/icons8_back_16px_left"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/chest_rv"
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
                     android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="10dp"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/chest_item" />
+                    android:padding="2dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/second_chest_rv"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center">
+
+                        <androidx.emoji.widget.EmojiAppCompatEditText
+                            android:id="@+id/emos_et"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:src="@drawable/emos_pic"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/emos_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/ru_eng_sriracha"
+                            android:text="@{String.valueOf(values.emos)}"
+                            android:textColor="@color/buttonBlueColor"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/chest_item" />
+                    android:padding="2dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/third_chest_rv"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center">
+
+                        <androidx.emoji.widget.EmojiAppCompatEditText
+                            android:id="@+id/emoji_et"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:focusable="false" />
+
+                        <TextView
+                            android:id="@+id/emojis_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/ru_eng_sriracha"
+                            android:text="@{String.valueOf(values.emojis)}"
+                            android:textColor="@color/buttonBlueColor"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/chest_item" />
+                    android:padding="2dp">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/right_arrow"
-                    android:layout_width="20dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:scaleType="center"
-                    android:layout_marginEnd="10dp"
-                    app:tint="@color/main_color"
-                    android:layout_weight="0"
-                    android:src="@drawable/icons8_back_16px_right"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center">
 
+                        <androidx.emoji.widget.EmojiAppCompatEditText
+                            android:id="@+id/emoji_box_et"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:focusable="false" />
+
+                        <TextView
+                            android:id="@+id/boxes_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/ru_eng_sriracha"
+                            android:text="@{String.valueOf(values.boxes)}"
+                            android:textColor="@color/buttonBlueColor"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
             </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/roll_emoji_place"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true">
+                android:layout_height="wrap_content">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/roll_emoji_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cornerRadius="20dp"
-                    app:backgroundTint="@color/blue_color"
-                    android:text="@string/roll"
-                    android:textSize="20sp"
-                    android:textAllCaps="false" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/roulette_constraint"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_centerInParent="true">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/empty_wheel"
+                        tools:layout_editor_absoluteX="64dp"
+                        tools:layout_editor_absoluteY="-62dp" />
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/appCompatImageView3"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:rotation="60"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toTopOf="@+id/view"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.892"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/emojiAppCompatEditText3"
+                        app:layout_constraintVertical_bias="0.18" />
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="21dp"
+                        android:layout_height="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView2"
+                        app:layout_constraintHorizontal_bias="0.501"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatImageView2"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatImageView2" />
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emojiAppCompatEditText11"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toTopOf="@+id/view"
+                        app:layout_constraintEnd_toStartOf="@+id/emojiAppCompatEditText3"
+                        app:layout_constraintHorizontal_bias="0.55"
+                        app:layout_constraintStart_toEndOf="@+id/emojiAppCompatEditText2"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatImageView2"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emojiAppCompatEditText3"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:rotation="30"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toTopOf="@+id/view"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView2"
+                        app:layout_constraintHorizontal_bias="0.738"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatImageView2"
+                        app:layout_constraintVertical_bias="0.267" />
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emojiAppCompatEditText5"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="24dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:rotation="-60"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toTopOf="@+id/view"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView2"
+                        app:layout_constraintHorizontal_bias="0.103"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatImageView2"
+                        app:layout_constraintVertical_bias="0.87" />
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emojiAppCompatEditText"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:rotation="-120"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+                        app:layout_constraintEnd_toStartOf="@+id/view"
+                        app:layout_constraintHorizontal_bias="0.28"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view"
+                        app:layout_constraintVertical_bias="0.267" />
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emojiAppCompatEditText6"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:rotation="-150"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+                        app:layout_constraintEnd_toStartOf="@+id/emojiAppCompatEditText9"
+                        app:layout_constraintHorizontal_bias="0.493"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view"
+                        app:layout_constraintVertical_bias="0.752" />
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emojiAppCompatEditText7"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="68dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:rotation="90"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toTopOf="@+id/emojiAppCompatEditText10"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView2"
+                        app:layout_constraintStart_toEndOf="@+id/view"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView3" />
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emojiAppCompatEditText4"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:rotation="-90"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/view"
+                        app:layout_constraintHorizontal_bias="0.16"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatImageView2"
+                        app:layout_constraintTop_toBottomOf="@+id/emojiAppCompatEditText5"
+                        app:layout_constraintVertical_bias="0.078" />
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emojiAppCompatEditText8"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="64dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:rotation="-180"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view"
+                        app:layout_constraintVertical_bias="0.52" />
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emojiAppCompatEditText9"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:rotation="150"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.707"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view"
+                        app:layout_constraintVertical_bias="0.663" />
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emojiAppCompatEditText10"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:rotation="120"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.892"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view"
+                        app:layout_constraintVertical_bias="0.267" />
+
+                    <androidx.emoji.widget.EmojiAppCompatEditText
+                        android:id="@+id/emojiAppCompatEditText2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="20sp"
+                        android:rotation="-30"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toTopOf="@+id/view"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.273"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.267" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    app:srcCompat="@drawable/icons8_next_96px"/>
 
             </RelativeLayout>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/open_chest_placeholder"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:cardCornerRadius="20dp"
-                android:background="@drawable/background_gradient" />
-
-        </RelativeLayout>
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="@dimen/margin_layout_bottom"
-                android:layout_alignParentBottom="true">
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/watch_add_btn"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/roll_wheel_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/buttonBlueColor"
+                    android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:tint="@color/background_color"
-                    android:background="@drawable/shop_corners_style"
-                    android:backgroundTint="@color/blue_color"
-                    android:src="@drawable/icons8_movie_projector_32px"
                     android:textAlignment="center"
-                    android:textSize="18sp"/>
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    app:cornerRadius="10dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/roll_ticket"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/buttonBlueColor"
+                    android:fontFamily="@font/ru_eng_sriracha"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    app:cornerRadius="10dp"/>
+
+
+            </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/buy_chest_btn"
+                android:id="@+id/chest_for_add_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="5dp"
-                android:alpha="0.8"
-                android:text="@string/buy_chest_for_200_emos"
-                android:textSize="20sp"
-                android:textAllCaps="false"
-                app:cornerRadius="20dp"
-                app:backgroundTint="@color/blue_color" />
-
-            </LinearLayout>
-
-            <androidx.emoji.widget.EmojiAppCompatButton
-                android:id="@+id/animated_view"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:textSize="16sp"
-                android:layout_centerInParent="true"
-                android:textAllCaps="false"
-                android:text="@string/open"
-                android:textColor="@color/background_color"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/textOrangeColor"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:text="@string/get_free_chest"
                 android:textAlignment="center"
-                android:background="@drawable/winner_emoji_style"/>
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                app:cornerRadius="10dp"
+                app:icon="@drawable/add_img"
+                app:iconSize="30dp" />
 
-            <LinearLayout
-                android:id="@+id/emoji_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:orientation="vertical"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_below="@id/animated_view"
-                android:layout_centerHorizontal="true">
 
-                <TextView
-                    android:id="@+id/emoji_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:textSize="22sp"
-                    android:textColor="@color/background_color"/>
-
-                <TextView
-                    android:id="@+id/emoji_group"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:textSize="20sp"
-                    android:textColor="@color/background_color" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/emoji_win_buttons"
-                android:layout_width="400dp"
-                android:visibility="invisible"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/emoji_text"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_centerHorizontal="true">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/take_winning_emoji"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    app:backgroundTint="@color/blue_color"
-                    android:text="@string/take"
-                    android:layout_weight="1"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/sell_winning_emoji"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:lines="1"
-                    android:ellipsize="end"
-                    app:backgroundTint="@color/red_color"
-                    android:text="@string/sell"
-                    android:layout_weight="1"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
+        </LinearLayout>
 
     </FrameLayout>
 </layout>

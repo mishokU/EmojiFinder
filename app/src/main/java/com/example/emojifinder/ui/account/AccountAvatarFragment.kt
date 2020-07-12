@@ -102,7 +102,7 @@ class AccountAvatarFragment : DaggerFragment() {
     }
 
     private fun initValues() {
-        binding.emojiBoxEt.setText("\uD83C\uDF81")
+        binding.emojiBoxEt.setText("\uD83C\uDF9F️")
         binding.emosEt.setText("\uD83D\uDCB0")
         binding.emojiEt.setText("\uD83D\uDE00")
     }

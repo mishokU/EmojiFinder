@@ -11,9 +11,9 @@
     <application
         android:name=".ui.application.MainApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/splash_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/splash_logo_round"
         android:supportsRtl="true"
         android:configChanges="orientation"
         android:theme="@style/CustomAppTheme">
@@ -42,7 +42,9 @@
         <activity android:name=".ui.main.MainActivity"
             android:configChanges="orientation"
             android:windowSoftInputMode="adjustNothing"
-            tools:ignore="LockedOrientationActivity">
+                    android:screenOrientation="portrait"
+
+        tools:ignore="LockedOrientationActivity">
         </activity>
 
         <meta-data
@@ -52,8 +54,6 @@
         <receiver android:name=".domain.notifications.NotificationReceiver"/>
 
     </application>
-
-    <!--            android:screenOrientation="portrait"-->
 
 
 </manifest>

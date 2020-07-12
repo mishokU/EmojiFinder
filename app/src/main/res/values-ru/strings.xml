@@ -191,5 +191,9 @@
     <string name="arcade_game">Arcade Game</string>
     <string name="play">Play</string>
     <string name="set_level_picture">Set level picture</string>
+    <string name="level_loading">Loading ...</string>
+    <string name="check_your_luck">Check your luck</string>
+    <string name="_200">200</string>
+    <string name="not_enough_tickets">Not enough tickets</string>
 
 </resources>

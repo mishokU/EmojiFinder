@@ -53,8 +53,6 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-
-
     fun updateUserEmailAndPassword(
         new_email: TextInputEditText,
         new_password: TextInputEditText

@@ -105,6 +105,8 @@
                 android:layout_height="200dp"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="5dp"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
                 android:background="@drawable/your_emojis_style"
                 android:padding="5dp"
                 android:scrollbars="vertical"

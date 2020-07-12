@@ -1,84 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
 
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/count_down_timer"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            app:lottie_rawRes="@raw/count_down"/>
-
-        <RelativeLayout
-            android:id="@+id/loading_game_place"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/background_color"
-            android:orientation="vertical"
-            android:layout_gravity="center">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="vertical">
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/main_menu_frame"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/level_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:fontFamily="@font/ru_eng_sriracha"
-                android:textSize="36sp"
-                android:layout_marginBottom="50dp"/>
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/stay_at_home"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
                 android:layout_gravity="center"
-                app:lottie_rawRes="@raw/stay_at_home"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true" />
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:textSize="36sp" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/start_circle_game_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cornerRadius="80dp"
-                    android:layout_marginTop="40dp"
-                    android:textAlignment="center"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginEnd="40dp"
-                    android:fontFamily="@font/ru_eng_sriracha"
-                    app:backgroundTint="@color/blue_color"
-                    android:textAllCaps="false"
-                    android:textSize="30sp"
-                    android:text="@string/start"/>
+            <androidx.emoji.widget.EmojiAppCompatEditText
+                android:id="@+id/start_emoji"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="54sp" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/back_circle_game_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cornerRadius="80dp"
-                    android:textAlignment="center"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginEnd="40dp"
-                    android:fontFamily="@font/ru_eng_sriracha"
-                    app:backgroundTint="@color/blue_color"
-                    android:textAllCaps="false"
-                    android:textSize="22sp"
-                    android:text="@string/return_to_levels"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/level_loading"
+                android:layout_gravity="center"
+                android:textColor="@color/buttonBlueColor"
+                android:layout_marginTop="20dp"
+                android:textSize="22sp"/>
 
-            </LinearLayout>
 
-        </RelativeLayout>
 
+        </LinearLayout>
 
     </FrameLayout>
 

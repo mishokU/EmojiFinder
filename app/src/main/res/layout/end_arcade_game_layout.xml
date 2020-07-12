@@ -113,26 +113,18 @@
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/try_arcade_game_btn"
-                    android:layout_width="40dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
                     android:scaleType="centerInside"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/restart_lvl_img" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/resume_end_arcade_game_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/resume_game_img" />
-
-                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/exit_arcade_btn"
-                    android:layout_width="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:background="?attr/selectableItemBackgroundBorderless"

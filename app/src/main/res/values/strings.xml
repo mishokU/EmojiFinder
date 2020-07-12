@@ -171,7 +171,7 @@
     <string name="finder">FINDER</string>
     <string name="menu">Menu</string>
     <string name="campaign">Campaign</string>
-    <string name="get_free_chest">GET FREE CHEST</string>
+    <string name="get_free_chest">GET FREE TICKET</string>
     <string name="_249_9">249.9 Р</string>
     <string name="_199_9">199.9 Р</string>
     <string name="starter_box_count">5</string>
@@ -188,4 +188,8 @@
     <string name="arcade_game">Arcade Game</string>
     <string name="play">Play</string>
     <string name="set_level_picture">Set level picture</string>
+    <string name="level_loading">Loading ...</string>
+    <string name="check_your_luck">Check your luck</string>
+    <string name="_200">200</string>
+    <string name="not_enough_tickets">Not enough tickets</string>
 </resources>

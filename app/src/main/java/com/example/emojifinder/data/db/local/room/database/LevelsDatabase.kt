@@ -13,7 +13,7 @@ import com.example.emojifinder.data.db.local.room.dao.LevelMainInfoDao
 
 @Database(
     entities = [EmojiShopModelLocal::class, SmallLevelModelLocal::class],
-    version = 3, exportSchema = false
+    version = 4, exportSchema = false
 )
 @TypeConverters(
     StatusConverter::class
