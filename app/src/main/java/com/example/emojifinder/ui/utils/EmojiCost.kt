@@ -16,6 +16,15 @@ object EmojiCost {
         return cost[2].toInt()
     }
 
+    fun emojiCost(emoji: EmojiShopModel?): Int {
+        return when(emoji?.text?.length){
+            in 1..2 -> 80
+            in 2..4 -> 100
+            in 6..8 -> 120
+            else -> 100
+        }
+    }
+
     fun emojiSellCost(emoji: EmojiShopModel?): CharSequence? {
         return when(emoji?.text?.length){
             in 1..2 -> "Sell for 80 Emos"

@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.children
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.ViewModelFactory
@@ -18,13 +17,13 @@ import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentLevelConstructorBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.ConstructorViewModel
-import com.example.emojifinder.domain.viewModels.ShopViewModel
 import com.example.emojifinder.ui.base.BaseImageFragment
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import com.example.emojifinder.ui.constructor.dialogs.ExitLevelDialog
 import com.example.emojifinder.ui.constructor.dialogs.ResetLevelDialog
 import com.example.emojifinder.ui.constructor.dialogs.SaveLevelDialog
 import com.example.emojifinder.ui.constructor.dialogs.SentLevelDialog
+import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.example.emojifinder.ui.utils.closeFilters
 import com.example.emojifinder.ui.utils.openFilters
@@ -44,10 +43,6 @@ class LevelConstructorFragment : BaseImageFragment() {
     private var isFilterVisible: Boolean = false
     private lateinit var saveItemIcon: MenuItem
     private lateinit var level: SmallLevelModel
-
-    @Inject
-    lateinit var viewModelFactoryShop: ViewModelProvider.Factory
-    private lateinit var viewModelShop: ShopViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -114,8 +109,14 @@ class LevelConstructorFragment : BaseImageFragment() {
             if (SaveLevelDialog.isNotEmpty()) {
                 if (SaveLevelDialog.getSmallLevelModel() != null) {
                     levelAdapter.setLevelTitleToEmojis(SaveLevelDialog.getNameLabel().text.toString())
-                    viewModel.saveLevel(levelAdapter.currentList, SaveLevelDialog.getSmallLevelModel()!!)
-                    saveItemIcon.icon = ContextCompat.getDrawable(requireContext(), R.drawable.icons8_save_26px_green)
+                    viewModel.saveLevel(
+                        levelAdapter.currentList,
+                        SaveLevelDialog.getSmallLevelModel()!!
+                    )
+                    saveItemIcon.icon = ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.icons8_save_26px_green
+                    )
                     SaveLevelDialog.dialogView.dismiss()
                 }
             }
@@ -123,7 +124,11 @@ class LevelConstructorFragment : BaseImageFragment() {
 
         SentLevelDialog.getSentLevelBtn().setOnClickListener {
             if (SentLevelDialog.isNotEmpty()) {
-                viewModel.sentLevel(levelAdapter.currentList, SentLevelDialog.getSmallLevelModel(), SentLevelDialog.getImage())
+                viewModel.sentLevel(
+                    levelAdapter.currentList,
+                    SentLevelDialog.getSmallLevelModel(),
+                    SentLevelDialog.getImage()
+                )
                 SentLevelDialog.dialogView.dismiss()
             }
         }
@@ -307,21 +312,8 @@ class LevelConstructorFragment : BaseImageFragment() {
     }
 
     private fun getAllEmojisFromJson() {
-        viewModelShop = injectViewModel(viewModelFactoryShop)
-        viewModelShop.emojisResponse.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                when (it) {
-                    is Result.Loading -> {
-                        binding.levelProgressBar.visibility = View.VISIBLE
-                    }
-                    is Result.Success -> {
-                        binding.levelProgressBar.visibility = View.INVISIBLE
-                        allEmojisAdapter.allEmojisSubmitList(it.data)
-                        generateGroupChips(it.data)
-                    }
-                }
-            }
-        })
+        allEmojisAdapter.allEmojisSubmitList((requireActivity() as MainActivity).randomEmojis)
+        generateGroupChips((requireActivity() as MainActivity).randomEmojis)
     }
 
     private fun getLevelEmojis() {

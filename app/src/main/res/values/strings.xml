@@ -192,4 +192,9 @@
     <string name="check_your_luck">Check your luck</string>
     <string name="_200">200</string>
     <string name="not_enough_tickets">Not enough tickets</string>
+    <string name="you_won_a_random_prize_chose_one_box">You won a random prize, chose one box</string>
+    <string name="you_won">You won</string>
+    <string name="roll_again">Roll again</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="take_ticket">Take ticket</string>
 </resources>

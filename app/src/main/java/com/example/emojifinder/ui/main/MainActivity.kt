@@ -2,21 +2,24 @@ package com.example.emojifinder.ui.main
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import com.example.emojifinder.R
+import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.ActivityMainBinding
 import com.example.emojifinder.domain.payment.LOAD_PAYMENT_DATA_REQUEST_CODE
+import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.sounds.MediaPlayerPool
+import com.example.emojifinder.domain.viewModels.ShopViewModel
+import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.google.android.gms.wallet.AutoResolveHelper
 import com.google.android.gms.wallet.PaymentData
 import dagger.android.support.DaggerAppCompatActivity
@@ -34,6 +37,13 @@ class MainActivity : DaggerAppCompatActivity() {
 
     lateinit var mediaPlayerPool: MediaPlayerPool
 
+    @Inject
+    lateinit var viewModelFactoryShop: ViewModelProvider.Factory
+    lateinit var viewModelShop: ShopViewModel
+
+    lateinit var randomEmojis : List<EmojiShopModel>
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -42,18 +52,29 @@ class MainActivity : DaggerAppCompatActivity() {
         val navHostFragment = nav_host_fragment as NavHostFragment
         val graphInflater = navHostFragment.navController.navInflater
 
-
-
         navGraph = graphInflater.inflate(R.navigation.navigation)
         navigation = navHostFragment.navController
         navGraph.startDestination = intent.getIntExtra("destination", R.id.signInFragment)
         navigation.graph = navGraph
 
-
-
         initMediaPlayer()
         playBackgroundMusic()
         enableFullScreen()
+
+        loadRandomEmojis()
+    }
+
+    private fun loadRandomEmojis() {
+        viewModelShop = injectViewModel(viewModelFactory)
+        viewModelShop.emojisResponse.observe(this, Observer {
+            it?.let {
+                when(it){
+                    is Result.Success -> {
+                        randomEmojis = it.data
+                    }
+                }
+            }
+        })
     }
 
     private fun enableFullScreen() {

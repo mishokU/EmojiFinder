@@ -19,12 +19,12 @@ class ShopViewModel @Inject constructor(
     val coroutineScope: CoroutineScope
 ) : ViewModel() {
 
-    private val _emojisResponse = MutableLiveData<Result<List<EmojiShopModel?>>>()
-    val emojisResponse : LiveData<Result<List<EmojiShopModel?>>>
+    private val _emojisResponse = MutableLiveData<Result<List<EmojiShopModel>>>()
+    val emojisResponse: LiveData<Result<List<EmojiShopModel>>>
         get() = _emojisResponse
 
     private val _emojisDailyResponse = MutableLiveData<Result<List<EmojiShopModel?>>>()
-    val emojisDailyResponse : LiveData<Result<List<EmojiShopModel?>>>
+    val emojisDailyResponse: LiveData<Result<List<EmojiShopModel?>>>
         get() = _emojisDailyResponse
 
     init {

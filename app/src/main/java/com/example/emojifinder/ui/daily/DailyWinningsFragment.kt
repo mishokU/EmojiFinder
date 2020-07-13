@@ -24,8 +24,7 @@ import com.example.emojifinder.domain.prefs.DailyWinningsPrefs
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.domain.viewModels.DailyViewModel
-import com.example.emojifinder.domain.viewModels.ShopViewModel
-import com.example.emojifinder.shared.utils.Emoji
+import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.example.emojifinder.ui.utils.ScreenSize
 import com.google.android.gms.ads.AdRequest
@@ -38,29 +37,24 @@ import javax.inject.Inject
 
 class DailyWinningsFragment : DaggerFragment() {
 
-    private lateinit var binding : FragmentDailyWinningsBinding
-    private lateinit var adapter : DailyRecyclerViewAdapter
-    private lateinit var day : DailyUI
-    private lateinit var values : AccountValuesModel
+    private lateinit var binding: FragmentDailyWinningsBinding
+    private lateinit var adapter: DailyRecyclerViewAdapter
+    private lateinit var day: DailyUI
+    private lateinit var values: AccountValuesModel
     private lateinit var mRewardedVideoAd: RewardedVideoAd
-    private var emojis : MutableList<EmojiAppCompatEditText> = mutableListOf()
-    private var shopEmojis : MutableList<EmojiShopModel> = mutableListOf()
+    private var emojis: MutableList<EmojiAppCompatEditText> = mutableListOf()
+    private var shopEmojis: MutableList<EmojiShopModel> = mutableListOf()
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var viewModel : DailyViewModel
+    lateinit var viewModel: DailyViewModel
 
     @Inject
-    lateinit var viewModelFactoryValues : ViewModelProvider.Factory
-    lateinit var viewModelValues : AccountViewModel
+    lateinit var viewModelFactoryValues: ViewModelProvider.Factory
+    lateinit var viewModelValues: AccountViewModel
 
     @Inject
-    lateinit var viewModelFactoryShop : ViewModelProvider.Factory
-    lateinit var viewModelShop : ShopViewModel
-
-    @Inject
-    lateinit var daily : DailyWinningsPrefs
-
+    lateinit var daily: DailyWinningsPrefs
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,23 +82,13 @@ class DailyWinningsFragment : DaggerFragment() {
     }
 
     private fun loadAllEmojis() {
-        viewModelShop = injectViewModel(viewModelFactoryShop)
-        viewModelShop.loadDailyEmojisFromJson()
-        viewModelShop.emojisDailyResponse.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                when(it){
-                    is Result.Success -> {
-                        for(i : Int in 0..3){
-                            shopEmojis.add(it.data.random()!!)
-                        }
-                        binding.firstDailyEmoji.setText(shopEmojis[0].text)
-                        binding.secondDailyEmoji.setText(shopEmojis[1].text)
-                        binding.thirdDailyEmoji.setText(shopEmojis[2].text)
-                        binding.fourthDailyEmoji.setText(shopEmojis[3].text)
-                    }
-                }
-            }
-        })
+        for (i: Int in 0..3) {
+            shopEmojis.add((requireActivity() as MainActivity).randomEmojis.random())
+        }
+        binding.firstDailyEmoji.setText(shopEmojis[0].text)
+        binding.secondDailyEmoji.setText(shopEmojis[1].text)
+        binding.thirdDailyEmoji.setText(shopEmojis[2].text)
+        binding.fourthDailyEmoji.setText(shopEmojis[3].text)
     }
 
     private fun initEmojis() {
@@ -115,9 +99,11 @@ class DailyWinningsFragment : DaggerFragment() {
     }
 
     private fun startAdClaimBtn() {
-        val animation = RotateAnimation(-5f, 5f,
+        val animation = RotateAnimation(
+            -5f, 5f,
             ScreenSize.dipToPixels(requireContext(), 100f),
-            ScreenSize.dipToPixels(requireContext(), 30f))
+            ScreenSize.dipToPixels(requireContext(), 30f)
+        )
 
         animation.repeatMode = Animation.REVERSE
         animation.repeatCount = Animation.INFINITE
@@ -137,12 +123,13 @@ class DailyWinningsFragment : DaggerFragment() {
 
         mRewardedVideoAd.loadAd(
             REWARDED_VIDEO_ID,
-            AdRequest.Builder().build())
+            AdRequest.Builder().build()
+        )
     }
 
-    private fun increaseUserValues(multiplier : Int) {
+    private fun increaseUserValues(multiplier: Int) {
         val item = adapter.currentList[daily.getDay() - 2]
-        when(item.type){
+        when (item.type) {
             Daily.EMOS -> {
                 viewModelValues.updateUserEmos(values.emos + item.cost * multiplier)
                 this.findNavController().navigate(R.id.mainMenuFragment)
@@ -151,9 +138,9 @@ class DailyWinningsFragment : DaggerFragment() {
                 viewModelValues.updateUserBoxes(values.boxes + item.cost * multiplier)
                 this.findNavController().navigate(R.id.mainMenuFragment)
             }
-            Daily.EMOJI ->  {
+            Daily.EMOJI -> {
                 binding.emojisDailyPlace.visibility = View.VISIBLE
-                for(i : Int in 0 until item.cost * multiplier){
+                for (i: Int in 0 until item.cost * multiplier) {
                     emojis[i].visibility = View.VISIBLE
                     emojis[i].setText(shopEmojis[i].text)
                     viewModelValues.addGeneratedEmoji(shopEmojis[i])
@@ -178,7 +165,7 @@ class DailyWinningsFragment : DaggerFragment() {
         viewModelValues.fetchUserValues()
         viewModelValues.userValuesResponse.observe(viewLifecycleOwner, Observer {
             it?.let {
-                when(it){
+                when (it) {
                     is Result.Loading -> {
                         binding.loadingValues1.visibility = View.VISIBLE
                         binding.loadingValues2.visibility = View.VISIBLE
@@ -208,8 +195,8 @@ class DailyWinningsFragment : DaggerFragment() {
         viewModel = injectViewModel(viewModelFactory)
         viewModel.dailies.observe(viewLifecycleOwner, Observer {
             it?.let {
-                when(it){
-                    is Result.Success ->{
+                when (it) {
+                    is Result.Success -> {
                         adapter.setDay(day.day)
                         adapter.submitList(it.data)
                     }
@@ -236,7 +223,7 @@ class DailyWinningsFragment : DaggerFragment() {
     private fun initClaimButton() {
         binding.claimBtn.setOnClickListener {
             var day = binding.daysTv.text.drop(4).toString().toInt()
-            if(day >= 15){
+            if (day >= 15) {
                 day = 2
             } else {
                 ++day
@@ -246,7 +233,7 @@ class DailyWinningsFragment : DaggerFragment() {
         }
 
         binding.doubleClaimBtn.setOnClickListener {
-            if(mRewardedVideoAd.isLoaded){
+            if (mRewardedVideoAd.isLoaded) {
                 mRewardedVideoAd.show()
             }
         }

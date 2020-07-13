@@ -1,14 +1,14 @@
 package com.example.emojifinder.ui.account
 
 import android.animation.Animator
-import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
-import androidx.core.view.iterator
 import androidx.emoji.widget.EmojiAppCompatButton
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,7 +21,6 @@ import com.example.emojifinder.databinding.FragmentAccountAvatarBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.sounds.MusicType
 import com.example.emojifinder.domain.viewModels.AccountViewModel
-import com.example.emojifinder.domain.viewModels.ShopViewModel
 import com.example.emojifinder.ui.boxes.EmojisBoxDialog
 import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.shop.EmojiShopModel
@@ -32,7 +31,6 @@ import com.example.emojifinder.ui.utils.closeFilters
 import com.example.emojifinder.ui.utils.openFilters
 import com.google.android.material.chip.Chip
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.emoji_shop_item.view.*
 import javax.inject.Inject
 
 
@@ -42,10 +40,6 @@ class AccountAvatarFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: AccountViewModel
-
-    @Inject
-    lateinit var viewModelFactoryShop: ViewModelProvider.Factory
-    lateinit var viewModelShop: ShopViewModel
 
     lateinit var adapter: EmojisRecyclerViewAdapter
     lateinit var userEmojisAdapter: EmojisRecyclerViewAdapter
@@ -66,7 +60,6 @@ class AccountAvatarFragment : DaggerFragment() {
         // Inflate the layout for this fragment
 
         viewModel = injectViewModel(viewModelFactory)
-        viewModelShop = injectViewModel(viewModelFactoryShop)
 
         EmojisBoxDialog.create(this)
 
@@ -325,24 +318,8 @@ class AccountAvatarFragment : DaggerFragment() {
     }
 
     private fun initShopViewModel(data: List<EmojiShopModel?>) {
-        viewModelShop.emojisResponse.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                when (it) {
-                    is Result.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
-                    }
-                    is Result.Success -> {
-                        binding.progressBar.visibility = View.INVISIBLE
-
-                        adapter.shopSubmitList(it.data, data)
-                        generateGroupChips(it.data)
-                    }
-                    is Result.Error -> {
-                        binding.progressBar.visibility = View.INVISIBLE
-                    }
-                }
-            }
-        })
+        adapter.shopSubmitList((requireActivity() as MainActivity).randomEmojis, data)
+        generateGroupChips((requireActivity() as MainActivity).randomEmojis)
     }
 
     @Suppress("DEPRECATION")

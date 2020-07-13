@@ -50,9 +50,11 @@ class AccountFragment : DaggerFragment() {
 
         initUserValuesViewModel()
         initValues()
+
+        loadUserMainInfo()
+
         initUserLevelsAdapter()
         observeLevelsStatistic()
-        loadUserMainInfo()
         initButtons()
 
         initListState()
@@ -156,7 +158,6 @@ class AccountFragment : DaggerFragment() {
     }
 
     private fun initUserEmojisViewModel() {
-        viewModel.fetchUserEmojis()
         viewModel.userEmojisResponse.observe(viewLifecycleOwner, Observer {
             it?.let { userEmojis ->
                 when (userEmojis) {

@@ -24,11 +24,9 @@ import com.example.emojifinder.domain.prefs.ShowGameHintPrefs
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.sounds.MusicType
 import com.example.emojifinder.domain.viewModels.AccountViewModel
-import com.example.emojifinder.domain.viewModels.ShopViewModel
 import com.example.emojifinder.ui.game.campaign.gameAlerts.ExitGameDialog
 import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.shop.EmojiShopModel
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import dagger.android.support.DaggerFragment
@@ -49,10 +47,6 @@ class ArcadeGameFragment : DaggerFragment() {
     var score = 0
     private var userScore = 0
     private var userEmos = 0
-
-    @Inject
-    lateinit var viewModelFactoryShop: ViewModelProvider.Factory
-    private lateinit var viewModelShop : ShopViewModel
 
     @Inject
     lateinit var viewModelFactoryAccount: ViewModelProvider.Factory
@@ -333,23 +327,11 @@ class ArcadeGameFragment : DaggerFragment() {
     }
 
     private fun initViewModel() {
-        viewModelShop = injectViewModel(viewModelFactoryShop)
-        viewModelShop.emojisResponse.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                when(it){
-                    is Result.Loading -> {
-                        binding.levelProgressBar.visibility = View.VISIBLE
-                    }
-                    is Result.Success -> {
-                        allEmojis = it.data as MutableList<EmojiShopModel?>
-                        createGamePlace(allEmojis)
-                        if(showGameHintPrefs.isArcadeHintShown()){
-                            animation.start()
-                        }
-                    }
-                }
-            }
-        })
+        allEmojis = (requireActivity() as MainActivity).randomEmojis as MutableList<EmojiShopModel?>
+        createGamePlace(allEmojis)
+        if(showGameHintPrefs.isArcadeHintShown()){
+            animation.start()
+        }
     }
 
     private fun createGamePlace(data: MutableList<EmojiShopModel?>) {

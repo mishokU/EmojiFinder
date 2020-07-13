@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/generator_emoji_style">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/you_won"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:textSize="24sp"
+                android:textColor="@color/buttonBlueColor"/>
+
+            <androidx.emoji.widget.EmojiAppCompatEditText
+                android:id="@+id/win_emoji_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:background="@null"
+                android:focusable="false"
+                android:clickable="false"
+                android:textSize="30sp"
+                android:textAlignment="center"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/roll_again_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/take"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/textOrangeColor"/>
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+

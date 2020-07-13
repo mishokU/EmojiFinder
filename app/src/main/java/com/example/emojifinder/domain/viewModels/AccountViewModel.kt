@@ -43,6 +43,7 @@ class AccountViewModel @Inject constructor(
     var oldPassword : String ?= null
 
     init {
+        fetchUserEmojis()
         fetchUserLevelsStatistic()
         fetchMainUserData()
     }
@@ -81,7 +82,7 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    fun fetchUserLevelsStatistic() {
+    private fun fetchUserLevelsStatistic() {
         coroutineScope.launch {
             withContext(Dispatchers.Main){
                 _levelsStatisticResponse.value = Result.Loading
@@ -125,9 +126,6 @@ class AccountViewModel @Inject constructor(
         coroutineScope.cancel()
     }
 
-    fun statisticResponseComplete() {
-        _levelsStatisticResponse.value = null
-    }
 
     fun addEmoji(emoji: EmojiShopModel?, cost : Int, values : AccountValuesModel) {
         coroutineScope.launch {
