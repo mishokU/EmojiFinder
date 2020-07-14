@@ -1,5 +1,6 @@
 package com.example.emojifinder.ui.boxes
 
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.emoji.widget.EmojiAppCompatEditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,21 +12,21 @@ import dagger.android.support.DaggerFragment
 
 object RandomPrizeDialog {
 
-    lateinit var dialogView : BaseDialog
-    lateinit var adapter : LootBoxRecyclerViewAdapter
+    lateinit var dialogView: BaseDialog
     lateinit var fragment: DaggerFragment
 
-    lateinit var secondEmoji : EmojiAppCompatEditText
-    lateinit var secondEmojiPlaceholder : EmojiAppCompatEditText
-    private lateinit var firstEmoji : EmojiAppCompatEditText
-    private lateinit var firstEmojiPlaceholder : EmojiAppCompatEditText
-    var emojis : MutableList<EmojiShopModel> = mutableListOf()
+    private lateinit var secondEmoji: EmojiAppCompatEditText
+    private lateinit var secondEmojiPlaceholder: AppCompatImageView
+    private lateinit var firstEmoji: EmojiAppCompatEditText
+    private lateinit var firstEmojiPlaceholder: AppCompatImageView
+
+    var emojis: MutableList<EmojiShopModel> = mutableListOf()
 
     private val _emoji = MutableLiveData<EmojiShopModel>()
-    val emoji : LiveData<EmojiShopModel>
+    val emoji: LiveData<EmojiShopModel>
         get() = _emoji
 
-    fun create(fragment: DaggerFragment){
+    fun create(fragment: DaggerFragment) {
         this.fragment = fragment
         dialogView = BaseDialog(fragment.requireContext(), R.style.CustomDialog)
         dialogView.setContentView(R.layout.random_prize_dialog)
@@ -41,7 +42,6 @@ object RandomPrizeDialog {
     private fun initSecondEmoji() {
         secondEmoji = dialogView.findViewById(R.id.second_chest_emoji)
         secondEmojiPlaceholder = dialogView.findViewById(R.id.second_emoji_placeholder)
-        secondEmojiPlaceholder.setText("\uD83C\uDF81")
         secondEmojiPlaceholder.setOnClickListener {
             _emoji.value = emojis[1]
             secondEmojiPlaceholderAnimate()
@@ -55,7 +55,7 @@ object RandomPrizeDialog {
             .alpha(1.0f)
             .setDuration(1500)
             .withEndAction {
-                if(click){
+                if (click) {
                     firstEmojiPlaceholderAnimate()
                     firstEmojiAnimate(false)
                 } else {
@@ -86,7 +86,6 @@ object RandomPrizeDialog {
     private fun initFirstPrize() {
         firstEmoji = dialogView.findViewById(R.id.first_chest_emoji)
         firstEmojiPlaceholder = dialogView.findViewById(R.id.first_emoji_placeholder)
-        firstEmojiPlaceholder.setText("\uD83C\uDF81")
         firstEmojiPlaceholder.setOnClickListener {
             _emoji.value = emojis[0]
             firstEmojiPlaceholderAnimate()
@@ -100,7 +99,7 @@ object RandomPrizeDialog {
             .alpha(1.0f)
             .setDuration(1500)
             .withEndAction {
-                if(click){
+                if (click) {
                     secondEmojiPlaceholderAnimate()
                     secondEmojiAnimate(false)
                 } else {
@@ -128,11 +127,11 @@ object RandomPrizeDialog {
             .start()
     }
 
-    fun show(){
+    fun show() {
         dialogView.show()
     }
 
-    private fun hide(){
+    private fun hide() {
         emojis.removeAll(emojis)
         dialogView.dismiss()
     }

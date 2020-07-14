@@ -1,16 +1,15 @@
 package com.example.emojifinder.ui.boxes
 
+import android.widget.TextView
 import androidx.emoji.widget.EmojiAppCompatEditText
 import com.example.emojifinder.R
 import com.example.emojifinder.ui.base.BaseDialog
-import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
 object NothingEmojiDialog {
 
     lateinit var dialogView: BaseDialog
-    lateinit var adapter: LootBoxRecyclerViewAdapter
     lateinit var fragment: DaggerFragment
 
     fun create(fragment: DaggerFragment) {
@@ -28,6 +27,8 @@ object NothingEmojiDialog {
 
     private fun setEmoji() {
         val emoji = dialogView.findViewById<EmojiAppCompatEditText>(R.id.win_emoji_et)
+        val title = dialogView.findViewById<TextView>(R.id.title_win_emoji)
+        title.text = title.resources.getString(R.string.win_nothing)
         emoji.setText("\uD83D\uDE22")
     }
 

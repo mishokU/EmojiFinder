@@ -38,19 +38,17 @@ class LootBoxesFragment : DaggerFragment() {
     lateinit var viewModel: AccountViewModel
 
     lateinit var binding: FragmentLootBoxesBinding
-    lateinit var adapter: LootBoxRecyclerViewAdapter
     lateinit var values: AccountValuesModel
 
     private lateinit var mRewardedVideoAd: RewardedVideoAd
     private var emojis: MutableList<EmojiAppCompatEditText> = mutableListOf()
-    private var emojisModel : MutableList<EmojiShopModel> = mutableListOf()
+    private var emojisModel: MutableList<EmojiShopModel> = mutableListOf()
     private lateinit var rotateAnimator: RotateAnimation
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentLootBoxesBinding.inflate(inflater)
 
         viewModel = injectViewModel(viewModelFactory)
@@ -59,8 +57,6 @@ class LootBoxesFragment : DaggerFragment() {
 
         getValuesFromBundle()
 
-        initRouletteAnimation()
-        initAdapter()
         initRouletteEmojis()
 
         initValues()
@@ -73,12 +69,13 @@ class LootBoxesFragment : DaggerFragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initValues() {
-        binding.emojiBoxEt.setText("\uD83C\uDF9F️")
-        binding.emosEt.setText("\uD83D\uDCB0")
-        binding.emojiEt.setText("\uD83D\uDE00")
-        binding.rollWheelBtn.text = "\uD83D\uDCB0" + " 200"
-        binding.rollTicket.text = "\uD83C\uDF9F️" + " 1"
+        binding.emojiBoxEt.setText(resources.getString(R.string.emoji_ticket))
+        binding.emosEt.setText(resources.getString(R.string.emoji_emos))
+        binding.emojiEt.setText(resources.getString(R.string.simple_emoji))
+        binding.rollWheelBtn.text = resources.getString(R.string.emoji_emos) + " 200"
+        binding.rollTicket.text = resources.getString(R.string.emoji_ticket) + " 1"
     }
 
     private fun initRouletteEmojis() {
@@ -101,13 +98,13 @@ class LootBoxesFragment : DaggerFragment() {
             emoji.setText(emojiModel.text)
         }
 
-        emojisModel[3].text = "\uD83C\uDF9F️"
-        emojisModel[4].text = "\uD83C\uDF81"
+        emojisModel[3].text = resources.getString(R.string.emoji_ticket)
+        emojisModel[4].text = resources.getString(R.string.emoji_present)
         emojisModel[9].text = ""
 
-        emojis[3].setText("\uD83C\uDF9F️")
+        emojis[3].setText(resources.getString(R.string.emoji_ticket))
         emojis[9].setText("")
-        emojis[4].setText("\uD83C\uDF81")
+        emojis[4].setText(resources.getString(R.string.emoji_present))
     }
 
     private fun initRouletteAnimation() {
@@ -137,9 +134,9 @@ class LootBoxesFragment : DaggerFragment() {
     }
 
     private fun givePrize(prize: EmojiShopModel) {
-        when(prize.text){
-            "\uD83C\uDF9F️" -> showTicketDialog() // Ticket
-            "\uD83C\uDF81" -> showRandomPrizeDialog() // Present
+        when (prize.text) {
+            resources.getString(R.string.emoji_ticket) -> showTicketDialog()
+            resources.getString(R.string.emoji_present) -> showRandomPrizeDialog()
             "" -> showNothingDialog()
             else -> showSimpleEmojiDialog(prize)
         }
@@ -172,9 +169,9 @@ class LootBoxesFragment : DaggerFragment() {
 
     private fun getRandomDegree(): Float {
         var startDegree = 720f
-        for(i in 30..1200 step 30){
+        for (i in 30..1200 step 30) {
             startDegree += i
-            if(Random.nextBoolean()){
+            if (Random.nextBoolean()) {
                 break
             }
         }
@@ -221,7 +218,7 @@ class LootBoxesFragment : DaggerFragment() {
             if (emos > 200) {
                 viewModel.updateUserEmos(emos - 200)
                 binding.emosCount.text = (emos - 200).toString()
-                startRoulette()
+                binding.rouletteConstraint.startAnimation(rotateAnimator)
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -236,7 +233,7 @@ class LootBoxesFragment : DaggerFragment() {
             if (tickets > 0) {
                 viewModel.updateUserEmos(tickets - 1)
                 binding.boxesCount.text = (tickets - 1).toString()
-                startRoulette()
+                binding.rouletteConstraint.startAnimation(rotateAnimator)
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -244,10 +241,6 @@ class LootBoxesFragment : DaggerFragment() {
                 ).show()
             }
         }
-    }
-
-    private fun startRoulette() {
-        binding.rouletteConstraint.startAnimation(rotateAnimator)
     }
 
     private fun getValuesFromBundle() {
@@ -275,12 +268,6 @@ class LootBoxesFragment : DaggerFragment() {
     override fun onResume() {
         super.onResume()
         mRewardedVideoAd.resume(requireContext())
-    }
-
-    private fun initAdapter() {
-        adapter = LootBoxRecyclerViewAdapter(LootBoxRecyclerViewAdapter.OnShopItemClickListener {
-
-        })
     }
 
     override fun onDestroy() {

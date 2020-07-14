@@ -58,7 +58,6 @@ class LevelConstructorFragment : BaseImageFragment() {
 
         ExitLevelDialog.create(this)
         ResetLevelDialog.create(this)
-
         SaveLevelDialog.create(this)
         SentLevelDialog.create(this)
 
@@ -369,10 +368,6 @@ class LevelConstructorFragment : BaseImageFragment() {
                 )
             false
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
     }
 
     private fun setBackButton() {

@@ -4,8 +4,8 @@
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
             <stroke
-                android:width="5dp"
-                android:color="@color/background_color"/>
+                android:width="2dp"
+                android:color="@color/buttonBlueColor"/>
             <corners android:radius="20dp"/>
         </shape>
     </item>
@@ -13,8 +13,8 @@
     <item android:id="@android:id/progress">
         <clip>
             <shape android:shape="rectangle">
-                <stroke android:color="@color/background_color"
-                    android:width="5dp"/>
+                <stroke android:color="@color/buttonBlueColor"
+                    android:width="2dp"/>
                 <solid android:color="@color/textOrangeColor"/>
                 <corners android:radius="20dp"/>
             </shape>

@@ -23,6 +23,7 @@ class FirebaseLevelStatisticImpl : FirebaseInit() {
                 .collection("users")
                 .document(mUser!!.uid)
                 .collection("levels")
+                .orderBy("id")
                 .get()
                 .await()
 

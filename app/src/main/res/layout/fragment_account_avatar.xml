@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="profile"
             type="com.example.emojifinder.data.db.remote.models.account.MainAccountModel" />
@@ -16,437 +17,461 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradient"
+        android:background="@color/backgroundDesignColor"
         tools:context=".ui.account.AccountAvatarFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="@dimen/margin_layout_top"
-            android:layout_marginBottom="@dimen/margin_layout_bottom">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_avatar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/ru_eng_sriracha"
-            android:layout_gravity="center"
-            android:elevation="4dp"
-            android:gravity="start"
-            android:textAlignment="viewStart"
-            app:titleTextAppearance="@style/Toolbar.TitleText"
-            app:titleTextColor="@color/background_color"
-            app:title="@string/app_name"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:layout_marginBottom="@dimen/margin_layout_bottom"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/titleCategories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent">
+                android:ellipsize="end"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:maxLines="1"
+                android:text="@string/emojis"
+                android:textColor="@color/textOrangeColor"
+                android:textSize="46sp" />
 
-                <LinearLayout
-                    android:id="@+id/avatar_place"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:textColor="@color/buttonBlueColor"
+                android:text="@string/emojis_explanation"/>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/left_change_avatar_btn"
-                            android:layout_width="20dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:paddingStart="0dp"
-                            app:icon="@drawable/icons8_back_16px_left"
-                            app:iconSize="20dp"
-                            app:strokeColor="@null"
-                            app:iconTint="@android:color/white"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-                        <RelativeLayout
-                            android:layout_width="80dp"
-                            android:layout_height="80dp">
-
-                            <androidx.emoji.widget.EmojiAppCompatButton
-                                android:id="@+id/emoji_avatar"
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:text="@{profile.avatar}"
-                                android:textSize="30sp"
-                                android:textAlignment="center"
-                                android:maxLines="1"
-                                android:background="@drawable/avatar_emoji_style" />
-
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                app:lottie_rawRes="@raw/loading_avatar"
-                                app:lottie_autoPlay="true"
-                                app:lottie_loop="true"
-                                android:id="@+id/loading_avatar"/>
-
-                        </RelativeLayout>
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/right_change_avatar_btn"
-                            android:layout_width="20dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:paddingStart="0dp"
-                            app:icon="@drawable/icons8_back_16px_right"
-                            app:iconSize="20dp"
-                            app:strokeColor="@null"
-                            app:iconTint="@android:color/white"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-                    </LinearLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:id="@+id/save_avatar_btn"
-                        app:icon="@drawable/icons8_save_26px"
-                        app:iconSize="20dp"
-                        android:paddingStart="40dp"
-                        android:textAllCaps="false"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:backgroundTint="@color/blue_color"
-                        android:textColor="@color/background_color" />
-
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/avatar_place"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignBottom="@id/avatar_place"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:padding="2dp">
 
-                        <RelativeLayout
-                            android:layout_weight="1"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/user_values"
-                            android:layout_marginEnd="2dp"
-                            android:padding="2dp">
+                            android:layout_gravity="center">
 
-                            <LinearLayout
+                            <androidx.emoji.widget.EmojiAppCompatEditText
+                                android:id="@+id/emos_et"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_gravity="center">
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10dp"
+                                android:background="@null"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:src="@drawable/emos_pic"
+                                android:textSize="20sp" />
 
-                                <androidx.emoji.widget.EmojiAppCompatEditText
-                                    android:id="@+id/emos_et"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_gravity="center"
-                                    android:clickable="false"
-                                    android:focusable="false"
-                                    android:textSize="20sp"
-                                    android:background="@null"
-                                    android:src="@drawable/emos_pic"/>
+                            <TextView
+                                android:id="@+id/emos_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/ru_eng_sriracha"
+                                android:text="@{String.valueOf(values.emos)}"
+                                android:textColor="@color/buttonBlueColor"
+                                android:textSize="14sp" />
 
-                                <TextView
-                                    android:id="@+id/emos_count"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/background_color"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/ru_eng_sriracha"
-                                    android:text="@{String.valueOf(values.emos)}"/>
+                        </LinearLayout>
 
-                            </LinearLayout>
+                    </RelativeLayout>
 
-                        </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:padding="2dp">
 
-                        <RelativeLayout
-                            android:layout_weight="1"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/user_values"
-                            android:layout_marginEnd="2dp"
-                            android:padding="2dp">
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center">
 
-                            <LinearLayout
+                            <androidx.emoji.widget.EmojiAppCompatEditText
+                                android:id="@+id/emoji_et"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_gravity="center">
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10dp"
+                                android:background="@null"
+                                android:clickable="false"
+                                android:focusable="false" />
 
-                                <androidx.emoji.widget.EmojiAppCompatEditText
-                                    android:id="@+id/emoji_et"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="10dp"
-                                    android:clickable="false"
-                                    android:focusable="false"
-                                    android:background="@null"
-                                    android:layout_gravity="center" />
+                            <TextView
+                                android:id="@+id/emojis_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/ru_eng_sriracha"
+                                android:text="@{String.valueOf(values.emojis)}"
+                                android:textColor="@color/buttonBlueColor"
+                                android:textSize="14sp" />
 
-                                <TextView
-                                    android:id="@+id/emojis_count"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/background_color"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/ru_eng_sriracha"
-                                    android:text="@{String.valueOf(values.emojis)}"/>
-
-                            </LinearLayout>
+                        </LinearLayout>
 
 
-                        </RelativeLayout>
+                    </RelativeLayout>
 
-                        <RelativeLayout
-                            android:layout_weight="1"
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="2dp">
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/user_values"
-                            android:padding="2dp">
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center">
 
-                            <LinearLayout
+                            <androidx.emoji.widget.EmojiAppCompatEditText
+                                android:id="@+id/emoji_box_et"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_gravity="center">
-
-                                <androidx.emoji.widget.EmojiAppCompatEditText
-                                    android:id="@+id/emoji_box_et"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:clickable="false"
-                                    android:background="@null"
-                                    android:layout_marginEnd="10dp"
-                                    android:focusable="false"
-                                    android:layout_gravity="center" />
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10dp"
+                                android:background="@null"
+                                android:clickable="false"
+                                android:focusable="false" />
 
                             <TextView
                                 android:id="@+id/boxes_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:textColor="@color/background_color"
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/ru_eng_sriracha"
-                                android:text="@{String.valueOf(values.boxes)}"/>
+                                android:text="@{String.valueOf(values.boxes)}"
+                                android:textColor="@color/buttonBlueColor"
+                                android:textSize="14sp" />
 
-                            </LinearLayout>
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="6dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/your_emojis_style">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/user_emojis_place_rv"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerInParent="true"
-                            app:spanCount="5"
-                            android:scrollbars="vertical"
-                            android:scrollbarSize="2dp"
-                            android:scrollbarThumbHorizontal="@color/yellow_color"
-                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                            tools:listitem="@layout/emoji_shop_item"
-                            android:padding="5dp" />
-
-                        <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/user_emojis_progress_bar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_centerInParent="true"
-                            app:lottie_autoPlay="true"
-                            app:lottie_loop="true"
-                            app:lottie_rawRes="@raw/loading_dots"/>
-
-                        <TextView
-                            android:id="@+id/error_message"
-                            android:visibility="invisible"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:text="@string/there_is_no_emojis"
-                            android:fontFamily="@font/ru_eng_sriracha"
-                            android:textAlignment="center"
-                            android:textSize="16sp" />
+                        </LinearLayout>
 
                     </RelativeLayout>
 
                 </LinearLayout>
 
-            </RelativeLayout>
+            </LinearLayout>
 
-                <RelativeLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp">
+
+                        <TextView
+                            android:id="@+id/shop_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/ru_eng_sriracha"
+                            android:text="@string/emoji_shop"
+                            android:textAlignment="center"
+                            android:textColor="@color/buttonBlueColor"
+                            android:textSize="22sp" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/filter_toggle_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icons8_filter_100px" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/shop_recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/your_emojis_style"
+                            android:padding="5dp"
+                            android:scrollbarSize="2dp"
+                            android:clipToPadding="false"
+                            android:overScrollMode="never"
+                            android:scrollbarThumbHorizontal="@color/blue_color"
+                            android:scrollbars="vertical"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:spanCount="8"
+                            tools:listitem="@layout/emoji_shop_item" />
+
+                        <RelativeLayout
+                            android:id="@+id/filters_place"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/your_emojis_style"
+                            android:visibility="invisible">
+
+                            <ScrollView
+                                android:id="@+id/chip_group_scroll_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_above="@id/filters_button_place"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp">
+
+                                <com.google.android.material.chip.ChipGroup
+                                    android:id="@+id/categories_chip_group"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginBottom="10dp">
+
+                                </com.google.android.material.chip.ChipGroup>
+
+                            </ScrollView>
+
+                            <LinearLayout
+                                android:id="@+id/filters_button_place"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/apply_filters"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:text="@string/filter"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="18sp"
+                                    app:backgroundTint="@color/blue_color" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/reset_filters"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:text="@string/reset"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="18sp"
+                                    app:backgroundTint="@color/blue_color" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/progress_bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/loading_dots" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:layout_marginTop="8dp">
+                    android:clipToPadding="false"
+                    android:overScrollMode="never">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="5dp"
-                        android:id="@+id/left_change_generator_btn"
-                        android:layout_width="20dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_gravity="center"
-                        android:paddingStart="5dp"
-                        app:icon="@drawable/icons8_back_16px_left"
-                        app:iconSize="15dp"
-                        app:strokeColor="@null"
-                        app:iconTint="@android:color/white"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-                    <HorizontalScrollView
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/selected_filters"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:scrollbars="none"
-                        android:layout_toStartOf="@id/right_change_generator_btn"
-                        android:layout_toEndOf="@id/left_change_generator_btn">
+                        app:singleLine="true" />
 
-                        <LinearLayout
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/left_change_generator_btn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="20dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:paddingStart="5dp"
+                    app:icon="@drawable/icons8_back_16px_left"
+                    app:iconSize="15dp"
+                    app:iconTint="@color/buttonBlueColor"
+                    app:strokeColor="@null" />
+
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_toStartOf="@id/right_change_generator_btn"
+                    android:layout_toEndOf="@id/left_change_generator_btn"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
 
-                            <RelativeLayout
-                                android:layout_weight="1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                                <androidx.emoji.widget.EmojiAppCompatButton
-                                    android:id="@+id/first_generator_field"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_centerVertical="true"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginEnd="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:background="@drawable/generator_emoji_style"
-                                    android:clickable="true"
-                                    android:focusable="true"
-                                    android:padding="5dp"
-                                    android:textAlignment="center"
-                                    android:textSize="24sp" />
-
-                            </RelativeLayout>
-
-                            <TextView
-                                android:layout_weight="1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
+                            <androidx.emoji.widget.EmojiAppCompatButton
+                                android:id="@+id/first_generator_field"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_centerVertical="true"
                                 android:layout_gravity="center"
-                                android:fontFamily="@font/ru_eng_sriracha"
-                                android:textSize="32sp"
-                                android:textColor="@android:color/white"
-                                android:text="+"/>
-
-                            <RelativeLayout
-                                android:layout_weight="1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                                <androidx.emoji.widget.EmojiAppCompatButton
-                                    android:id="@+id/second_generator_field"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_centerVertical="true"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginEnd="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:background="@drawable/generator_emoji_style"
-                                    android:clickable="true"
-                                    android:focusable="true"
-                                    android:padding="5dp"
-                                    android:textAlignment="center"
-                                    android:textSize="24sp" />
-
-                            </RelativeLayout>
-
-                            <TextView
-                                android:layout_weight="1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/generator_emoji_style"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:padding="5dp"
                                 android:textAlignment="center"
+                                android:textSize="24sp" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/ru_eng_sriracha"
+                            android:text="+"
+                            android:textAlignment="center"
+                            android:textColor="@color/textOrangeColor"
+                            android:textSize="32sp" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <androidx.emoji.widget.EmojiAppCompatButton
+                                android:id="@+id/second_generator_field"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_centerVertical="true"
                                 android:layout_gravity="center"
-                                android:textSize="32sp"
-                                android:fontFamily="@font/ru_eng_sriracha"
-                                android:textColor="@android:color/white"
-                                android:text="+"/>
-
-                            <RelativeLayout
-                                android:layout_weight="1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                                <androidx.emoji.widget.EmojiAppCompatButton
-                                    android:id="@+id/third_generator_field"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_centerVertical="true"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginEnd="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:background="@drawable/generator_emoji_style"
-                                    android:clickable="true"
-                                    android:focusable="true"
-                                    android:padding="5dp"
-                                    android:textAlignment="center"
-                                    android:textSize="24sp" />
-
-                            </RelativeLayout>
-
-                            <TextView
-                                android:layout_weight="1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/generator_emoji_style"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:padding="5dp"
                                 android:textAlignment="center"
+                                android:textSize="24sp" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/ru_eng_sriracha"
+                            android:text="+"
+                            android:textAlignment="center"
+                            android:textColor="@color/textOrangeColor"
+                            android:textSize="32sp" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <androidx.emoji.widget.EmojiAppCompatButton
+                                android:id="@+id/third_generator_field"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_centerVertical="true"
                                 android:layout_gravity="center"
-                                android:textSize="32sp"
-                                android:fontFamily="@font/ru_eng_sriracha"
-                                android:textColor="@android:color/white"
-                                android:text="+"/>
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/generator_emoji_style"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:padding="5dp"
+                                android:textAlignment="center"
+                                android:textSize="24sp" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/ru_eng_sriracha"
+                            android:text="+"
+                            android:textAlignment="center"
+                            android:textColor="@color/textOrangeColor"
+                            android:textSize="32sp" />
 
 
                         <RelativeLayout
-                            android:layout_weight="1"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
 
                             <androidx.emoji.widget.EmojiAppCompatButton
                                 android:id="@+id/fourth_generator_field"
@@ -467,335 +492,171 @@
                         </RelativeLayout>
 
                         <TextView
-                            android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center"
                             android:layout_gravity="center"
-                            android:textSize="32sp"
+                            android:layout_weight="1"
                             android:fontFamily="@font/ru_eng_sriracha"
-                            android:textColor="@android:color/white"
-                            android:text="+"/>
+                            android:text="+"
+                            android:textAlignment="center"
+                            android:textColor="@color/textOrangeColor"
+                            android:textSize="32sp" />
 
                         <RelativeLayout
-                            android:layout_weight="1"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
 
                             <androidx.emoji.widget.EmojiAppCompatButton
                                 android:id="@+id/fifth_generator_field"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:padding="5dp"
-                                android:textSize="24sp"
-                                android:textAlignment="center"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dp"
+                                android:background="@drawable/generator_emoji_style"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:layout_centerInParent="true"
-                                android:layout_margin="5dp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/generator_emoji_style"/>
+                                android:padding="5dp"
+                                android:textAlignment="center"
+                                android:textSize="24sp" />
 
                         </RelativeLayout>
 
                         <TextView
-                            android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:fontFamily="@font/ru_eng_sriracha"
-                            android:textColor="@android:color/white"
-                            android:textSize="32sp"
-                            android:text="+"/>
+                            android:text="+"
+                            android:textAlignment="center"
+                            android:textColor="@color/textOrangeColor"
+                            android:textSize="32sp" />
 
 
-                            <RelativeLayout
-                                android:layout_weight="1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
 
-                                <androidx.emoji.widget.EmojiAppCompatButton
-                                    android:id="@+id/six_generator_field"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:padding="5dp"
-                                    android:textSize="24sp"
-                                    android:textAlignment="center"
-                                    android:clickable="true"
-                                    android:focusable="true"
-                                    android:layout_centerInParent="true"
-                                    android:layout_margin="5dp"
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/generator_emoji_style"/>
-
-                            </RelativeLayout>
-
-                            <TextView
-                                android:id="@+id/equal_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
-                                android:layout_toStartOf="@id/result_emoji"
+                            <androidx.emoji.widget.EmojiAppCompatButton
+                                android:id="@+id/six_generator_field"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_centerInParent="true"
                                 android:layout_gravity="center"
-                                android:fontFamily="@font/ru_eng_sriracha"
-                                android:layout_centerVertical="true"
-                                android:textColor="@android:color/white"
-                                android:textSize="32sp"
-                                android:text="="/>
+                                android:layout_margin="5dp"
+                                android:background="@drawable/generator_emoji_style"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:padding="5dp"
+                                android:textAlignment="center"
+                                android:textSize="24sp" />
 
+                        </RelativeLayout>
 
-                            <RelativeLayout
-                                android:id="@+id/result_emoji"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center">
+                    </LinearLayout>
 
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:id="@+id/failed_to_generate"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:textAlignment="center"
-                                    android:layout_gravity="center"
-                                    android:layout_centerInParent="true"
-                                    app:lottie_rawRes="@raw/failed_to_generate"/>
+                </HorizontalScrollView>
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/right_change_generator_btn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="20dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:paddingStart="5dp"
+                    app:icon="@drawable/icons8_back_16px_right"
+                    app:iconSize="15dp"
+                    app:iconTint="@color/buttonBlueColor"
+                    app:strokeColor="@null" />
 
-                                <androidx.emoji.widget.EmojiButton
-                                    android:id="@+id/result_generator_field"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:padding="5dp"
-                                    android:textSize="24sp"
-                                    android:textAlignment="center"
-                                    android:clickable="true"
-                                    android:focusable="true"
-                                    android:maxLines="1"
-                                    android:layout_centerInParent="true"
-                                    android:layout_margin="5dp"
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/generator_emoji_style"/>
+            </RelativeLayout>
 
-                            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                        </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/result_emoji"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center">
 
-                    </HorizontalScrollView>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/right_change_generator_btn"
-                        android:layout_width="20dp"
-                        android:layout_height="40dp"
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/failed_to_generate"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
                         android:layout_gravity="center"
-                        android:paddingStart="5dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="5dp"
-                        android:layout_alignParentEnd="true"
-                        app:icon="@drawable/icons8_back_16px_right"
-                        app:iconSize="15dp"
-                        app:strokeColor="@null"
-                        app:iconTint="@android:color/white"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                        android:textAlignment="center"
+                        app:lottie_rawRes="@raw/failed_to_generate" />
+
+
+                    <androidx.emoji.widget.EmojiButton
+                        android:id="@+id/result_generator_field"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/generator_emoji_style"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:maxLines="1"
+                        android:padding="5dp"
+                        android:textAlignment="center"
+                        android:textSize="24sp" />
 
                 </RelativeLayout>
 
-                <LinearLayout
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/show_chest"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:orientation="horizontal">
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/blue_color"
+                    android:fontFamily="@font/ru_eng_sriracha"
+                    android:text="@string/open_chest"
+                    android:textAllCaps="false"
+                    android:layout_marginEnd="5dp"
+                    android:textColor="@color/background_color" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/generate_emoji_set"
-                        android:text="@string/generate"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="5dp"
-                        android:backgroundTint="@color/blue_color"
-                        android:textColor="@color/background_color"
-                        android:fontFamily="@font/ru_eng_sriracha"
-                        android:textAllCaps="false"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/show_chest"
-                        android:text="@string/open_chest"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/blue_color"
-                        android:textColor="@color/background_color"
-                        android:textAllCaps="false"
-                        android:layout_width="match_parent"
-                        android:fontFamily="@font/ru_eng_sriracha"
-                        android:layout_height="45dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/reset_emojis_btn"
-                        android:text="@string/reset"
-                        android:layout_weight="1"
-                        android:layout_marginStart="5dp"
-                        android:textAllCaps="false"
-                        app:backgroundTint="@color/blue_color"
-                        android:textColor="@color/background_color"
-                        android:fontFamily="@font/ru_eng_sriracha"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/generate_emoji_set"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:orientation="vertical">
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/blue_color"
+                    android:fontFamily="@font/ru_eng_sriracha"
+                    android:text="@string/generate"
+                    android:textAllCaps="false"
+                    android:textColor="@color/background_color" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp">
-
-                        <TextView
-                            android:id="@+id/shop_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/emojis"
-                            android:fontFamily="@font/ru_eng_sriracha"
-                            android:layout_marginStart="10dp"
-                            android:layout_centerVertical="true"
-                            android:textAlignment="center"
-                            android:textColor="@color/background_color"
-                            android:textSize="22sp" />
-
-                        <HorizontalScrollView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/shop_title"
-                            android:layout_toStartOf="@id/filter_toggle_button"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="5dp"
-                            android:layout_centerVertical="true">
-
-                            <com.google.android.material.chip.ChipGroup
-                                android:id="@+id/selected_filters"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:singleLine="true"/>
-
-                        </HorizontalScrollView>
-
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/filter_toggle_button"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="20dp"
-                            android:layout_centerInParent="true"
-                            android:src="@drawable/icons8_filter_100px"/>
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/shop_recycler_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/your_emojis_style"
-                            tools:listitem="@layout/emoji_shop_item"
-                            android:padding="5dp"
-                            android:scrollbarSize="2dp"
-                            android:scrollbarThumbHorizontal="@color/blue_color"
-                            android:scrollbars="vertical"
-                            app:spanCount="8"
-                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
-
-                        <RelativeLayout
-                            android:id="@+id/filters_place"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="10dp"
-                            android:visibility="invisible"
-                            android:background="@drawable/your_emojis_style">
-
-                            <ScrollView
-                                android:id="@+id/chip_group_scroll_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginBottom="5dp"
-                                android:layout_above="@id/filters_button_place">
-
-                                <com.google.android.material.chip.ChipGroup
-                                    android:id="@+id/categories_chip_group"
-                                    android:layout_width="wrap_content"
-                                    android:layout_margin="5dp"
-                                    android:layout_height="wrap_content">
-
-                                </com.google.android.material.chip.ChipGroup>
-
-                            </ScrollView>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_alignParentBottom="true"
-                                android:id="@+id/filters_button_place">
-
-                                <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/apply_filters"
-                                    android:layout_width="match_parent"
-                                    android:text="@string/filter"
-                                    android:layout_weight="1"
-                                    android:textAlignment="center"
-                                    android:textSize="18sp"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:textAllCaps="false"
-                                    android:fontFamily="@font/ru_eng_sriracha"
-                                    app:backgroundTint="@color/blue_color"
-                                    android:textColor="@android:color/white"
-                                    android:layout_height="50dp"/>
-
-                                <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/reset_filters"
-                                    android:layout_width="match_parent"
-                                    android:text="@string/reset"
-                                    android:textAlignment="center"
-                                    android:textSize="18sp"
-                                    android:layout_weight="1"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:textAllCaps="false"
-                                    android:fontFamily="@font/ru_eng_sriracha"
-                                    app:backgroundTint="@color/blue_color"
-                                    android:textColor="@android:color/white"
-                                    android:layout_height="50dp"/>
-
-                            </LinearLayout>
-
-                        </RelativeLayout>
-
-                        <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/progress_bar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            app:lottie_autoPlay="true"
-                            app:lottie_loop="true"
-                            app:lottie_rawRes="@raw/loading_dots"/>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/reset_emojis_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ru_eng_sriracha"
+                    android:text="@string/reset"
+                    android:textAllCaps="false"
+                    android:textColor="@color/background_color"
+                    app:backgroundTint="@color/blue_color" />
 
             </LinearLayout>
 

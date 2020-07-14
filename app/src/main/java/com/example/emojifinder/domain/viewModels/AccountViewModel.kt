@@ -46,6 +46,7 @@ class AccountViewModel @Inject constructor(
         fetchUserEmojis()
         fetchUserLevelsStatistic()
         fetchMainUserData()
+        fetchUserValues()
     }
 
     fun updateLogin(login : TextInputEditText){

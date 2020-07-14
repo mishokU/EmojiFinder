@@ -71,6 +71,7 @@ class FirebaseLevelsImpl : FirebaseInit(), FirebaseLevels {
         return try {
             val document = mFireStore
                 .collection("levels")
+                .orderBy("id")
                 .get()
                 .await()
 

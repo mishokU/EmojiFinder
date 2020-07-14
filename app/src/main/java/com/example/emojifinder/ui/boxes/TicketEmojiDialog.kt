@@ -3,14 +3,12 @@ package com.example.emojifinder.ui.boxes
 import androidx.emoji.widget.EmojiAppCompatEditText
 import com.example.emojifinder.R
 import com.example.emojifinder.ui.base.BaseDialog
-import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
 object TicketEmojiDialog {
 
     lateinit var dialogView: BaseDialog
-    lateinit var adapter: LootBoxRecyclerViewAdapter
     lateinit var fragment: DaggerFragment
 
     fun create(fragment: DaggerFragment) {

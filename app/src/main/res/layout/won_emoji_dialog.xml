@@ -19,6 +19,7 @@
             android:background="@drawable/generator_emoji_style">
 
             <TextView
+                android:id="@+id/title_win_emoji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/you_won"

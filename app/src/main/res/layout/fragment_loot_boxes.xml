@@ -396,8 +396,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    app:srcCompat="@drawable/icons8_next_96px" />
+                    app:srcCompat="@drawable/strela" />
 
             </RelativeLayout>
 

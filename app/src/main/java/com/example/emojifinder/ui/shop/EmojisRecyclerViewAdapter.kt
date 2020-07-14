@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.emoji_shop_item.view.*
 class EmojisRecyclerViewAdapter(
     private val onClickListener: OnShopItemClickListener,
     private val progress: LottieAnimationView?,
-    val isShop: Boolean
+    private val isShop: Boolean
 ) :
     RecyclerView.Adapter<EmojisRecyclerViewAdapter.ShopEmojiViewHolder>() {
 
@@ -48,7 +48,21 @@ class EmojisRecyclerViewAdapter(
     ) {
         this.userEmojis = userEmojis
         this.fullList = data
-        this.adapterlist.submitList(data)
+        createList(userEmojis, data)
+    }
+
+    private fun createList(
+        data: List<EmojiShopModel?>,
+        shop: List<EmojiShopModel?>
+    ) {
+        for(emoji in shop){
+            for(userEmoji in data){
+                if(emoji?.text == userEmoji?.text){
+                    emoji?.group = "Your"
+                }
+            }
+        }
+        adapterlist.submitList(shop)
     }
 
     fun filter(categories: MutableList<String>) {
@@ -95,7 +109,7 @@ class EmojisRecyclerViewAdapter(
 
     class ShopEmojiViewHolder(
         private val binding: EmojiShopItemBinding,
-        val userEmojis: List<EmojiShopModel?>?,
+        private val userEmojis: List<EmojiShopModel?>?,
         val shop: Boolean,
         val avatar : String?
     ) :
@@ -113,6 +127,7 @@ class EmojisRecyclerViewAdapter(
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             binding.emojiView.backgroundTintList =
                                 binding.emojiView.resources.getColorStateList(R.color.green_color, null)
+                            emojiShop?.group = "Your"
                         }
                     }
                 }
@@ -137,10 +152,6 @@ class EmojisRecyclerViewAdapter(
         return adapterlist.currentList.size
     }
 
-    fun submitList(data: List<EmojiShopModel?>) {
-        adapterlist.submitList(data)
-    }
-
     fun getGeneratedEmoji(generatedEmoji: String): EmojiShopModel? {
         for(emoji in adapterlist.currentList){
             if(emoji.text == generatedEmoji){
@@ -154,6 +165,13 @@ class EmojisRecyclerViewAdapter(
         this.avatar = avatar
         this.userEmojis = data
         adapterlist.submitList(data)
+    }
+
+    fun changeEmoji(generatedEmoji: String) {
+        val emoji = adapterlist.currentList.find {
+            emojiShopModel -> emojiShopModel.text == generatedEmoji
+        }
+        emoji?.group = "Your"
     }
 
 }

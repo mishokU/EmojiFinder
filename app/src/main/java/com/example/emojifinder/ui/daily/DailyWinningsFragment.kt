@@ -186,9 +186,9 @@ class DailyWinningsFragment : DaggerFragment() {
     }
 
     private fun initValues() {
-        binding.emojiBoxEt.setText("\uD83C\uDF81")
-        binding.emosEt.setText("\uD83D\uDCB0")
-        binding.emojiEt.setText("\uD83D\uDE00")
+        binding.emojiBoxEt.setText(resources.getString(R.string.emoji_ticket))
+        binding.emosEt.setText(resources.getString(R.string.emoji_emos))
+        binding.emojiEt.setText(resources.getString(R.string.simple_emoji))
     }
 
     private fun fetchDailies() {

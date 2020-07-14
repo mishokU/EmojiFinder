@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -30,23 +29,23 @@
 
                 <ProgressBar
                     android:id="@+id/game_progress_bar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:progress="60"
-                    android:max="60"
+                    android:layout_height="30dp"
                     android:layout_margin="10dp"
                     android:indeterminateBehavior="cycle"
-                    android:progressDrawable="@drawable/custom_progress_bar"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+                    android:max="60"
+                    android:progress="60"
+                    android:progressDrawable="@drawable/custom_progress_bar" />
 
                 <TextView
                     android:id="@+id/game_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
                     android:layout_centerInParent="true"
                     android:layout_marginStart="5dp"
-                    android:textColor="@color/background_color" />
+                    android:textColor="@color/backgroundDesignColor"
+                    android:textSize="14sp" />
 
             </RelativeLayout>
 
@@ -59,49 +58,49 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/game_back_button"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="start|top"
                     android:layout_marginStart="10dp"
-                    android:paddingStart="10dp"
                     android:padding="0dp"
-                    app:icon="@drawable/back_24px"
-                    app:strokeColor="@null"
-                    app:rippleColor="@color/main_ripple_button_color"
-                    app:iconTint="@color/textOrangeColor"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:paddingStart="10dp"
                     app:backgroundTint="@android:color/transparent"
+                    app:icon="@drawable/back_24px"
+                    app:iconTint="@color/textOrangeColor"
+                    app:rippleColor="@color/main_ripple_button_color"
+                    app:strokeColor="@null"
                     tools:ignore="RtlSymmetry" />
 
                 <TextView
                     android:id="@+id/score_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/game_back_button"
-                    android:layout_toStartOf="@id/arcade_game_audio_btn"
                     android:layout_centerVertical="true"
-                    android:textSize="26sp"
+                    android:layout_toStartOf="@id/arcade_game_audio_btn"
+                    android:layout_toEndOf="@id/game_back_button"
                     android:fontFamily="@font/ru_eng_sriracha"
-                    android:textColor="@color/buttonBlueColor"
+                    android:text="@string/find_all_emojis"
                     android:textAlignment="center"
-                    android:text="@string/find_all_emojis"/>
+                    android:textColor="@color/buttonBlueColor"
+                    android:textSize="26sp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/arcade_game_audio_btn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_gravity="start|top"
-                    app:icon="@drawable/icons8_audio_24px"
                     android:layout_marginEnd="10dp"
                     android:padding="0dp"
-                    app:rippleColor="@color/main_ripple_button_color"
-                    app:cornerRadius="12dp"
                     android:paddingStart="10dp"
-                    android:layout_alignParentEnd="true"
-                    app:strokeColor="@null"
+                    app:backgroundTint="@android:color/transparent"
+                    app:cornerRadius="12dp"
+                    app:icon="@drawable/icons8_audio_24px"
                     app:iconTint="@color/textOrangeColor"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    app:backgroundTint="@android:color/transparent" />
+                    app:rippleColor="@color/main_ripple_button_color"
+                    app:strokeColor="@null" />
 
             </RelativeLayout>
 
@@ -109,12 +108,12 @@
                 android:id="@+id/game_emoji_field_rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
                 android:layout_above="@id/finder_place"
                 android:layout_below="@id/intro_place"
                 android:layout_centerInParent="true"
                 android:layout_margin="10dp"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
                 android:padding="5dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="5"
@@ -125,69 +124,69 @@
                 android:id="@+id/finder_place"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:background="@drawable/generator_emoji_style"
-                android:layout_alignParentBottom="true">
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/generator_emoji_style">
 
                 <androidx.emoji.widget.EmojiAppCompatEditText
                     android:id="@+id/first_emoji"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:textAlignment="center"
-                    android:background="@null"
+                    android:layout_weight="1"
                     android:alpha="0.5"
+                    android:background="@null"
                     android:clickable="false"
                     android:focusable="false"
-                    android:textSize="24sp"
-                    android:layout_weight="1"/>
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
 
                 <androidx.emoji.widget.EmojiAppCompatEditText
                     android:id="@+id/second_emoji"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:alpha="0.5"
                     android:background="@null"
                     android:clickable="false"
-                    android:alpha="0.5"
                     android:focusable="false"
-                    android:textSize="24sp"
-                    android:layout_weight="1"/>
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
 
                 <androidx.emoji.widget.EmojiAppCompatEditText
                     android:id="@+id/third_emoji"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:alpha="0.5"
                     android:background="@null"
                     android:clickable="false"
                     android:focusable="false"
-                    android:alpha="0.5"
-                    android:textSize="24sp"
-                    android:layout_weight="1"/>
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
 
                 <androidx.emoji.widget.EmojiAppCompatEditText
                     android:id="@+id/fourth_emoji"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:alpha="0.5"
                     android:background="@null"
                     android:clickable="false"
-                    android:alpha="0.5"
                     android:focusable="false"
-                    android:textSize="24sp"
-                    android:layout_weight="1"/>
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
 
                 <androidx.emoji.widget.EmojiAppCompatEditText
                     android:id="@+id/fifth_emoji"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:alpha="0.5"
                     android:background="@null"
                     android:clickable="false"
-                    android:alpha="0.5"
                     android:focusable="false"
-                    android:textSize="24sp"
-                    android:layout_weight="1"/>
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
@@ -195,11 +194,11 @@
                 android:id="@+id/level_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_centerInParent="true"
+                android:layout_gravity="center"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/loading_dots"/>
+                app:lottie_rawRes="@raw/loading_dots" />
 
         </RelativeLayout>
 

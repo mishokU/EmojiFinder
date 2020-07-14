@@ -59,14 +59,13 @@
                         android:background="@color/background_color"
                         android:textAlignment="center"/>
 
-                    <androidx.emoji.widget.EmojiAppCompatEditText
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/first_emoji_placeholder"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_centerInParent="true"
-                        android:focusable="false"
-                        android:clickable="false"
                         android:background="@null"
+                        app:srcCompat="@drawable/chest"
                         android:alpha="1"
                         android:textSize="60sp"
                         android:textAlignment="center"/>
@@ -93,14 +92,13 @@
                         android:background="@null"
                         android:textAlignment="center"/>
 
-                    <androidx.emoji.widget.EmojiAppCompatEditText
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/second_emoji_placeholder"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_centerInParent="true"
-                        android:focusable="false"
-                        android:clickable="false"
                         android:background="@null"
+                        android:src="@drawable/chest"
                         android:alpha="1"
                         android:textSize="60sp"
                         android:textAlignment="center"/>

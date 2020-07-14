@@ -11,7 +11,7 @@ data class EmojiShopModel(
     @SerializedName(value = "char")
     var text: String,
     val codes: String,
-    val group: String,
+    var group: String,
     val name: String,
     val subgroup: String
 ) : Parcelable {

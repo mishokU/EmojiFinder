@@ -1,23 +1,20 @@
 package com.example.emojifinder.ui.help
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.R
 import com.example.emojifinder.databinding.FragmentWriteQuestionBinding
 import com.example.emojifinder.domain.auth.CheckOnValid
-import dagger.android.support.DaggerAppCompatActivity
+import com.example.emojifinder.ui.utils.CustomTextWatcher
 import dagger.android.support.DaggerFragment
-import kotlinx.coroutines.flow.combine
 
 class WriteQuestionFragment : DaggerFragment() {
 
-    private lateinit var binding : FragmentWriteQuestionBinding
+    private lateinit var binding: FragmentWriteQuestionBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,52 +24,59 @@ class WriteQuestionFragment : DaggerFragment() {
         binding = FragmentWriteQuestionBinding.inflate(inflater)
 
         initEditTextsWatcher()
-        setHasOptionsMenu(true)
+        initSentBtn()
 
         return binding.root
     }
 
+    private fun initSentBtn() {
+        binding.sentQuestionBtn.setOnClickListener {
+            sentMessage()
+        }
+    }
+
     private fun initEditTextsWatcher() {
-        binding.userEmail.addTextChangedListener(EditTextWatcher)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        (activity as DaggerAppCompatActivity).menuInflater.inflate(R.menu.write_question_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return (when(item.itemId) {
-            R.id.write_question_btn -> {
-                sentMessage()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        })
-    }
-
-    private fun checkPermissions() {
-
+        binding.userEmail.addTextChangedListener(editTextWatcher)
     }
 
     private fun sentMessage() {
-        if(binding.userName.text.toString().isNotEmpty() &&
-                binding.userEmail.text.toString().isNotEmpty() &&
-                CheckOnValid.isEmailValid(binding.userEmail) &&
-                binding.message.text.toString().isNotEmpty()){
-            Toast.makeText(requireContext(),"Send", Toast.LENGTH_LONG).show()
+        if (binding.userName.text.toString().isNotEmpty() &&
+            binding.userEmail.text.toString().isNotEmpty() &&
+            CheckOnValid.isEmailValid(binding.userEmail) &&
+            binding.message.text.toString().isNotEmpty()
+        ) {
+            openMessageIntent(
+                binding.userName.text.toString(),
+                binding.userEmail.text.toString(),
+                binding.message.text.toString()
+            )
         } else {
-            Toast.makeText(requireContext(),resources.getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                requireContext(),
+                resources.getString(R.string.fill_all_fields),
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
-    private val EditTextWatcher = object : TextWatcher {
+    private fun openMessageIntent(
+        userName: String,
+        userEmail: String,
+        message: String
+    ) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("mailto:$toEmail"))
+        intent.putExtra(Intent.EXTRA_SUBJECT, userName)
+        intent.putExtra(Intent.EXTRA_TEXT, message)
+        startActivity(intent)
+    }
+
+    private val editTextWatcher = object : CustomTextWatcher() {
         override fun afterTextChanged(s: Editable?) {
             CheckOnValid.isEmailValid(binding.userEmail)
         }
-
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
     }
 
+    companion object {
+        const val toEmail = "usov.misha@gmail.com"
+    }
 }

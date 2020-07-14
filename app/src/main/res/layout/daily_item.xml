@@ -3,13 +3,13 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="daily"
             type="com.example.emojifinder.data.db.local.models.DailyModel" />
     </data>
 
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="90dp"
         android:layout_height="wrap_content">
 
@@ -23,31 +23,30 @@
             <TextView
                 android:id="@+id/day_tv"
                 android:layout_width="match_parent"
-                android:textSize="18sp"
-                android:text="@{String.valueOf(daily.id)}"
-                android:textColor="@color/first_color"
-                android:fontFamily="@font/ru_eng_sriracha"
-                android:textAlignment="center"
+                android:layout_height="wrap_content"
                 android:background="@drawable/daily_top"
-                android:layout_height="wrap_content"/>
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:text="@{String.valueOf(daily.id)}"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:background="@color/green_color"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:background="@color/green_color">
 
                 <androidx.emoji.widget.EmojiAppCompatEditText
                     android:id="@+id/daily_emoji"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:focusable="false"
-                    android:clickable="false"
+                    android:layout_centerInParent="true"
                     android:background="@null"
-                    android:textSize="20sp"
+                    android:clickable="false"
+                    android:focusable="false"
                     android:gravity="center"
-                    app:daily_type="@{daily.type}"
-                    android:layout_centerInParent="true"/>
-
+                    android:textSize="20sp"
+                    app:daily_type="@{daily.type}" />
 
             </RelativeLayout>
 
@@ -55,12 +54,12 @@
                 android:id="@+id/daily_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(daily.cost)}"
-                android:fontFamily="@font/ru_eng_sriracha"
-                android:textSize="18sp"
                 android:background="@drawable/daily_bottom"
-                android:textColor="@color/first_color"
-                android:textAlignment="center"/>
+                android:fontFamily="@font/ru_eng_sriracha"
+                android:text="@{String.valueOf(daily.cost)}"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
 
         </LinearLayout>
 

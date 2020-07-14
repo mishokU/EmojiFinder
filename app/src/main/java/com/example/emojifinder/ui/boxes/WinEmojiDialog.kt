@@ -10,7 +10,6 @@ import dagger.android.support.DaggerFragment
 object WinEmojiDialog {
 
     lateinit var dialogView: BaseDialog
-    lateinit var adapter: LootBoxRecyclerViewAdapter
     lateinit var fragment: DaggerFragment
 
     fun create(fragment: DaggerFragment) {

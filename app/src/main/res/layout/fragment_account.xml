@@ -16,11 +16,10 @@
 
     </data>
 
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradient"
+        android:background="@color/backgroundDesignColor"
         tools:context=".ui.account.AccountFragment">
 
         <LinearLayout
@@ -272,12 +271,14 @@
                                     android:layout_centerInParent="true"
                                     android:padding="5dp"
                                     android:scrollbarSize="2dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginStart="5dp"
                                     android:clipToPadding="false"
                                     android:overScrollMode="never"
                                     android:scrollbarThumbHorizontal="@color/yellow_color"
-                                    android:scrollbars="vertical"
+                                    android:orientation="horizontal"
                                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                                    app:spanCount="5"
+                                    app:spanCount="2"
                                     tools:listitem="@layout/emoji_shop_item" />
 
                                 <com.airbnb.lottie.LottieAnimationView

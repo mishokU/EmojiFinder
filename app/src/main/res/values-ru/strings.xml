@@ -200,5 +200,8 @@
     <string name="roll_again">Roll again</string>
     <string name="congratulations">Congratulations!</string>
     <string name="take_ticket">Take ticket</string>
+    <string name="win_nothing">Oops, won nothing</string>
+    <string name="avatar_updated">Avatar updated!</string>
+    <string name="emojis_explanation">Create new emojis by combining existing ones!</string>
 
 </resources>

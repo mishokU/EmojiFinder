@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -12,7 +11,6 @@ import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.databinding.FragmentAccountBinding
-import com.example.emojifinder.domain.adds.BANNER_ID
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.ui.shop.EmojisRecyclerViewAdapter
@@ -33,8 +31,7 @@ class AccountFragment : DaggerFragment() {
     lateinit var profile: MainAccountModel
     lateinit var adapter: UserLevelRecyclerViewAdapter
 
-    lateinit var userAdapter: EmojisRecyclerViewAdapter
-    lateinit var userEmojisAdapter: EmojisRecyclerViewAdapter
+    private lateinit var userEmojisAdapter: EmojisRecyclerViewAdapter
 
 
     override fun onCreateView(
@@ -67,6 +64,13 @@ class AccountFragment : DaggerFragment() {
         return binding.root
     }
 
+    private fun initAvatarLeftRightButtons() {
+//        binding.saveAvatarBtn.setOnClickListener {
+//            viewModel.updateUserAvatar(binding.emojiAvatar.text.toString())
+//            Toast.makeText(requireContext(), resources.getString(R.string.avatar_updated), Toast.LENGTH_SHORT).show()
+//        }
+    }
+
     private fun initUserEmojisAdapter() {
         userEmojisAdapter = EmojisRecyclerViewAdapter(
             EmojisRecyclerViewAdapter.OnShopItemClickListener {},
@@ -76,10 +80,10 @@ class AccountFragment : DaggerFragment() {
     }
 
     private fun initValues() {
-        binding.emojiBoxEt.setText("\uD83C\uDF9F️")
-        binding.emosEt.setText("\uD83D\uDCB0")
-        binding.emojiEt.setText("\uD83D\uDE00")
-        binding.scoreEmoji.setText("\uD83C\uDFAF")
+        binding.emojiBoxEt.setText(resources.getString(R.string.emoji_ticket))
+        binding.emosEt.setText(resources.getString(R.string.emoji_emos))
+        binding.emojiEt.setText(resources.getString(R.string.simple_emoji))
+        binding.scoreEmoji.setText(resources.getString(R.string.emoji_score))
     }
 
     private fun addListenerToAdView() {
@@ -166,12 +170,8 @@ class AccountFragment : DaggerFragment() {
                     }
                     is Result.Success -> {
                         binding.userEmojisProgressBar.visibility = View.INVISIBLE
-
                         userEmojisAdapter.submitUserList(profile.avatar, userEmojis.data)
-                        //userEmojisCount = userEmojis.data.size.toString()
-
                         initUserValuesViewModel()
-                        //initShopViewModel(userEmojis.data)
                     }
                     is Result.Error -> {
                         binding.userEmojisProgressBar.visibility = View.INVISIBLE
