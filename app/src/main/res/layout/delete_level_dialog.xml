@@ -39,8 +39,8 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:fontFamily="@font/ru_eng_sriracha"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="10dp"
                 android:textSize="20sp"
                 android:textColor="@color/first_color"/>
@@ -57,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:text="@string/delete"
+                    app:cornerRadius="10dp"
                     app:backgroundTint="@color/textOrangeColor"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
@@ -73,6 +74,7 @@
                     android:textColor="@color/main_ripple_button_color"
                     android:layout_marginStart="5dp"
                     app:strokeWidth="3dp"
+                    app:cornerRadius="10dp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:textAllCaps="false"/>
 

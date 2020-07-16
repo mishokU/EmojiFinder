@@ -73,6 +73,7 @@
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
+                    android:textColor="@color/main_ripple_button_color"
                     app:strokeWidth="3dp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:textAllCaps="false"/>

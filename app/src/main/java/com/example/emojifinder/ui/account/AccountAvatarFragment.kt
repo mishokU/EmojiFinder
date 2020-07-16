@@ -1,7 +1,9 @@
 package com.example.emojifinder.ui.account
 
 import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -172,17 +174,10 @@ class AccountAvatarFragment : DaggerFragment() {
                 )
             )
         }
-        binding.failedToGenerate.addAnimatorListener(object : Animator.AnimatorListener {
-
+        binding.failedToGenerate.addAnimatorListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
-                binding.resultGeneratorField.visibility = View.VISIBLE
+                binding.failedToGenerate.visibility = View.GONE
             }
-
-            override fun onAnimationRepeat(animation: Animator?) {}
-
-            override fun onAnimationCancel(animation: Animator?) {}
-
-            override fun onAnimationStart(animation: Animator?) {}
         })
     }
 
@@ -255,7 +250,6 @@ class AccountAvatarFragment : DaggerFragment() {
         generateGroupChips((requireActivity() as MainActivity).randomEmojis)
     }
 
-    @Suppress("DEPRECATION")
     private fun generateGroupChips(data: List<EmojiShopModel?>) {
         binding.categoriesChipGroup.removeAllViews()
         val groups = data.distinctBy {
@@ -267,6 +261,7 @@ class AccountAvatarFragment : DaggerFragment() {
         binding.categoriesChipGroup.addView(createChip("Your"))
     }
 
+    @Suppress("DEPRECATION")
     private fun createChip(group: String?): Chip {
         val chip = Chip(requireContext())
         chip.text = group
@@ -379,26 +374,37 @@ class AccountAvatarFragment : DaggerFragment() {
     }
 
     private fun changeResultState(generatedEmoji: String) {
-        binding.resultGeneratorField.text = generatedEmoji
-        if (binding.resultGeneratorField.lineCount == 1 && generatedEmoji != "" && generatedEmoji.length > 1) {
-            binding.resultGeneratorField.visibility = View.VISIBLE
-            viewModel.addGeneratedEmoji(adapter.getGeneratedEmoji(generatedEmoji))
-            increaseUserEmojis()
-            adapter.changeEmoji(generatedEmoji)
-            (activity as MainActivity).mediaPlayerPool.play(MusicType.SUCCESSFUL)
+        binding.emojiBuilderAnimation.playAnimation()
+        binding.emojiBuilderAnimation.addAnimatorListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator?, isReverse: Boolean) {
+                binding.emojiBuilderAnimation.visibility = View.VISIBLE
+                binding.resultGeneratorField.visibility = View.VISIBLE
+            }
 
-        } else {
-            binding.resultGeneratorField.text = ""
-            binding.resultGeneratorField.visibility = View.INVISIBLE
-            binding.failedToGenerate.playAnimation()
+            override fun onAnimationEnd(animation: Animator?) {
+                binding.emojiBuilderAnimation.visibility = View.GONE
+                binding.resultGeneratorField.text = generatedEmoji
+                if (binding.resultGeneratorField.lineCount == 1 && generatedEmoji != "" && generatedEmoji.length > 1) {
+                    binding.resultGeneratorField.visibility = View.VISIBLE
+                    binding.resultEmoji.visibility = View.VISIBLE
+                    viewModel.addGeneratedEmoji(adapter.getGeneratedEmoji(generatedEmoji))
+                    increaseUserEmojis(1)
+                    adapter.changeEmoji(generatedEmoji)
+                    (activity as MainActivity).mediaPlayerPool.play(MusicType.SUCCESSFUL)
 
-            (activity as MainActivity).mediaPlayerPool.play(MusicType.FAIL)
-        }
+                } else {
+                    binding.resultGeneratorField.text = ""
+                    binding.failedToGenerate.visibility = View.VISIBLE
+                    binding.failedToGenerate.playAnimation()
+                    (activity as MainActivity).mediaPlayerPool.play(MusicType.FAIL)
+                }
+            }
+        })
     }
 
-    private fun increaseUserEmojis() {
+    private fun increaseUserEmojis(data : Int) {
         val emojisCount = binding.emojisCount.text.toString().toInt()
-        binding.emojisCount.text = (emojisCount + 1).toString()
+        binding.emojisCount.text = (emojisCount + data).toString()
     }
 
     private fun changeButtonState(
@@ -447,9 +453,10 @@ class AccountAvatarFragment : DaggerFragment() {
                     EmojiCost.getEmojiSellCost(ShopEmojiDialog.getSaleButton()),
                     getUserValues()
                 )
-
-                viewModel.fetchUserEmojis()
-                viewModel.fetchUserValues()
+                adapter.removeEmoji(emoji)
+                increaseUserEmojis(-1)
+//                viewModel.fetchUserEmojis()
+//                viewModel.fetchUserValues()
 
                 (activity as MainActivity).mediaPlayerPool.play(MusicType.MONEY)
 

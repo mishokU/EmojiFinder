@@ -4,7 +4,7 @@
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
             <stroke
-                android:width="2dp"
+                android:width="5dp"
                 android:color="@color/buttonBlueColor"/>
             <corners android:radius="20dp"/>
         </shape>
@@ -14,7 +14,7 @@
         <clip>
             <shape android:shape="rectangle">
                 <stroke android:color="@color/buttonBlueColor"
-                    android:width="2dp"/>
+                    android:width="5dp"/>
                 <solid android:color="@color/textOrangeColor"/>
                 <corners android:radius="20dp"/>
             </shape>

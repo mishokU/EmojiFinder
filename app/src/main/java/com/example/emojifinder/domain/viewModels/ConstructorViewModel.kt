@@ -21,10 +21,10 @@ class ConstructorViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _constructorLevelResponse = MutableLiveData<Result<List<EmojiShopModel?>>>()
-    val constructorLevelResponse : LiveData<Result<List<EmojiShopModel?>>>
+    val constructorLevelResponse: LiveData<Result<List<EmojiShopModel?>>>
         get() = _constructorLevelResponse
 
-    lateinit var levelTitle : String
+    lateinit var levelTitle: String
     val emojis by lazy {
         levelsRepository.getEmojis(levelTitle)
     }
@@ -33,25 +33,29 @@ class ConstructorViewModel @Inject constructor(
     val isSimilarList = levelsRepository.isSimilarList
 
     init {
+        fetchConstructor()
+    }
+
+    private fun fetchConstructor() {
         coroutineScope.launch {
-            fetchConstructor()
+            withContext(Dispatchers.Main) {
+                _constructorLevelResponse.value = Result.Loading
+            }
+            val result = levelConstructorService.fetchFakeData()
+            withContext(Dispatchers.Main) {
+                _constructorLevelResponse.value = result
+            }
         }
     }
 
-    private suspend fun fetchConstructor() {
-        withContext(Dispatchers.Main){
-            _constructorLevelResponse.value = Result.Loading
-        }
-        val result = levelConstructorService.fetchFakeData()
-        withContext(Dispatchers.Main){
-            _constructorLevelResponse.value = result
-        }
+    fun levelComplete() {
+        _constructorLevelResponse.value = null
     }
 
     fun saveLevel(level: List<EmojiShopModel>, smallLevelModel: SmallLevelModel) {
         coroutineScope.launch {
             levelsRepository.removeLevel(smallLevelModel.title)
-            levelsRepository.addLevel(level,smallLevelModel)
+            levelsRepository.addLevel(level, smallLevelModel)
         }
     }
 
@@ -59,7 +63,7 @@ class ConstructorViewModel @Inject constructor(
         level: List<EmojiShopModel>,
         smallLevelModel: SmallLevelModel?,
         image: Bitmap?
-    ){
+    ) {
         coroutineScope.launch {
             levelsRepository.sentLevel(level, smallLevelModel, image)
         }

@@ -174,4 +174,8 @@ class EmojisRecyclerViewAdapter(
         emoji?.group = "Your"
     }
 
+    fun removeEmoji(emoji: EmojiShopModel) {
+        adapterlist.currentList.remove(emoji)
+    }
+
 }

@@ -43,7 +43,6 @@ class MainActivity : DaggerAppCompatActivity() {
 
     lateinit var randomEmojis : List<EmojiShopModel>
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)

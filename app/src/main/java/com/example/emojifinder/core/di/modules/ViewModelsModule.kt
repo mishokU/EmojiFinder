@@ -6,7 +6,6 @@ import com.example.emojifinder.core.di.launcher.LaunchViewModel
 import com.example.emojifinder.core.di.utils.ViewModelFactory
 import com.example.emojifinder.core.di.utils.ViewModelKey
 import com.example.emojifinder.domain.viewModels.*
-import com.example.emojifinder.domain.viewModels.SharedViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.emoji.widget.EmojiAppCompatEditText
 import com.bumptech.glide.Glide
+import com.example.emojifinder.R
 import com.example.emojifinder.data.db.local.models.Daily
 import com.example.emojifinder.data.db.remote.service.FirebaseInit
 import com.example.emojifinder.domain.glide.GlideApp
@@ -23,9 +24,9 @@ fun bindProgress(textView: TextView, score: Int, max: Int) {
 @BindingAdapter("daily_type")
 fun bindDailyType(view: EmojiAppCompatEditText, type: Daily) {
     when (type) {
-        Daily.EMOJI -> view.setText("\uD83D\uDE00")
-        Daily.BOX -> view.setText("\uD83C\uDF81")
-        Daily.EMOS -> view.setText("\uD83D\uDCB0")
+        Daily.EMOJI -> view.setText(view.resources.getString(R.string.simple_emoji))
+        Daily.BOX -> view.setText(view.resources.getString(R.string.emoji_ticket))
+        Daily.EMOS -> view.setText(view.resources.getString(R.string.emoji_emos))
     }
 }
 

@@ -27,6 +27,7 @@
                 android:id="@+id/constructor_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/ToolbarTheme"
                 android:fontFamily="@font/ru_eng_sriracha" />
 
             <ScrollView
@@ -36,6 +37,8 @@
                 android:layout_above="@id/stat_place"
                 android:layout_below="@id/constructor_toolbar"
                 android:layout_marginStart="5dp"
+                android:overScrollMode="never"
+                android:clipToPadding="false"
                 android:layout_marginEnd="5dp"
                 android:scrollbars="none">
 
@@ -43,6 +46,8 @@
                     android:id="@+id/constructor_level_rv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="10" />
 
@@ -53,8 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/all_emojis_constructor"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
@@ -104,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="5dp"
+                android:layout_margin="10dp"
                 android:clipToPadding="false"
                 android:overScrollMode="never"
                 android:background="@drawable/your_emojis_style"
@@ -118,7 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_below="@id/stat_place"
-                android:layout_margin="5dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/your_emojis_style"
                 android:visibility="invisible">
 
@@ -126,15 +131,20 @@
                     android:id="@+id/chip_group_scroll_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:clipToPadding="false"
                     android:layout_above="@id/filters_button_place"
                     android:layout_marginTop="5dp"
+                    android:overScrollMode="never"
                     android:layout_marginBottom="5dp">
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/categories_chip_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp">
+                        android:isScrollContainer="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="10dp">
 
                     </com.google.android.material.chip.ChipGroup>
 

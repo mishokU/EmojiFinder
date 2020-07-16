@@ -1,6 +1,7 @@
 package com.example.emojifinder.ui.main
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -92,11 +93,13 @@ class MainMenuFragment : DaggerFragment() {
 
     private fun dailyWinnings() {
         if (daily.isNextDay()) {
-            this.findNavController().navigate(
-                MainMenuFragmentDirections.actionMainMenuFragmentToDailyWinningsFragment(
-                    DailyUI(daily.getDay())
+            Handler().postDelayed({
+                this.findNavController().navigate(
+                    MainMenuFragmentDirections.actionMainMenuFragmentToDailyWinningsFragment(
+                        DailyUI(daily.getDay())
+                    )
                 )
-            )
+            }, 2000)
         }
     }
 

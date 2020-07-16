@@ -26,7 +26,10 @@ class SplashActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initUseCase()
+    }
 
+    private fun initUseCase() {
         val intent = Intent(this, MainActivity::class.java)
         val viewModel: LaunchViewModel = injectViewModel(viewModelFactory)
         viewModel.launchDestination.observe(this, EventObserver { destination ->

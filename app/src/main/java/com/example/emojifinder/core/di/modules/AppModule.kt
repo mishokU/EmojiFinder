@@ -15,6 +15,7 @@ import com.example.emojifinder.core.di.utils.CoroutineScopeMain
 import com.example.emojifinder.data.db.local.emoji_json.ShopEmojiService
 import com.example.emojifinder.data.db.local.fake.FakeDailyItems
 import com.example.emojifinder.data.db.local.fake.LevelConstructorService
+import com.example.emojifinder.data.db.local.room.dao.LevelMainInfoDao
 import com.example.emojifinder.data.db.local.room.database.LevelsDatabase
 import com.example.emojifinder.data.db.remote.api.FirebaseLevels
 import com.example.emojifinder.data.db.remote.api.FirebaseRegistration
@@ -56,6 +57,11 @@ class AppModule {
         FirebaseRegistrationImpl(
             firebaseCreateUserAccount
         )
+
+    @Singleton
+    @Provides
+    fun provideLevelsDao(application: Application): LevelMainInfoDao =
+        LevelsDatabase.getDatabase(application).levelDao()
 
     @Singleton
     @Provides

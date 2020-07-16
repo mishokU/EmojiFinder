@@ -24,8 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginTop="@dimen/margin_layout_top"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="@dimen/margin_layout_bottom"
             android:orientation="vertical">
 
@@ -43,10 +43,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
                 android:fontFamily="@font/ru_eng_sriracha"
+                android:text="@string/emojis_explanation"
                 android:textColor="@color/buttonBlueColor"
-                android:text="@string/emojis_explanation"/>
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/ru_eng_sriracha"
                                 android:text="@{String.valueOf(values.emos)}"
-                                android:textColor="@color/buttonBlueColor"
+                                android:textColor="@color/textOrangeColor"
                                 android:textSize="14sp" />
 
                         </LinearLayout>
@@ -126,7 +126,7 @@
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/ru_eng_sriracha"
                                 android:text="@{String.valueOf(values.emojis)}"
-                                android:textColor="@color/buttonBlueColor"
+                                android:textColor="@color/textOrangeColor"
                                 android:textSize="14sp" />
 
                         </LinearLayout>
@@ -163,7 +163,7 @@
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/ru_eng_sriracha"
                                 android:text="@{String.valueOf(values.boxes)}"
-                                android:textColor="@color/buttonBlueColor"
+                                android:textColor="@color/textOrangeColor"
                                 android:textSize="14sp" />
 
                         </LinearLayout>
@@ -225,10 +225,10 @@
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
                             android:background="@drawable/your_emojis_style"
-                            android:padding="5dp"
-                            android:scrollbarSize="2dp"
                             android:clipToPadding="false"
                             android:overScrollMode="never"
+                            android:padding="5dp"
+                            android:scrollbarSize="2dp"
                             android:scrollbarThumbHorizontal="@color/blue_color"
                             android:scrollbars="vertical"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -249,7 +249,9 @@
                                 android:layout_height="match_parent"
                                 android:layout_above="@id/filters_button_place"
                                 android:layout_marginTop="5dp"
-                                android:layout_marginBottom="5dp">
+                                android:layout_marginBottom="5dp"
+                                android:clipToPadding="false"
+                                android:overScrollMode="never">
 
                                 <com.google.android.material.chip.ChipGroup
                                     android:id="@+id/categories_chip_group"
@@ -583,7 +585,7 @@
 
                 <RelativeLayout
                     android:id="@+id/result_emoji"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_gravity="center">
@@ -592,11 +594,10 @@
                         android:id="@+id/failed_to_generate"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:visibility="gone"
                         android:layout_centerInParent="true"
                         android:layout_gravity="center"
-                        android:textAlignment="center"
                         app:lottie_rawRes="@raw/failed_to_generate" />
-
 
                     <androidx.emoji.widget.EmojiButton
                         android:id="@+id/result_generator_field"
@@ -613,6 +614,15 @@
                         android:textAlignment="center"
                         android:textSize="24sp" />
 
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/emoji_builder_animation"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:lottie_speed="2"
+                        android:visibility="gone"
+                        android:layout_centerInParent="true"
+                        app:lottie_rawRes="@raw/emoji_builder"/>
+
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -627,12 +637,12 @@
                     android:id="@+id/show_chest"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/blue_color"
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:text="@string/open_chest"
                     android:textAllCaps="false"
-                    android:layout_marginEnd="5dp"
                     android:textColor="@color/background_color" />
 
                 <com.google.android.material.button.MaterialButton

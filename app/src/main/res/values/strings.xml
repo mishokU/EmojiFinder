@@ -171,7 +171,7 @@
     <string name="finder">FINDER</string>
     <string name="menu">Menu</string>
     <string name="campaign">Campaign</string>
-    <string name="get_free_chest">GET FREE TICKET</string>
+    <string name="get_free_chest">GET FREE 🎟️</string>
     <string name="_249_9">249.9 Р</string>
     <string name="_199_9">199.9 Р</string>
     <string name="starter_box_count">5</string>
@@ -205,4 +205,6 @@
     <string name="avatar_updated">Avatar updated!</string>
     <string name="emoji_score">🎯</string>
     <string name="emojis_explanation">Create new emojis by combining existing ones!</string>
+    <string name="emoji_private_policy">🕵️</string>
+    <string name="emoji_help">ℹ️</string>
 </resources>

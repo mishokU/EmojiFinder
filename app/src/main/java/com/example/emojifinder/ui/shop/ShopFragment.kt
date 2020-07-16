@@ -61,14 +61,14 @@ class ShopFragment : DaggerFragment() {
     }
 
     private fun initEmojis() {
-        binding.emosEt.setText("\uD83D\uDCB0")
-        binding.boxEt.setText("\uD83C\uDF81")
+        binding.emosEt.setText(resources.getString(R.string.emoji_emos))
+        binding.boxEt.setText(resources.getString(R.string.emoji_ticket))
 
-        binding.mediumBoxEt.setText("\uD83C\uDF81")
-        binding.mediumEmosEt.setText("\uD83D\uDCB0")
+        binding.mediumBoxEt.setText(resources.getString(R.string.emoji_ticket))
+        binding.mediumEmosEt.setText(resources.getString(R.string.emoji_emos))
 
         binding.noAddsEmoji.setText("⛔")
-        binding.vipEmosEmoji.setText("\uD83D\uDCB0")
+        binding.vipEmosEmoji.setText(resources.getString(R.string.emoji_emos))
         binding.vipEmoji.setText("\uD83D\uDE00")
     }
 

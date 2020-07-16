@@ -195,5 +195,7 @@
     <string name="win_nothing">Oops, won nothing</string>
     <string name="avatar_updated">Avatar updated!</string>
     <string name="emojis_explanation">Create new emojis by combining existing ones!</string>
+    <string name="emoji_private_policy">🕵️</string>
+    <string name="emoji_help">ℹ️</string>
 
 </resources>

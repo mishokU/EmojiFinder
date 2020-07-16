@@ -1,6 +1,5 @@
 package com.example.emojifinder.ui.constructor
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.emoji.widget.EmojiAppCompatButton
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emojifinder.data.db.remote.models.EmojiShopModel
 import com.example.emojifinder.databinding.EmojiConstructorItemBinding
-import com.google.common.primitives.Ints.max
 import kotlinx.android.synthetic.main.emoji_constructor_item.view.*
 
 class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiClickListener) : ListAdapter<EmojiShopModel,
@@ -40,7 +38,6 @@ class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiC
     override fun onBindViewHolder(holder: KeyboardViewHolder, position: Int){
         val emoji = getItem(position)
         val button = holder.itemView.emoji_constructor_btn
-
         holder.itemView.setOnClickListener {
             handleEmoji(button, emoji, position)
         }

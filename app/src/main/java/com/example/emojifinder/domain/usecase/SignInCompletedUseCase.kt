@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.emojifinder.domain.prefs
+package com.example.emojifinder.domain.usecase
 
 import com.example.emojifinder.domain.UseCase
 import com.example.emojifinder.data.db.remote.service.FirebaseAuthHandler

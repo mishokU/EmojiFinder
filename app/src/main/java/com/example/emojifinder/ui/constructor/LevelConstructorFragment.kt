@@ -19,6 +19,7 @@ import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.ConstructorViewModel
 import com.example.emojifinder.ui.base.BaseImageFragment
 import com.example.emojifinder.ui.categories.SmallLevelModel
+import com.example.emojifinder.ui.constructor.LevelConstructorRecyclerViewAdapter
 import com.example.emojifinder.ui.constructor.dialogs.ExitLevelDialog
 import com.example.emojifinder.ui.constructor.dialogs.ResetLevelDialog
 import com.example.emojifinder.ui.constructor.dialogs.SaveLevelDialog
@@ -41,6 +42,8 @@ class LevelConstructorFragment : BaseImageFragment() {
 
     private var isGridActive: Boolean = true
     private var isFilterVisible: Boolean = false
+    private var isSaved = false
+
     private lateinit var saveItemIcon: MenuItem
     private lateinit var level: SmallLevelModel
 
@@ -118,6 +121,8 @@ class LevelConstructorFragment : BaseImageFragment() {
                     )
                     SaveLevelDialog.dialogView.dismiss()
                 }
+                this.findNavController().navigateUp()
+                isSaved = true
             }
         }
 
@@ -128,6 +133,7 @@ class LevelConstructorFragment : BaseImageFragment() {
                     SentLevelDialog.getSmallLevelModel(),
                     SentLevelDialog.getImage()
                 )
+                this.findNavController().navigateUp()
                 SentLevelDialog.dialogView.dismiss()
             }
         }
@@ -179,6 +185,7 @@ class LevelConstructorFragment : BaseImageFragment() {
         }
     }
 
+    @Suppress("DEPRECATION")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         (activity as DaggerAppCompatActivity).menuInflater.inflate(R.menu.constructor_menu, menu)
         saveItemIcon = menu.findItem(R.id.is_saved)
@@ -231,15 +238,6 @@ class LevelConstructorFragment : BaseImageFragment() {
                 it
             )
         }
-//        viewModel.isSimilarList.observe(viewLifecycleOwner, Observer {
-//            if(levelAdapter.currentList.isEmpty()){
-//                this.findNavController().navigateUp()
-//            } else if(it){
-//                ExitLevelDialog.open()
-//            } else if(!it) {
-//                this.findNavController().navigateUp()
-//            }
-//        })
         if (!levelAdapter.isEmptyLevel()) {
             ExitLevelDialog.open()
         } else {
@@ -327,6 +325,7 @@ class LevelConstructorFragment : BaseImageFragment() {
         })
     }
 
+    @Suppress("DEPRECATION")
     private fun generateGroupChips(data: List<EmojiShopModel?>) {
         binding.categoriesChipGroup.removeAllViews()
         val groups = data.distinctBy {
@@ -382,5 +381,4 @@ class LevelConstructorFragment : BaseImageFragment() {
             handleHomeButton()
         }
     }
-
 }

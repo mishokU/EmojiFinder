@@ -146,10 +146,9 @@ class DailyWinningsFragment : DaggerFragment() {
                     viewModelValues.addGeneratedEmoji(shopEmojis[i])
                 }
                 viewModelValues.updateUserEmojis(values.emojis + item.cost * multiplier)
-
                 Handler().postDelayed({
                     this.findNavController().navigate(R.id.mainMenuFragment)
-                }, 3000)
+                }, 1500)
             }
         }
     }

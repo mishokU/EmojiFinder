@@ -43,10 +43,10 @@ class AccountViewModel @Inject constructor(
     var oldPassword : String ?= null
 
     init {
-        fetchUserEmojis()
         fetchUserLevelsStatistic()
         fetchMainUserData()
         fetchUserValues()
+        fetchUserEmojis()
     }
 
     fun updateLogin(login : TextInputEditText){

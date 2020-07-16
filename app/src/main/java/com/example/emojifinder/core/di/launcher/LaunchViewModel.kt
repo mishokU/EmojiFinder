@@ -20,7 +20,7 @@ package com.example.emojifinder.core.di.launcher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.emojifinder.domain.prefs.SignInCompletedUseCase
+import com.example.emojifinder.domain.usecase.SignInCompletedUseCase
 import com.example.emojifinder.domain.result.Event
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.shared.utils.map

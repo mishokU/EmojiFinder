@@ -58,7 +58,6 @@
                     android:layout_weight="1"
                     android:textAllCaps="false"
                     app:cornerRadius="10dp"
-                    app:rippleColor="@color/main_ripple_button_color"
                     android:textColor="@color/main_ripple_button_color"
                     android:layout_marginStart="5dp"
                     app:strokeWidth="3dp"
