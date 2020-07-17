@@ -52,7 +52,7 @@
                         android:layout_height="60dp"
                         android:backgroundTint="@color/buttonBlueColor"
                         android:fontFamily="@font/ru_eng_sriracha"
-                        android:text="@string/login"
+                        android:text="@string/log_in"
                         android:textColor="@android:color/white"
                         android:textSize="20sp"
                         app:cornerRadius="10dp" />

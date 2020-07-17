@@ -2,9 +2,7 @@ package com.example.emojifinder.ui.constructor.dialogs
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.RippleDrawable
 import android.net.Uri
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import com.example.emojifinder.R
@@ -41,7 +39,7 @@ object SentLevelDialog {
         dialogView.show()
     }
 
-    private fun getNameLabel(): EditText {
+    fun getNameLabel(): EditText {
         return dialogView.findViewById(R.id.level_name_sent)
     }
 

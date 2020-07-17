@@ -5,7 +5,6 @@ import com.example.emojifinder.domain.auth.LoginModel
 import com.example.emojifinder.domain.result.Result
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.tasks.await
-import java.lang.Exception
 import javax.inject.Singleton
 
 
@@ -45,7 +44,9 @@ class FirebaseAuthHandler : Auth, FirebaseInit() {
             .delete()
 
         mAuth.signOut()
-        mUser.delete()
+        if(mUser != null){
+            mUser!!.delete()
+        }
     }
 
 }

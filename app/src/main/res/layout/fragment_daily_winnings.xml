@@ -95,8 +95,7 @@
                         android:clickable="false"
                         android:focusable="false"
                         android:textSize="20sp"
-                        android:background="@null"
-                        android:src="@drawable/emos_pic"/>
+                        android:background="@null" />
 
                     <TextView
                         android:id="@+id/emos_count"

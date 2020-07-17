@@ -9,7 +9,8 @@ data class MainAccountModel(
     val login : String,
     val password : String,
     val avatar : String,
-    val score : Int
+    val score : Int,
+    val vip : Boolean
 ) : Parcelable {
-    constructor() : this("", "", "", "", 0)
+    constructor() : this("", "", "", "", 0, false)
 }

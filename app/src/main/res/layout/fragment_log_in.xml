@@ -19,10 +19,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:fontFamily="@font/ru_eng_sriracha"
-                android:text="@string/login"
+                android:text="@string/log_in"
                 android:textColor="@color/textOrangeColor"
                 android:textSize="46sp" />
 
@@ -43,8 +43,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="40dp"
-                            android:layout_marginEnd="40dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
                             android:orientation="vertical">
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -71,8 +71,9 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textColorHint="@color/first_color"
                                 app:boxStrokeColor="@color/buttonBlueColor"
+                                android:hint="@string/password"
+                                android:textColorHint="@color/first_color"
                                 app:passwordToggleEnabled="true">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -81,8 +82,8 @@
                                     android:layout_height="wrap_content"
                                     android:drawableStart="@drawable/icons8_lock_24px"
                                     android:drawablePadding="10dp"
+                                    android:fontFamily="@font/ru_eng_sriracha"
                                     android:drawableTint="@color/textOrangeColor"
-                                    android:hint="@string/password"
                                     android:inputType="textPassword"
                                     android:maxLines="1"
                                     android:textColor="@color/buttonBlueColor" />
@@ -95,6 +96,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="end"
+                                android:fontFamily="@font/ru_eng_sriracha"
                                 android:text="@string/forgot_your_password"
                                 android:textAllCaps="false"
                                 android:textSize="16sp"
@@ -109,11 +111,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_marginStart="40dp"
-                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="40dp"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:backgroundTint="@color/blue_color"
                         android:enabled="false"
-                        android:text="@string/login"
+                        android:text="@string/log_in"
+                        app:cornerRadius="10dp"
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"
                         android:textSize="20sp">
@@ -128,6 +131,7 @@
                         android:layout_gravity="center"
                         android:text="@string/registration"
                         android:textAlignment="center"
+                        android:fontFamily="@font/ru_eng_sriracha"
                         android:textAllCaps="false"
                         android:textSize="16sp"
                         app:strokeColor="@color/background_color" />

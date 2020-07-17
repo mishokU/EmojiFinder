@@ -5,12 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
-import android.provider.MediaStore
-import androidx.room.PrimaryKey
 import com.example.emojifinder.core.di.utils.CoroutineScopeIO
-import com.example.emojifinder.ui.application.MainApplication
-import com.example.emojifinder.data.prefs.PreferenceStorage
-import com.example.emojifinder.data.prefs.SharedPreferenceStorage
 import com.example.emojifinder.core.di.utils.CoroutineScopeMain
 import com.example.emojifinder.data.db.local.emoji_json.ShopEmojiService
 import com.example.emojifinder.data.db.local.fake.FakeDailyItems
@@ -20,6 +15,8 @@ import com.example.emojifinder.data.db.local.room.database.LevelsDatabase
 import com.example.emojifinder.data.db.remote.api.FirebaseLevels
 import com.example.emojifinder.data.db.remote.api.FirebaseRegistration
 import com.example.emojifinder.data.db.remote.service.*
+import com.example.emojifinder.data.prefs.PreferenceStorage
+import com.example.emojifinder.data.prefs.SharedPreferenceStorage
 import com.example.emojifinder.domain.notifications.NotificationsService
 import com.example.emojifinder.domain.prefs.NotificationAlarmPrefs
 import com.example.emojifinder.domain.prefs.SettingsPrefs
@@ -27,6 +24,7 @@ import com.example.emojifinder.domain.prefs.ShowGameHintPrefs
 import com.example.emojifinder.domain.sounds.MediaPlayerPool
 import com.example.emojifinder.domain.user.FirebaseCreateUserAccount
 import com.example.emojifinder.domain.user.FirebaseCreateUserAccountImpl
+import com.example.emojifinder.ui.application.MainApplication
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
@@ -62,6 +60,10 @@ class AppModule {
     @Provides
     fun provideLevelsDao(application: Application): LevelMainInfoDao =
         LevelsDatabase.getDatabase(application).levelDao()
+
+//    @Singleton
+//    @Provides
+//    fun provideLocaleHelper(application: Application) = LocaleHelper(application as MainApplication)
 
     @Singleton
     @Provides

@@ -1,6 +1,7 @@
 package com.example.emojifinder.ui.main
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,9 +16,12 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.ActivityMainBinding
+import com.example.emojifinder.domain.locale.ApplicationLanguageHelper
+import com.example.emojifinder.domain.locale.LocaleHelper
 import com.example.emojifinder.domain.payment.LOAD_PAYMENT_DATA_REQUEST_CODE
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.sounds.MediaPlayerPool
+import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.domain.viewModels.ShopViewModel
 import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.google.android.gms.wallet.AutoResolveHelper
@@ -41,7 +45,12 @@ class MainActivity : DaggerAppCompatActivity() {
     lateinit var viewModelFactoryShop: ViewModelProvider.Factory
     lateinit var viewModelShop: ShopViewModel
 
+    @Inject
+    lateinit var viewModelFactoryUser: ViewModelProvider.Factory
+    lateinit var viewModel: AccountViewModel
+
     lateinit var randomEmojis : List<EmojiShopModel>
+    var isVipAccount : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -61,6 +70,20 @@ class MainActivity : DaggerAppCompatActivity() {
         enableFullScreen()
 
         loadRandomEmojis()
+        loadUserMainData()
+    }
+
+    private fun loadUserMainData() {
+        viewModel = injectViewModel(viewModelFactoryUser)
+        viewModel.userMainDataResponse.observe(this, Observer {
+            it?.let {
+                when(it){
+                    is Result.Success -> {
+                        isVipAccount = it.data!!.vip
+                    }
+                }
+            }
+        })
     }
 
     private fun loadRandomEmojis() {
@@ -140,5 +163,11 @@ class MainActivity : DaggerAppCompatActivity() {
     override fun onResume() {
         super.onResume()
         mediaPlayerPool.resumeBackground()
+    }
+
+    //This we change the language
+    override fun attachBaseContext(newBase: Context?) {
+        val language = LocaleHelper.getLanguage(newBase!!)
+        super.attachBaseContext(ApplicationLanguageHelper.wrap(newBase, language))
     }
 }

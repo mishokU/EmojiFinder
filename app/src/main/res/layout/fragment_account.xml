@@ -156,7 +156,6 @@
                                                 android:background="@null"
                                                 android:clickable="false"
                                                 android:focusable="false"
-                                                android:src="@drawable/emos_pic"
                                                 android:textSize="18sp" />
 
                                             <TextView
@@ -381,6 +380,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="18sp" />
@@ -427,7 +427,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="45dp"
-            android:visibility="invisible"
             app:adSize="BANNER"
             app:adUnitId="ca-app-pub-3940256099942544/6300978111"
             app:layout_constraintBottom_toBottomOf="parent"

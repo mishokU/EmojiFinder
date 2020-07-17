@@ -16,7 +16,7 @@ class SettingsPrefs @Inject constructor(application: Application) {
     }
 
     fun isNotificationsAvailable() : Boolean{
-        return sharedPref.getBoolean("notifications", true)
+        return sharedPref.getBoolean("notifications", false)
     }
 
     fun changeMusic(play: Boolean) {

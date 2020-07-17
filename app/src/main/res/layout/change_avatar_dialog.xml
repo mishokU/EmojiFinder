@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/generator_emoji_style">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/emoji_shop_top_place_style">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/update_avatar"
+                    android:textSize="22sp"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/ru_eng_sriracha"
+                    android:textColor="@color/background_color"/>
+
+            </RelativeLayout>
+
+            <androidx.emoji.widget.EmojiAppCompatEditText
+                android:id="@+id/avatar_emoji"
+                android:layout_marginTop="10dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@null"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/update_avatar_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/update"
+                    android:fontFamily="@font/ru_eng_sriracha"
+                    app:backgroundTint="@color/textOrangeColor"
+                    android:layout_marginEnd="5dp"
+                    android:textAllCaps="false"
+                    app:cornerRadius="10dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+</layout>

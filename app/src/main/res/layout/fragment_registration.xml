@@ -56,13 +56,12 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/login"
                                 android:textColorHint="@color/first_color"
-                                app:boxStrokeColor="@color/background_color">
+                                app:boxStrokeColor="@color/buttonBlueColor">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/login_registration"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/ru_eng_sriracha"
                                     android:drawableStart="@drawable/icons8_account_24px"
                                     android:drawablePadding="10dp"
                                     android:drawableTint="@color/textOrangeColor"
@@ -85,7 +84,6 @@
                                     android:layout_height="wrap_content"
                                     android:drawableStart="@drawable/email_24px"
                                     android:drawablePadding="10dp"
-                                    android:fontFamily="@font/ru_eng_sriracha"
                                     android:drawableTint="@color/textOrangeColor"
                                     android:maxLines="1"
                                     android:textColor="@color/buttonBlueColor" />
@@ -153,6 +151,7 @@
                         android:fontFamily="@font/ru_eng_sriracha"
                         android:backgroundTint="@color/blue_color"
                         android:enabled="false"
+                        app:cornerRadius="10dp"
                         android:text="@string/registration"
                         android:textAllCaps="false"
                         android:textSize="20sp" />

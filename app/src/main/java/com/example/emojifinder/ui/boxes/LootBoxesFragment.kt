@@ -21,7 +21,6 @@ import com.example.emojifinder.domain.adds.REWARDED_VIDEO_ID
 import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.shop.EmojiShopModel
-import com.example.emojifinder.ui.utils.EmojiCost
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.reward.RewardItem
@@ -150,14 +149,18 @@ class LootBoxesFragment : DaggerFragment() {
     private fun showSimpleEmojiDialog(prize: EmojiShopModel) {
         WinEmojiDialog.create(this)
         WinEmojiDialog.show(prize)
-        viewModel.addEmoji(prize, EmojiCost.emojiCost(prize), getUserValues())
+        viewModel.addGeneratedEmoji(prize)
+        updateUserEmojisCount()
+        viewModel.updateUserEmojis(getUserValues().emojis + 1)
     }
 
     private fun showRandomPrizeDialog() {
         RandomPrizeDialog.create(this)
         RandomPrizeDialog.show()
         RandomPrizeDialog.emoji.observe(viewLifecycleOwner, Observer { emoji ->
-            viewModel.addEmoji(emoji, EmojiCost.emojiCost(emoji), getUserValues())
+            viewModel.addGeneratedEmoji(emoji)
+            updateUserEmojisCount()
+            viewModel.updateUserEmojis(getUserValues().emojis + 1)
         })
     }
 
@@ -231,7 +234,7 @@ class LootBoxesFragment : DaggerFragment() {
             initRouletteAnimation()
             val tickets = binding.boxesCount.text.toString().toInt()
             if (tickets > 0) {
-                viewModel.updateUserEmos(tickets - 1)
+                viewModel.updateUserBoxes(tickets - 1)
                 binding.boxesCount.text = (tickets - 1).toString()
                 binding.rouletteConstraint.startAnimation(rotateAnimator)
             } else {

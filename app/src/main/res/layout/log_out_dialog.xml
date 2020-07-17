@@ -41,6 +41,7 @@
                 android:textAlignment="center"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:layout_marginTop="10dp"
                 android:textSize="22sp"
                 android:textColor="@color/first_color"/>
@@ -72,6 +73,7 @@
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:textAllCaps="false"
                     app:cornerRadius="10dp"
+                    app:rippleColor="@color/main_ripple_button_color"
                     android:textColor="@color/main_ripple_button_color"
                     android:layout_marginStart="5dp"
                     app:strokeWidth="3dp"

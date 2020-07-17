@@ -1,12 +1,10 @@
 package com.example.emojifinder.domain.binding
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.emoji.widget.EmojiAppCompatEditText
-import com.bumptech.glide.Glide
 import com.example.emojifinder.R
 import com.example.emojifinder.data.db.local.models.Daily
 import com.example.emojifinder.data.db.remote.service.FirebaseInit
@@ -35,6 +33,7 @@ fun bindImage(imageView: ImageView, url: String?) {
     if(url != "" && url != null){
         GlideApp.with(imageView.context)
             .load(FirebaseInit.mFireStorage.child(url))
+            .placeholder(R.drawable.icons8_full_image_60px)
             .into(imageView)
     }
 }

@@ -42,9 +42,7 @@ class LevelConstructorFragment : BaseImageFragment() {
 
     private var isGridActive: Boolean = true
     private var isFilterVisible: Boolean = false
-    private var isSaved = false
 
-    private lateinit var saveItemIcon: MenuItem
     private lateinit var level: SmallLevelModel
 
     @Inject
@@ -70,12 +68,34 @@ class LevelConstructorFragment : BaseImageFragment() {
         initAllEmojisAdapter()
         initConstructorAdapter()
         initButtons()
+        initSameTitle()
 
         getAllEmojisFromJson()
         getLevel()
         setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    private fun initSameTitle() {
+        viewModel.hasTitleResponse.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) {
+                    SentLevelDialog.getNameLabel().error =
+                        resources.getString(R.string.level_name_should_be_unique)
+                    viewModel.hasTitleComplete()
+                } else {
+                    viewModel.sentLevel(
+                        levelAdapter.currentList,
+                        SentLevelDialog.getSmallLevelModel(),
+                        SentLevelDialog.getImage()
+                    )
+                    this.findNavController().navigateUp()
+                    SentLevelDialog.dialogView.dismiss()
+                    viewModel.hasTitleComplete()
+                }
+            }
+        })
     }
 
     private fun getLevel() {
@@ -115,26 +135,15 @@ class LevelConstructorFragment : BaseImageFragment() {
                         levelAdapter.currentList,
                         SaveLevelDialog.getSmallLevelModel()!!
                     )
-                    saveItemIcon.icon = ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.icons8_save_26px_green
-                    )
                     SaveLevelDialog.dialogView.dismiss()
                 }
                 this.findNavController().navigateUp()
-                isSaved = true
             }
         }
 
         SentLevelDialog.getSentLevelBtn().setOnClickListener {
             if (SentLevelDialog.isNotEmpty()) {
-                viewModel.sentLevel(
-                    levelAdapter.currentList,
-                    SentLevelDialog.getSmallLevelModel(),
-                    SentLevelDialog.getImage()
-                )
-                this.findNavController().navigateUp()
-                SentLevelDialog.dialogView.dismiss()
+                viewModel.checkOnSameTitle(SentLevelDialog.getSmallLevelModel()!!.title)
             }
         }
 
@@ -188,7 +197,6 @@ class LevelConstructorFragment : BaseImageFragment() {
     @Suppress("DEPRECATION")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         (activity as DaggerAppCompatActivity).menuInflater.inflate(R.menu.constructor_menu, menu)
-        saveItemIcon = menu.findItem(R.id.is_saved)
         for (item in menu.children) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 item.iconTintList =

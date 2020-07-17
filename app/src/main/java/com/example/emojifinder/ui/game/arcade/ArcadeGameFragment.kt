@@ -227,9 +227,11 @@ class ArcadeGameFragment : DaggerFragment() {
     }
 
     private fun initloadAd() {
-        interstitialAd.adUnitId = INTERSTITIAL_ID
-        val adRequest = AdRequest.Builder().build()
-        interstitialAd.loadAd(adRequest)
+        if(!(activity as MainActivity).isVipAccount){
+            interstitialAd.adUnitId = INTERSTITIAL_ID
+            val adRequest = AdRequest.Builder().build()
+            interstitialAd.loadAd(adRequest)
+        }
     }
 
     private fun initFinderEmojis() {

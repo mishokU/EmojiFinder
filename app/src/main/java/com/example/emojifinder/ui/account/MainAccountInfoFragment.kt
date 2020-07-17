@@ -1,14 +1,11 @@
 package com.example.emojifinder.ui.account
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -19,10 +16,10 @@ import com.example.emojifinder.databinding.FragmentMainAccountInfoBinding
 import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.domain.viewModels.SharedViewModel
 import com.example.emojifinder.ui.main.MainActivity
+import com.example.emojifinder.ui.utils.CustomTextWatcher
 import com.example.emojifinder.ui.utils.hideKeyboard
 import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.DaggerFragment
-import java.nio.channels.Selector
 import javax.inject.Inject
 
 
@@ -120,8 +117,7 @@ class MainAccountInfoFragment : DaggerFragment() {
         binding.profile = profile
     }
 
-    private val registrationTextWatcher = object : TextWatcher {
-
+    private val registrationTextWatcher = object : CustomTextWatcher() {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             binding.saveEmailPasswordBtn.isEnabled = (
                     binding.emailRegistration.text.toString().isNotEmpty() &&
@@ -129,9 +125,6 @@ class MainAccountInfoFragment : DaggerFragment() {
 
             binding.updateLoginBtn.isEnabled = binding.loginRegistration.text.toString().isNotEmpty()
         }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        override fun afterTextChanged(s: Editable?) {}
     }
 
 }

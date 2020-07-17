@@ -1,10 +1,8 @@
 package com.example.emojifinder.ui.game.campaign.gameAlerts
 
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +37,6 @@ import com.example.emojifinder.ui.utils.ScreenSize
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import dagger.android.support.DaggerFragment
-import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -51,11 +48,11 @@ class GameFragment : DaggerFragment() {
 
     @Inject
     lateinit var levelViewModelFactory: ViewModelProvider.Factory
-    lateinit var levelViewModel: CategoriesViewModel
+    private lateinit var levelViewModel: CategoriesViewModel
 
     @Inject
     lateinit var viewModelFactoryAccount: ViewModelProvider.Factory
-    lateinit var viewModelAccount: AccountViewModel
+    private lateinit var viewModelAccount: AccountViewModel
 
     @Inject
     lateinit var gameHint: ShowGameHintPrefs
@@ -121,14 +118,16 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun initStatisticEmojis(){
-        binding.gameScoreEmoji.setText("\uD83C\uDFAF")
-        binding.mistakeEmoji.setText("\uD83D\uDCDB")
+        binding.gameScoreEmoji.setText(resources.getString(R.string.emoji_score))
+        binding.mistakeEmoji.setText(resources.getString(R.string.emoji_mistakes))
     }
 
     private fun initInterstitialAd() {
-        interstitialAd.adUnitId = INTERSTITIAL_VIDEO_ID
-        val adRequest = AdRequest.Builder().build()
-        interstitialAd.loadAd(adRequest)
+        if(!(activity as MainActivity).isVipAccount) {
+            interstitialAd.adUnitId = INTERSTITIAL_VIDEO_ID
+            val adRequest = AdRequest.Builder().build()
+            interstitialAd.loadAd(adRequest)
+        }
     }
 
     private fun loadUserScore() {
@@ -181,14 +180,18 @@ class GameFragment : DaggerFragment() {
             CampaignGameHint.show(level)
             CampaignGameHint.getStartGameButton().setOnClickListener {
                 CampaignGameHint.dialogView.dismiss()
+                setEmptyStatistic()
+                initProgressAnimator(level)
+                addEndAnimationListener()
+                initStartCircleEndAnimation()
             }
             gameHint.isHintShown(true)
+        } else {
+            setEmptyStatistic()
+            initProgressAnimator(level)
+            addEndAnimationListener()
+            initStartCircleEndAnimation()
         }
-
-        setEmptyStatistic()
-        initProgressAnimator(level)
-        addEndAnimationListener()
-        initStartCircleEndAnimation()
     }
 
     private fun initStartCircleEndAnimation() {
@@ -229,6 +232,7 @@ class GameFragment : DaggerFragment() {
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun initAudioButton() {
         if(settingsPrefs.isPlayMusic()){
             binding.gameAudioBtn.icon = resources.getDrawable(R.drawable.icons8_audio_24px)
@@ -372,8 +376,10 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun showInertialVideoAd() {
-        if (interstitialAd.isLoaded) {
-            interstitialAd.show()
+        if(!(activity as MainActivity).isVipAccount){
+            if (interstitialAd.isLoaded) {
+                interstitialAd.show()
+            }
         }
     }
 
@@ -481,7 +487,5 @@ class GameFragment : DaggerFragment() {
 
     private fun startTimer() {
         animation.start()
-        Log.d("animation", "start")
     }
-
 }

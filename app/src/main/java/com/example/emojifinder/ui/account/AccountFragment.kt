@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -13,6 +14,7 @@ import com.example.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.example.emojifinder.databinding.FragmentAccountBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.AccountViewModel
+import com.example.emojifinder.ui.main.MainActivity
 import com.example.emojifinder.ui.shop.EmojisRecyclerViewAdapter
 import com.google.android.gms.ads.AdRequest
 import dagger.android.support.DaggerFragment
@@ -45,10 +47,12 @@ class AccountFragment : DaggerFragment() {
 
         binding.profilePlace.visibility = View.INVISIBLE
 
-        initUserValuesViewModel()
-        initValues()
+        UpdateAvatarDialog.create(this)
 
         loadUserMainInfo()
+
+        initUserValuesViewModel()
+        initValues()
 
         initUserLevelsAdapter()
         observeLevelsStatistic()
@@ -57,23 +61,27 @@ class AccountFragment : DaggerFragment() {
         initListState()
         initUserEmojisAdapter()
 
-        initUserEmojisViewModel()
-
         addListenerToAdView()
+
+        initUpdateAvatar()
 
         return binding.root
     }
 
-    private fun initAvatarLeftRightButtons() {
-//        binding.saveAvatarBtn.setOnClickListener {
-//            viewModel.updateUserAvatar(binding.emojiAvatar.text.toString())
-//            Toast.makeText(requireContext(), resources.getString(R.string.avatar_updated), Toast.LENGTH_SHORT).show()
-//        }
+    private fun initUpdateAvatar() {
+        UpdateAvatarDialog.getUpdateAvatarBtn().setOnClickListener {
+            viewModel.updateUserAvatar(UpdateAvatarDialog.getEmoji())
+            viewModel.fetchMainUserData()
+            Toast.makeText(requireContext(), resources.getString(R.string.avatar_updated), Toast.LENGTH_SHORT).show()
+            UpdateAvatarDialog.dialogView.dismiss()
+        }
     }
 
     private fun initUserEmojisAdapter() {
         userEmojisAdapter = EmojisRecyclerViewAdapter(
-            EmojisRecyclerViewAdapter.OnShopItemClickListener {},
+            EmojisRecyclerViewAdapter.OnShopItemClickListener {
+                UpdateAvatarDialog.show(it?.text)
+            },
             binding.userEmojisProgressBar, false
         )
         binding.userEmojisPlaceRv.adapter = userEmojisAdapter
@@ -87,8 +95,10 @@ class AccountFragment : DaggerFragment() {
     }
 
     private fun addListenerToAdView() {
-        val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
+        if(!(activity as MainActivity).isVipAccount){
+            val adRequest = AdRequest.Builder().build()
+            binding.adView.loadAd(adRequest)
+        }
     }
 
     private fun initListState() {
@@ -98,7 +108,6 @@ class AccountFragment : DaggerFragment() {
     }
 
     private fun initUserValuesViewModel() {
-        viewModel.fetchUserValues()
         viewModel.userValuesResponse.observe(viewLifecycleOwner, Observer {
             it?.let { values ->
                 when (values) {
@@ -124,7 +133,6 @@ class AccountFragment : DaggerFragment() {
                     .actionAccountFragmentToMainAccountInfoFragment(profile)
             )
         }
-
         binding.ratingBtn.setOnClickListener {
             this.findNavController().navigate(R.id.ratingFragment)
         }
@@ -151,6 +159,8 @@ class AccountFragment : DaggerFragment() {
                         binding.profilePlace.visibility = View.VISIBLE
                         profile = it.data!!
                         binding.profile = it.data
+
+                        initUserEmojisViewModel()
                     }
                     is Result.Error -> {
                         binding.loadingProfile.visibility = View.GONE
@@ -183,6 +193,7 @@ class AccountFragment : DaggerFragment() {
     }
 
     private fun observeLevelsStatistic() {
+        viewModel.fetchUserLevelsStatistic()
         viewModel.levelsStatisticResponse.observe(viewLifecycleOwner, Observer {
             it?.let {
                 when (it) {

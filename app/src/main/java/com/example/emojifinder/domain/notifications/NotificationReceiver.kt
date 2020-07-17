@@ -35,11 +35,8 @@ class NotificationReceiver : BroadcastReceiver() {
             .build()
 
         // Issue the notification.
-        //val notificationManager = NotificationManagerCompat.from(context)
-        with(NotificationManagerCompat.from(context)) {
-            notify(100, newMessageNotification)
-        }
-        //notificationManager.notify(100, newMessageNotification)
+        val notificationManager = NotificationManagerCompat.from(context)
+        notificationManager.notify(100, newMessageNotification)
     }
 
 }

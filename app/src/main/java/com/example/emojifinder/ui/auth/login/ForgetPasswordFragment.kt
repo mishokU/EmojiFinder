@@ -1,12 +1,9 @@
 package com.example.emojifinder.ui.auth.login
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +15,7 @@ import com.example.emojifinder.domain.auth.CheckOnValid
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.LogInViewModel
 import com.example.emojifinder.ui.game.campaign.gameAlerts.ErrorDialog
+import com.example.emojifinder.ui.utils.CustomTextWatcher
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
 import dagger.android.support.DaggerFragment
@@ -27,9 +25,9 @@ class ForgetPasswordFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var viewModel : LogInViewModel
+    lateinit var viewModel: LogInViewModel
 
-    lateinit var binding : FragmentForgetPasswordBinding
+    lateinit var binding: FragmentForgetPasswordBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +46,7 @@ class ForgetPasswordFragment : DaggerFragment() {
     private fun handleButton() {
         binding.emailForget.addTextChangedListener(emailTextWatcher)
         binding.forgetPasswordBtn.setOnClickListener {
-            if(CheckOnValid.isEmailValid(binding.emailForget)){
+            if (CheckOnValid.isEmailValid(binding.emailForget)) {
                 viewModel.forgetPassword(binding.emailForget)
             }
         }
@@ -58,14 +56,15 @@ class ForgetPasswordFragment : DaggerFragment() {
         viewModel = injectViewModel(viewModelFactory)
         viewModel.restorePasswordResponse.observe(viewLifecycleOwner, Observer {
             it?.let {
-                when(it){
+                when (it) {
                     is Result.Success -> {
                         this.findNavController().popBackStack(R.id.forgetPasswordFragment, true)
                         this.findNavController().navigate(R.id.logInFragment)
                     }
                     is Result.Loading -> {
                         binding.forgetPasswordBtn.showProgress {
-                            progressColor = ContextCompat.getColor(requireContext(),R.color.background_color)
+                            progressColor =
+                                ContextCompat.getColor(requireContext(), R.color.background_color)
                             buttonText = ""
                         }
                     }
@@ -78,15 +77,10 @@ class ForgetPasswordFragment : DaggerFragment() {
         })
     }
 
-    private val emailTextWatcher = object : TextWatcher {
-
+    private val emailTextWatcher = object : CustomTextWatcher() {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             binding.forgetPasswordBtn.isEnabled = (binding.emailForget.text.toString().isNotEmpty())
         }
-
-        override fun afterTextChanged(s: Editable?) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
     }
 
 }

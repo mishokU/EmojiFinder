@@ -23,7 +23,8 @@ class FirebaseCreateUserAccountImpl @Inject constructor(private val collection: 
             email = email,
             password = password,
             score = 0,
-            avatar = "\uD83D\uDE02"
+            avatar = "\uD83D\uDE02",
+            vip = false
         )
 
         if(mAuth.uid != null){

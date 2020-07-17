@@ -79,7 +79,6 @@
                                 android:background="@null"
                                 android:clickable="false"
                                 android:focusable="false"
-                                android:src="@drawable/emos_pic"
                                 android:textSize="20sp" />
 
                             <TextView
@@ -285,7 +284,8 @@
                                     android:textAllCaps="false"
                                     android:textColor="@android:color/white"
                                     android:textSize="18sp"
-                                    app:backgroundTint="@color/blue_color" />
+                                    app:backgroundTint="@color/textOrangeColor"
+                                    app:cornerRadius="10dp" />
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/reset_filters"
@@ -300,7 +300,8 @@
                                     android:textAllCaps="false"
                                     android:textColor="@android:color/white"
                                     android:textSize="18sp"
-                                    app:backgroundTint="@color/blue_color" />
+                                    app:backgroundTint="@color/textOrangeColor"
+                                    app:cornerRadius="10dp" />
 
                             </LinearLayout>
 
@@ -590,15 +591,6 @@
                     android:layout_centerInParent="true"
                     android:layout_gravity="center">
 
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/failed_to_generate"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:visibility="gone"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center"
-                        app:lottie_rawRes="@raw/failed_to_generate" />
-
                     <androidx.emoji.widget.EmojiButton
                         android:id="@+id/result_generator_field"
                         android:layout_width="50dp"
@@ -618,10 +610,19 @@
                         android:id="@+id/emoji_builder_animation"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        app:lottie_speed="2"
-                        android:visibility="gone"
                         android:layout_centerInParent="true"
-                        app:lottie_rawRes="@raw/emoji_builder"/>
+                        android:visibility="gone"
+                        app:lottie_rawRes="@raw/emoji_builder"
+                        app:lottie_speed="2" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/failed_to_generate"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        app:lottie_rawRes="@raw/failed_to_generate" />
 
                 </RelativeLayout>
 

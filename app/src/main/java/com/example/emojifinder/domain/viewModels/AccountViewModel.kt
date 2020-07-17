@@ -83,7 +83,7 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    private fun fetchUserLevelsStatistic() {
+    fun fetchUserLevelsStatistic() {
         coroutineScope.launch {
             withContext(Dispatchers.Main){
                 _levelsStatisticResponse.value = Result.Loading

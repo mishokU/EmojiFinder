@@ -33,7 +33,7 @@ open class FirebaseInit  {
 
     companion object {
         val mAuth : FirebaseAuth = FirebaseAuth.getInstance()
-        val mUser : FirebaseUser? = mAuth.currentUser
+        var mUser : FirebaseUser? = mAuth.currentUser
         val mFireStore = FirebaseFirestore.getInstance()
         val mFireStorage = FirebaseStorage.getInstance().reference
         //val mNaturalLanguage = FirebaseNaturalLanguage.getInstance().getTranslator(options)

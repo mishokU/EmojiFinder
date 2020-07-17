@@ -1,12 +1,9 @@
 package com.example.emojifinder.ui.auth.registration
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +14,7 @@ import com.example.emojifinder.databinding.FragmentRegistrationBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.RegistrationViewModel
 import com.example.emojifinder.ui.game.campaign.gameAlerts.ErrorDialog
+import com.example.emojifinder.ui.utils.CustomTextWatcher
 import com.example.emojifinder.ui.utils.hideKeyboard
 import com.github.razir.progressbutton.bindProgressButton
 import com.github.razir.progressbutton.hideProgress
@@ -96,8 +94,7 @@ class RegistrationFragment : DaggerFragment() {
         }
     }
 
-    private val registrationTextWatcher = object : TextWatcher {
-
+    private val registrationTextWatcher = object : CustomTextWatcher() {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             binding.registrationBtn.isEnabled = (
                     binding.loginRegistration.text.toString().isNotEmpty() &&
@@ -105,9 +102,6 @@ class RegistrationFragment : DaggerFragment() {
                     binding.passwordRegistration.text.toString().isNotEmpty() &&
                     binding.repeatPasswordRegistration.text.toString().isNotEmpty())
         }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        override fun afterTextChanged(s: Editable?) {}
     }
 
 }

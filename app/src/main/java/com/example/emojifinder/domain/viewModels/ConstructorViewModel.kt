@@ -24,6 +24,8 @@ class ConstructorViewModel @Inject constructor(
     val constructorLevelResponse: LiveData<Result<List<EmojiShopModel?>>>
         get() = _constructorLevelResponse
 
+    val hasTitleResponse : LiveData<Boolean> = levelsRepository.hasTitle
+
     lateinit var levelTitle: String
     val emojis by lazy {
         levelsRepository.getEmojis(levelTitle)
@@ -59,6 +61,12 @@ class ConstructorViewModel @Inject constructor(
         }
     }
 
+    fun checkOnSameTitle(title : String){
+        coroutineScope.launch {
+            levelsRepository.checkOnSameTitle(title)
+        }
+    }
+
     fun sentLevel(
         level: List<EmojiShopModel>,
         smallLevelModel: SmallLevelModel?,
@@ -87,6 +95,10 @@ class ConstructorViewModel @Inject constructor(
         coroutineScope.launch {
             levelsRepository.removeLevel(title)
         }
+    }
+
+    fun hasTitleComplete() {
+        levelsRepository.hasTitleComplete()
     }
 
 }

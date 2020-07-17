@@ -3,7 +3,6 @@ package com.example.emojifinder.ui.account
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,11 +30,11 @@ import com.example.emojifinder.ui.utils.closeFilters
 import com.example.emojifinder.ui.utils.openFilters
 import com.google.android.material.chip.Chip
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.emoji_shop_item.view.*
 import javax.inject.Inject
 
 
 class AccountAvatarFragment : DaggerFragment() {
-
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -177,6 +176,7 @@ class AccountAvatarFragment : DaggerFragment() {
         binding.failedToGenerate.addAnimatorListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
                 binding.failedToGenerate.visibility = View.GONE
+                binding.resultGeneratorField.visibility = View.VISIBLE
             }
         })
     }
@@ -218,6 +218,7 @@ class AccountAvatarFragment : DaggerFragment() {
     }
 
     private fun initUserEmojisViewModel() {
+        viewModel.fetchUserEmojis()
         viewModel.userEmojisResponse.observe(viewLifecycleOwner, Observer {
             it?.let { userEmojis ->
                 when (userEmojis) {
@@ -301,6 +302,7 @@ class AccountAvatarFragment : DaggerFragment() {
                     getUserValues()
                 )
 
+                changeEmojiBackground(emoji)
                 viewModel.fetchUserEmojis()
                 viewModel.fetchUserValues()
 
@@ -314,6 +316,13 @@ class AccountAvatarFragment : DaggerFragment() {
             }
             ShopEmojiDialog.dialogView.dismiss()
         }
+    }
+
+    private fun changeEmojiBackground(emoji: EmojiShopModel?) {
+        val holder =
+            binding.shopRecyclerView.findViewHolderForAdapterPosition(adapter.fullList.indexOf(emoji))
+        holder?.itemView?.emoji_view?.backgroundTintList = resources.getColorStateList(R.color.green_color)
+        holder?.setIsRecyclable(false)
     }
 
     private fun initGeneratorList() {
@@ -378,7 +387,8 @@ class AccountAvatarFragment : DaggerFragment() {
         binding.emojiBuilderAnimation.addAnimatorListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator?, isReverse: Boolean) {
                 binding.emojiBuilderAnimation.visibility = View.VISIBLE
-                binding.resultGeneratorField.visibility = View.VISIBLE
+                binding.resultGeneratorField.visibility = View.INVISIBLE
+                binding.failedToGenerate.visibility = View.INVISIBLE
             }
 
             override fun onAnimationEnd(animation: Animator?) {
@@ -391,9 +401,9 @@ class AccountAvatarFragment : DaggerFragment() {
                     increaseUserEmojis(1)
                     adapter.changeEmoji(generatedEmoji)
                     (activity as MainActivity).mediaPlayerPool.play(MusicType.SUCCESSFUL)
-
                 } else {
                     binding.resultGeneratorField.text = ""
+                    binding.resultGeneratorField.visibility = View.INVISIBLE
                     binding.failedToGenerate.visibility = View.VISIBLE
                     binding.failedToGenerate.playAnimation()
                     (activity as MainActivity).mediaPlayerPool.play(MusicType.FAIL)
@@ -402,7 +412,7 @@ class AccountAvatarFragment : DaggerFragment() {
         })
     }
 
-    private fun increaseUserEmojis(data : Int) {
+    private fun increaseUserEmojis(data: Int) {
         val emojisCount = binding.emojisCount.text.toString().toInt()
         binding.emojisCount.text = (emojisCount + data).toString()
     }
@@ -443,23 +453,17 @@ class AccountAvatarFragment : DaggerFragment() {
         }
     }
 
+    //Problem with selling emoji and green background
     private fun sellEmoji(emoji: EmojiShopModel?) {
         ShopEmojiDialog.showUserAlert(this, emoji)
         ShopEmojiDialog.getYesSaleButton().setOnClickListener {
             if (emoji != null) {
-
-                viewModel.removeEmoji(
-                    emoji,
-                    EmojiCost.getEmojiSellCost(ShopEmojiDialog.getSaleButton()),
-                    getUserValues()
-                )
+                viewModel.removeEmoji(emoji, EmojiCost.getEmojiSellCost(ShopEmojiDialog.getSaleButton()), getUserValues())
+                viewModel.updateUserEmojis(getUserValues().emojis - 1)
+                viewModel.fetchUserValues()
                 adapter.removeEmoji(emoji)
-                increaseUserEmojis(-1)
-//                viewModel.fetchUserEmojis()
-//                viewModel.fetchUserValues()
 
                 (activity as MainActivity).mediaPlayerPool.play(MusicType.MONEY)
-
                 ShopEmojiDialog.dialogUserView.dismiss()
             }
         }

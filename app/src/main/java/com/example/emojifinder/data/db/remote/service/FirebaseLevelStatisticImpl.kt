@@ -3,12 +3,13 @@ package com.example.emojifinder.data.db.remote.service
 import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.domain.result.Result
 import kotlinx.coroutines.tasks.await
-import java.lang.Exception
 
 class FirebaseLevelStatisticImpl : FirebaseInit() {
 
     fun writeLevelStatistic(title : String?, statistics: UserLevelStatistics){
-
+        if(mUser == null){
+            mUser = mAuth.currentUser
+        }
         mFireStore
             .collection("users")
             .document(mUser!!.uid)

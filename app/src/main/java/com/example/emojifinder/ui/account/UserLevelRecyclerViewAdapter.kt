@@ -13,54 +13,44 @@ import com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.example.emojifinder.databinding.AccountLevelItemBinding
 
 class UserLevelRecyclerViewAdapter(
-    private val onClickListener : OnLevelClickListener,
-    private val context : Context
+    private val onClickListener: OnLevelClickListener,
+    private val context: Context
 ) : ListAdapter<UserLevelStatistics,
         UserLevelRecyclerViewAdapter.LevelViewHolder>(
     DiffCallback
 ) {
 
-    var expandStat = true
+    companion object DiffCallback : DiffUtil.ItemCallback<UserLevelStatistics>() {
 
-    companion object DiffCallback: DiffUtil.ItemCallback<UserLevelStatistics>()     {
-
-        override fun areItemsTheSame(oldItem: UserLevelStatistics, newItem: UserLevelStatistics): Boolean {
-            return oldItem === newItem
+        override fun areItemsTheSame(
+            oldItem: UserLevelStatistics,
+            newItem: UserLevelStatistics
+        ): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: UserLevelStatistics, newItem: UserLevelStatistics): Boolean {
-            return oldItem.id == newItem.id
+        override fun areContentsTheSame(
+            oldItem: UserLevelStatistics,
+            newItem: UserLevelStatistics
+        ): Boolean {
+            return oldItem == newItem
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : LevelViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LevelViewHolder {
         return LevelViewHolder(
             context,
             AccountLevelItemBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
 
-    override fun onBindViewHolder(holder: LevelViewHolder, position: Int){
+    override fun onBindViewHolder(holder: LevelViewHolder, position: Int) {
         val level = getItem(position)
         holder.itemView.setOnClickListener {
             onClickListener.onClick(level)
-            expandStat = if(expandStat) {
-                holder.expand(expandStat)
-                false
-            } else {
-                holder.expand(expandStat)
-                true
-            }
+            holder.expand()
         }
         holder.bind(level)
-    }
-
-    fun collapseAll() {
-
-    }
-
-    fun expandAll() {
-
     }
 
     class LevelViewHolder(
@@ -68,20 +58,29 @@ class UserLevelRecyclerViewAdapter(
         private val binding: AccountLevelItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        private var expand = true
+
         fun bind(level: UserLevelStatistics?) {
             binding.level = level
             binding.executePendingBindings()
+
         }
 
-        fun expand(expand_: Boolean) {
-            if(expand_){
+        fun expand() {
+            if (expand) {
                 binding.extraStatistic.visibility = View.VISIBLE
-                binding.expandExtraLevelStatisticBtn.icon = ResourcesCompat.getDrawable(context.resources,
-                    R.drawable.icons8_back_16px_up, null)
+                binding.expandExtraLevelStatisticBtn.icon = ResourcesCompat.getDrawable(
+                    context.resources,
+                    R.drawable.icons8_back_16px_up, null
+                )
+                expand = false
             } else {
                 binding.extraStatistic.visibility = View.GONE
-                binding.expandExtraLevelStatisticBtn.icon = ResourcesCompat.getDrawable(context.resources,
-                    R.drawable.icons8_back_16px, null)
+                binding.expandExtraLevelStatisticBtn.icon = ResourcesCompat.getDrawable(
+                    context.resources,
+                    R.drawable.icons8_back_16px, null
+                )
+                expand = true
             }
         }
     }

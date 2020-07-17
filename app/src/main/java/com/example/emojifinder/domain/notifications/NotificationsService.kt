@@ -4,7 +4,7 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import com.example.emojifinder.ui.application.MainApplication
+import android.util.Log
 import java.util.*
 import javax.inject.Inject
 
@@ -51,6 +51,7 @@ class NotificationsService @Inject constructor(val application: Application) {
             // Register the channel with the system
             val notificationManager: NotificationManager = application.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
+            Log.d("channel", "channel is created")
         }
     }
 }

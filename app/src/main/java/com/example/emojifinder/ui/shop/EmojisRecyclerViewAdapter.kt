@@ -4,7 +4,9 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.emojifinder.R
 import com.example.emojifinder.databinding.EmojiShopItemBinding
@@ -12,6 +14,7 @@ import kotlinx.android.synthetic.main.emoji_shop_item.view.*
 
 class EmojisRecyclerViewAdapter(
     private val onClickListener: OnShopItemClickListener,
+
     private val progress: LottieAnimationView?,
     private val isShop: Boolean
 ) :
@@ -40,7 +43,8 @@ class EmojisRecyclerViewAdapter(
         }
     }
 
-    private lateinit var fullList : List<EmojiShopModel?>
+    lateinit var fullList : List<EmojiShopModel?>
+    private var tmpList : MutableList<EmojiShopModel?> = mutableListOf()
 
     fun shopSubmitList(
         data: List<EmojiShopModel?>,
@@ -66,17 +70,17 @@ class EmojisRecyclerViewAdapter(
     }
 
     fun filter(categories: MutableList<String>) {
-        val list : MutableList<EmojiShopModel> = mutableListOf()
+        tmpList = mutableListOf()
         if(categories.size != 0){
             progress?.visibility = View.VISIBLE
             for(category in categories) {
                 for(emoji in fullList){
                     if(emoji?.group == category){
-                        list.add(emoji)
+                        tmpList.add(emoji)
                     }
                 }
             }
-            adapterlist.submitList(list)
+            adapterlist.submitList(tmpList)
         } else {
             adapterlist.submitList(fullList)
         }
@@ -161,7 +165,7 @@ class EmojisRecyclerViewAdapter(
         return null
     }
 
-    fun submitUserList(avatar: String, data: List<EmojiShopModel?>) {
+    fun submitUserList(avatar: String?, data: List<EmojiShopModel?>) {
         this.avatar = avatar
         this.userEmojis = data
         adapterlist.submitList(data)
@@ -175,7 +179,9 @@ class EmojisRecyclerViewAdapter(
     }
 
     fun removeEmoji(emoji: EmojiShopModel) {
-        adapterlist.currentList.remove(emoji)
+        val index = adapterlist.currentList.indexOf(emoji)
+        notifyItemRemoved(index)
+        notifyDataSetChanged()
     }
 
 }

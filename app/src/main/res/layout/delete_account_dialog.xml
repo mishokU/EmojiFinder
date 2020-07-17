@@ -35,8 +35,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:textAlignment="center"
                 android:text="@string/delete_account_message"
                 android:layout_gravity="center"
@@ -73,6 +73,7 @@
                     android:fontFamily="@font/ru_eng_sriracha"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
+                    app:rippleColor="@color/main_ripple_button_color"
                     android:textColor="@color/main_ripple_button_color"
                     app:strokeWidth="3dp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"

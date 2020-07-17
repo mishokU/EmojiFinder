@@ -13,7 +13,6 @@ import com.example.emojifinder.data.db.remote.models.EmojiShopModel
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import javax.inject.Inject
 
 class LevelsRepository @Inject constructor(
@@ -25,6 +24,10 @@ class LevelsRepository @Inject constructor(
     val isSimilarList: LiveData<Boolean>
         get() = _isSimilarList
 
+    private val _hasTitle = MutableLiveData<Boolean>()
+    val hasTitle: LiveData<Boolean>
+        get() = _hasTitle
+
     val levels: LiveData<List<SmallLevelModel>> =
         Transformations.map(database.levelDao().getLevels()) {
             it.asSmallLevelUI()
@@ -32,11 +35,6 @@ class LevelsRepository @Inject constructor(
 
     fun getEmojis(title: String): LiveData<List<EmojiShopModel>> =
         Transformations.map(database.emojisDao().getEmojis(title)) {
-            it.asEmojiShopModel()
-        }
-
-    fun getCurrentLevelList(smallLevelModel: SmallLevelModel) =
-        Transformations.map(database.emojisDao().getEmojis(smallLevelModel.title)) {
             it.asEmojiShopModel()
         }
 
@@ -69,45 +67,26 @@ class LevelsRepository @Inject constructor(
         }
     }
 
-    suspend fun hasDifferences(
-        currentList: List<EmojiShopModel>,
-        smallLevelModel: SmallLevelModel
-    ) {
-
-        val listDiffer =
-            database.emojisDao().getEmojis(smallLevelModel.title)
-
-        val list = listDiffer.value!!
-
-        Timber.d(list.toString())
-        Timber.d(currentList.toString())
-
-        if (list.isNotEmpty()) {
-            val pairs = list.zip(currentList)
-            for (pair in pairs) {
-                if (pair.first.unicode != pair.second.unicode) {
-                    handleStatus(true)
-                    break
-                }
-            }
-        } else {
-            handleStatus(false)
-        }
-        handleStatus(false)
-    }
-
-    private suspend fun handleStatus(differ: Boolean) {
-        withContext(Dispatchers.Main) {
-            _isSimilarList.value = differ
-        }
-    }
-
     suspend fun sentLevel(
         level: List<EmojiShopModel>,
         smallLevelModel: SmallLevelModel?,
         image: Bitmap?
     ) {
         firebaseCategories.addFullLevel(level, smallLevelModel, image)
+    }
+
+    fun hasTitleComplete() {
+        _hasTitle.value = null
+    }
+
+    suspend fun checkOnSameTitle(title: String) {
+        var result = firebaseCategories.hasThisTitle(title)
+        if(!result) {
+           result = firebaseCategories.hasThisTitleInUserLevels(title)
+        }
+        withContext(Dispatchers.Main) {
+            _hasTitle.value = result
+        }
     }
 }
 

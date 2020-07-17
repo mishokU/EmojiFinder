@@ -3,7 +3,6 @@ package com.example.emojifinder.ui.base
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.widget.Toast
-import com.example.emojifinder.ui.constructor.dialogs.SaveLevelDialog
 import com.example.emojifinder.ui.constructor.dialogs.SentLevelDialog
 import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.DaggerFragment

@@ -30,8 +30,7 @@ object ShopEmojiDialog {
         val emojiName = dialogView.findViewById<TextView>(R.id.emoji_full_name)
         val emojiGroup = dialogView.findViewById<TextView>(R.id.emoji_full_group)
 
-        getBuyButton().text =
-            emojiCost(emoji)
+        getBuyButton().text = EmojiCost.emojiCost(emoji).toString()
 
         emojiAvatar.setText(emoji?.text)
         emojiName.text = emoji?.name
@@ -42,17 +41,6 @@ object ShopEmojiDialog {
         getCancelButton(
             dialogView
         )
-    }
-
-    private fun emojiCost(emoji: EmojiShopModel?): CharSequence? {
-        return when(emoji?.text?.length){
-            in 1..2 -> "100"
-            in 2..4 -> "200"
-            in 6..8 -> "250"
-            in 8..10 -> "300"
-            in 10..12 -> "350"
-            else -> "200"
-        }
     }
 
     fun getBuyButton(): MaterialButton {

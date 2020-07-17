@@ -13,6 +13,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">#B301BCEF</item>
         <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button</item>

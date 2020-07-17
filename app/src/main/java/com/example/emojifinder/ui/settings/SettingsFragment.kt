@@ -95,6 +95,14 @@ class SettingsFragment : DaggerFragment() {
                 settingsPrefs.changeMusic(isChecked)
             }
         }
+
+        binding.notificationsSwitcher.isChecked = settingsPrefs.isNotificationsAvailable()
+        binding.notificationsSwitcher.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                settingsPrefs.changeNotifications(isChecked)
+            }
+        }
+
     }
 
     private fun setLogOutButton() {

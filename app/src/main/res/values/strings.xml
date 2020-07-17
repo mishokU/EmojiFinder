@@ -207,4 +207,7 @@
     <string name="emojis_explanation">Create new emojis by combining existing ones!</string>
     <string name="emoji_private_policy">🕵️</string>
     <string name="emoji_help">ℹ️</string>
+    <string name="update_avatar">Update avatar</string>
+    <string name="log_in">Log in</string>
+    <string name="emoji_mistakes">📛</string>
 </resources>

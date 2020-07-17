@@ -8,7 +8,6 @@ import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.ui.categories.SmallLevelModel
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
-import java.lang.Exception
 
 class FirebaseLevelsImpl : FirebaseInit(), FirebaseLevels {
 
@@ -44,17 +43,53 @@ class FirebaseLevelsImpl : FirebaseInit(), FirebaseLevels {
         }
 
         mFireStore
-            .collection("levels")
+            .collection("userLevels")
             .document(smallLevelModel?.title!!)
             .set(smallLevelModel)
 
-        mFireStore.collection("levels")
+        mFireStore.collection("userLevels")
             .document(smallLevelModel.title)
             .collection("emojis")
             .document("level")
             .set(map)
 
         putBitmap(smallLevelModel,image)
+    }
+
+    override suspend fun hasThisTitle(title: String): Boolean {
+        try {
+            val document = mFireStore
+                .collection("levels")
+                .orderBy("id")
+                .get()
+                .await()
+
+            for(data in document.documents){
+                val level = data.toObject(SmallLevelModel::class.java)!!
+                if(level.title == title){
+                    return true
+                }
+            }
+        } catch (e : Exception){ }
+        return false
+    }
+
+    override suspend fun hasThisTitleInUserLevels(title: String): Boolean {
+        try {
+            val document = mFireStore
+                .collection("userLevels")
+                .orderBy("id")
+                .get()
+                .await()
+
+            for(data in document.documents){
+                val level = data.toObject(SmallLevelModel::class.java)!!
+                if(level.title == title){
+                    return true
+                }
+            }
+        } catch (e : Exception){ }
+        return false
     }
 
     private fun putBitmap(

@@ -2,6 +2,7 @@ package com.example.emojifinder.ui.main
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,6 @@ import com.example.emojifinder.domain.prefs.DailyWinningsPrefs
 import com.example.emojifinder.domain.prefs.NotificationAlarmPrefs
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.AccountViewModel
-import com.example.emojifinder.shared.utils.Emoji
 import com.example.emojifinder.ui.daily.DailyUI
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
@@ -88,6 +88,7 @@ class MainMenuFragment : DaggerFragment() {
             notificationsService.create()
         } else {
             alarmPrefs.setStarted()
+            Log.d("alarmPrefs", "alarm is started")
         }
     }
 
@@ -104,11 +105,13 @@ class MainMenuFragment : DaggerFragment() {
     }
 
     private fun addListenerToAdView() {
-        val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
-        binding.adView.adListener = object : AdListener() {
-            override fun onAdClosed() {
-                binding.adView.loadAd(AdRequest.Builder().build())
+        if(!(activity as MainActivity).isVipAccount){
+            val adRequest = AdRequest.Builder().build()
+            binding.adView.loadAd(adRequest)
+            binding.adView.adListener = object : AdListener() {
+                override fun onAdClosed() {
+                    binding.adView.loadAd(AdRequest.Builder().build())
+                }
             }
         }
     }
