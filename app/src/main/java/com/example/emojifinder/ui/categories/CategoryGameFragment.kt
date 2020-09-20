@@ -9,10 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentCategotyGameBinding
+import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.CategoriesViewModel
 import dagger.android.support.DaggerFragment
-import com.example.emojifinder.domain.result.Result
-import com.example.emojifinder.ui.game.campaign.gameAlerts.ShowStartGameButton
 import javax.inject.Inject
 
 
@@ -29,24 +28,34 @@ class CategoryGameFragment : DaggerFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentCategotyGameBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
         initCategories()
         initViewModel()
         initLevel()
+        initPlayButton()
 
         return binding.root
+    }
+
+    private fun initPlayButton() {
+        binding.playLevelBtn.setOnClickListener {
+            viewModel.showGameFragment(adapter.items[adapter.currentItem])
+        }
     }
 
     private fun initLevel() {
         viewModel.gameCategory.observe(viewLifecycleOwner, Observer {
             it?.let {
-                this.findNavController().navigate( CategoryGameFragmentDirections
-                    .actionCategotyGameFragmentToGameFragment(
-                        it,
-                        adapter.items.toTypedArray()
-                    ))
+                this.findNavController().navigate(
+                    CategoryGameFragmentDirections
+                        .actionCategotyGameFragmentToGameFragment(
+                            it,
+                            adapter.items.toTypedArray()
+                        )
+                )
                 viewModel.gameFragmentComplete()
             }
         })
@@ -64,6 +73,7 @@ class CategoryGameFragment : DaggerFragment() {
                     is Result.Success -> {
                         binding.progressBar.visibility = View.INVISIBLE
                         binding.errorMessage.visibility = View.INVISIBLE
+                        @Suppress("UNCHECKED_CAST")
                         adapter.setLevels(result.data as List<SmallLevelModel>)
                     }
                     is Result.Error -> {
@@ -77,8 +87,7 @@ class CategoryGameFragment : DaggerFragment() {
     }
 
     private fun initCategories() {
-        adapter = CategoryRecyclerViewAdapter(CategoryRecyclerViewAdapter
-            .OnCategoryClickListener {
+        adapter = CategoryRecyclerViewAdapter(CategoryRecyclerViewAdapter.OnCategoryClickListener {
                 viewModel.showGameFragment(it)
             })
         binding.categoriesList.initialize(adapter)

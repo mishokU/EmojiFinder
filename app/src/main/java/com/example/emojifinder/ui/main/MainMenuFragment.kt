@@ -2,7 +2,6 @@ package com.example.emojifinder.ui.main
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +47,6 @@ class MainMenuFragment : DaggerFragment() {
         binding = FragmentMainMenuBinding.inflate(inflater)
 
         handleButtons()
-        addListenerToAdView()
         dailyWinnings()
 
         setNotifications()
@@ -68,6 +66,7 @@ class MainMenuFragment : DaggerFragment() {
                     is Result.Success -> {
                         hideProfileLoading()
                         binding.profileEmoji.text = it.data?.avatar
+                        addListenerToAdView(it.data?.vip!!)
                     }
                     is Result.Error -> {
                         hideProfileLoading()
@@ -84,12 +83,12 @@ class MainMenuFragment : DaggerFragment() {
     }
 
     private fun setNotifications() {
-        if (!alarmPrefs.isStarted()) {
-            notificationsService.create()
-        } else {
-            alarmPrefs.setStarted()
-            Log.d("alarmPrefs", "alarm is started")
-        }
+//        if (!alarmPrefs.isStarted()) {
+//            notificationsService.create()
+//        } else {
+//            alarmPrefs.setStarted()
+//        }
+        notificationsService.create()
     }
 
     private fun dailyWinnings() {
@@ -104,8 +103,8 @@ class MainMenuFragment : DaggerFragment() {
         }
     }
 
-    private fun addListenerToAdView() {
-        if(!(activity as MainActivity).isVipAccount){
+    private fun addListenerToAdView(showAd : Boolean) {
+        if(!showAd){
             val adRequest = AdRequest.Builder().build()
             binding.adView.loadAd(adRequest)
             binding.adView.adListener = object : AdListener() {

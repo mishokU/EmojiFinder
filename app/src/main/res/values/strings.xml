@@ -210,4 +210,5 @@
     <string name="update_avatar">Update avatar</string>
     <string name="log_in">Log in</string>
     <string name="emoji_mistakes">📛</string>
+    <string name="googlepay_status_unavailable">Google pay is not supported on your device</string>
 </resources>

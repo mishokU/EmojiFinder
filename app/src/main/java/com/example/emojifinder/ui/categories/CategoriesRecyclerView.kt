@@ -2,7 +2,6 @@ package com.example.emojifinder.ui.categories
 
 import android.animation.ArgbEvaluator
 import android.content.Context
-import android.graphics.Color.blue
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.util.AttributeSet
@@ -13,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emojifinder.R
+import kotlin.math.pow
 
 class HorizontalCarouselRecyclerView(
     context: Context,
@@ -28,7 +28,7 @@ class HorizontalCarouselRecyclerView(
         newAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 post {
-                    if(getChildAt(0) != null){
+                    if (getChildAt(0) != null) {
                         val sidePadding = (width / 2) - (getChildAt(0).width / 2)
                         setPadding(sidePadding, 0, sidePadding, 0)
                         scrollToPosition(0)
@@ -38,6 +38,7 @@ class HorizontalCarouselRecyclerView(
                                 onScrollChanged()
                             }
                         })
+
                     }
                 }
             }
@@ -50,8 +51,7 @@ class HorizontalCarouselRecyclerView(
     }
 
     private fun onScrollChanged() {
-        post {
-            (0 until childCount).forEach { position ->
+        post { (0 until childCount).forEach { position ->
                 val child = getChildAt(position)
                 val childCenterX = (child.left + child.right) / 2
                 val scaleValue = getGaussianScale(childCenterX, 1f, 1f, 150.toDouble())
@@ -69,14 +69,17 @@ class HorizontalCarouselRecyclerView(
         matrix.setSaturation(saturationPercent)
 
         viewsToChangeColor.forEach { viewId ->
-            val viewToChangeColor = child.findViewById<View>(viewId)
-            when (viewToChangeColor) {
+            when (val viewToChangeColor = child.findViewById<View>(viewId)) {
                 is ImageView -> {
                     viewToChangeColor.colorFilter = ColorMatrixColorFilter(matrix)
                     viewToChangeColor.imageAlpha = (255 * alphaPercent).toInt()
                 }
                 is TextView -> {
-                    val textColor = ArgbEvaluator().evaluate(saturationPercent, inactiveColor, activeColor) as Int
+                    val textColor = ArgbEvaluator().evaluate(
+                        saturationPercent,
+                        inactiveColor,
+                        activeColor
+                    ) as Int
                     viewToChangeColor.setTextColor(textColor)
                 }
             }
@@ -90,12 +93,8 @@ class HorizontalCarouselRecyclerView(
         spreadFactor: Double
     ): Float {
         val recyclerCenterX = (left + right) / 2
-        return (Math.pow(
-            Math.E,
-            -Math.pow(childCenterX - recyclerCenterX.toDouble(), 2.toDouble()) / (2 * Math.pow(
-                spreadFactor,
-                2.toDouble()
-            ))
+        return (Math.E.pow(
+            -(childCenterX - recyclerCenterX.toDouble()).pow(2.toDouble()) / (2 * spreadFactor.pow(2.toDouble()))
         ) * scaleFactor + minScaleOffest).toFloat()
     }
 

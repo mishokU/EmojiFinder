@@ -42,6 +42,7 @@ class DailyWinningsFragment : DaggerFragment() {
     private lateinit var day: DailyUI
     private lateinit var values: AccountValuesModel
     private lateinit var mRewardedVideoAd: RewardedVideoAd
+
     private var emojis: MutableList<EmojiAppCompatEditText> = mutableListOf()
     private var shopEmojis: MutableList<EmojiShopModel> = mutableListOf()
 
@@ -132,11 +133,11 @@ class DailyWinningsFragment : DaggerFragment() {
         when (item.type) {
             Daily.EMOS -> {
                 viewModelValues.updateUserEmos(values.emos + item.cost * multiplier)
-                this.findNavController().navigate(R.id.mainMenuFragment)
+                this.findNavController().popBackStack()
             }
             Daily.BOX -> {
                 viewModelValues.updateUserBoxes(values.boxes + item.cost * multiplier)
-                this.findNavController().navigate(R.id.mainMenuFragment)
+                this.findNavController().popBackStack()
             }
             Daily.EMOJI -> {
                 binding.emojisDailyPlace.visibility = View.VISIBLE
@@ -147,10 +148,11 @@ class DailyWinningsFragment : DaggerFragment() {
                 }
                 viewModelValues.updateUserEmojis(values.emojis + item.cost * multiplier)
                 Handler().postDelayed({
-                    this.findNavController().navigate(R.id.mainMenuFragment)
+                    this.findNavController().popBackStack()
                 }, 1500)
             }
         }
+
     }
 
     @SuppressLint("SetTextI18n")

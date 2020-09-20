@@ -70,4 +70,5 @@ class CategoriesViewModel @Inject constructor(
         super.onCleared()
         coroutineScope.cancel()
     }
+
 }

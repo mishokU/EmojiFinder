@@ -43,15 +43,15 @@ class EmojisRecyclerViewAdapter(
         }
     }
 
-    lateinit var fullList : List<EmojiShopModel?>
-    private var tmpList : MutableList<EmojiShopModel?> = mutableListOf()
+    lateinit var fullList : MutableList<EmojiShopModel?>
+    var tmpList : MutableList<EmojiShopModel?> = mutableListOf()
 
     fun shopSubmitList(
         data: List<EmojiShopModel?>,
         userEmojis: List<EmojiShopModel?>
     ) {
         this.userEmojis = userEmojis
-        this.fullList = data
+        this.fullList = data as MutableList<EmojiShopModel?>
         createList(userEmojis, data)
     }
 
@@ -178,10 +178,13 @@ class EmojisRecyclerViewAdapter(
         emoji?.group = "Your"
     }
 
-    fun removeEmoji(emoji: EmojiShopModel) {
-        val index = adapterlist.currentList.indexOf(emoji)
-        notifyItemRemoved(index)
+    fun removeUserEmoji(emojiShop: EmojiShopModel?) {
+        tmpList.remove(emojiShop)
+        val emoji = fullList.find {
+            it?.text == emojiShop?.text
+        }
+        emoji?.group = "Other"
+
         notifyDataSetChanged()
     }
-
 }

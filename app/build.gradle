@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'com.google.firebase.crashlytics'
 
 
 android {
@@ -57,21 +58,24 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.firebase:firebase-firestore:21.5.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'com.google.firebase:firebase-firestore:21.6.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.firebase:firebase-auth:19.3.2'
-    implementation 'com.google.firebase:firebase-ads:19.2.0'
-    implementation 'com.google.firebase:firebase-messaging:20.2.3'
+    implementation 'com.google.firebase:firebase-auth:19.4.0'
+    implementation 'com.google.firebase:firebase-ads:19.4.0'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
 
     implementation 'com.firebaseui:firebase-ui-storage:3.2.1'
-    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-storage:19.2.0'
+
+    implementation 'com.google.android.gms:play-services-wallet:18.0.0'
+
 
     testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // UI
     implementation "com.google.android.material:material:$rootProject.materialVersion"
@@ -121,21 +125,21 @@ dependencies {
 
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     // For control over item selection of both touch and mouse driven selection
-    implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc01"
+    implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc02"
 
     //Emoji
     implementation "com.android.support:support-emoji-bundled:$version"
     implementation "com.android.support:support-emoji-appcompat:$version"
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta7'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
     //Keyboard
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.0.0'
 
-    implementation 'com.google.android.gms:play-services-ads:19.2.0'
+    implementation 'com.google.android.gms:play-services-ads:19.4.0'
 
-    implementation 'com.google.firebase:firebase-ml-natural-language:22.0.0'
-    implementation 'com.google.firebase:firebase-ml-natural-language-translate-model:20.0.8'
+    implementation 'com.google.firebase:firebase-ml-natural-language:22.0.1'
+    implementation 'com.google.firebase:firebase-ml-natural-language-translate-model:20.0.9'
 
     implementation "com.airbnb.android:lottie:3.0.0"
 
@@ -146,10 +150,12 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
-
-
-    implementation "com.google.android.gms:play-services-wallet:18.0.0"
-
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
+
+    // Recommended: Add the Firebase SDK for Google Analytics.
+    implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
+
+    // Add the Firebase Crashlytics SDK.
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.1'
 }

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.activity.OnBackPressedCallback
 import androidx.core.animation.addListener
+import androidx.core.content.ContextCompat
 import androidx.emoji.widget.EmojiAppCompatEditText
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -165,7 +166,7 @@ class ArcadeGameFragment : DaggerFragment() {
             }, 100)
             animation.cancel()
             (activity as MainActivity).mediaPlayerPool.play(MusicType.LOSE)
-            this.findNavController().navigateUp()
+            this.findNavController().popBackStack()
         }
 
         ExitGameDialog.getResumeGameButton().setOnClickListener {
@@ -191,7 +192,7 @@ class ArcadeGameFragment : DaggerFragment() {
             Handler().postDelayed({
                 EndGameDialog.dialogView.dismiss()
             }, 100)
-            this.findNavController().navigateUp()
+            this.findNavController().popBackStack()
         }
     }
 
@@ -218,6 +219,13 @@ class ArcadeGameFragment : DaggerFragment() {
                 viewModelAccount.updateUserEmos(userEmos + score / 5)
             }
         })
+
+        animation.addUpdateListener {
+            binding.gameTime.text = (it.animatedValue.toString().toInt() / 100).toString()
+            if(it.animatedValue.toString().toInt() / 100 == 60 / 2){
+                binding.gameTime.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.textOrangeColor))
+            }
+        }
     }
 
     private fun loadAd() {

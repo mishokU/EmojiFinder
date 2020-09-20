@@ -13,25 +13,25 @@ import javax.inject.Inject
 class RatingViewModel @Inject constructor(
     private val firebaseUsers: FirebaseUsers,
     @CoroutineScopeIO
-    val coroutineScope : CoroutineScope
+    val coroutineScope: CoroutineScope
 ) : ViewModel() {
 
     private val _users = MutableLiveData<Result<List<MainAccountModel>>>()
-    val users : LiveData<Result<List<MainAccountModel>>>
+    val users: LiveData<Result<List<MainAccountModel>>>
         get() = _users
 
     init {
         fetchUsers()
     }
 
-    private fun fetchUsers(){
+    private fun fetchUsers() {
         coroutineScope.launch {
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 _users.value = Result.Loading
             }
             val users = firebaseUsers.fetchUsers()
 
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 _users.value = users
             }
         }

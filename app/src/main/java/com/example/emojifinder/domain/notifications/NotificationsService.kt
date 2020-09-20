@@ -1,25 +1,28 @@
 package com.example.emojifinder.domain.notifications
 
-import android.app.*
-import android.content.Context
+import android.app.AlarmManager
+import android.app.Application
+import android.app.PendingIntent
+import android.content.Context.ALARM_SERVICE
 import android.content.Intent
-import android.os.Build
 import android.util.Log
 import java.util.*
 import javax.inject.Inject
 
 class NotificationsService @Inject constructor(val application: Application) {
 
-    fun create(){
-        createNotificationChannel()
+    fun create() {
         initCalendar()
     }
 
     private fun initCalendar() {
-        val calendar : Calendar = Calendar.getInstance()
+        val calendar: Calendar = Calendar.getInstance()
 
-        calendar.set(Calendar.HOUR_OF_DAY,calendar.get(Calendar.HOUR))
-        calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE))
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR))
+        calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) - 1)
+
+        Log.d("minute", calendar.get(Calendar.HOUR).toString())
+        Log.d("minute", (calendar.get(Calendar.MINUTE)).toString())
 
         val intent = Intent(application, NotificationReceiver::class.java)
         intent.action = "notifyDaily"
@@ -27,31 +30,17 @@ class NotificationsService @Inject constructor(val application: Application) {
         val pendingIntent = PendingIntent.getBroadcast(
             application,
             100,
-            intent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-        val alarmManager = application.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            pendingIntent
+            intent, PendingIntent.FLAG_UPDATE_CURRENT
         )
-    }
 
-     private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "DEDW"
-            val descriptionText = "fefe"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel("d", name, importance).apply {
-                description = descriptionText
-            }
-            // Register the channel with the system
-            val notificationManager: NotificationManager = application.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-            Log.d("channel", "channel is created")
+        val alarmManager = application.getSystemService(ALARM_SERVICE) as AlarmManager
+        if (alarmManager != null) {
+            alarmManager.setInexactRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+            )
         }
     }
 }

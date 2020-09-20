@@ -8,8 +8,8 @@ import kotlinx.coroutines.tasks.await
 
 class FirebaseUsers : FirebaseInit() {
 
-    suspend fun fetchUsers() : Result<List<MainAccountModel>> {
-        return try{
+    suspend fun fetchUsers(): Result<List<MainAccountModel>> {
+        return try {
 
             val users = mFireStore
                 .collection("score")
@@ -18,12 +18,12 @@ class FirebaseUsers : FirebaseInit() {
                 .get()
                 .await()
 
-            val listOfUsers : MutableList<MainAccountModel> = mutableListOf()
-            for(user in users.documents){
+            val listOfUsers: MutableList<MainAccountModel> = mutableListOf()
+            for (user in users.documents) {
                 listOfUsers.add(user.toObject(MainAccountModel::class.java)!!)
             }
             Result.Success(listOfUsers)
-        } catch (e : Exception){
+        } catch (e: Exception) {
             Result.Error(e)
         }
     }

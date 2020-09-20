@@ -167,7 +167,7 @@ class LootBoxesFragment : DaggerFragment() {
     private fun showTicketDialog() {
         TicketEmojiDialog.create(this)
         TicketEmojiDialog.show()
-        updateUserTickets()
+        updateUserTickets(1)
     }
 
     private fun getRandomDegree(): Float {
@@ -256,8 +256,8 @@ class LootBoxesFragment : DaggerFragment() {
         binding.emojisCount.text = count.toString()
     }
 
-    private fun updateUserTickets() {
-        val ticketsCount = binding.boxesCount.text.toString().toInt() - 1
+    private fun updateUserTickets(index : Int) {
+        val ticketsCount = binding.boxesCount.text.toString().toInt() + index
         viewModel.updateUserBoxes(ticketsCount)
         binding.boxesCount.text = (ticketsCount).toString()
     }

@@ -4,9 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +23,7 @@ import com.example.emojifinder.domain.sounds.MediaPlayerPool
 import com.example.emojifinder.domain.viewModels.AccountViewModel
 import com.example.emojifinder.domain.viewModels.ShopViewModel
 import com.example.emojifinder.ui.shop.EmojiShopModel
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.wallet.AutoResolveHelper
 import com.google.android.gms.wallet.PaymentData
 import dagger.android.support.DaggerAppCompatActivity
@@ -32,6 +32,8 @@ import javax.inject.Inject
 
 
 class MainActivity : DaggerAppCompatActivity() {
+
+    var TAG : String = javaClass.simpleName
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -100,8 +102,7 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     private fun enableFullScreen() {
-        val w: Window = window // in Activity's onCreate() for instance
-        w.setFlags(
+        window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
@@ -109,37 +110,31 @@ class MainActivity : DaggerAppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         when (requestCode) {
+            // value passed in AutoResolveHelper
             LOAD_PAYMENT_DATA_REQUEST_CODE -> {
                 when (resultCode) {
                     Activity.RESULT_OK -> {
-                        if (data == null)
-                            return
-
-                        val paymentData = PaymentData.getFromIntent(data)
+                        val paymentData = PaymentData.getFromIntent(data!!)
+                        //handlePaymentSuccess(paymentData)
                     }
                     Activity.RESULT_CANCELED -> {
-                        // Пользователь нажал назад,
-                        // когда был показан диалог google pay
-                        // если показывали загрузку или что-то еще,
-                        // можете отменить здесь
+                        Toast.makeText(this,"Payment canceled", Toast.LENGTH_SHORT).show()
                     }
-                    AutoResolveHelper.RESULT_ERROR -> {
-                        if (data == null)
-                            return
 
-                        // Гугл сам покажет диалог ошибки.
-                        // Можете вывести логи и спрятать загрузку,
-                        // если показывали
-                        val status = AutoResolveHelper.getStatusFromIntent(data)
-                        Log.e("GOOGLE PAY", "Load payment data has failed with status: $status")
+                    AutoResolveHelper.RESULT_ERROR -> {
+                        val status: Status? = AutoResolveHelper.getStatusFromIntent(data)
+                        handleError(status?.statusCode)
                     }
-                    else -> { }
                 }
+                // Re-enables the Google Pay payment button.
+                //enableButtons()
             }
-            else -> { }
         }
+    }
+
+    private fun handleError(statusCode: Int?) {
+        Toast.makeText(this, "Text: $statusCode", Toast.LENGTH_SHORT).show()
     }
 
     fun navigateFirstTabWithClearStack() {

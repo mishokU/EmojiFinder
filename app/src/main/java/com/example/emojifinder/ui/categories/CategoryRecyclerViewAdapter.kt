@@ -1,6 +1,7 @@
 package com.example.emojifinder.ui.categories
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@ class CategoryRecyclerViewAdapter(private val onClickListener : OnCategoryClickL
     : RecyclerView.Adapter<CategoryRecyclerViewAdapter.CategoriesViewHolder>() {
 
     var items: List<SmallLevelModel> = listOf()
+    var currentItem : Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : CategoriesViewHolder {
         return CategoriesViewHolder(
@@ -22,6 +24,8 @@ class CategoryRecyclerViewAdapter(private val onClickListener : OnCategoryClickL
             onClickListener.onClick(items[position])
         }
         holder.bind(items[position])
+        currentItem = position
+        Log.d("POSITION", position.toString())
     }
 
     fun setLevels(newItems: List<SmallLevelModel>) {

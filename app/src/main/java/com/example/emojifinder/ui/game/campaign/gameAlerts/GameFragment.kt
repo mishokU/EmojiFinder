@@ -3,12 +3,14 @@ package com.example.emojifinder.ui.game.campaign.gameAlerts
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import androidx.activity.OnBackPressedCallback
 import androidx.core.animation.addListener
+import androidx.core.content.ContextCompat
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.widget.EmojiAppCompatEditText
 import androidx.gridlayout.widget.GridLayout
@@ -117,13 +119,13 @@ class GameFragment : DaggerFragment() {
         return binding.root
     }
 
-    private fun initStatisticEmojis(){
+    private fun initStatisticEmojis() {
         binding.gameScoreEmoji.setText(resources.getString(R.string.emoji_score))
         binding.mistakeEmoji.setText(resources.getString(R.string.emoji_mistakes))
     }
 
     private fun initInterstitialAd() {
-        if(!(activity as MainActivity).isVipAccount) {
+        if (!(activity as MainActivity).isVipAccount) {
             interstitialAd.adUnitId = INTERSTITIAL_VIDEO_ID
             val adRequest = AdRequest.Builder().build()
             interstitialAd.loadAd(adRequest)
@@ -208,7 +210,7 @@ class GameFragment : DaggerFragment() {
             animation.removeAllListeners()
             animation.cancel()
             (activity as MainActivity).mediaPlayerPool.play(MusicType.LOSE)
-            this@GameFragment.findNavController().navigateUp()
+            this@GameFragment.findNavController().popBackStack()
         }
 
         ExitGameDialog.getResumeGameButton().setOnClickListener {
@@ -219,7 +221,7 @@ class GameFragment : DaggerFragment() {
 
     private fun setMusicSwitcher() {
         binding.gameAudioBtn.setOnClickListener {
-            if(settingsPrefs.isPlayMusic()){
+            if (settingsPrefs.isPlayMusic()) {
                 (requireActivity() as MainActivity).mediaPlayerPool.pauseBackground()
                 settingsPrefs.changeMusic(!settingsPrefs.isPlayMusic())
                 initAudioButton()
@@ -234,7 +236,7 @@ class GameFragment : DaggerFragment() {
 
     @Suppress("DEPRECATION")
     private fun initAudioButton() {
-        if(settingsPrefs.isPlayMusic()){
+        if (settingsPrefs.isPlayMusic()) {
             binding.gameAudioBtn.icon = resources.getDrawable(R.drawable.icons8_audio_24px)
         } else {
             binding.gameAudioBtn.icon = resources.getDrawable(R.drawable.icons8_no_audio_24px)
@@ -245,8 +247,8 @@ class GameFragment : DaggerFragment() {
         val uniqueList = data.distinctBy {
             it?.unicode
         }
-        gameKeyboardAdapter.submitList(uniqueList + getRandomExtraEmojis(uniqueList.size))
         binding.keyboardProgressBar.visibility = View.GONE
+        gameKeyboardAdapter.submitList(uniqueList + getRandomExtraEmojis(uniqueList.size))
     }
 
     private fun getRandomExtraEmojis(size: Int): List<EmojiShopModel> {
@@ -310,13 +312,19 @@ class GameFragment : DaggerFragment() {
     private fun createEndGameListeners() {
         EndGameDialog.getRetryButton().setOnClickListener {
             EndGameDialog.dialogView.dismiss()
-            interstitialAd.loadAd(AdRequest.Builder().build())
+            if (!(activity as MainActivity).isVipAccount) {
+                interstitialAd.loadAd(AdRequest.Builder().build())
+            }
             startGameDialog()
         }
 
+        hideNextLevel()
+
         EndGameDialog.getNextLevelButton().setOnClickListener {
             startNextLevel()
-            interstitialAd.loadAd(AdRequest.Builder().build())
+            if (!(activity as MainActivity).isVipAccount) {
+                interstitialAd.loadAd(AdRequest.Builder().build())
+            }
             EndGameDialog.dialogView.dismiss()
         }
     }
@@ -372,11 +380,19 @@ class GameFragment : DaggerFragment() {
 
         animation.addUpdateListener {
             binding.gameTime.text = (it.animatedValue.toString().toInt() / 100).toString()
+            if (it.animatedValue.toString().toInt() / 100 == level.time / 2) {
+                binding.gameTime.setTextColor(
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.textOrangeColor
+                    )
+                )
+            }
         }
     }
 
     private fun showInertialVideoAd() {
-        if(!(activity as MainActivity).isVipAccount){
+        if (!(activity as MainActivity).isVipAccount) {
             if (interstitialAd.isLoaded) {
                 interstitialAd.show()
             }
@@ -390,7 +406,9 @@ class GameFragment : DaggerFragment() {
 
     private fun startNextLevel() {
         levelId++
-        if (levelId < levels.size) {
+        Log.d("level", levelId.toString())
+        hideNextLevel()
+        if (levelId <= levels.size) {
             for (level in levels) {
                 if (level.id == levelId) {
                     this.level = level
@@ -399,6 +417,12 @@ class GameFragment : DaggerFragment() {
                     levelViewModel.fetchLevel(level.title)
                 }
             }
+        }
+    }
+
+    private fun hideNextLevel() {
+        if (levelId == levels.size) {
+            EndGameDialog.hideNextLevelBtn()
         }
     }
 
@@ -424,6 +448,7 @@ class GameFragment : DaggerFragment() {
     }
 
     private fun drawLevel(data: List<EmojiShopModel?>) {
+        binding.levelProgressBar.visibility = View.GONE
 
         binding.gameEmojiField.removeAllViews()
         levelEditTextList = mutableListOf()
@@ -464,7 +489,6 @@ class GameFragment : DaggerFragment() {
                 binding.gameEmojiField.addView(emojiView)
             }
         }
-        binding.levelProgressBar.visibility = View.GONE
     }
 
     private fun setEmptyStatistic() {

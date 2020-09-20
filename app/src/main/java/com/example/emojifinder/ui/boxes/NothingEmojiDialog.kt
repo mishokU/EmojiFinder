@@ -28,6 +28,9 @@ object NothingEmojiDialog {
     private fun setEmoji() {
         val emoji = dialogView.findViewById<EmojiAppCompatEditText>(R.id.win_emoji_et)
         val title = dialogView.findViewById<TextView>(R.id.title_win_emoji)
+        val take = dialogView.findViewById<MaterialButton>(R.id.roll_again_btn)
+        take.text = "Ok"
+
         title.text = title.resources.getString(R.string.win_nothing)
         emoji.setText("\uD83D\uDE22")
     }

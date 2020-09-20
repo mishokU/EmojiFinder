@@ -1,23 +1,24 @@
 package com.example.emojifinder.ui.rating
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.example.emojifinder.core.di.utils.ViewModelFactory
 import com.example.emojifinder.core.di.utils.injectViewModel
 import com.example.emojifinder.databinding.FragmentRatingBinding
 import com.example.emojifinder.domain.result.Result
 import com.example.emojifinder.domain.viewModels.RatingViewModel
-import com.google.android.gms.ads.AdRequest
 import dagger.android.support.DaggerFragment
+import timber.log.Timber
 import javax.inject.Inject
+
 
 class RatingFragment : DaggerFragment() {
 
+    private val TAG = "Rating Fragment";
     private lateinit var binding: FragmentRatingBinding
     private lateinit var adapter: RatingRecyclerViewAdapter
 
@@ -33,9 +34,22 @@ class RatingFragment : DaggerFragment() {
 
         initUsers()
         fetchUsers()
+        initInvite();
 
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    private fun initInvite() {
+        binding.inviteBtn.setOnClickListener {
+            val sendIntent = Intent()
+            sendIntent.action = Intent.ACTION_SEND
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+            sendIntent.type = "text/plain"
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
     }
 
     private fun fetchUsers() {
@@ -51,7 +65,7 @@ class RatingFragment : DaggerFragment() {
                         adapter.submitList(it.data)
                     }
                     is Result.Error -> {
-                        println(it.exception.message)
+                        Timber.e(it.exception)
                     }
                 }
             }

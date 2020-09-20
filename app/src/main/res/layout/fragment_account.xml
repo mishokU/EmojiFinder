@@ -46,6 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="60dp"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
                 <LinearLayout
@@ -399,21 +401,22 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/margin_layout_bottom"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="30dp"
             android:background="@android:color/transparent">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/rating_btn"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/ru_eng_sriracha"
                 android:text="@string/top"
                 android:textColor="@android:color/white"
-                app:backgroundTint="@color/textOrangeColor"
+                app:backgroundTint="@color/blue_color"
                 app:cornerRadius="10dp"
                 app:icon="@drawable/icons8_medal_48px"
                 app:iconSize="30dp"
@@ -428,7 +431,7 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="45dp"
             app:adSize="BANNER"
-            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+            app:adUnitId="ca-app-pub-2845388640791569/6766468842"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

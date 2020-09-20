@@ -5,21 +5,15 @@ import android.os.StrictMode
 import androidx.core.provider.FontRequest
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.text.FontRequestEmojiCompatConfig
-import androidx.lifecycle.ViewModelProvider
 import com.example.emojifinder.BuildConfig
 import com.example.emojifinder.R
 import com.example.emojifinder.core.di.DaggerAppComponent
-import com.example.emojifinder.core.di.utils.injectViewModel
-import com.example.emojifinder.domain.glide.MyAppGlideModule
-import com.example.emojifinder.domain.viewModels.ShopViewModel
-import com.example.emojifinder.ui.shop.EmojiShopModel
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import java.util.*
-import javax.inject.Inject
 
 
 class MainApplication : DaggerApplication() {
@@ -42,7 +36,8 @@ class MainApplication : DaggerApplication() {
             enableStrictMode()
         }
 
-        val testDeviceIds = listOf("33BE2250B43518CCDA7DE426D04EE231", "FD9586430CDB7E0EF8DE82B129A21EE9")
+        val testDeviceIds = listOf("33BE2250B43518CCDA7DE426D04EE231",
+            "FD9586430CDB7E0EF8DE82B129A21EE9")
         val configuration = RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
 
         MobileAds.setRequestConfiguration(configuration)

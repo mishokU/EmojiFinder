@@ -372,13 +372,12 @@
                             android:textSize="18sp"
                             app:cornerRadius="15dp" />
 
-
                     </LinearLayout>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/chest_for_add"
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="60dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="10dp"
@@ -386,8 +385,10 @@
                         android:fontFamily="@font/ru_eng_sriracha"
                         android:text="@string/get_free_chest"
                         android:textAlignment="center"
+                        android:clickable="false"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
+                        android:enabled="false"
                         app:cornerRadius="15dp"
                         app:icon="@drawable/add_img"
                         app:iconSize="30dp" />

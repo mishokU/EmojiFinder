@@ -41,10 +41,6 @@ object EndGameDialog {
 
             initExitButton()
 
-            if(state != State.LOST){
-                exit.visibility = View.INVISIBLE
-            }
-
             result.text = statistics.result
             score.text = statistics.score.toString()
             mistakes.text = statistics.mistakes.toString()
@@ -66,10 +62,14 @@ object EndGameDialog {
     private fun initExitButton() {
         exit = dialogView.findViewById(R.id.exit_campaign_end_btn)
         exit.setOnClickListener {
-            fragment.findNavController().navigateUp()
+            fragment.findNavController().popBackStack()
             Handler().postDelayed({
                 dialogView.dismiss()
             }, 100)
         }
+    }
+
+    fun hideNextLevelBtn() {
+        getNextLevelButton().visibility = View.GONE
     }
 }

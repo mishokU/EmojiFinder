@@ -62,7 +62,7 @@
     <string name="game_hint_prefs">Подсказка</string>
     <string name="start">Начать</string>
     <string name="help">Помощь</string>
-    <string name="open_chest">Сундуки</string>
+    <string name="open_chest">Колесо</string>
     <string name="roll">Крутить</string>
     <string name="values">Значения</string>
     <string name="emoji_box">ЭМОДЗИ СУНДУК</string>
@@ -216,5 +216,6 @@
     <string name="update_avatar">Обновить аватар</string>
     <string name="log_in">Вход</string>
     <string name="emoji_mistakes">📛</string>
+    <string name="googlepay_status_unavailable">Google pay is not supported on your device</string>
 
 </resources>

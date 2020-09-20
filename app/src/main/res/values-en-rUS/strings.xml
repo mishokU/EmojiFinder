@@ -66,7 +66,7 @@
     <string name="game_hint_prefs">game hint</string>
     <string name="start">Start</string>
     <string name="help">Help</string>
-    <string name="open_chest">Chests</string>
+    <string name="open_chest">Wheel</string>
     <string name="roll">Roll</string>
     <string name="values">Values</string>
     <string name="emoji_box">EMOJI BOX</string>
@@ -89,14 +89,14 @@
     <string name="game">Game</string>
     <string name="statistics">Statistics</string>
     <string name="other">Other</string>
-    <string name="how_to_delete_account">How to delete account ?</string>
-    <string name="help_forgot_password">I need to log in, but I can’t remember the password. Could you help me ?</string>
+    <string name="how_to_delete_account">How to delete account?</string>
+    <string name="help_forgot_password">I need to log in, but I can’t remember the password. Could you help me?</string>
     <string name="bad_nick_name">Why my nick name contains 👶</string>
     <string name="i_passed_the_level">I passed the level, but the statistics were not recorded, what should I do?</string>
-    <string name="how_to_disable_adds">How to disable adds ?</string>
+    <string name="how_to_disable_adds">How to disable adds?</string>
 
     <string name="save_info">Save</string>
-    <string name="how_to_play">How to play ?</string>
+    <string name="how_to_play">How to play?</string>
     <string name="how_to_disable_adds_answer">To disable ads, you need to buy a VIP account for 2$</string>
     <string name="i_passed_the_level_answer">If you have completed a level and you have not recorded statistics in your account, then make sure that you have completed the level before the time runs out. Otherwise, you will have to go through it again. If none of the answers help, then write to the mail.</string>
     <string name="no_answer">There is no answer</string>
@@ -140,13 +140,13 @@
     <string name="do_you_sure_you_want_to_delete_this_level">Do you sure you want to delete this level ?</string>
     <string name="sec">sec</string>
     <string name="collapsed">Collapsed</string>
-    <string name="find_all_emojis">Find All Emojis !</string>
+    <string name="find_all_emojis">Find All Emojis!</string>
     <string name="emos">Emos:</string>
     <string name="private_policy">Private policy</string>
     <string name="invite">Invite</string>
     <string name="rating">Rating</string>
     <string name="emojis">Emojis</string>
-    <string name="what_is_emos">What is Emos in the account ?</string>
+    <string name="what_is_emos">What is Emos in the account?</string>
     <string name="how_to_combine">How to combine Emojis in the shop?</string>
     <string name="name_your_level">Name your level</string>
     <string name="set_time_in_seconds">Set time in seconds</string>
@@ -170,7 +170,7 @@
     <string name="finder">FINDER</string>
     <string name="menu">Menu</string>
     <string name="campaign">Campaign</string>
-    <string name="get_free_chest">Покуртить за видео</string>
+    <string name="get_free_chest">1 🎟️</string>
     <string name="_249_9">249.9 Р</string>
     <string name="_199_9">199.9 Р</string>
     <string name="advertisements">Adds</string>
@@ -183,7 +183,7 @@
     <string name="arcade_game">Arcade Game</string>
     <string name="play">Play</string>
     <string name="set_level_picture">Set level picture</string>
-    <string name="level_loading">Loading ...</string>
+    <string name="level_loading">Loading...</string>
     <string name="check_your_luck">Check your luck</string>
     <string name="_200">200</string>
     <string name="not_enough_tickets">Not enough tickets</string>
@@ -200,5 +200,6 @@
     <string name="update_avatar">Update avatar</string>
     <string name="log_in">Log In</string>
     <string name="emoji_mistakes">📛</string>
+    <string name="googlepay_status_unavailable">Google pay is not supported on your device</string>
 
 </resources>

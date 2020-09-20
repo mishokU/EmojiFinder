@@ -302,7 +302,7 @@ class AccountAvatarFragment : DaggerFragment() {
                     getUserValues()
                 )
 
-                changeEmojiBackground(emoji)
+                changeEmojiBackground(emoji, true)
                 viewModel.fetchUserEmojis()
                 viewModel.fetchUserValues()
 
@@ -318,11 +318,20 @@ class AccountAvatarFragment : DaggerFragment() {
         }
     }
 
-    private fun changeEmojiBackground(emoji: EmojiShopModel?) {
-        val holder =
-            binding.shopRecyclerView.findViewHolderForAdapterPosition(adapter.fullList.indexOf(emoji))
-        holder?.itemView?.emoji_view?.backgroundTintList = resources.getColorStateList(R.color.green_color)
-        holder?.setIsRecyclable(false)
+    private fun changeEmojiBackground(emoji: EmojiShopModel?, your : Boolean) {
+        if(your){
+            val holder = binding
+                .shopRecyclerView
+                .findViewHolderForAdapterPosition(adapter.fullList.indexOf(emoji))
+
+            holder?.itemView?.emoji_view?.backgroundTintList = resources.getColorStateList(R.color.green_color)
+            holder?.setIsRecyclable(false)
+        } else {
+            val holder = binding
+                .shopRecyclerView
+                .findViewHolderForAdapterPosition(adapter.tmpList.indexOf(emoji))
+            holder?.itemView?.emoji_view?.backgroundTintList = resources.getColorStateList(R.color.red_color)
+        }
     }
 
     private fun initGeneratorList() {
@@ -458,10 +467,14 @@ class AccountAvatarFragment : DaggerFragment() {
         ShopEmojiDialog.showUserAlert(this, emoji)
         ShopEmojiDialog.getYesSaleButton().setOnClickListener {
             if (emoji != null) {
+
                 viewModel.removeEmoji(emoji, EmojiCost.getEmojiSellCost(ShopEmojiDialog.getSaleButton()), getUserValues())
+                changeEmojiBackground(emoji, false)
+                adapter.removeUserEmoji(emoji)
+
                 viewModel.updateUserEmojis(getUserValues().emojis - 1)
                 viewModel.fetchUserValues()
-                adapter.removeEmoji(emoji)
+                viewModel.fetchUserEmojis()
 
                 (activity as MainActivity).mediaPlayerPool.play(MusicType.MONEY)
                 ShopEmojiDialog.dialogUserView.dismiss()

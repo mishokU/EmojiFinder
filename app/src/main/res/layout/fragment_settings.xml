@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -49,6 +50,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="10dp"
+                        android:background="?selectableItemBackground"
                         app:cardCornerRadius="25dp">
 
                         <RelativeLayout
@@ -98,7 +100,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:background="@android:color/white"
+                        android:foreground="?selectableItemBackground"
                         app:cardCornerRadius="25dp">
 
                         <RelativeLayout
@@ -248,6 +250,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:background="@android:color/white"
+                        android:foreground="?selectableItemBackground"
                         app:cardCornerRadius="25dp">
 
                         <RelativeLayout
@@ -298,6 +301,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:background="@android:color/white"
+                        android:foreground="?selectableItemBackground"
                         app:cardCornerRadius="25dp">
 
                         <RelativeLayout
@@ -348,6 +352,7 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="20dp"
                         android:background="@android:color/white"
+                        android:foreground="?selectableItemBackground"
                         app:cardCornerRadius="25dp">
 
                         <RelativeLayout
