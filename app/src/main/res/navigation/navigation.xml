@@ -4,26 +4,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/dailyWinningsFragment">
+    app:startDestination="@id/signInFragment">
 
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.emojifinder.ui.game.campaign.gameAlerts.GameFragment"
+        android:name="com.mishok.emojifinder.ui.game.campaign.gameAlerts.GameFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game">
 
         <argument
             android:name="Category"
-            app:argType="com.example.emojifinder.ui.categories.SmallLevelModel"/>
+            app:argType="com.mishok.emojifinder.ui.categories.SmallLevelModel"/>
 
         <argument
             android:name="Levels"
-            app:argType="com.example.emojifinder.ui.categories.SmallLevelModel[]"/>
+            app:argType="com.mishok.emojifinder.ui.categories.SmallLevelModel[]"/>
 
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.emojifinder.ui.auth.signin.SignInFragment"
+        android:name="com.mishok.emojifinder.ui.auth.signin.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.emojifinder.ui.auth.registration.RegistrationFragment"
+        android:name="com.mishok.emojifinder.ui.auth.registration.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.example.emojifinder.ui.auth.login.LogInFragment"
+        android:name="com.mishok.emojifinder.ui.auth.login.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainMenuFragment"
-        android:name="com.example.emojifinder.ui.main.MainMenuFragment"
+        android:name="com.mishok.emojifinder.ui.main.MainMenuFragment"
         android:label="fragment_main_menu"
         tools:layout="@layout/fragment_main_menu" >
         <action
@@ -91,7 +91,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.example.emojifinder.ui.account.AccountFragment"
+        android:name="com.mishok.emojifinder.ui.account.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" >
         <action
@@ -104,7 +104,7 @@
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.emojifinder.ui.settings.SettingsFragment"
+        android:name="com.mishok.emojifinder.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -117,12 +117,12 @@
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
-        android:name="com.example.emojifinder.ui.auth.login.ForgetPasswordFragment"
+        android:name="com.mishok.emojifinder.ui.auth.login.ForgetPasswordFragment"
         android:label="fragment_forget_password"
         tools:layout="@layout/fragment_forget_password" />
     <fragment
         android:id="@+id/categotyGameFragment"
-        android:name="com.example.emojifinder.ui.categories.CategoryGameFragment"
+        android:name="com.mishok.emojifinder.ui.categories.CategoryGameFragment"
         android:label="fragment_categoty_game"
         tools:layout="@layout/fragment_categoty_game" >
 
@@ -135,13 +135,13 @@
     </fragment>
     <fragment
         android:id="@+id/mainAccountInfoFragment"
-        android:name="com.example.emojifinder.ui.account.MainAccountInfoFragment"
+        android:name="com.mishok.emojifinder.ui.account.MainAccountInfoFragment"
         android:label="fragment_main_account_info"
         tools:layout="@layout/fragment_main_account_info">
 
         <argument
             android:name="MainInfo"
-            app:argType="com.example.emojifinder.data.db.remote.models.account.MainAccountModel"/>
+            app:argType="com.mishok.emojifinder.data.db.remote.models.account.MainAccountModel"/>
         <action
             android:id="@+id/action_mainAccountInfoFragment_to_accountAvatarFragment"
             app:destination="@id/accountAvatarFragment" />
@@ -149,13 +149,13 @@
     </fragment>
     <fragment
         android:id="@+id/accountAvatarFragment"
-        android:name="com.example.emojifinder.ui.account.AccountAvatarFragment"
+        android:name="com.mishok.emojifinder.ui.account.AccountAvatarFragment"
         android:label="fragment_account_avatar"
         tools:layout="@layout/fragment_account_avatar">
 
         <argument
             android:name="MainInfo"
-            app:argType="com.example.emojifinder.data.db.remote.models.account.MainAccountModel"/>
+            app:argType="com.mishok.emojifinder.data.db.remote.models.account.MainAccountModel"/>
         <action
             android:id="@+id/action_accountAvatarFragment_to_lootBoxesFragment"
             app:destination="@id/lootBoxesFragment" />
@@ -163,23 +163,23 @@
     </fragment>
     <fragment
         android:id="@+id/lootBoxesFragment"
-        android:name="com.example.emojifinder.ui.boxes.LootBoxesFragment"
+        android:name="com.mishok.emojifinder.ui.boxes.LootBoxesFragment"
         android:label="fragment_loot_boxes"
         tools:layout="@layout/fragment_loot_boxes">
 
         <argument
             android:name="Values"
-            app:argType="com.example.emojifinder.data.db.remote.models.account.AccountValuesModel"/>
+            app:argType="com.mishok.emojifinder.data.db.remote.models.account.AccountValuesModel"/>
 
     </fragment>
     <fragment
         android:id="@+id/localizeAppFragment"
-        android:name="com.example.emojifinder.ui.localization.LocalizeAppFragment"
+        android:name="com.mishok.emojifinder.ui.localization.LocalizeAppFragment"
         android:label="fragment_localize_app"
         tools:layout="@layout/fragment_localize_app" />
     <fragment
         android:id="@+id/helpFragment"
-        android:name="com.example.emojifinder.ui.help.HelpFragment"
+        android:name="com.mishok.emojifinder.ui.help.HelpFragment"
         android:label="fragment_help"
         tools:layout="@layout/fragment_help" >
         <action
@@ -192,13 +192,13 @@
     </fragment>
     <fragment
         android:id="@+id/readQAFragment"
-        android:name="com.example.emojifinder.ui.help.ReadQAFragment"
+        android:name="com.mishok.emojifinder.ui.help.ReadQAFragment"
         android:label="fragment_read_q_a"
         tools:layout="@layout/fragment_read_q_a">
 
         <argument
             android:name="Help"
-            app:argType="com.example.emojifinder.ui.help.HelpModel"/>
+            app:argType="com.mishok.emojifinder.ui.help.HelpModel"/>
         <action
             android:id="@+id/action_readQAFragment_to_writeQuestionFragment"
             app:destination="@id/writeQuestionFragment" />
@@ -206,23 +206,23 @@
     </fragment>
     <fragment
         android:id="@+id/writeQuestionFragment"
-        android:name="com.example.emojifinder.ui.help.WriteQuestionFragment"
+        android:name="com.mishok.emojifinder.ui.help.WriteQuestionFragment"
         android:label="fragment_write_question"
         tools:layout="@layout/fragment_write_question" />
     <fragment
         android:id="@+id/levelConstructorFragment"
-        android:name="com.example.emojifinder.ui.constructor.LevelConstructorFragment"
+        android:name="com.mishok.emojifinder.ui.constructor.LevelConstructorFragment"
         android:label="fragment_level_constructor"
         tools:layout="@layout/fragment_level_constructor">
 
         <argument
             android:name="Level"
-            app:argType="com.example.emojifinder.ui.categories.SmallLevelModel"/>
+            app:argType="com.mishok.emojifinder.ui.categories.SmallLevelModel"/>
 
     </fragment>
     <fragment
         android:id="@+id/yourLevelsFragment"
-        android:name="com.example.emojifinder.ui.levels.YourLevelsFragment"
+        android:name="com.mishok.emojifinder.ui.levels.YourLevelsFragment"
         android:label="fragment_your_levels"
         tools:layout="@layout/fragment_your_levels" >
         <action
@@ -231,27 +231,27 @@
     </fragment>
     <fragment
         android:id="@+id/arcadeGameFragment"
-        android:name="com.example.emojifinder.ui.game.arcade.ArcadeGameFragment"
+        android:name="com.mishok.emojifinder.ui.game.arcade.ArcadeGameFragment"
         android:label="ArcadeGameFragment" />
     <fragment
         android:id="@+id/ratingFragment"
-        android:name="com.example.emojifinder.ui.rating.RatingFragment"
+        android:name="com.mishok.emojifinder.ui.rating.RatingFragment"
         android:label="fragment_rating"
         tools:layout="@layout/fragment_rating" />
     <fragment
         android:id="@+id/shopFragment"
-        android:name="com.example.emojifinder.ui.shop.ShopFragment"
+        android:name="com.mishok.emojifinder.ui.shop.ShopFragment"
         android:label="fragment_shop"
         tools:layout="@layout/fragment_shop" />
     <fragment
         android:id="@+id/dailyWinningsFragment"
-        android:name="com.example.emojifinder.ui.daily.DailyWinningsFragment"
+        android:name="com.mishok.emojifinder.ui.daily.DailyWinningsFragment"
         android:label="fragment_daily_winnings"
         tools:layout="@layout/fragment_daily_winnings" >
 
         <argument
             android:name="Daily"
-            app:argType="com.example.emojifinder.ui.daily.DailyUI"/>
+            app:argType="com.mishok.emojifinder.ui.daily.DailyUI"/>
 
         <action
             android:id="@+id/action_dailyWinningsFragment_to_mainMenuFragment"

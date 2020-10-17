@@ -6,7 +6,7 @@
 
         <variable
             name="daily"
-            type="com.example.emojifinder.data.db.local.models.DailyModel" />
+            type="com.mishok.emojifinder.data.db.local.models.DailyModel" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"

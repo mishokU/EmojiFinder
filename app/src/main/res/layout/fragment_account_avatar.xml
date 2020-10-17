@@ -7,11 +7,11 @@
 
         <variable
             name="profile"
-            type="com.example.emojifinder.data.db.remote.models.account.MainAccountModel" />
+            type="com.mishok.emojifinder.data.db.remote.models.account.MainAccountModel" />
 
         <variable
             name="values"
-            type="com.example.emojifinder.data.db.remote.models.account.AccountValuesModel" />
+            type="com.mishok.emojifinder.data.db.remote.models.account.AccountValuesModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

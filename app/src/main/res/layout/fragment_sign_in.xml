@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.emojifinder.domain.viewModels.SignInViewModel" />
+            type="com.mishok.emojifinder.domain.viewModels.SignInViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"

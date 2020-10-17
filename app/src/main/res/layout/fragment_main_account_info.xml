@@ -8,7 +8,7 @@
 
         <variable
             name="profile"
-            type="com.example.emojifinder.data.db.remote.models.account.MainAccountModel" />
+            type="com.mishok.emojifinder.data.db.remote.models.account.MainAccountModel" />
     </data>
 
     <FrameLayout

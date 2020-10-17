@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.emojifinder.domain.viewModels.CategoriesViewModel" />
+            type="com.mishok.emojifinder.domain.viewModels.CategoriesViewModel" />
     </data>
 
     <FrameLayout
@@ -36,7 +36,7 @@
                 android:textColor="@color/textOrangeColor"
                 android:textSize="46sp" />
 
-        <com.example.emojifinder.ui.categories.HorizontalCarouselRecyclerView
+        <com.mishok.emojifinder.ui.categories.HorizontalCarouselRecyclerView
             android:id="@+id/categories_list"
             android:layout_above="@id/play_level_btn"
             android:layout_width="match_parent"

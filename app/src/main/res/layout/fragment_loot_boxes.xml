@@ -8,7 +8,7 @@
 
         <variable
             name="values"
-            type="com.example.emojifinder.data.db.remote.models.account.AccountValuesModel" />
+            type="com.mishok.emojifinder.data.db.remote.models.account.AccountValuesModel" />
     </data>
 
     <FrameLayout

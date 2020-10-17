@@ -6,7 +6,7 @@
 
         <variable
             name="level"
-            type="com.example.emojifinder.data.db.remote.models.account.UserLevelStatistics" />
+            type="com.mishok.emojifinder.data.db.remote.models.account.UserLevelStatistics" />
     </data>
 
     <RelativeLayout

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="level"
-            type="com.example.emojifinder.ui.categories.SmallLevelModel" />
+            type="com.mishok.emojifinder.ui.categories.SmallLevelModel" />
     </data>
 
     <FrameLayout

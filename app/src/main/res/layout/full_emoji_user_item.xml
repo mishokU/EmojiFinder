@@ -4,7 +4,7 @@
     <data>
         <variable
             name="emoji"
-            type="com.example.emojifinder.ui.shop.EmojiShopModel" />
+            type="com.mishok.emojifinder.ui.shop.EmojiShopModel" />
     </data>
 
     <FrameLayout
