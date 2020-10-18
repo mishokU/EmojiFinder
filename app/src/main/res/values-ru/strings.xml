@@ -217,5 +217,6 @@
     <string name="log_in">Вход</string>
     <string name="emoji_mistakes">📛</string>
     <string name="googlepay_status_unavailable">Google pay is not supported on your device</string>
+    <string name="next_version">This feature will avaliable in the next versions</string>
 
 </resources>

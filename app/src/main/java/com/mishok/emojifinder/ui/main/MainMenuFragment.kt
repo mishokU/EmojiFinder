@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
 import com.mishok.emojifinder.R
 import com.mishok.emojifinder.core.di.utils.injectViewModel
 import com.mishok.emojifinder.databinding.FragmentMainMenuBinding
@@ -18,8 +20,6 @@ import com.mishok.emojifinder.domain.prefs.NotificationAlarmPrefs
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.domain.viewModels.AccountViewModel
 import com.mishok.emojifinder.ui.daily.DailyUI
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 

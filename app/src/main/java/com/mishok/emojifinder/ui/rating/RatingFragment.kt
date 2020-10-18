@@ -1,4 +1,4 @@
-package com.example.emojifinder.ui.rating
+package com.mishok.emojifinder.ui.rating
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import com.example.emojifinder.core.di.utils.ViewModelFactory
-import com.example.emojifinder.core.di.utils.injectViewModel
-import com.example.emojifinder.databinding.FragmentRatingBinding
-import com.example.emojifinder.domain.result.Result
-import com.example.emojifinder.domain.viewModels.RatingViewModel
+import com.mishok.emojifinder.core.di.utils.ViewModelFactory
+import com.mishok.emojifinder.core.di.utils.injectViewModel
+import com.mishok.emojifinder.databinding.FragmentRatingBinding
+import com.mishok.emojifinder.domain.viewModels.RatingViewModel
 import dagger.android.support.DaggerFragment
 import timber.log.Timber
+import com.mishok.emojifinder.domain.result.Result
 import javax.inject.Inject
 
 
