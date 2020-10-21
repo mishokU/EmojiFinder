@@ -5,11 +5,12 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.widget.EditText
 import android.widget.ImageButton
+import com.bumptech.glide.Glide
+import com.google.android.material.button.MaterialButton
 import com.mishok.emojifinder.R
 import com.mishok.emojifinder.data.db.local.converter.LevelStatus
 import com.mishok.emojifinder.ui.base.BaseDialog
 import com.mishok.emojifinder.ui.categories.SmallLevelModel
-import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
 object SentLevelDialog {
@@ -66,7 +67,9 @@ object SentLevelDialog {
     }
 
     fun setImage(data: Uri?) {
-        image.setImageURI(data)
+        Glide.with(dialogView.context)
+            .load(data)
+            .into(image)
     }
 
     fun getSmallLevelModel(): SmallLevelModel? {

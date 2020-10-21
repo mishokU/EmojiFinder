@@ -5,5 +5,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DailyUI (
-    val day : Int
+    var day : Int
 ) : Parcelable

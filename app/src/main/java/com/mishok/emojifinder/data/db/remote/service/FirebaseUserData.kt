@@ -1,11 +1,12 @@
 package com.mishok.emojifinder.data.db.remote.service
 
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.mishok.emojifinder.data.db.remote.models.account.AccountValuesModel
 import com.mishok.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.ui.shop.EmojiShopModel
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.EmailAuthProvider
 import kotlinx.coroutines.tasks.await
 
 
@@ -89,6 +90,9 @@ class FirebaseUserData : FirebaseInit() {
     }
 
     fun updateScore(score: Int) {
+        if(mUser == null){
+            mUser = FirebaseAuth.getInstance().currentUser
+        }
         mFireStore
             .collection("score")
             .document(mUser!!.uid)

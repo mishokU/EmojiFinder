@@ -2,6 +2,7 @@ package com.mishok.emojifinder.ui.main
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ import com.mishok.emojifinder.domain.prefs.DailyWinningsPrefs
 import com.mishok.emojifinder.domain.prefs.NotificationAlarmPrefs
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.domain.viewModels.AccountViewModel
-import com.mishok.emojifinder.ui.daily.DailyUI
+import com.mishok.emojifinder.ui.utils.Companion
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -92,14 +93,24 @@ class MainMenuFragment : DaggerFragment() {
         notificationsService.create()
     }
 
+    /*
+        Open daily winnig fragment, but there is a problem, that we should calculate it
+        before opening. The best solution is to show in application context
+    */
     private fun dailyWinnings() {
         if (daily.isNextDay()) {
-            Handler().postDelayed({
-                this.findNavController().navigate(
-                    MainMenuFragmentDirections.actionMainMenuFragmentToDailyWinningsFragment(
-                        DailyUI(daily.getDay())
-                    )
-                )
+            Handler(Looper.getMainLooper()).postDelayed({
+                try {
+//                    this.findNavController().navigate(
+//                        MainMenuFragmentDirections.actionMainMenuFragmentToDailyWinningsFragment(
+//                            DailyUI(daily.getDay())
+//                        )
+//                    )
+                    Companion.day = daily.getDay()
+                    this.findNavController().navigate(R.id.dailyWinningsFragment)
+                } catch (e : Exception){
+                    e.printStackTrace()
+                }
             }, 2000)
         }
     }

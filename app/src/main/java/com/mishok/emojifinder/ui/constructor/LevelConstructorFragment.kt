@@ -11,7 +11,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.children
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.mishok.emojifinder.ui.main.MainActivity
 import com.google.android.material.chip.Chip
 import com.mishok.emojifinder.R
 import com.mishok.emojifinder.core.di.utils.ViewModelFactory
@@ -25,7 +24,7 @@ import com.mishok.emojifinder.ui.constructor.dialogs.ExitLevelDialog
 import com.mishok.emojifinder.ui.constructor.dialogs.ResetLevelDialog
 import com.mishok.emojifinder.ui.constructor.dialogs.SaveLevelDialog
 import com.mishok.emojifinder.ui.constructor.dialogs.SentLevelDialog
-
+import com.mishok.emojifinder.ui.main.MainActivity
 import com.mishok.emojifinder.ui.shop.EmojiShopModel
 import com.mishok.emojifinder.ui.utils.closeFilters
 import com.mishok.emojifinder.ui.utils.openFilters
@@ -123,6 +122,7 @@ class LevelConstructorFragment : BaseImageFragment() {
             ResetLevelDialog.dialogView.dismiss()
         }
 
+        //TODO: Rewrite to show images from the phone in bottom navigation sheet
         SentLevelDialog.getLevelPicture().setOnClickListener {
             pickImageFromGallery(SENT_CODE)
         }

@@ -13,7 +13,6 @@ import androidx.emoji.widget.EmojiAppCompatEditText
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.mishok.emojifinder.ui.main.MainActivity
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.reward.RewardItem
@@ -29,13 +28,16 @@ import com.mishok.emojifinder.domain.prefs.DailyWinningsPrefs
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.domain.viewModels.AccountViewModel
 import com.mishok.emojifinder.domain.viewModels.DailyViewModel
+import com.mishok.emojifinder.ui.main.MainActivity
 import com.mishok.emojifinder.ui.shop.EmojiShopModel
+import com.mishok.emojifinder.ui.utils.Companion
 import com.mishok.emojifinder.ui.utils.ScreenSize
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 
 class DailyWinningsFragment : DaggerFragment() {
+
 
     private lateinit var binding: FragmentDailyWinningsBinding
     private lateinit var adapter: DailyRecyclerViewAdapter
@@ -157,7 +159,7 @@ class DailyWinningsFragment : DaggerFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun getDay() {
-        day = DailyWinningsFragmentArgs.fromBundle(requireArguments()).Daily
+        day = DailyUI(Companion.day)
         binding.daysTv.text = "Day " + day.day.toString()
     }
 
