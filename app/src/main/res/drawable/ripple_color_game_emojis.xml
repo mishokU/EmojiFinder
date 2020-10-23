@@ -4,7 +4,6 @@
     android:color="@color/main_ripple_button_color">
 
     <item
-
         android:id="@android:id/mask"
         android:drawable="@color/main_color" />
 </ripple>

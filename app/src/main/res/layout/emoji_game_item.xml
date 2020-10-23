@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
         android:layout_width="50dp"
         android:layout_height="50dp">
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/back_place_emoji"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/backgroundDesignColor"
             android:gravity="center">
 
             <androidx.emoji.widget.EmojiAppCompatButton
                 android:id="@+id/emoji_game_view"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:textSize="24sp"
-                android:textAlignment="center"
-                android:background="@drawable/ripple_color_game_emojis"
-                android:layout_margin="5dp"
                 android:layout_centerInParent="true"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/ripple_color_game_emojis"
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
-        </RelativeLayout>
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/emojiStars"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center"
+                app:lottie_rawRes="@raw/stars_emoji"
+                app:lottie_repeatCount="1" />
+
+        </androidx.cardview.widget.CardView>
 
     </FrameLayout>
-
 
 </layout>

@@ -12,7 +12,7 @@
 
     <color name="price_button_grey">#555</color>
 
-    <color name="main_ripple_button_color">#696D73</color>
+    <color name="main_ripple_button_color">#7F8183</color>
     <color name="second_text_color">#389aed</color>
     <color name="black_color">#050708</color>
     <color name="first_color">#4f5154</color>
@@ -37,5 +37,6 @@
 
     <color name="colorStripeStart">#FFF0F4FD</color>
     <color name="colorStripeEnd">#AB80F3</color>
+    <color name="white">#ffffff</color>
 
 </resources>

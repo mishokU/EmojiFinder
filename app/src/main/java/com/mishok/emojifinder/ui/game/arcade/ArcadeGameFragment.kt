@@ -16,6 +16,8 @@ import androidx.emoji.widget.EmojiAppCompatEditText
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.mishok.emojifinder.R
 import com.mishok.emojifinder.core.di.utils.injectViewModel
 import com.mishok.emojifinder.databinding.ArcadeGameLayoutBinding
@@ -25,11 +27,10 @@ import com.mishok.emojifinder.domain.prefs.ShowGameHintPrefs
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.domain.sounds.MusicType
 import com.mishok.emojifinder.domain.viewModels.AccountViewModel
+import com.mishok.emojifinder.domain.viewModels.GameViewModel
 import com.mishok.emojifinder.ui.game.campaign.gameAlerts.ExitGameDialog
 import com.mishok.emojifinder.ui.main.MainActivity
 import com.mishok.emojifinder.ui.shop.EmojiShopModel
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -48,6 +49,10 @@ class ArcadeGameFragment : DaggerFragment() {
     var score = 0
     private var userScore = 0
     private var userEmos = 0
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var viewModel: GameViewModel
 
     @Inject
     lateinit var viewModelFactoryAccount: ViewModelProvider.Factory
@@ -69,6 +74,7 @@ class ArcadeGameFragment : DaggerFragment() {
         interstitialAd = InterstitialAd(requireContext())
 
         viewModelAccount = injectViewModel(viewModelFactoryAccount)
+        viewModel = injectViewModel(viewModelFactory)
 
         EndGameDialog.create(this)
 
@@ -149,6 +155,18 @@ class ArcadeGameFragment : DaggerFragment() {
                         userEmos = it.data.emos
                     }
                 }
+            }
+        })
+
+        viewModel.oneLevelEmojisData.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                //userEmojisAdapter.submitList(it)
+            }
+        })
+
+        viewModel.bottomEmojis.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                createBottomEmojis(it)
             }
         })
     }
@@ -347,14 +365,8 @@ class ArcadeGameFragment : DaggerFragment() {
     private fun createGamePlace(data: MutableList<EmojiShopModel?>) {
         val bottomEmojis = mutableListOf<EmojiShopModel?>()
         oneLevelEmojis = mutableListOf()
-        userEmojisAdapter.submitList(emptyList())
-        for(i : Int in 0..44){
-            val emoji = data.random()
-            oneLevelEmojis.add(emoji)
-            bottomEmojis.add(emoji)
-        }
-        userEmojisAdapter.submitList(oneLevelEmojis)
-        createBottomEmojis(bottomEmojis)
+        userEmojisAdapter.clear()
+        viewModel.countLevel(userEmojisAdapter, bottomEmojis, data, oneLevelEmojis)
     }
 
     private fun createBottomEmojis(list: MutableList<EmojiShopModel?>) {

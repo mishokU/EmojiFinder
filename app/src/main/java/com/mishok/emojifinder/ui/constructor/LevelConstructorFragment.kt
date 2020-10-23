@@ -317,7 +317,7 @@ class LevelConstructorFragment : BaseImageFragment() {
     }
 
     private fun getAllEmojisFromJson() {
-        allEmojisAdapter.allEmojisSubmitList((requireActivity() as MainActivity).randomEmojis)
+        allEmojisAdapter.allEmojisSubmitList((requireActivity() as MainActivity).randomEmojis as MutableList<EmojiShopModel?>)
         generateGroupChips((requireActivity() as MainActivity).randomEmojis)
     }
 

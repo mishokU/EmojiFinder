@@ -17,6 +17,8 @@ import androidx.gridlayout.widget.GridLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.mishok.emojifinder.R
 import com.mishok.emojifinder.core.di.utils.injectViewModel
 import com.mishok.emojifinder.data.db.local.converter.toEmojiShopModel
@@ -36,8 +38,6 @@ import com.mishok.emojifinder.ui.categories.SmallLevelModel
 import com.mishok.emojifinder.ui.main.MainActivity
 import com.mishok.emojifinder.ui.utils.ScaleGesture
 import com.mishok.emojifinder.ui.utils.ScreenSize
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -248,7 +248,7 @@ class GameFragment : DaggerFragment() {
             it?.unicode
         }
         binding.keyboardProgressBar.visibility = View.GONE
-        gameKeyboardAdapter.submitList(uniqueList + getRandomExtraEmojis(uniqueList.size))
+        gameKeyboardAdapter.setData((uniqueList + getRandomExtraEmojis(uniqueList.size)).toMutableList())
     }
 
     private fun getRandomExtraEmojis(size: Int): List<EmojiShopModel> {
@@ -357,8 +357,7 @@ class GameFragment : DaggerFragment() {
     private fun initProgressAnimator(levelModel: SmallLevelModel) {
         binding.gameProgressBar.max = levelModel.time * 100
         binding.gameProgressBar.progress = levelModel.time * 100
-        animation =
-            ObjectAnimator.ofInt(binding.gameProgressBar, "progress", levelModel.time * 100, 0)
+        animation = ObjectAnimator.ofInt(binding.gameProgressBar, "progress", levelModel.time * 100, 0)
         animation.duration = (levelModel.time * 1000).toLong()
         animation.interpolator = AccelerateInterpolator()
     }

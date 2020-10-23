@@ -5,14 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.emoji.widget.EmojiAppCompatButton
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.mishok.emojifinder.R
 import com.mishok.emojifinder.databinding.EmojiGameItemBinding
-import kotlinx.android.synthetic.main.emoji_game_item.view.*
 import com.mishok.emojifinder.ui.shop.EmojiShopModel
+import kotlinx.android.synthetic.main.emoji_game_item.view.*
 
 
 class AllEmojisRecyclerViewAdapter(
@@ -21,32 +19,16 @@ class AllEmojisRecyclerViewAdapter(
 ) : RecyclerView.Adapter<AllEmojisRecyclerViewAdapter.KeyboardViewHolder>() {
 
     private var prevElement : Int = 0
-    private var adapterlist : AsyncListDiffer<EmojiShopModel>
-    private lateinit var fullList : List<EmojiShopModel?>
-
-
-    private val CALLBACK = object : DiffUtil.ItemCallback<EmojiShopModel>() {
-        override fun areItemsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem.text == newItem.text
-        }
-
-        override fun areContentsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem == newItem
-        }
-    }
+    var adapterlist : MutableList<EmojiShopModel?> = mutableListOf()
+    private lateinit var fullList : MutableList<EmojiShopModel?>
 
     init {
-        adapterlist = AsyncListDiffer(this, CALLBACK)
-        adapterlist.addListListener { previousList, currentList ->
-            if(previousList != currentList){
-                progress.visibility = View.INVISIBLE
-            }
-        }
+
     }
 
-    fun allEmojisSubmitList(data: List<EmojiShopModel?>) {
+    fun allEmojisSubmitList(data: MutableList<EmojiShopModel?>) {
         this.fullList = data
-        this.adapterlist.submitList(data)
+        this.adapterlist = data
     }
 
     fun getCurrentElement() : Int {
@@ -60,7 +42,7 @@ class AllEmojisRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: KeyboardViewHolder, position: Int){
-        val emoji = adapterlist.currentList[position]
+        val emoji = adapterlist.get(index = position)
         val button = holder.itemView.emoji_game_view
         if(holder.itemView.emoji_game_view.background ==
             ContextCompat.getDrawable(
@@ -71,12 +53,12 @@ class AllEmojisRecyclerViewAdapter(
         }
         holder.itemView.setOnClickListener {
             setChecked(button)
-            onClickListener.onClick(emoji, prevElement)
+            onClickListener.onClick(emoji!!, prevElement)
             prevElement = holder.layoutPosition
         }
         button.setOnClickListener {
             setChecked(button)
-            onClickListener.onClick(emoji, prevElement)
+            onClickListener.onClick(emoji!!, prevElement)
             prevElement = holder.layoutPosition
         }
         holder.bind(emoji)
@@ -93,7 +75,7 @@ class AllEmojisRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        return adapterlist.currentList.size
+        return adapterlist.size
     }
 
     private fun setChecked(
@@ -106,11 +88,11 @@ class AllEmojisRecyclerViewAdapter(
     }
 
     fun resetFilters() {
-        adapterlist.submitList(fullList)
+        adapterlist = fullList
     }
 
     fun filter(categories: MutableList<String>) {
-        val list : MutableList<EmojiShopModel> = mutableListOf()
+        val list : MutableList<EmojiShopModel?> = mutableListOf()
         if(categories.size != 0){
             progress.visibility = View.VISIBLE
             for(category in categories) {
@@ -120,9 +102,9 @@ class AllEmojisRecyclerViewAdapter(
                     }
                 }
             }
-            adapterlist.submitList(list)
+            adapterlist = list
         } else {
-            adapterlist.submitList(fullList)
+            adapterlist = fullList
         }
     }
 

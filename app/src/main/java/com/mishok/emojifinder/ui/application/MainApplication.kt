@@ -33,7 +33,7 @@ class MainApplication : DaggerApplication() {
 
         // Enable strict mode before Dagger creates graph
         if (BuildConfig.DEBUG) {
-            enableStrictMode()
+            //enableStrictMode()
         }
 
         val testDeviceIds = listOf("33BE2250B43518CCDA7DE426D04EE231",

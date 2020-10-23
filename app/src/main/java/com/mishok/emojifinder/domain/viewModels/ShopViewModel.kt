@@ -36,7 +36,10 @@ class ShopViewModel @Inject constructor(
             withContext(Dispatchers.Main) {
                 _emojisResponse.value = Result.Loading
             }
-            val emojis = shopEmojiService.fetchEmojis()
+            var emojis : Result<List<EmojiShopModel>> ?= null
+            withContext(Dispatchers.IO){
+                emojis = shopEmojiService.fetchEmojis()
+            }
             withContext(Dispatchers.Main) {
                 _emojisResponse.value = emojis
             }

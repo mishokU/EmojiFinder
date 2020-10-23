@@ -2,8 +2,6 @@ package com.mishok.emojifinder.ui.game.campaign.gameAlerts
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mishok.emojifinder.data.db.remote.models.EmojiShopModel
 import com.mishok.emojifinder.databinding.EmojiGameItemBinding
@@ -11,22 +9,9 @@ import kotlinx.android.synthetic.main.emoji_game_item.view.*
 
 
 class GameKeyBoardRecyclerViewAdapter(private val onClickListener: OnEmojiClickListener) :
-    ListAdapter<EmojiShopModel,
-            GameKeyBoardRecyclerViewAdapter.KeyboardViewHolder>(
-        DiffCallback
-    ) {
+    RecyclerView.Adapter<GameKeyBoardRecyclerViewAdapter.KeyboardViewHolder>() {
 
-    companion object DiffCallback : DiffUtil.ItemCallback<EmojiShopModel>() {
-
-        override fun areItemsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem.order == newItem.order
-        }
-
-        override fun areContentsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem == newItem
-        }
-
-    }
+    var keyboardEmojis : MutableList<EmojiShopModel?> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KeyboardViewHolder {
         return KeyboardViewHolder(
@@ -35,14 +20,16 @@ class GameKeyBoardRecyclerViewAdapter(private val onClickListener: OnEmojiClickL
     }
 
     override fun onBindViewHolder(holder: KeyboardViewHolder, position: Int) {
-        val emoji = getItem(position)
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(emoji)
+        val emoji = keyboardEmojis[position]
+        if(emoji != null){
+            holder.itemView.setOnClickListener {
+                onClickListener.onClick(emoji)
+            }
+            holder.itemView.emoji_game_view.setOnClickListener {
+                onClickListener.onClick(emoji)
+            }
+            holder.bind(emoji)
         }
-        holder.itemView.emoji_game_view.setOnClickListener {
-            onClickListener.onClick(emoji)
-        }
-        holder.bind(emoji)
     }
 
     class KeyboardViewHolder(private val binding: EmojiGameItemBinding) :
@@ -55,5 +42,14 @@ class GameKeyBoardRecyclerViewAdapter(private val onClickListener: OnEmojiClickL
 
     class OnEmojiClickListener(val clickListener: (emojiShop: EmojiShopModel?) -> Unit) {
         fun onClick(emojiShop: EmojiShopModel) = clickListener(emojiShop)
+    }
+
+    override fun getItemCount(): Int {
+        return keyboardEmojis.size
+    }
+
+    fun setData(emojis: MutableList<EmojiShopModel?>) {
+        this.keyboardEmojis = emojis
+        notifyDataSetChanged()
     }
 }

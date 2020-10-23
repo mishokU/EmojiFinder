@@ -96,6 +96,9 @@ class MainActivity : DaggerAppCompatActivity() {
                     is Result.Success -> {
                         randomEmojis = it.data
                     }
+                    is Result.Error -> {
+                        loadRandomEmojis()
+                    }
                 }
             }
         })

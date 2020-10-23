@@ -107,7 +107,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/game_emoji_field_rv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_above="@id/finder_place"
                 android:layout_below="@id/intro_place"
                 android:layout_centerInParent="true"
@@ -117,7 +117,7 @@
                 android:padding="5dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="5"
-                tools:itemCount="50"
+                tools:itemCount="60"
                 tools:listitem="@layout/emoji_game_item" />
 
             <LinearLayout
