@@ -3,31 +3,17 @@ package com.mishok.emojifinder.ui.constructor
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.emoji.widget.EmojiAppCompatButton
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mishok.emojifinder.data.db.remote.models.EmojiShopModel
 import com.mishok.emojifinder.databinding.EmojiConstructorItemBinding
 import kotlinx.android.synthetic.main.emoji_constructor_item.view.*
 
-class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiClickListener) : ListAdapter<EmojiShopModel,
-        LevelConstructorRecyclerViewAdapter.KeyboardViewHolder>(
-    DiffCallback
-) {
+class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiClickListener) :
+    RecyclerView.Adapter<LevelConstructorRecyclerViewAdapter.KeyboardViewHolder>() {
 
     private var element : com.mishok.emojifinder.ui.shop.EmojiShopModel ?= null
+    private var items : MutableList<EmojiShopModel> = mutableListOf()
     private var order = 0
-
-    companion object DiffCallback: DiffUtil.ItemCallback<EmojiShopModel>()  {
-
-        override fun areItemsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem === newItem
-        }
-
-        override fun areContentsTheSame(oldItem: EmojiShopModel, newItem: EmojiShopModel): Boolean {
-            return oldItem.unicode == newItem.unicode
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : KeyboardViewHolder {
         return KeyboardViewHolder(
@@ -36,7 +22,7 @@ class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiC
     }
 
     override fun onBindViewHolder(holder: KeyboardViewHolder, position: Int){
-        val emoji = getItem(position)
+        val emoji = items[position]
         val button = holder.itemView.emoji_constructor_btn
         holder.itemView.setOnClickListener {
             handleEmoji(button, emoji, position)
@@ -64,7 +50,7 @@ class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiC
                 // increase all emojis by 1 in order
                 when {
                     position == 0 -> {
-                        for(item in currentList){
+                        for(item in items){
                             item.order -= 1
                         }
                         order--
@@ -72,8 +58,8 @@ class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiC
                         button.text = ""
                         // if position in the middle
                     }
-                    position != currentList.size - 1 -> {
-                        for(item in currentList.subList(position, currentList.size - 1)){
+                    position != items.size - 1 -> {
+                        for(item in items.subList(position, items.size - 1)){
                             item.order -= 1
                         }
                         order--
@@ -87,7 +73,7 @@ class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiC
                     }
                 }
             }
-            for(item in currentList){
+            for(item in items){
                 if(item.unicode != ""){
                     println(item)
                 }
@@ -104,30 +90,30 @@ class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiC
 
     fun resetOrder() {
         order = 0
-        for(item in currentList){
+        for(item in items){
             item.order = 0
         }
     }
 
     fun isEmptyLevel(): Boolean {
-        var items = 0
-        for(item in currentList){
+        var int = 0
+        for(item in items){
             if(item.unicode != ""){
-                items++
+                int++
             }
         }
-        return items == 0
+        return int == 0
     }
 
     fun setLevelTitleToEmojis(title: String) {
-        for(emoji in currentList){
+        for(emoji in items){
             emoji.title = title
         }
     }
 
     fun setOrder(){
         var tmpMax = 0
-        for(item in currentList){
+        for(item in items){
             if(item.order > tmpMax){
                 tmpMax = item.order
             }
@@ -145,5 +131,18 @@ class LevelConstructorRecyclerViewAdapter(private val onClickListener : OnEmojiC
 
     class OnEmojiClickListener(val clickListener: (emojiShop: EmojiShopModel?) -> Unit) {
         fun onClick(emojiShop: EmojiShopModel) = clickListener(emojiShop)
+    }
+
+    override fun getItemCount(): Int {
+        return items.size
+    }
+
+    fun getItems(): List<EmojiShopModel> {
+        return items
+    }
+
+    fun setData(it: List<EmojiShopModel?>) {
+        this.items = it as MutableList<EmojiShopModel>
+        this.notifyDataSetChanged()
     }
 }

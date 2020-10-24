@@ -10,6 +10,8 @@ import com.mishok.emojifinder.ui.auth.signin.SignInFragment
 import com.mishok.emojifinder.ui.boxes.LootBoxesFragment
 import com.mishok.emojifinder.ui.categories.CategoryGameFragment
 import com.mishok.emojifinder.ui.constructor.LevelConstructorFragment
+import com.mishok.emojifinder.ui.constructor.choosePhoto.DaggerBottomSheetDialogFragment
+import com.mishok.emojifinder.ui.constructor.choosePhoto.PhotoPickerBottomDialogFragment
 import com.mishok.emojifinder.ui.daily.DailyWinningsFragment
 import com.mishok.emojifinder.ui.game.arcade.ArcadeGameFragment
 import com.mishok.emojifinder.ui.game.campaign.gameAlerts.GameFragment
@@ -98,4 +100,9 @@ abstract class FragmentsBuilderModule {
     @ContributesAndroidInjector
     abstract fun contributeLogOutFragment(): LogOutFragment
 
+    @ContributesAndroidInjector
+    abstract fun contributeBottomPhotos() : PhotoPickerBottomDialogFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeBaseBottomSheet() : DaggerBottomSheetDialogFragment
 }

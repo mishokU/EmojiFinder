@@ -22,13 +22,11 @@ class AllEmojisRecyclerViewAdapter(
     var adapterlist : MutableList<EmojiShopModel?> = mutableListOf()
     private lateinit var fullList : MutableList<EmojiShopModel?>
 
-    init {
-
-    }
 
     fun allEmojisSubmitList(data: MutableList<EmojiShopModel?>) {
         this.fullList = data
         this.adapterlist = data
+        this.notifyDataSetChanged()
     }
 
     fun getCurrentElement() : Int {
@@ -36,28 +34,25 @@ class AllEmojisRecyclerViewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : KeyboardViewHolder {
-        return KeyboardViewHolder(
-            EmojiGameItemBinding.inflate(LayoutInflater.from(parent.context))
-        )
+        return KeyboardViewHolder(EmojiGameItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: KeyboardViewHolder, position: Int){
         val emoji = adapterlist.get(index = position)
         val button = holder.itemView.emoji_game_view
-        if(holder.itemView.emoji_game_view.background ==
-            ContextCompat.getDrawable(
-                button.context,
-                R.drawable.checked_emoji_style
-            )) {
-            holder.setIsRecyclable(false)
-        }
+        holder.setIsRecyclable(true)
+//        if(holder.itemView.emoji_game_view.background ==
+//            ContextCompat.getDrawable(button.context, R.drawable.checked_emoji_style
+//            )) {
+//            holder.setIsRecyclable(false)
+//        }
         holder.itemView.setOnClickListener {
-            setChecked(button)
+            //setChecked(button)
             onClickListener.onClick(emoji!!, prevElement)
             prevElement = holder.layoutPosition
         }
         button.setOnClickListener {
-            setChecked(button)
+            //setChecked(button)
             onClickListener.onClick(emoji!!, prevElement)
             prevElement = holder.layoutPosition
         }
@@ -78,9 +73,7 @@ class AllEmojisRecyclerViewAdapter(
         return adapterlist.size
     }
 
-    private fun setChecked(
-        button: EmojiAppCompatButton
-    ) {
+    private fun setChecked(button: EmojiAppCompatButton) {
         button.background = ContextCompat.getDrawable(
             button.context,
             R.drawable.checked_emoji_style
@@ -108,9 +101,7 @@ class AllEmojisRecyclerViewAdapter(
         }
     }
 
-    class KeyboardViewHolder(private val binding: EmojiGameItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
+    class KeyboardViewHolder(private val binding: EmojiGameItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(emojiShop: EmojiShopModel?) {
             binding.emojiGameView.text = emojiShop?.text
             binding.executePendingBindings()

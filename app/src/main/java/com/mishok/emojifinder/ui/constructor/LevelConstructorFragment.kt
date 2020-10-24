@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.children
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
@@ -18,8 +19,10 @@ import com.mishok.emojifinder.core.di.utils.injectViewModel
 import com.mishok.emojifinder.databinding.FragmentLevelConstructorBinding
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.domain.viewModels.ConstructorViewModel
+import com.mishok.emojifinder.domain.viewModels.SharedViewModel
 import com.mishok.emojifinder.ui.base.BaseImageFragment
 import com.mishok.emojifinder.ui.categories.SmallLevelModel
+import com.mishok.emojifinder.ui.constructor.choosePhoto.PhotoPickerBottomDialogFragment
 import com.mishok.emojifinder.ui.constructor.dialogs.ExitLevelDialog
 import com.mishok.emojifinder.ui.constructor.dialogs.ResetLevelDialog
 import com.mishok.emojifinder.ui.constructor.dialogs.SaveLevelDialog
@@ -41,6 +44,9 @@ class LevelConstructorFragment : BaseImageFragment() {
 
     private var isGridActive: Boolean = true
     private var isFilterVisible: Boolean = false
+
+    private val model: SharedViewModel by activityViewModels()
+
 
     private lateinit var level: SmallLevelModel
 
@@ -85,7 +91,7 @@ class LevelConstructorFragment : BaseImageFragment() {
                     viewModel.hasTitleComplete()
                 } else {
                     viewModel.sentLevel(
-                        levelAdapter.currentList,
+                        levelAdapter.getItems(),
                         SentLevelDialog.getSmallLevelModel(),
                         SentLevelDialog.getImage()
                     )
@@ -111,7 +117,7 @@ class LevelConstructorFragment : BaseImageFragment() {
     private fun fetchLevel(level: SmallLevelModel) {
         viewModel.levelTitle = level.title
         viewModel.emojis.observe(viewLifecycleOwner, Observer {
-            levelAdapter.submitList(it)
+            levelAdapter.setData(it)
             levelAdapter.setOrder()
         })
     }
@@ -122,17 +128,23 @@ class LevelConstructorFragment : BaseImageFragment() {
             ResetLevelDialog.dialogView.dismiss()
         }
 
-        //TODO: Rewrite to show images from the phone in bottom navigation sheet
         SentLevelDialog.getLevelPicture().setOnClickListener {
-            pickImageFromGallery(SENT_CODE)
+            val photoPicker = PhotoPickerBottomDialogFragment()
+            activity?.supportFragmentManager?.let {
+                    it1 -> photoPicker.show(it1,"photos")
+            }
         }
+
+        model.photo.observe(viewLifecycleOwner, Observer {
+            SentLevelDialog.setImage(it?.uri)
+        })
 
         SaveLevelDialog.getSaveLevelBtn().setOnClickListener {
             if (SaveLevelDialog.isNotEmpty()) {
                 if (SaveLevelDialog.getSmallLevelModel() != null) {
                     levelAdapter.setLevelTitleToEmojis(SaveLevelDialog.getNameLabel().text.toString())
                     viewModel.saveLevel(
-                        levelAdapter.currentList,
+                        levelAdapter.getItems(),
                         SaveLevelDialog.getSmallLevelModel()!!
                     )
                     SaveLevelDialog.dialogView.dismiss()
@@ -171,7 +183,7 @@ class LevelConstructorFragment : BaseImageFragment() {
         }
 
         binding.toCheckedEmoji.setOnClickListener {
-            binding.allEmojisConstructor.smoothScrollToPosition(allEmojisAdapter.getCurrentElement())
+            //binding.allEmojisConstructor.smoothScrollToPosition(allEmojisAdapter.getCurrentElement())
         }
 
         binding.applyFilters.setOnClickListener {
@@ -242,7 +254,7 @@ class LevelConstructorFragment : BaseImageFragment() {
     private fun handleHomeButton() {
         SaveLevelDialog.getSmallLevelModel()?.let {
             viewModel.hasDifferences(
-                levelAdapter.currentList,
+                levelAdapter.getItems(),
                 it
             )
         }
@@ -306,18 +318,18 @@ class LevelConstructorFragment : BaseImageFragment() {
     private fun initAllEmojisAdapter() {
         allEmojisAdapter =
             AllEmojisRecyclerViewAdapter(AllEmojisRecyclerViewAdapter.OnEmojiClickListener { emojiShopModel: EmojiShopModel?, id: Int ->
-                allEmojisAdapter.resetBackground(
-                    binding.allEmojisConstructor.findViewHolderForAdapterPosition(
-                        id
-                    )
-                )
+//                allEmojisAdapter.resetBackground(
+//                    binding.allEmojisConstructor.findViewHolderForAdapterPosition(
+//                        id
+//                    )
+//                )
                 levelAdapter.setActiveElement(emojiShopModel)
             }, binding.levelProgressBar)
         binding.allEmojisConstructor.adapter = allEmojisAdapter
     }
 
     private fun getAllEmojisFromJson() {
-        allEmojisAdapter.allEmojisSubmitList((requireActivity() as MainActivity).randomEmojis as MutableList<EmojiShopModel?>)
+        allEmojisAdapter.allEmojisSubmitList((requireActivity() as MainActivity).randomEmojis.subList(0, 50) as MutableList<EmojiShopModel?>)
         generateGroupChips((requireActivity() as MainActivity).randomEmojis)
     }
 
@@ -326,7 +338,7 @@ class LevelConstructorFragment : BaseImageFragment() {
             it?.let {
                 when (it) {
                     is Result.Success -> {
-                        levelAdapter.submitList(it.data)
+                        levelAdapter.setData(it.data)
                     }
                 }
             }

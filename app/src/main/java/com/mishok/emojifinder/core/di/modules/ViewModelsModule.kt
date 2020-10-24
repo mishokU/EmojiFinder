@@ -74,4 +74,9 @@ abstract class ViewModelsModule {
     @ViewModelKey(DailyViewModel::class)
     abstract fun bindDailyViewModel(viewModel: DailyViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(PhotosViewModel::class)
+    abstract fun bindPhotosViewModel(viewModel : PhotosViewModel) : ViewModel
+
 }

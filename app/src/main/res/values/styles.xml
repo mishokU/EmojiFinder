@@ -15,6 +15,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:statusBarColor">#B301BCEF</item>
         <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button</item>
         <item name="android:windowTranslucentNavigation">true</item>
@@ -117,7 +118,13 @@
         <item name="android:bottomRightRadius">20dp</item>
     </style>
 
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
 
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_round_top_corners</item>
+    </style>
 
 
 </resources>

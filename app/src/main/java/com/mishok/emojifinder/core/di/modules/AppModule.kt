@@ -10,6 +10,7 @@ import com.mishok.emojifinder.core.di.utils.CoroutineScopeMain
 import com.mishok.emojifinder.data.db.local.emoji_json.ShopEmojiService
 import com.mishok.emojifinder.data.db.local.fake.FakeDailyItems
 import com.mishok.emojifinder.data.db.local.fake.LevelConstructorService
+import com.mishok.emojifinder.data.db.local.photos.PhotosDataSource
 import com.mishok.emojifinder.data.db.local.room.dao.LevelMainInfoDao
 import com.mishok.emojifinder.data.db.local.room.database.LevelsDatabase
 import com.mishok.emojifinder.data.db.remote.api.FirebaseLevels
@@ -155,4 +156,7 @@ class AppModule {
     @CoroutineScopeMain
     @Provides
     fun provideCoroutineScopeMain() = CoroutineScope(Dispatchers.Main)
+
+    @Provides
+    fun providePhotosDataSource() : PhotosDataSource = PhotosDataSource()
 }
