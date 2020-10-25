@@ -31,6 +31,7 @@ import com.mishok.emojifinder.ui.utils.closeFilters
 import com.mishok.emojifinder.ui.utils.openFilters
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.emoji_shop_item.view.*
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -318,19 +319,27 @@ class AccountAvatarFragment : DaggerFragment() {
         }
     }
 
+    //TODO: Rewrite logic to buy and add emoji and sell and remove
     private fun changeEmojiBackground(emoji: EmojiShopModel?, your : Boolean) {
-        if(your){
-            val holder = binding
-                .shopRecyclerView
-                .findViewHolderForAdapterPosition(adapter.fullList.indexOf(emoji))
-
-            (holder as EmojisRecyclerViewAdapter.ShopEmojiViewHolder).itemView.emoji_view.backgroundTintList = resources.getColorStateList(R.color.green_color)
-            holder.setIsRecyclable(false)
-        } else {
-            val holder = binding
-                .shopRecyclerView
-                .findViewHolderForAdapterPosition(adapter.tmpList.indexOf(emoji))
-            holder?.itemView?.emoji_view?.backgroundTintList = resources.getColorStateList(R.color.red_color)
+        try {
+            if(your){
+                val holder = binding.shopRecyclerView
+                    .findViewHolderForAdapterPosition(adapter.adapterlist.currentList.indexOf(emoji))
+                Timber.d("buy emoji")
+                (holder as EmojisRecyclerViewAdapter.ShopEmojiViewHolder)
+                    .itemView
+                    .emoji_view
+                    .backgroundTintList = resources.getColorStateList(R.color.green_color)
+                holder.setIsRecyclable(false)
+            } else {
+                val holder = binding
+                    .shopRecyclerView
+                    .findViewHolderForAdapterPosition(adapter.adapterlist.currentList.indexOf(emoji))
+                holder?.itemView?.emoji_view?.backgroundTintList = resources.getColorStateList(R.color.red_color)
+            }
+        } catch (e : Exception){
+            Toast.makeText(requireContext(),getString(R.string.some_error_ocure), Toast.LENGTH_SHORT).show()
+            e.printStackTrace()
         }
     }
 

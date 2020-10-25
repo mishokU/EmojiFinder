@@ -20,7 +20,7 @@ class EmojisRecyclerViewAdapter(
 ) :
     RecyclerView.Adapter<EmojisRecyclerViewAdapter.ShopEmojiViewHolder>() {
 
-    private var adapterlist : AsyncListDiffer<EmojiShopModel>
+    var adapterlist : AsyncListDiffer<EmojiShopModel>
     private var userEmojis : List<EmojiShopModel?> ?= null
     private var avatar : String ?= null
 
