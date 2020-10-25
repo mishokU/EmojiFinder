@@ -25,31 +25,31 @@ class HelpFragment : DaggerFragment() {
 
     private fun initQuestionsButton() {
         binding.howToDeleteAccount.setOnClickListener {
-            navigate(binding.howToDeleteAccount.text.toString(), Help.ACCOUNT)
+            navigate(binding.howToDeleteAccountText.text.toString(), Help.ACCOUNT)
         }
         binding.howToDisableAdds.setOnClickListener {
-            navigate(binding.howToDisableAdds.text.toString(), Help.OTHER)
+            navigate(binding.howToDisableAddsText.text.toString(), Help.OTHER)
         }
         binding.howToPlay.setOnClickListener {
-            navigate(binding.howToPlay.text.toString(), Help.GAME)
+            navigate(binding.howToPlayText.text.toString(), Help.GAME)
         }
 
         binding.forgetPassword.setOnClickListener {
-            navigate(binding.forgetPassword.text.toString(), Help.ACCOUNT)
+            navigate(binding.forgetPasswordText.text.toString(), Help.ACCOUNT)
         }
         binding.badUserName.setOnClickListener {
-            navigate(binding.badUserName.text.toString(), Help.ACCOUNT)
+            navigate(binding.badUserNameText.text.toString(), Help.ACCOUNT)
         }
         binding.statisticDoNotWrite.setOnClickListener {
-            navigate(binding.statisticDoNotWrite.text.toString(), Help.GAME)
+            navigate(binding.statisticDoNotWriteText.text.toString(), Help.GAME)
         }
 
         binding.whatIsEmos.setOnClickListener {
-            navigate(binding.whatIsEmos.text.toString(), Help.OTHER)
+            navigate(binding.whatIsEmosText.text.toString(), Help.OTHER)
         }
 
         binding.howToCombine.setOnClickListener {
-            navigate(binding.howToCombine.text.toString(), Help.OTHER)
+            navigate(binding.howToCombineText.text.toString(), Help.OTHER)
         }
     }
 

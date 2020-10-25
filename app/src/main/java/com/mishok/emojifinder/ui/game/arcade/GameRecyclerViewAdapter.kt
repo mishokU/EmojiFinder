@@ -25,12 +25,10 @@ class GameRecyclerViewAdapter(private val onClickListener: OnEmojiClickListener)
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val emoji = emojis[position]
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(emoji!!)
-            holder.itemView.emojiStars.playAnimation()
+            onClickListener.onClick(emoji!!, position)
         }
         holder.itemView.emoji_game_view.setOnClickListener {
-            onClickListener.onClick(emoji!!)
-            holder.itemView.emojiStars.playAnimation()
+            onClickListener.onClick(emoji!!, position)
         }
         holder.bind(emoji)
     }
@@ -42,8 +40,8 @@ class GameRecyclerViewAdapter(private val onClickListener: OnEmojiClickListener)
         }
     }
 
-    class OnEmojiClickListener(val clickListener: (emojiShop: EmojiShopModel?) -> Unit) {
-        fun onClick(emojiShop: EmojiShopModel) = clickListener(emojiShop)
+    class OnEmojiClickListener(val clickListener: (emojiShop: EmojiShopModel?, position : Int) -> Unit) {
+        fun onClick(emojiShop: EmojiShopModel,position : Int) = clickListener(emojiShop, position)
     }
 
     override fun getItemCount(): Int {

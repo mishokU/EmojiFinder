@@ -23,8 +23,8 @@ class AllEmojisRecyclerViewAdapter(
     private lateinit var fullList : MutableList<EmojiShopModel?>
 
 
-    fun allEmojisSubmitList(data: MutableList<EmojiShopModel?>) {
-        this.fullList = data
+    fun allEmojisSubmitList(data: List<EmojiShopModel?>) {
+        this.fullList = data as MutableList<EmojiShopModel?>
         this.adapterlist = data
         this.notifyDataSetChanged()
     }
@@ -41,18 +41,18 @@ class AllEmojisRecyclerViewAdapter(
         val emoji = adapterlist.get(index = position)
         val button = holder.itemView.emoji_game_view
         holder.setIsRecyclable(true)
-//        if(holder.itemView.emoji_game_view.background ==
-//            ContextCompat.getDrawable(button.context, R.drawable.checked_emoji_style
-//            )) {
-//            holder.setIsRecyclable(false)
-//        }
+        if(holder.itemView.emoji_game_view.background ==
+            ContextCompat.getDrawable(button.context, R.drawable.checked_emoji_style
+            )) {
+            holder.setIsRecyclable(false)
+        }
         holder.itemView.setOnClickListener {
-            //setChecked(button)
+            setChecked(button)
             onClickListener.onClick(emoji!!, prevElement)
             prevElement = holder.layoutPosition
         }
         button.setOnClickListener {
-            //setChecked(button)
+            setChecked(button)
             onClickListener.onClick(emoji!!, prevElement)
             prevElement = holder.layoutPosition
         }
@@ -88,6 +88,7 @@ class AllEmojisRecyclerViewAdapter(
         val list : MutableList<EmojiShopModel?> = mutableListOf()
         if(categories.size != 0){
             progress.visibility = View.VISIBLE
+            progress.playAnimation()
             for(category in categories) {
                 for(emoji in fullList){
                     if(emoji?.group == category){
@@ -95,6 +96,8 @@ class AllEmojisRecyclerViewAdapter(
                     }
                 }
             }
+            progress.visibility = View.GONE
+            progress.cancelAnimation()
             adapterlist = list
         } else {
             adapterlist = fullList

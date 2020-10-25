@@ -101,11 +101,6 @@ class MainMenuFragment : DaggerFragment() {
         if (daily.isNextDay()) {
             Handler(Looper.getMainLooper()).postDelayed({
                 try {
-//                    this.findNavController().navigate(
-//                        MainMenuFragmentDirections.actionMainMenuFragmentToDailyWinningsFragment(
-//                            DailyUI(daily.getDay())
-//                        )
-//                    )
                     Companion.day = daily.getDay()
                     this.findNavController().navigate(R.id.dailyWinningsFragment)
                 } catch (e : Exception){
@@ -149,13 +144,6 @@ class MainMenuFragment : DaggerFragment() {
         binding.shopBtn.setOnClickListener {
             Toast.makeText(requireContext(),getString(R.string.next_version), Toast.LENGTH_SHORT).show()
             //this.findNavController().navigate(R.id.shopFragment)
-        }
-        binding.profileMainBtn.setOnClickListener {
-            this.findNavController().navigate(R.id.accountFragment)
-        }
-
-        binding.profileEmoji.setOnClickListener {
-            this.findNavController().navigate(R.id.accountFragment)
         }
     }
 }

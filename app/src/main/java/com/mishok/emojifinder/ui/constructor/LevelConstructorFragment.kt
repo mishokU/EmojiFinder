@@ -183,7 +183,7 @@ class LevelConstructorFragment : BaseImageFragment() {
         }
 
         binding.toCheckedEmoji.setOnClickListener {
-            //binding.allEmojisConstructor.smoothScrollToPosition(allEmojisAdapter.getCurrentElement())
+            binding.allEmojisConstructor.smoothScrollToPosition(allEmojisAdapter.getCurrentElement())
         }
 
         binding.applyFilters.setOnClickListener {
@@ -318,18 +318,18 @@ class LevelConstructorFragment : BaseImageFragment() {
     private fun initAllEmojisAdapter() {
         allEmojisAdapter =
             AllEmojisRecyclerViewAdapter(AllEmojisRecyclerViewAdapter.OnEmojiClickListener { emojiShopModel: EmojiShopModel?, id: Int ->
-//                allEmojisAdapter.resetBackground(
-//                    binding.allEmojisConstructor.findViewHolderForAdapterPosition(
-//                        id
-//                    )
-//                )
+                allEmojisAdapter.resetBackground(
+                    binding.allEmojisConstructor.findViewHolderForAdapterPosition(
+                        id
+                    )
+                )
                 levelAdapter.setActiveElement(emojiShopModel)
             }, binding.levelProgressBar)
         binding.allEmojisConstructor.adapter = allEmojisAdapter
     }
 
     private fun getAllEmojisFromJson() {
-        allEmojisAdapter.allEmojisSubmitList((requireActivity() as MainActivity).randomEmojis.subList(0, 50) as MutableList<EmojiShopModel?>)
+        allEmojisAdapter.allEmojisSubmitList((requireActivity() as MainActivity).randomEmojis)
         generateGroupChips((requireActivity() as MainActivity).randomEmojis)
     }
 

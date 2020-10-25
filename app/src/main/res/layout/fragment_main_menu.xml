@@ -42,14 +42,19 @@
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/emoji_finder_title" />
 
-            <RelativeLayout
+            <androidx.cardview.widget.CardView
                 android:id="@+id/profile_main_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:layout_weight="0"
-                android:background="@drawable/main_menu_emoji_style">
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/buttonBlueColor"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="5dp">
 
                 <androidx.emoji.widget.EmojiAppCompatButton
                     android:id="@+id/profile_emoji"
@@ -57,8 +62,9 @@
                     android:layout_height="70dp"
                     android:layout_centerInParent="true"
                     android:layout_margin="5dp"
-                    android:foreground="?selectableItemBackgroundBorderless"
                     android:background="@null"
+                    android:clickable="false"
+                    android:focusable="false"
                     android:padding="5dp"
                     android:textAlignment="center"
                     android:textSize="40sp" />
@@ -68,11 +74,12 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_centerInParent="true"
+                    android:layout_gravity="center"
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/loading_avatar"/>
+                    app:lottie_rawRes="@raw/loading_avatar" />
 
-            </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
@@ -100,8 +107,8 @@
                 android:layout_marginTop="60dp"
                 android:layout_marginEnd="40dp"
                 android:fontFamily="@font/ru_eng_sriracha"
-                android:textAllCaps="false"
                 android:text="@string/arcade_game"
+                android:textAllCaps="false"
                 android:textSize="20sp"
                 app:backgroundTint="@color/buttonBlueColor" />
 
@@ -110,11 +117,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="40dp"
-                android:fontFamily="@font/ru_eng_sriracha"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:textAllCaps="false"
+                android:fontFamily="@font/ru_eng_sriracha"
                 android:text="@string/campaign"
+                android:textAllCaps="false"
                 android:textSize="20sp"
                 app:backgroundTint="@color/buttonBlueColor" />
 
@@ -127,8 +134,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
                 android:fontFamily="@font/ru_eng_sriracha"
-                android:textAllCaps="false"
                 android:text="@string/emojis"
+                android:textAllCaps="false"
                 android:textSize="20sp"
                 app:backgroundTint="@color/buttonBlueColor" />
 
@@ -142,8 +149,8 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="40dp"
                 android:fontFamily="@font/ru_eng_sriracha"
-                android:textAllCaps="false"
                 android:text="@string/shop"
+                android:textAllCaps="false"
                 android:textSize="20sp"
                 app:backgroundTint="@color/buttonBlueColor" />
 

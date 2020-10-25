@@ -312,6 +312,7 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_margin="10dp"
                                 android:scaleType="centerCrop"
+                                android:background="@drawable/ripple_color_settings"
                                 app:srcCompat="@drawable/settings_btn"
                                 app:tint="@color/buttonBlueColor" />
 

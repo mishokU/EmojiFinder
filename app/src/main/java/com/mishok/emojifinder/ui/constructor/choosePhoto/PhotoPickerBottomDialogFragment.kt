@@ -96,6 +96,6 @@ class PhotoPickerBottomDialogFragment() : DaggerBottomSheetDialogFragment() {
     }
 
     private fun makeRequest() {
-        ActivityCompat.requestPermissions(this.requireActivity(), arrayOf(READ_EXTERNAL_STORAGE), 1000)
+        ActivityCompat.requestPermissions(this.requireActivity(), arrayOf(READ_EXTERNAL_STORAGE), REQUEST_CODE_READ_EXTERNAL)
     }
 }

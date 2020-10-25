@@ -3,15 +3,19 @@ package com.mishok.emojifinder.ui.game.arcade
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
+import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.core.animation.addListener
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
+import androidx.emoji.widget.EmojiAppCompatButton
 import androidx.emoji.widget.EmojiAppCompatEditText
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +36,7 @@ import com.mishok.emojifinder.ui.game.campaign.gameAlerts.ExitGameDialog
 import com.mishok.emojifinder.ui.main.MainActivity
 import com.mishok.emojifinder.ui.shop.EmojiShopModel
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.arcade_game_layout.*
 import javax.inject.Inject
 
 class ArcadeGameFragment : DaggerFragment() {
@@ -269,19 +274,60 @@ class ArcadeGameFragment : DaggerFragment() {
     }
 
     private fun initAdapter() {
-        userEmojisAdapter = GameRecyclerViewAdapter(GameRecyclerViewAdapter.OnEmojiClickListener{
-            handleClickedEmoji(it)
+        userEmojisAdapter = GameRecyclerViewAdapter(GameRecyclerViewAdapter.OnEmojiClickListener{ emojiShopModel: EmojiShopModel?, position: Int ->
+            handleClickedEmoji(emojiShopModel, position)
         })
         binding.gameEmojiFieldRv.adapter = userEmojisAdapter
     }
 
-    private fun handleClickedEmoji(it: EmojiShopModel?) {
+    private fun animateEmoji(emoji: EmojiShopModel?, position: Int, bottomEmoji: EmojiAppCompatEditText) {
+        val newEmojiView = createEmoji(emoji, position)
+        val rootLocation = IntArray(2)
+        val emojiRect = Rect()
+        bottomEmoji.getGlobalVisibleRect(emojiRect)
+        bottomEmoji.getLocationInWindow(rootLocation)
+        val (x,y) = rootLocation
+        newEmojiView.animate()
+            .translationX(x.toFloat() - 25)
+            .translationY(y.toFloat())
+            .alpha(0f)
+            .setDuration(500)
+            .withEndAction {
+                activateStars()
+            }
+            .start()
+    }
+
+    private fun activateStars() {
+
+    }
+
+    private fun createEmoji(emoji: EmojiShopModel?, position: Int): EmojiAppCompatButton {
+        val emojiNew = EmojiAppCompatButton(requireContext())
+        val emojiLocation = IntArray(2)
+        binding.gameEmojiFieldRv[position].getLocationOnScreen(emojiLocation)
+        val (x, y) = emojiLocation
+        emojiNew.text = emoji?.text
+        emojiNew.textSize = 26f
+        emojiNew.x = x.toFloat() - 25
+        emojiNew.y = y.toFloat()
+        emojiNew.background = null
+        emojiNew.layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        )
+        rootArcadeGame.addView(emojiNew)
+        return emojiNew
+    }
+
+    private fun handleClickedEmoji(it: EmojiShopModel?, position: Int) {
         for(emoji in emojis){
             if(it?.text == emoji.text.toString() && emoji.alpha != 1.0f){
                 emoji.alpha = 1.0f
                 animation.duration += 2
                 increaseScore()
                 playSound(MusicType.CORRECT)
+                animateEmoji(it, position, emoji)
                 findEmojis++
                 break
             }

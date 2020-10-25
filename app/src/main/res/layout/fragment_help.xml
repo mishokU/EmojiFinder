@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,22 +30,25 @@
                 android:textColor="@color/textOrangeColor"
                 android:textSize="46sp" />
 
-            <ScrollView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="40dp"
-                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:padding="5dp"
+                app:cardCornerRadius="20dp"
+                app:strokeColor="@color/buttonBlueColor"
+                app:strokeWidth="1dp">
 
-                <com.google.android.material.card.MaterialCardView
+                <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:padding="5dp"
-                    app:cardCornerRadius="20dp"
-                    app:strokeColor="@color/buttonBlueColor"
-                    app:strokeWidth="1dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -70,45 +72,88 @@
                             android:layout_marginEnd="10dp"
                             android:orientation="vertical">
 
-                            <androidx.emoji.widget.EmojiAppCompatButton
+                            <androidx.cardview.widget.CardView
                                 android:id="@+id/how_to_delete_account"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:fontFamily="@font/ru_eng_sriracha"
-                                android:text="@string/how_to_delete_account"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="@color/first_color"
-                                android:textSize="18sp" />
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="0dp">
 
-                            <androidx.emoji.widget.EmojiAppCompatButton
+                                <androidx.emoji.widget.EmojiAppCompatButton
+                                    android:id="@+id/how_to_delete_account_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:paddingStart="5dp"
+                                    android:paddingEnd="5dp"
+                                    android:text="@string/how_to_delete_account"
+                                    android:textAlignment="textStart"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/first_color"
+                                    android:textSize="18sp" />
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
                                 android:id="@+id/forget_password"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
-                                android:background="@null"
-                                android:fontFamily="@font/ru_eng_sriracha"
-                                android:text="@string/help_forgot_password"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="@color/first_color"
-                                android:textSize="18sp"
-                                android:textStyle="normal" />
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="0dp">
 
-                            <androidx.emoji.widget.EmojiAppCompatButton
+                                <androidx.emoji.widget.EmojiAppCompatButton
+                                    android:id="@+id/forget_password_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="15dp"
+                                    android:background="@color/white"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:paddingStart="5dp"
+                                    android:paddingEnd="5dp"
+                                    android:text="@string/help_forgot_password"
+                                    android:textAlignment="textStart"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/first_color"
+                                    android:textSize="18sp"
+                                    android:textStyle="normal" />
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
                                 android:id="@+id/bad_user_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
-                                android:background="@null"
-                                android:fontFamily="@font/ru_eng_sriracha"
-                                android:text="@string/bad_nick_name"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="@color/first_color"
-                                android:textSize="18sp"
-                                android:textStyle="normal" />
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="0dp">
+
+                                <androidx.emoji.widget.EmojiAppCompatButton
+                                    android:id="@+id/bad_user_name_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="15dp"
+                                    android:background="@color/white"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:paddingStart="5dp"
+                                    android:paddingEnd="5dp"
+                                    android:text="@string/bad_nick_name"
+                                    android:textAlignment="textStart"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/first_color"
+                                    android:textSize="18sp"
+                                    android:textStyle="normal" />
+
+                            </androidx.cardview.widget.CardView>
+
 
                         </LinearLayout>
 
@@ -129,32 +174,63 @@
                             android:layout_marginEnd="10dp"
                             android:orientation="vertical">
 
-                            <androidx.emoji.widget.EmojiAppCompatButton
+                            <androidx.cardview.widget.CardView
                                 android:id="@+id/how_to_play"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:fontFamily="@font/ru_eng_sriracha"
-                                android:text="@string/how_to_play"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="@color/first_color"
-                                android:textSize="18sp"
-                                android:textStyle="normal" />
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="0dp">
 
-                            <androidx.emoji.widget.EmojiAppCompatButton
+                                <androidx.emoji.widget.EmojiAppCompatButton
+                                    android:id="@+id/how_to_play_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:paddingStart="5dp"
+                                    android:paddingEnd="5dp"
+                                    android:text="@string/how_to_play"
+                                    android:textAlignment="textStart"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/first_color"
+                                    android:textSize="18sp"
+                                    android:textStyle="normal" />
+
+
+                            </androidx.cardview.widget.CardView>
+
+
+                            <androidx.cardview.widget.CardView
                                 android:id="@+id/statistic_do_not_write"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
-                                android:background="@null"
-                                android:fontFamily="@font/ru_eng_sriracha"
-                                android:text="@string/i_passed_the_level"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="@color/first_color"
-                                android:textSize="18sp"
-                                android:textStyle="normal" />
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="0dp">
+
+                                <androidx.emoji.widget.EmojiAppCompatButton
+                                    android:id="@+id/statistic_do_not_write_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="15dp"
+                                    android:background="@color/white"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:paddingStart="5dp"
+                                    android:paddingEnd="5dp"
+                                    android:text="@string/i_passed_the_level"
+                                    android:textAlignment="textStart"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/first_color"
+                                    android:textSize="18sp"
+                                    android:textStyle="normal" />
+
+                            </androidx.cardview.widget.CardView>
+
 
                         </LinearLayout>
 
@@ -176,44 +252,86 @@
                             android:layout_marginEnd="10dp"
                             android:orientation="vertical">
 
-                            <androidx.emoji.widget.EmojiAppCompatButton
+                            <androidx.cardview.widget.CardView
                                 android:id="@+id/how_to_disable_adds"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:fontFamily="@font/ru_eng_sriracha"
-                                android:text="@string/how_to_disable_adds"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="@color/first_color"
-                                android:textSize="18sp"
-                                android:textStyle="normal" />
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="0dp">
 
-                            <androidx.emoji.widget.EmojiAppCompatButton
+                                <androidx.emoji.widget.EmojiAppCompatButton
+                                    android:id="@+id/how_to_disable_adds_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:paddingStart="5dp"
+                                    android:paddingEnd="5dp"
+                                    android:text="@string/how_to_disable_adds"
+                                    android:textAlignment="textStart"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/first_color"
+                                    android:textSize="18sp"
+                                    android:textStyle="normal" />
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
                                 android:id="@+id/what_is_emos"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:fontFamily="@font/ru_eng_sriracha"
-                                android:text="@string/what_is_emos"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="@color/first_color"
-                                android:textSize="18sp"
-                                android:textStyle="normal" />
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="0dp">
 
-                            <androidx.emoji.widget.EmojiAppCompatButton
+                                <androidx.emoji.widget.EmojiAppCompatButton
+                                    android:id="@+id/what_is_emos_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:paddingStart="5dp"
+                                    android:paddingEnd="5dp"
+                                    android:text="@string/what_is_emos"
+                                    android:textAlignment="textStart"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/first_color"
+                                    android:textSize="18sp"
+                                    android:textStyle="normal" />
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
                                 android:id="@+id/how_to_combine"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:fontFamily="@font/ru_eng_sriracha"
-                                android:text="@string/how_to_combine"
-                                android:textAlignment="textStart"
-                                android:textAllCaps="false"
-                                android:textColor="@color/first_color"
-                                android:textSize="18sp"
-                                android:textStyle="normal" />
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="0dp">
+
+                                <androidx.emoji.widget.EmojiAppCompatButton
+                                    android:id="@+id/how_to_combine_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/ru_eng_sriracha"
+                                    android:paddingStart="5dp"
+                                    android:paddingEnd="5dp"
+                                    android:text="@string/how_to_combine"
+                                    android:textAlignment="textStart"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/first_color"
+                                    android:textSize="18sp"
+                                    android:textStyle="normal" />
+
+                            </androidx.cardview.widget.CardView>
 
                         </LinearLayout>
 
@@ -230,9 +348,9 @@
 
                     </LinearLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+                </ScrollView>
 
-            </ScrollView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 

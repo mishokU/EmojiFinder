@@ -9,10 +9,10 @@ import androidx.lifecycle.Observer
 import com.mishok.emojifinder.core.di.utils.ViewModelFactory
 import com.mishok.emojifinder.core.di.utils.injectViewModel
 import com.mishok.emojifinder.databinding.FragmentRatingBinding
+import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.domain.viewModels.RatingViewModel
 import dagger.android.support.DaggerFragment
 import timber.log.Timber
-import com.mishok.emojifinder.domain.result.Result
 import javax.inject.Inject
 
 
@@ -34,9 +34,8 @@ class RatingFragment : DaggerFragment() {
 
         initUsers()
         fetchUsers()
-        initInvite();
+        initInvite()
 
-        // Inflate the layout for this fragment
         return binding.root
     }
 
@@ -44,7 +43,7 @@ class RatingFragment : DaggerFragment() {
         binding.inviteBtn.setOnClickListener {
             val sendIntent = Intent()
             sendIntent.action = Intent.ACTION_SEND
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.mishok.emojifinder")
             sendIntent.type = "text/plain"
 
             val shareIntent = Intent.createChooser(sendIntent, null)

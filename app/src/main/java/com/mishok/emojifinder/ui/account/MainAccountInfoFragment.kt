@@ -63,11 +63,11 @@ class MainAccountInfoFragment : DaggerFragment() {
                 profile
             ))
         }
-        binding.profileEmojiAvatarMain.setOnClickListener {
-            this.findNavController().navigate(MainAccountInfoFragmentDirections.actionMainAccountInfoFragmentToAccountAvatarFragment(
-                profile
-            ))
-        }
+//        binding.profileEmojiAvatarMain.setOnClickListener {
+//            this.findNavController().navigate(MainAccountInfoFragmentDirections.actionMainAccountInfoFragmentToAccountAvatarFragment(
+//                profile
+//            ))
+//        }
     }
 
     private fun setCheckEmailAndPasswordButtons() {

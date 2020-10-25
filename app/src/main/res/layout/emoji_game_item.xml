@@ -28,15 +28,6 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/emojiStars"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:layout_gravity="center"
-                app:lottie_rawRes="@raw/stars_emoji"
-                app:lottie_repeatCount="1" />
-
         </androidx.cardview.widget.CardView>
 
     </FrameLayout>
