@@ -18,7 +18,6 @@ import javax.inject.Inject
 
 class RatingFragment : DaggerFragment() {
 
-    private val TAG = "Rating Fragment";
     private lateinit var binding: FragmentRatingBinding
     private lateinit var adapter: RatingRecyclerViewAdapter
 
@@ -72,7 +71,7 @@ class RatingFragment : DaggerFragment() {
     }
 
     private fun initUsers() {
-        adapter = RatingRecyclerViewAdapter()
+        adapter = RatingRecyclerViewAdapter(requireContext())
         binding.ratingRv.adapter = adapter
     }
 }

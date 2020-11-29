@@ -1,6 +1,7 @@
 package com.mishok.emojifinder.ui.auth.login
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -100,6 +101,13 @@ class LogInFragment : DaggerFragment() {
 
     private val loginTextWatcher = object : CustomTextWatcher() {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            binding.loginLoginBtn.isEnabled = (
+                    binding.emailLogIn.text.toString().isNotEmpty() &&
+                            binding.passwordLogIn.text.toString().isNotEmpty())
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            super.afterTextChanged(s)
             binding.loginLoginBtn.isEnabled = (
                     binding.emailLogIn.text.toString().isNotEmpty() &&
                             binding.passwordLogIn.text.toString().isNotEmpty())

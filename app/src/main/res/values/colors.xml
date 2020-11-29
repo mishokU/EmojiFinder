@@ -39,4 +39,18 @@
     <color name="colorStripeEnd">#AB80F3</color>
     <color name="white">#ffffff</color>
 
+    <!-- rating colors -->
+
+    <color name="startGoldColor">#eeb609</color>
+    <color name="middleGoldColor">#fcc201</color>
+    <color name="endGoldColor">#dba514</color>
+
+    <color name="startSilverColor">#b3b6b5</color>
+    <color name="centerSilverColor">#a1a2a3</color>
+    <color name="endSilverColor">#bec0c2</color>
+
+    <color name="startBronzeColor">#895e1a</color>
+    <color name="centerBronzeColor">#804a00</color>
+    <color name="endBronzeColor">#9c7a3c</color>
+    
 </resources>

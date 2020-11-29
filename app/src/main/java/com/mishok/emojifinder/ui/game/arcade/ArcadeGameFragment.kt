@@ -281,43 +281,48 @@ class ArcadeGameFragment : DaggerFragment() {
     }
 
     private fun animateEmoji(emoji: EmojiShopModel?, position: Int, bottomEmoji: EmojiAppCompatEditText) {
-        val newEmojiView = createEmoji(emoji, position)
+        val newEmojiView: EmojiAppCompatButton? = createEmoji(emoji, position)
         val rootLocation = IntArray(2)
         val emojiRect = Rect()
         bottomEmoji.getGlobalVisibleRect(emojiRect)
         bottomEmoji.getLocationInWindow(rootLocation)
         val (x,y) = rootLocation
-        newEmojiView.animate()
-            .translationX(x.toFloat() - 25)
-            .translationY(y.toFloat())
-            .alpha(0f)
-            .setDuration(500)
-            .withEndAction {
+        newEmojiView?.animate()
+            ?.translationX(x.toFloat() - 25)
+            ?.translationY(y.toFloat())
+            ?.alpha(0f)
+            ?.setDuration(500)
+            ?.withEndAction {
                 activateStars()
             }
-            .start()
+            ?.start()
     }
 
     private fun activateStars() {
 
     }
 
-    private fun createEmoji(emoji: EmojiShopModel?, position: Int): EmojiAppCompatButton {
-        val emojiNew = EmojiAppCompatButton(requireContext())
-        val emojiLocation = IntArray(2)
-        binding.gameEmojiFieldRv[position].getLocationOnScreen(emojiLocation)
-        val (x, y) = emojiLocation
-        emojiNew.text = emoji?.text
-        emojiNew.textSize = 26f
-        emojiNew.x = x.toFloat() - 25
-        emojiNew.y = y.toFloat()
-        emojiNew.background = null
-        emojiNew.layoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.WRAP_CONTENT,
-            FrameLayout.LayoutParams.WRAP_CONTENT
-        )
-        rootArcadeGame.addView(emojiNew)
-        return emojiNew
+    private fun createEmoji(emoji: EmojiShopModel?, position: Int): EmojiAppCompatButton? {
+        try {
+            val emojiNew = EmojiAppCompatButton(requireContext())
+            val emojiLocation = IntArray(2)
+            binding.gameEmojiFieldRv[position].getLocationOnScreen(emojiLocation)
+            val (x, y) = emojiLocation
+            emojiNew.text = emoji?.text
+            emojiNew.textSize = 26f
+            emojiNew.x = x.toFloat() - 25
+            emojiNew.y = y.toFloat()
+            emojiNew.background = null
+            emojiNew.layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+            )
+            rootArcadeGame.addView(emojiNew)
+            return emojiNew
+        } catch (e : Exception){
+            e.printStackTrace()
+            return null
+        }
     }
 
     private fun handleClickedEmoji(it: EmojiShopModel?, position: Int) {
