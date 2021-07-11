@@ -20,15 +20,8 @@ object UpdateAvatarDialog {
 
     private fun createDialog() {
         dialogView = BaseDialog(fragment.requireContext(), R.style.CustomDialog)
+        dialogView.setCancelable(true)
         dialogView.setContentView(R.layout.change_avatar_dialog)
-        close()
-    }
-
-    private fun close(){
-//        close = dialogView.findViewById(R.id.cancel_delete)
-//        close.setOnClickListener {
-//            dialogView.dismiss()
-//        }
     }
 
     fun getUpdateAvatarBtn() : MaterialButton {

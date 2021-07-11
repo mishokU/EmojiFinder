@@ -1,5 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.mishok.emojifinder.data.db.remote.service
 
+import android.annotation.SuppressLint
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,21 +21,13 @@ open class FirebaseInit  {
         }
     }
 
-//    suspend fun downloadLanguage() {
-//        mNaturalLanguage.downloadModelIfNeeded()
-//            .addOnSuccessListener {
-//                println("success")
-//            }.addOnFailureListener {
-//                println(it.message)
-//        }.await()
-//    }
-
     companion object {
         val mAuth : FirebaseAuth = FirebaseAuth.getInstance()
         var mUser : FirebaseUser? = mAuth.currentUser
+
+        @SuppressLint("StaticFieldLeak")
         val mFireStore = FirebaseFirestore.getInstance()
         val mFireStorage = FirebaseStorage.getInstance().reference
-        //val mNaturalLanguage = FirebaseNaturalLanguage.getInstance().getTranslator(options)
     }
 
 }

@@ -41,7 +41,9 @@ class MainApplication : DaggerApplication() {
         val configuration = RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
 
         MobileAds.setRequestConfiguration(configuration)
-        MobileAds.initialize(this) {}
+        MobileAds.initialize(this) {
+
+        }
 
         super.onCreate()
     }

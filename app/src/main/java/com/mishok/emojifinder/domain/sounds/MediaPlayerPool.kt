@@ -72,6 +72,7 @@ class MediaPlayerPool @Inject constructor(application: Application) {
             MusicType.WIN -> playCorrect(winPlayer)
             MusicType.CORRECT -> playCorrect(correctClick)
             MusicType.GAME -> playCorrect(gamePlayer)
+            MusicType.MONEY -> TODO()
         }
     }
 
@@ -94,6 +95,7 @@ class MediaPlayerPool @Inject constructor(application: Application) {
             MusicType.WIN -> stopMusic(winPlayer)
             MusicType.CORRECT -> stopMusic(correctClick)
             MusicType.GAME -> stopMusic(gamePlayer)
+            MusicType.MONEY -> TODO()
         }
     }
 

@@ -1,31 +1,32 @@
 package com.mishok.emojifinder.ui.shop
 
 import android.app.Activity
-import android.app.AlertDialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mishok.emojifinder.R
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
-import com.mishok.emojifinder.domain.result.Result
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.reward.RewardItem
 import com.google.android.gms.ads.reward.RewardedVideoAd
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.wallet.*
+import com.mishok.emojifinder.R
 import com.mishok.emojifinder.core.di.utils.injectViewModel
 import com.mishok.emojifinder.data.db.remote.models.account.AccountValuesModel
 import com.mishok.emojifinder.databinding.FragmentShopBinding
 import com.mishok.emojifinder.domain.adds.MyRewardedVideoListener
 import com.mishok.emojifinder.domain.adds.REWARDED_VIDEO_ID
 import com.mishok.emojifinder.domain.payment.*
+import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.domain.viewModels.AccountViewModel
 import com.mishok.emojifinder.domain.wallet.Constants
 import com.mishok.emojifinder.domain.wallet.util.PaymentsUtil
@@ -36,7 +37,6 @@ import org.json.JSONObject
 import java.util.*
 import java.util.Optional.empty
 import javax.inject.Inject
-import kotlin.math.roundToInt
 
 
 class ShopFragment : DaggerFragment() {
@@ -55,7 +55,6 @@ class ShopFragment : DaggerFragment() {
 
     private var paymentsClient: PaymentsClient? = null
 
-
     private val selectedGarment: JSONObject? = null
     private val garmentList: JSONArray? = null
 
@@ -69,7 +68,7 @@ class ShopFragment : DaggerFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentShopBinding.inflate(inflater)
 
         viewModel = injectViewModel(viewModelFactory)
@@ -192,31 +191,28 @@ class ShopFragment : DaggerFragment() {
     fun requestPayment(price : String) {
 
         // Disables the button to prevent multiple clicks.
-        //disableButtons()
+        disableButtons()
 
         // The price provided to the API should include taxes and shipping.
         // This price is not displayed to the user.
         try {
             val garmentPrice = price.toDouble()
-            val garmentPriceCents = (garmentPrice * PaymentsUtil.CENTS_IN_A_UNIT.toLong()).roundToInt()
-            val priceCents: Long = garmentPriceCents.toLong()
+            //val garmentPriceCents = (garmentPrice * PaymentsUtil.CENTS_IN_A_UNIT.toLong()).roundToInt()
+            val priceCents: Long = 1L
 
             val paymentDataRequestJson = PaymentsUtil.getPaymentDataRequest(priceCents)
             if (!paymentDataRequestJson.isPresent) {
                 return
             }
-            val request =
-                PaymentDataRequest.fromJson(paymentDataRequestJson.get().toString())
+            val request = PaymentDataRequest.fromJson(paymentDataRequestJson.get().toString())
 
             // Since loadPaymentData may show the UI asking the user to select a payment method, we use
             // AutoResolveHelper to wait for the user interacting with it. Once completed,
             // onActivityResult will be called with the result.
-            if (request != null) {
-                AutoResolveHelper.resolveTask(
-                    paymentsClient!!.loadPaymentData(request),
-                    this.requireActivity(), LOAD_PAYMENT_DATA_REQUEST_CODE
-                )
-            }
+            AutoResolveHelper.resolveTask(
+                paymentsClient?.loadPaymentData(request),
+                this.requireActivity(), LOAD_PAYMENT_DATA_REQUEST_CODE
+            )
         } catch (e: JSONException) {
             throw RuntimeException("The price cannot be deserialized from the JSON object.")
         }
@@ -226,6 +222,31 @@ class ShopFragment : DaggerFragment() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            // value passed in AutoResolveHelper
+            LOAD_PAYMENT_DATA_REQUEST_CODE -> {
+                when (resultCode) {
+                    Activity.RESULT_OK -> {
+                        if(data != null) {
+                            val paymentData = PaymentData.getFromIntent(data)
+                            handlePaymentSuccess(paymentData)
+                        }
+                    }
+                    Activity.RESULT_CANCELED -> {
+                        Toast.makeText(requireContext(),getString(R.string.payment_canceled), Toast.LENGTH_SHORT).show()
+                    }
+                    AutoResolveHelper.RESULT_ERROR -> {
+                        val status: Status? = AutoResolveHelper.getStatusFromIntent(data)
+                        handleError(status?.statusCode)
+                    }
+                }
+                // Re-enables the Google Pay payment button.
+                enableButtons()
+            }
+        }
+    }
+
     private fun enableButtons() {
         binding.vipPackBtn.isClickable = true
         binding.mediumPackBtn.isClickable = true
@@ -233,31 +254,22 @@ class ShopFragment : DaggerFragment() {
     }
 
     private fun handlePaymentSuccess(paymentData: PaymentData?) {
-
         // Token will be null if PaymentDataRequest was not constructed using fromJson(String).
         val paymentInfo = paymentData!!.toJson() ?: return
 
         try {
+            // Token will be null if PaymentDataRequest was not constructed using fromJson(String).
             val paymentMethodData = JSONObject(paymentInfo).getJSONObject("paymentMethodData")
-            // If the gateway is set to "example", no payment information is returned - instead, the
-            // token will only consist of "examplePaymentMethodToken".
-            val tokenizationData = paymentMethodData.getJSONObject("tokenizationData")
-            val tokenizationType = tokenizationData.getString("type")
-            val token = tokenizationData.getString("token")
+            val billingName = paymentMethodData.getJSONObject("info")
+                .getJSONObject("billingAddress")
+                .getString("name")
 
-            if ("PAYMENT_GATEWAY" == tokenizationType && "examplePaymentMethodToken" == token) {
-                AlertDialog.Builder(this.requireContext())
-                    .setTitle("Warning")
-                    .setPositiveButton("OK", null)
-                    .create()
-                    .show()
-            }
+            Toast.makeText(requireContext(), getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG).show()
 
-            val info = paymentMethodData.getJSONObject("info")
-            val billingName = info.getJSONObject("billingAddress").getString("name")
-            //Toast.makeText(this.requireContext(), getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG).show()
             // Logging token string.
-            Log.d("Google Pay token: ", token)
+            Log.d("GooglePaymentToken", paymentMethodData
+                .getJSONObject("tokenizationData")
+                .getString("token"))
 
         } catch (e: JSONException) {
             throw java.lang.RuntimeException("The selected garment cannot be parsed from the list of elements")

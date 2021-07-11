@@ -20,6 +20,10 @@ class FirebaseLevelStatisticImpl : FirebaseInit() {
 
     suspend fun fetchUserLevelsStatistic(): Result<List<UserLevelStatistics?>>{
         return try {
+            if(mUser == null){
+                mUser = mAuth.currentUser
+            }
+
             val document =  mFireStore
                 .collection("users")
                 .document(mUser!!.uid)

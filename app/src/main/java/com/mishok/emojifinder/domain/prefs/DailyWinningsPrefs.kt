@@ -8,19 +8,16 @@ import javax.inject.Inject
 
 class DailyWinningsPrefs @Inject constructor(val application: Application) {
 
-    private var PRIVATE_MODE = 0
-    private val PREF_NAME = "daily"
-    private val sharedPref: SharedPreferences =
-        application.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
+    private val sharedPref: SharedPreferences = application.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
 
     fun isNextDay(): Boolean {
         var day = getDay()
         if (!hasFirstTime()) {
-            writeTime("first_time")
+            writeTime(KEY_FIRST_TIME)
             return true
         } else {
 
-            val firstTime = sharedPref.getLong("first_time", 0)
+            val firstTime = sharedPref.getLong(KEY_FIRST_TIME, 0)
             val smfFirst = SimpleDateFormat("yyyy-MM-DD", Locale.getDefault())
             val smfSecond = SimpleDateFormat("yyyy-MM-DD", Locale.getDefault())
 
@@ -33,8 +30,8 @@ class DailyWinningsPrefs @Inject constructor(val application: Application) {
                 } else {
                     ++day
                 }
-                sharedPref.edit().putInt("day", day)
-                writeTime("first_time")
+                sharedPref.edit().putInt(KEY_DAY, day)
+                writeTime(KEY_FIRST_TIME)
                 true
             } else {
                 false
@@ -43,11 +40,11 @@ class DailyWinningsPrefs @Inject constructor(val application: Application) {
     }
 
     fun setDay(day: Int) {
-        sharedPref.edit().putInt("day", day).apply()
+        sharedPref.edit().putInt(KEY_DAY, day).apply()
     }
 
     fun getDay(): Int {
-        return sharedPref.getInt("day", 1)
+        return sharedPref.getInt(KEY_DAY, 1)
     }
 
     private fun writeTime(time: String) {
@@ -56,5 +53,13 @@ class DailyWinningsPrefs @Inject constructor(val application: Application) {
 
     private fun hasFirstTime(): Boolean {
         return sharedPref.contains("first_time")
+    }
+
+    companion object {
+        private const val PREF_NAME = "daily"
+        private const val KEY_DAY = "day"
+        private const val KEY_FIRST_TIME = "first_time"
+
+        private var PRIVATE_MODE = 0
     }
 }

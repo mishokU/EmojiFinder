@@ -27,7 +27,6 @@ import com.mishok.emojifinder.ui.constructor.dialogs.ExitLevelDialog
 import com.mishok.emojifinder.ui.constructor.dialogs.ResetLevelDialog
 import com.mishok.emojifinder.ui.constructor.dialogs.SaveLevelDialog
 import com.mishok.emojifinder.ui.constructor.dialogs.SentLevelDialog
-import com.mishok.emojifinder.ui.main.MainActivity
 import com.mishok.emojifinder.ui.shop.EmojiShopModel
 import com.mishok.emojifinder.ui.utils.closeFilters
 import com.mishok.emojifinder.ui.utils.openFilters
@@ -47,17 +46,13 @@ class LevelConstructorFragment : BaseImageFragment() {
 
     private val model: SharedViewModel by activityViewModels()
 
-
     private lateinit var level: SmallLevelModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: ConstructorViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentLevelConstructorBinding.inflate(inflater)
 
         viewModel = injectViewModel(viewModelFactory)
@@ -329,8 +324,10 @@ class LevelConstructorFragment : BaseImageFragment() {
     }
 
     private fun getAllEmojisFromJson() {
-        allEmojisAdapter.allEmojisSubmitList((requireActivity() as MainActivity).randomEmojis)
-        generateGroupChips((requireActivity() as MainActivity).randomEmojis)
+        viewModel.randomEmojis.apply {
+            allEmojisAdapter.allEmojisSubmitList(this)
+            generateGroupChips(this)
+        }
     }
 
     private fun getLevelEmojis() {

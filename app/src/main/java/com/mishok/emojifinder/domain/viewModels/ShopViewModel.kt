@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mishok.emojifinder.core.di.utils.CoroutineScopeIO
 import com.mishok.emojifinder.data.db.local.emoji_json.ShopEmojiService
+import com.mishok.emojifinder.domain.daily.RandomEmojisProvider
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.ui.shop.EmojiShopModel
 import kotlinx.coroutines.CoroutineScope
@@ -15,6 +16,7 @@ import javax.inject.Inject
 
 class ShopViewModel @Inject constructor(
     private val shopEmojiService: ShopEmojiService,
+    private val randomEmojisProvider: RandomEmojisProvider,
     @CoroutineScopeIO
     val coroutineScope: CoroutineScope
 ) : ViewModel() {
@@ -44,6 +46,10 @@ class ShopViewModel @Inject constructor(
                 _emojisResponse.value = emojis
             }
         }
+    }
+
+    fun setRandomEmojis(data: List<EmojiShopModel>){
+        randomEmojisProvider.randomEmojis = data
     }
 
     fun loadDailyEmojisFromJson() {

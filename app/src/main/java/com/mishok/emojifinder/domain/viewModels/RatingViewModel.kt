@@ -30,9 +30,21 @@ class RatingViewModel @Inject constructor(
                 _users.value = Result.Loading
             }
             val users = firebaseUsers.fetchUsers()
-
+            setUserRating(users)
             withContext(Dispatchers.Main) {
                 _users.value = users
+            }
+        }
+    }
+
+    private fun setUserRating(users: Result<List<MainAccountModel>>) {
+        var place = 1
+        when(users){
+            is Result.Success -> {
+                users.data.forEach {
+                    it.place = place
+                    place += 1
+                }
             }
         }
     }

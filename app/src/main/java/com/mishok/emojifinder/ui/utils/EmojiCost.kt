@@ -1,7 +1,7 @@
 package com.mishok.emojifinder.ui.utils
 
-import com.mishok.emojifinder.ui.shop.EmojiShopModel
 import com.google.android.material.button.MaterialButton
+import com.mishok.emojifinder.ui.shop.EmojiShopModel
 
 object EmojiCost {
 
@@ -24,7 +24,7 @@ object EmojiCost {
         }
     }
 
-    fun emojiSellCost(emoji: EmojiShopModel?): CharSequence? {
+    fun emojiSellCost(emoji: EmojiShopModel?): CharSequence {
         return when(emoji?.text?.length){
             in 1..2 -> "70"
             in 2..4 -> "90"

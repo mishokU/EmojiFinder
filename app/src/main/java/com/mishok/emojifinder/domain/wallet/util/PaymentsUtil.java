@@ -83,7 +83,7 @@ public class PaymentsUtil {
     return new JSONObject() {{
       put("type", "PAYMENT_GATEWAY");
       put("parameters", new JSONObject() {{
-        put("gateway", "example");
+        put("gateway", "alfabank");
         put("gatewayMerchantId", "exampleGatewayMerchantId");
       }});
     }};
@@ -242,7 +242,7 @@ public class PaymentsUtil {
    * href="https://developers.google.com/pay/api/android/reference/object#MerchantInfo">MerchantInfo</a>
    */
   private static JSONObject getMerchantInfo() throws JSONException {
-    return new JSONObject().put("merchantName", "Example Merchant");
+    return new JSONObject().put("merchantName", "Mishok");
   }
 
   /**
@@ -266,7 +266,7 @@ public class PaymentsUtil {
 
       /* An optional shipping address requirement is a top-level property of the PaymentDataRequest
       JSON object. */
-      paymentDataRequest.put("shippingAddressRequired", true);
+      paymentDataRequest.put("shippingAddressRequired", false);
 
       JSONObject shippingAddressParameters = new JSONObject();
       shippingAddressParameters.put("phoneNumberRequired", false);

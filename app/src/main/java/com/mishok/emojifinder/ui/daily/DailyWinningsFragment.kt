@@ -1,8 +1,6 @@
 package com.mishok.emojifinder.ui.daily
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,9 +26,7 @@ import com.mishok.emojifinder.domain.prefs.DailyWinningsPrefs
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.domain.viewModels.AccountViewModel
 import com.mishok.emojifinder.domain.viewModels.DailyViewModel
-import com.mishok.emojifinder.ui.main.MainActivity
 import com.mishok.emojifinder.ui.shop.EmojiShopModel
-import com.mishok.emojifinder.ui.utils.Companion
 import com.mishok.emojifinder.ui.utils.ScreenSize
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -60,25 +56,24 @@ class DailyWinningsFragment : DaggerFragment() {
     lateinit var daily: DailyWinningsPrefs
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         binding = FragmentDailyWinningsBinding.inflate(inflater)
 
+        fetchUserValues()
+
         getDay()
-
         initEmojis()
-
         loadAllEmojis()
-        initValues()
         initDailyAdapter()
+
         startAdClaimBtn()
 
         fetchDailies()
-        fetchUserValues()
-        initClaimButton()
 
+        initClaimButton()
         initRewarded()
 
         return binding.root
@@ -86,7 +81,7 @@ class DailyWinningsFragment : DaggerFragment() {
 
     private fun loadAllEmojis() {
         for (i: Int in 0..3) {
-            shopEmojis.add((requireActivity() as MainActivity).randomEmojis.random())
+            shopEmojis.add(viewModelValues.randomEmojis.random())
         }
         binding.firstDailyEmoji.setText(shopEmojis[0].text)
         binding.secondDailyEmoji.setText(shopEmojis[1].text)
@@ -122,6 +117,11 @@ class DailyWinningsFragment : DaggerFragment() {
             override fun onRewarded(p0: RewardItem?) {
                 increaseUserValues(2)
             }
+
+            override fun onRewardedVideoAdClosed() {
+                super.onRewardedVideoAdClosed()
+                findNavController().navigate(R.id.mainMenuFragment)
+            }
         }
 
         mRewardedVideoAd.loadAd(
@@ -131,15 +131,13 @@ class DailyWinningsFragment : DaggerFragment() {
     }
 
     private fun increaseUserValues(multiplier: Int) {
-        val item = adapter.currentList[daily.getDay() - 2]
+        val item = adapter.items[daily.getDay() - 2]
         when (item.type) {
             Daily.EMOS -> {
                 viewModelValues.updateUserEmos(values.emos + item.cost * multiplier)
-                this.findNavController().popBackStack()
             }
             Daily.BOX -> {
                 viewModelValues.updateUserBoxes(values.boxes + item.cost * multiplier)
-                this.findNavController().popBackStack()
             }
             Daily.EMOJI -> {
                 binding.emojisDailyPlace.visibility = View.VISIBLE
@@ -149,17 +147,13 @@ class DailyWinningsFragment : DaggerFragment() {
                     viewModelValues.addGeneratedEmoji(shopEmojis[i])
                 }
                 viewModelValues.updateUserEmojis(values.emojis + item.cost * multiplier)
-                Handler().postDelayed({
-                    this.findNavController().popBackStack()
-                }, 1500)
             }
         }
 
     }
 
-    @SuppressLint("SetTextI18n")
     private fun getDay() {
-        day = DailyUI(Companion.day)
+        day = DailyUI(daily.getDay())
         binding.daysTv.text = "Day " + day.day.toString()
     }
 
@@ -173,43 +167,47 @@ class DailyWinningsFragment : DaggerFragment() {
                         binding.loadingValues1.visibility = View.VISIBLE
                         binding.loadingValues2.visibility = View.VISIBLE
                         binding.loadingValues3.visibility = View.VISIBLE
+                        binding.userValuesError.visibility = View.GONE
                         binding.valuesPlace.visibility = View.INVISIBLE
                     }
                     is Result.Success -> {
                         binding.loadingValues1.visibility = View.GONE
                         binding.loadingValues2.visibility = View.GONE
                         binding.loadingValues3.visibility = View.GONE
+                        binding.userValuesError.visibility = View.GONE
                         binding.valuesPlace.visibility = View.VISIBLE
                         binding.values = it.data
                         values = it.data
+                    }
+                    is Result.Error -> {
+                        binding.loadingValues1.visibility = View.GONE
+                        binding.loadingValues2.visibility = View.GONE
+                        binding.loadingValues3.visibility = View.GONE
+                        binding.valuesPlace.visibility = View.GONE
+                        binding.userValuesError.visibility = View.VISIBLE
                     }
                 }
             }
         })
     }
 
-    private fun initValues() {
-        binding.emojiBoxEt.setText(resources.getString(R.string.emoji_ticket))
-        binding.emosEt.setText(resources.getString(R.string.emoji_emos))
-        binding.emojiEt.setText(resources.getString(R.string.simple_emoji))
-    }
-
     private fun fetchDailies() {
         viewModel = injectViewModel(viewModelFactory)
-        viewModel.dailies.observe(viewLifecycleOwner, Observer {
+        viewModel.dailies.observe(viewLifecycleOwner, {
             it?.let {
                 when (it) {
                     is Result.Success -> {
-                        adapter.setDay(day.day)
-                        adapter.submitList(it.data)
+                        adapter.items = it.data
                     }
+                    is Result.Error -> {}
+                    is Result.Loading -> {}
                 }
             }
         })
     }
 
     private fun initDailyAdapter() {
-        adapter = DailyRecyclerViewAdapter()
+        adapter = DailyRecyclerViewAdapter(daily.getDay())
         binding.dailyWinningsRv.adapter = adapter
     }
 
@@ -226,22 +224,15 @@ class DailyWinningsFragment : DaggerFragment() {
     private fun initClaimButton() {
         binding.claimBtn.setOnClickListener {
             var day = binding.daysTv.text.drop(4).toString().toInt()
-            if (day >= 15) {
-                day = 2
-            } else {
-                ++day
-            }
+            if (day >= 15) day = 2 else ++day
             daily.setDay(day)
             increaseUserValues(1)
+            findNavController().navigate(R.id.mainMenuFragment)
         }
-
         binding.doubleClaimBtn.setOnClickListener {
             if (mRewardedVideoAd.isLoaded) {
                 mRewardedVideoAd.show()
             }
         }
-
     }
-
-
 }

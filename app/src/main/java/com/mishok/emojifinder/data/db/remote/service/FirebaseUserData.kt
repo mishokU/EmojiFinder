@@ -159,19 +159,23 @@ class FirebaseUserData : FirebaseInit() {
     }
 
     fun updateAvatar(avatar: String) {
-        mFireStore
-            .collection("score")
-            .document(mUser!!.uid)
-            .update("avatar", avatar)
+        mUser?.let {
+            mFireStore
+                .collection("score")
+                .document(it.uid)
+                .update("avatar", avatar)
+        }
     }
 
     fun updateEmos(emos: Int) {
-        mFireStore
-            .collection("users")
-            .document(mAuth.uid!!)
-            .collection("values")
-            .document("data")
-            .update("emos", emos)
+        mAuth.uid?.let {
+            mFireStore
+                .collection("users")
+                .document(it)
+                .collection("values")
+                .document("data")
+                .update("emos", emos)
+        }
     }
 
     fun updateBoxes(boxes: Int) {
@@ -185,11 +189,13 @@ class FirebaseUserData : FirebaseInit() {
     }
 
     fun updateEmojis(emojisCount: Int) {
-        mFireStore
-            .collection("users")
-            .document(mAuth.uid!!)
-            .collection("values")
-            .document("data")
-            .update("emojis", emojisCount)
+        mAuth.uid?.let {
+            mFireStore
+                .collection("users")
+                .document(it)
+                .collection("values")
+                .document("data")
+                .update("emojis", emojisCount)
+        }
     }
 }

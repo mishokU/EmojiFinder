@@ -1,13 +1,9 @@
 package com.mishok.emojifinder.ui.main
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdListener
@@ -16,11 +12,9 @@ import com.mishok.emojifinder.R
 import com.mishok.emojifinder.core.di.utils.injectViewModel
 import com.mishok.emojifinder.databinding.FragmentMainMenuBinding
 import com.mishok.emojifinder.domain.notifications.NotificationsService
-import com.mishok.emojifinder.domain.prefs.DailyWinningsPrefs
 import com.mishok.emojifinder.domain.prefs.NotificationAlarmPrefs
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.domain.viewModels.AccountViewModel
-import com.mishok.emojifinder.ui.utils.Companion
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -36,21 +30,13 @@ class MainMenuFragment : DaggerFragment() {
     lateinit var notificationsService: NotificationsService
 
     @Inject
-    lateinit var daily: DailyWinningsPrefs
-
-    @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: AccountViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMainMenuBinding.inflate(inflater)
 
         handleButtons()
-        dailyWinnings()
-
         setNotifications()
         loadUserAvatar()
 
@@ -59,7 +45,7 @@ class MainMenuFragment : DaggerFragment() {
 
     private fun loadUserAvatar() {
         viewModel = injectViewModel(viewModelFactory)
-        viewModel.userMainDataResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.userMainDataResponse.observe(viewLifecycleOwner, {
             it?.let {
                 when (it) {
                     is Result.Loading -> {
@@ -67,8 +53,8 @@ class MainMenuFragment : DaggerFragment() {
                     }
                     is Result.Success -> {
                         hideProfileLoading()
-                        binding.profileEmoji.text = it.data?.avatar
-                        addListenerToAdView(it.data?.vip!!)
+                        binding.profileEmoji.text = it.data.avatar
+                        addListenerToAdView(it.data.vip)
                     }
                     is Result.Error -> {
                         hideProfileLoading()
@@ -91,23 +77,6 @@ class MainMenuFragment : DaggerFragment() {
 //            alarmPrefs.setStarted()
 //        }
         notificationsService.create()
-    }
-
-    /*
-        Open daily winnig fragment, but there is a problem, that we should calculate it
-        before opening. The best solution is to show in application context
-    */
-    private fun dailyWinnings() {
-        if (daily.isNextDay()) {
-            Handler(Looper.getMainLooper()).postDelayed({
-                try {
-                    Companion.day = daily.getDay()
-                    this.findNavController().navigate(R.id.dailyWinningsFragment)
-                } catch (e : Exception){
-                    e.printStackTrace()
-                }
-            }, 2000)
-        }
     }
 
     private fun addListenerToAdView(showAd : Boolean) {
@@ -142,8 +111,8 @@ class MainMenuFragment : DaggerFragment() {
         }
 
         binding.shopBtn.setOnClickListener {
-            Toast.makeText(requireContext(),getString(R.string.next_version), Toast.LENGTH_SHORT).show()
-            //this.findNavController().navigate(R.id.shopFragment)
+            //Toast.makeText(requireContext(),getString(R.string.next_version), Toast.LENGTH_SHORT).show()
+            this.findNavController().navigate(R.id.shopFragment)
         }
     }
 }

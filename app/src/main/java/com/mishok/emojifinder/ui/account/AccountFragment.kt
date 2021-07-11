@@ -8,15 +8,15 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
 import com.mishok.emojifinder.R
 import com.mishok.emojifinder.core.di.utils.injectViewModel
 import com.mishok.emojifinder.data.db.remote.models.account.MainAccountModel
 import com.mishok.emojifinder.databinding.FragmentAccountBinding
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.domain.viewModels.AccountViewModel
+import com.mishok.emojifinder.ui.account.user_emojis.UserEmojisAdapter
 import com.mishok.emojifinder.ui.main.MainActivity
-import com.mishok.emojifinder.ui.shop.EmojisRecyclerViewAdapter
-import com.google.android.gms.ads.AdRequest
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -33,13 +33,10 @@ class AccountFragment : DaggerFragment() {
     lateinit var profile: MainAccountModel
     lateinit var adapter: UserLevelRecyclerViewAdapter
 
-    private lateinit var userEmojisAdapter: EmojisRecyclerViewAdapter
+    private lateinit var userEmojisAdapter: UserEmojisAdapter
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentAccountBinding.inflate(inflater)
 
         viewModel = injectViewModel(viewModelFactory)
@@ -55,11 +52,12 @@ class AccountFragment : DaggerFragment() {
         initValues()
 
         initUserLevelsAdapter()
+
         observeLevelsStatistic()
+
         initButtons()
 
         initListState()
-        initUserEmojisAdapter()
 
         addListenerToAdView()
 
@@ -78,12 +76,9 @@ class AccountFragment : DaggerFragment() {
     }
 
     private fun initUserEmojisAdapter() {
-        userEmojisAdapter = EmojisRecyclerViewAdapter(
-            EmojisRecyclerViewAdapter.OnShopItemClickListener {
-                UpdateAvatarDialog.show(it?.text)
-            },
-            binding.userEmojisProgressBar, false
-        )
+        userEmojisAdapter = UserEmojisAdapter(profile.avatar) {
+            UpdateAvatarDialog.show(it.text)
+        }
         binding.userEmojisPlaceRv.adapter = userEmojisAdapter
     }
 
@@ -141,7 +136,9 @@ class AccountFragment : DaggerFragment() {
 
     private fun initUserLevelsAdapter() {
         adapter = UserLevelRecyclerViewAdapter(
-            UserLevelRecyclerViewAdapter.OnLevelClickListener {},
+            UserLevelRecyclerViewAdapter.OnLevelClickListener {
+
+            },
             requireContext()
         )
         binding.levelsRecyclerView.adapter = adapter
@@ -157,9 +154,10 @@ class AccountFragment : DaggerFragment() {
                     is Result.Success -> {
                         binding.loadingProfile.visibility = View.GONE
                         binding.profilePlace.visibility = View.VISIBLE
-                        profile = it.data!!
+                        profile = it.data
                         binding.profile = it.data
 
+                        initUserEmojisAdapter()
                         initUserEmojisViewModel()
                     }
                     is Result.Error -> {
@@ -172,7 +170,7 @@ class AccountFragment : DaggerFragment() {
     }
 
     private fun initUserEmojisViewModel() {
-        viewModel.userEmojisResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.userEmojisResponse.observe(viewLifecycleOwner, {
             it?.let { userEmojis ->
                 when (userEmojis) {
                     is Result.Loading -> {
@@ -180,7 +178,7 @@ class AccountFragment : DaggerFragment() {
                     }
                     is Result.Success -> {
                         binding.userEmojisProgressBar.visibility = View.INVISIBLE
-                        userEmojisAdapter.submitUserList(profile.avatar, userEmojis.data)
+                        userEmojisAdapter.items = userEmojis.data
                         initUserValuesViewModel()
                     }
                     is Result.Error -> {
@@ -194,7 +192,7 @@ class AccountFragment : DaggerFragment() {
 
     private fun observeLevelsStatistic() {
         viewModel.fetchUserLevelsStatistic()
-        viewModel.levelsStatisticResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.levelsStatisticResponse.observe(viewLifecycleOwner, {
             it?.let {
                 when (it) {
                     is Result.Loading -> {

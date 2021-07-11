@@ -1,9 +1,9 @@
 package com.mishok.emojifinder.ui.levels
 
+import com.google.android.material.button.MaterialButton
 import com.mishok.emojifinder.R
 import com.mishok.emojifinder.ui.base.BaseDialog
 import com.mishok.emojifinder.ui.categories.SmallLevelModel
-import com.google.android.material.button.MaterialButton
 import dagger.android.support.DaggerFragment
 
 object DeleteLevelDialog {
@@ -22,7 +22,6 @@ object DeleteLevelDialog {
         dialogView = BaseDialog(fragment.requireContext(), R.style.CustomDialog)
         dialogView.setCancelable(false)
         dialogView.setContentView(R.layout.delete_level_dialog)
-        dialogView.window!!.attributes.windowAnimations = R.anim.fragment_fade_enter
 
         close()
     }

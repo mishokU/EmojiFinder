@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.mishok.emojifinder.data.db.remote.service
 
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguage

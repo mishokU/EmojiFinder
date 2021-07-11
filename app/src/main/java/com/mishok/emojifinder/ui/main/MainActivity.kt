@@ -1,37 +1,33 @@
 package com.mishok.emojifinder.ui.main
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
-import com.google.android.gms.common.api.Status
-import com.google.android.gms.wallet.AutoResolveHelper
 import com.google.android.gms.wallet.PaymentData
 import com.mishok.emojifinder.R
 import com.mishok.emojifinder.core.di.utils.injectViewModel
 import com.mishok.emojifinder.databinding.ActivityMainBinding
 import com.mishok.emojifinder.domain.locale.ApplicationLanguageHelper
 import com.mishok.emojifinder.domain.locale.LocaleHelper
-import com.mishok.emojifinder.domain.payment.LOAD_PAYMENT_DATA_REQUEST_CODE
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.domain.sounds.MediaPlayerPool
 import com.mishok.emojifinder.domain.viewModels.AccountViewModel
-import com.mishok.emojifinder.domain.viewModels.ShopViewModel
-import com.mishok.emojifinder.ui.shop.EmojiShopModel
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONException
+import org.json.JSONObject
 import javax.inject.Inject
 
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity(){
 
     var TAG : String = javaClass.simpleName
 
@@ -44,14 +40,9 @@ class MainActivity : DaggerAppCompatActivity() {
     lateinit var mediaPlayerPool: MediaPlayerPool
 
     @Inject
-    lateinit var viewModelFactoryShop: ViewModelProvider.Factory
-    lateinit var viewModelShop: ShopViewModel
-
-    @Inject
     lateinit var viewModelFactoryUser: ViewModelProvider.Factory
     lateinit var viewModel: AccountViewModel
 
-    lateinit var randomEmojis : List<EmojiShopModel>
     var isVipAccount : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,37 +59,20 @@ class MainActivity : DaggerAppCompatActivity() {
         navigation.graph = navGraph
 
         initMediaPlayer()
-        playBackgroundMusic()
         enableFullScreen()
-
-        loadRandomEmojis()
         loadUserMainData()
     }
 
     private fun loadUserMainData() {
         viewModel = injectViewModel(viewModelFactoryUser)
-        viewModel.userMainDataResponse.observe(this, Observer {
+        viewModel.userMainDataResponse.observe(this, {
             it?.let {
                 when(it){
                     is Result.Success -> {
-                        isVipAccount = it.data!!.vip
+                        isVipAccount = it.data.vip
                     }
-                }
-            }
-        })
-    }
-
-    private fun loadRandomEmojis() {
-        viewModelShop = injectViewModel(viewModelFactory)
-        viewModelShop.emojisResponse.observe(this, Observer {
-            it?.let {
-                when(it){
-                    is Result.Success -> {
-                        randomEmojis = it.data
-                    }
-                    is Result.Error -> {
-                        loadRandomEmojis()
-                    }
+                    is Result.Error -> {}
+                    is Result.Loading -> {}
                 }
             }
         })
@@ -113,29 +87,38 @@ class MainActivity : DaggerAppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        for (fragment in supportFragmentManager.fragments) {
+        for (fragment in this.nav_host_fragment.childFragmentManager.fragments) {
             fragment.onActivityResult(requestCode, resultCode, data)
         }
-        when (requestCode) {
-            // value passed in AutoResolveHelper
-            LOAD_PAYMENT_DATA_REQUEST_CODE -> {
-                when (resultCode) {
-                    Activity.RESULT_OK -> {
-                        val paymentData = PaymentData.getFromIntent(data!!)
-                        //handlePaymentSuccess(paymentData)
-                    }
-                    Activity.RESULT_CANCELED -> {
-                        Toast.makeText(this,"Payment canceled", Toast.LENGTH_SHORT).show()
-                    }
+    }
 
-                    AutoResolveHelper.RESULT_ERROR -> {
-                        val status: Status? = AutoResolveHelper.getStatusFromIntent(data)
-                        handleError(status?.statusCode)
-                    }
-                }
-                // Re-enables the Google Pay payment button.
-                //enableButtons()
-            }
+    /**
+     * PaymentData response object contains the payment information, as well as any additional
+     * requested information, such as billing and shipping address.
+     *
+     * @param paymentData A response object returned by Google after a payer approves payment.
+     * @see [Payment
+     * Data](https://developers.google.com/pay/api/android/reference/object.PaymentData)
+     */
+    private fun handlePaymentSuccess(paymentData: PaymentData) {
+        val paymentInformation = paymentData.toJson() ?: return
+
+        try {
+            // Token will be null if PaymentDataRequest was not constructed using fromJson(String).
+            val paymentMethodData = JSONObject(paymentInformation).getJSONObject("paymentMethodData")
+            val billingName = paymentMethodData.getJSONObject("info")
+                .getJSONObject("billingAddress").getString("name")
+            Log.d("BillingName", billingName)
+
+            Toast.makeText(this, getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG).show()
+
+            // Logging token string.
+            Log.d("GooglePaymentToken", paymentMethodData
+                .getJSONObject("tokenizationData")
+                .getString("token"))
+
+        } catch (e: JSONException) {
+            Log.e("handlePaymentSuccess", "Error: " + e.toString())
         }
     }
 

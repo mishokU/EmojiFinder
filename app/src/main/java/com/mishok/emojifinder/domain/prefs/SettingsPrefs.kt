@@ -12,7 +12,7 @@ class SettingsPrefs @Inject constructor(application: Application) {
         application.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
 
     fun isPlayMusic() : Boolean {
-        return sharedPref.getBoolean("music", true)
+        return sharedPref.getBoolean("music", false)
     }
 
     fun isNotificationsAvailable() : Boolean{

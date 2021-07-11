@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.mishok.emojifinder.core.di.launcher
+package com.mishok.emojifinder.core.di.launchers
 
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.mishok.emojifinder.core.di.utils.LaunchDestination
 import com.mishok.emojifinder.domain.result.Event
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.domain.usecase.SignInCompletedUseCase
@@ -46,9 +47,4 @@ class LaunchViewModel @Inject constructor(
             }
         }
     }
-}
-
-enum class LaunchDestination {
-    SIGN_IN_ACTIVITY,
-    MAIN_ACTIVITY
 }

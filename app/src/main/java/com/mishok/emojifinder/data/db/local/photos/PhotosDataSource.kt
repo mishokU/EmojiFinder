@@ -12,6 +12,7 @@ class PhotosDataSource {
 
     private val listOfAllImages = mutableListOf<PhotoPickerModel>()
 
+    @Suppress("DEPRECATION")
     private fun getPhotoMediaCursorFromGallery(context: Context): Cursor? {
         val projection = arrayOf(
             MediaStore.Files.FileColumns._ID,

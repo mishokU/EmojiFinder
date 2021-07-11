@@ -2,7 +2,8 @@ package com.mishok.emojifinder.core.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mishok.emojifinder.core.di.launcher.LaunchViewModel
+import com.mishok.emojifinder.core.di.launchers.LaunchDailyViewModel
+import com.mishok.emojifinder.core.di.launchers.LaunchViewModel
 import com.mishok.emojifinder.core.di.utils.ViewModelFactory
 import com.mishok.emojifinder.core.di.utils.ViewModelKey
 import com.mishok.emojifinder.domain.viewModels.*
@@ -21,6 +22,11 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(LaunchViewModel::class)
     abstract fun bindLaunchViewModel(viewModel: LaunchViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LaunchDailyViewModel::class)
+    abstract fun bindLaunchDailyViewModel(viewModel: LaunchDailyViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -78,5 +84,7 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(PhotosViewModel::class)
     abstract fun bindPhotosViewModel(viewModel : PhotosViewModel) : ViewModel
+
+
 
 }

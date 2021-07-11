@@ -27,14 +27,10 @@ class SignInFragment : DaggerFragment() {
         viewModel = injectViewModel(viewModelFactory)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentSignInBinding.inflate(inflater)
         // Inflate the layout for this fragment
         handleButtons()
-
         return binding.root
     }
 

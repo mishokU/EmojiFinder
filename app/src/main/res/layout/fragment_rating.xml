@@ -65,9 +65,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_margin="20dp"
                         android:layout_below="@id/top_place"
                         android:layout_above="@id/invite_player_place"
                         android:background="@drawable/main_menu_frame">
@@ -77,6 +75,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="5dp"
+                            android:layout_marginBottom="4dp"
                             android:clipToPadding="false"
                             android:overScrollMode="never"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

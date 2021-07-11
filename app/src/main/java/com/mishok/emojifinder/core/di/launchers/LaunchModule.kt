@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mishok.emojifinder.core.di.launcher
+package com.mishok.emojifinder.core.di.launchers
 
 import androidx.lifecycle.ViewModel
 import com.mishok.emojifinder.core.di.utils.ViewModelKey
@@ -37,4 +37,9 @@ internal abstract class LaunchModule {
     @IntoMap
     @ViewModelKey(LaunchViewModel::class)
     internal abstract fun bindLaunchViewModel(viewModel: LaunchViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LaunchDailyViewModel::class)
+    internal abstract fun bindDailyLaunchViewModel(viewModel: LaunchDailyViewModel): ViewModel
 }

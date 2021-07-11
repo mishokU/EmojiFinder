@@ -18,6 +18,8 @@ import com.mishok.emojifinder.data.db.remote.api.FirebaseRegistration
 import com.mishok.emojifinder.data.db.remote.service.*
 import com.mishok.emojifinder.data.prefs.PreferenceStorage
 import com.mishok.emojifinder.data.prefs.SharedPreferenceStorage
+import com.mishok.emojifinder.domain.daily.RandomEmojisProvider
+import com.mishok.emojifinder.domain.daily.RandomEmojisProviderImpl
 import com.mishok.emojifinder.domain.notifications.NotificationsService
 import com.mishok.emojifinder.domain.prefs.NotificationAlarmPrefs
 import com.mishok.emojifinder.domain.prefs.SettingsPrefs
@@ -46,8 +48,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideFirebaseAuthHandler(): FirebaseAuthHandler =
-        FirebaseAuthHandler()
+    fun provideFirebaseAuthHandler(): FirebaseAuthHandler = FirebaseAuthHandler()
 
     @Singleton
     @Provides
@@ -61,10 +62,6 @@ class AppModule {
     @Provides
     fun provideLevelsDao(application: Application): LevelMainInfoDao =
         LevelsDatabase.getDatabase(application).levelDao()
-
-//    @Singleton
-//    @Provides
-//    fun provideLocaleHelper(application: Application) = LocaleHelper(application as MainApplication)
 
     @Singleton
     @Provides
@@ -149,6 +146,10 @@ class AppModule {
     @Provides
     fun provideFakeDaily(): FakeDailyItems = FakeDailyItems()
 
+    @Singleton
+    @Provides
+    fun provideRandomEmojis(): RandomEmojisProvider = RandomEmojisProviderImpl()
+
     @CoroutineScopeIO
     @Provides
     fun provideCoroutineScopeIO() = CoroutineScope(Dispatchers.IO)
@@ -158,5 +159,5 @@ class AppModule {
     fun provideCoroutineScopeMain() = CoroutineScope(Dispatchers.Main)
 
     @Provides
-    fun providePhotosDataSource() : PhotosDataSource = PhotosDataSource()
+    fun providePhotosDataSource(): PhotosDataSource = PhotosDataSource()
 }

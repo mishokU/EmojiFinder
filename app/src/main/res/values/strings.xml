@@ -178,6 +178,7 @@
     <string name="starter_emos_count">1000</string>
     <string name="medium_emos_count">2000</string>
     <string name="medium_box_count">10</string>
+    <string name="payment_canceled">Payment canceled</string>
     <string name="advertisements">Adds</string>
     <string name="profile_settings">Profile\nSettings</string>
     <string name="login_updated">Login updated</string>
@@ -224,5 +225,6 @@
     <string name="gateway_replace_name_example">"Gateway name set to \"example\" - please modify Constants.java and replace it with your own gateway."</string>
     <string name="checkout_item_description">Description</string>
     <string name="next_version">This feature will avaliable in the next versions</string>
+    <string name="error_while_loading_user_data">Error while loading user data.</string>
 
 </resources>

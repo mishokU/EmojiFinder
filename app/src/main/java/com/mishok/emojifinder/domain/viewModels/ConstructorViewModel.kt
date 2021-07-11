@@ -8,6 +8,7 @@ import com.mishok.emojifinder.core.di.utils.CoroutineScopeIO
 import com.mishok.emojifinder.data.db.local.fake.LevelConstructorService
 import com.mishok.emojifinder.data.db.remote.models.EmojiShopModel
 import com.mishok.emojifinder.data.db.repository.LevelsRepository
+import com.mishok.emojifinder.domain.daily.RandomEmojisProvider
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.ui.categories.SmallLevelModel
 import kotlinx.coroutines.*
@@ -16,6 +17,7 @@ import javax.inject.Inject
 class ConstructorViewModel @Inject constructor(
     private val levelConstructorService: LevelConstructorService,
     private val levelsRepository: LevelsRepository,
+    randomEmojisProvider: RandomEmojisProvider,
     @CoroutineScopeIO
     val coroutineScope: CoroutineScope
 ) : ViewModel() {
@@ -31,8 +33,8 @@ class ConstructorViewModel @Inject constructor(
         levelsRepository.getEmojis(levelTitle)
     }
 
+    val randomEmojis = randomEmojisProvider.randomEmojis
     val userLevels = levelsRepository.levels
-    val isSimilarList = levelsRepository.isSimilarList
 
     init {
         fetchConstructor()
@@ -48,10 +50,6 @@ class ConstructorViewModel @Inject constructor(
                 _constructorLevelResponse.value = result
             }
         }
-    }
-
-    fun levelComplete() {
-        _constructorLevelResponse.value = null
     }
 
     fun saveLevel(level: List<EmojiShopModel>, smallLevelModel: SmallLevelModel) {

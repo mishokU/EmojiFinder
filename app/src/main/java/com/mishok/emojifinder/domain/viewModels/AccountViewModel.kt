@@ -11,6 +11,7 @@ import com.mishok.emojifinder.data.db.remote.models.account.UserLevelStatistics
 import com.mishok.emojifinder.data.db.remote.service.FirebaseLevelStatisticImpl
 import com.mishok.emojifinder.data.db.remote.service.FirebaseUserData
 import com.mishok.emojifinder.domain.auth.CheckOnValid
+import com.mishok.emojifinder.domain.daily.RandomEmojisProvider
 import com.mishok.emojifinder.domain.result.Result
 import com.mishok.emojifinder.ui.shop.EmojiShopModel
 import kotlinx.coroutines.*
@@ -19,6 +20,7 @@ import javax.inject.Inject
 class AccountViewModel @Inject constructor(
     private val levelStatistics: FirebaseLevelStatisticImpl,
     private val userMainData : FirebaseUserData,
+    private val randomEmojisProvider: RandomEmojisProvider,
     @CoroutineScopeIO
     val coroutineScope: CoroutineScope
 ) : ViewModel() {
@@ -27,8 +29,8 @@ class AccountViewModel @Inject constructor(
     val levelsStatisticResponse : LiveData<Result<List<UserLevelStatistics?>>>
         get() = _levelsStatisticResponse
 
-    private val _userMainDataResponse = MutableLiveData<Result<MainAccountModel?>>()
-    val userMainDataResponse : LiveData<Result<MainAccountModel?>>
+    private val _userMainDataResponse = MutableLiveData<Result<MainAccountModel>>()
+    val userMainDataResponse : LiveData<Result<MainAccountModel>>
         get() = _userMainDataResponse
 
     private val _userEmojisResponse = MutableLiveData<Result<List<EmojiShopModel?>>>()
@@ -38,6 +40,8 @@ class AccountViewModel @Inject constructor(
     private val _userValuesResponse = MutableLiveData<Result<AccountValuesModel>>()
     val userValuesResponse : LiveData<Result<AccountValuesModel>>
         get() = _userValuesResponse
+
+    val randomEmojis = randomEmojisProvider.randomEmojis
 
     var oldEmail : String ?= null
     var oldPassword : String ?= null

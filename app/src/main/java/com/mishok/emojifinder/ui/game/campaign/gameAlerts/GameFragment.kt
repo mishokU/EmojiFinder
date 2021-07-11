@@ -1,9 +1,9 @@
 package com.mishok.emojifinder.ui.game.campaign.gameAlerts
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -85,7 +85,7 @@ class GameFragment : DaggerFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentGameBinding.inflate(inflater)
 
         viewModel = injectViewModel(viewModelFactory)
@@ -138,8 +138,10 @@ class GameFragment : DaggerFragment() {
             it?.let {
                 when (it) {
                     is Result.Success -> {
-                        score = it.data!!.score
+                        score = it.data.score
                     }
+                    is Result.Error -> {}
+                    is Result.Loading -> {}
                 }
             }
         })
@@ -234,6 +236,7 @@ class GameFragment : DaggerFragment() {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Suppress("DEPRECATION")
     private fun initAudioButton() {
         if (settingsPrefs.isPlayMusic()) {
@@ -405,7 +408,6 @@ class GameFragment : DaggerFragment() {
 
     private fun startNextLevel() {
         levelId++
-        Log.d("level", levelId.toString())
         hideNextLevel()
         if (levelId <= levels.size) {
             for (level in levels) {
@@ -427,7 +429,7 @@ class GameFragment : DaggerFragment() {
 
     private fun loadGameLevel() {
         levelViewModel.fetchLevel(level.title)
-        levelViewModel.levelResponse.observe(viewLifecycleOwner, Observer {
+        levelViewModel.levelResponse.observe(viewLifecycleOwner, {
             it?.let { result ->
                 when (result) {
                     is Result.Loading -> {

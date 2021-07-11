@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mishok.emojifinder.R
 import com.mishok.emojifinder.ui.base.BaseDialog
-import com.mishok.emojifinder.ui.main.MainActivity
 import com.mishok.emojifinder.ui.shop.EmojiShopModel
 import dagger.android.support.DaggerFragment
 
@@ -26,8 +25,11 @@ object RandomPrizeDialog {
     val emoji: LiveData<EmojiShopModel>
         get() = _emoji
 
-    fun create(fragment: DaggerFragment) {
+    private var randomEmojis: List<EmojiShopModel> = emptyList()
+
+    fun create(fragment: DaggerFragment, randomEmojis: List<EmojiShopModel>) {
         this.fragment = fragment
+        this.randomEmojis = randomEmojis
         dialogView = BaseDialog(fragment.requireContext(), R.style.CustomDialog)
         dialogView.setContentView(R.layout.random_prize_dialog)
 
@@ -137,8 +139,8 @@ object RandomPrizeDialog {
     }
 
     private fun setRandomEmojis() {
-        emojis.add((fragment.requireActivity() as MainActivity).randomEmojis.random())
-        emojis.add((fragment.requireActivity() as MainActivity).randomEmojis.random())
+        emojis.add(randomEmojis.random())
+        emojis.add(randomEmojis.random())
         initEmojis()
         secondEmoji.setText(emojis[0].text)
         firstEmoji.setText(emojis[1].text)

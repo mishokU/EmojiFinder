@@ -81,8 +81,8 @@ class LevelsRepository @Inject constructor(
 
     suspend fun checkOnSameTitle(title: String) {
         var result = firebaseCategories.hasThisTitle(title)
-        if(!result) {
-           result = firebaseCategories.hasThisTitleInUserLevels(title)
+        if (!result) {
+            result = firebaseCategories.hasThisTitleInUserLevels(title)
         }
         withContext(Dispatchers.Main) {
             _hasTitle.value = result

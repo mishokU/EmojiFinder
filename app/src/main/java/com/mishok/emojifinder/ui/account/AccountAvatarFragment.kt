@@ -51,10 +51,7 @@ class AccountAvatarFragment : DaggerFragment() {
 
     private var isFilterVisible: Boolean = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentAccountAvatarBinding.inflate(inflater)
 
         viewModel = injectViewModel(viewModelFactory)
@@ -248,8 +245,10 @@ class AccountAvatarFragment : DaggerFragment() {
     }
 
     private fun initShopViewModel(userEmojis: List<EmojiShopModel?>) {
-        adapter.shopSubmitList((requireActivity() as MainActivity).randomEmojis, userEmojis)
-        generateGroupChips((requireActivity() as MainActivity).randomEmojis)
+        viewModel.randomEmojis.apply {
+            adapter.shopSubmitList(this, userEmojis)
+            generateGroupChips(this)
+        }
     }
 
     private fun generateGroupChips(data: List<EmojiShopModel?>) {

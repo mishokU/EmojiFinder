@@ -10,8 +10,11 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.emoji.widget.EmojiAppCompatEditText
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.reward.RewardItem
+import com.google.android.gms.ads.reward.RewardedVideoAd
 import com.mishok.emojifinder.R
 import com.mishok.emojifinder.core.di.utils.injectViewModel
 import com.mishok.emojifinder.data.db.remote.models.account.AccountValuesModel
@@ -19,12 +22,7 @@ import com.mishok.emojifinder.databinding.FragmentLootBoxesBinding
 import com.mishok.emojifinder.domain.adds.MyRewardedVideoListener
 import com.mishok.emojifinder.domain.adds.REWARDED_VIDEO_ID
 import com.mishok.emojifinder.domain.viewModels.AccountViewModel
-import com.mishok.emojifinder.ui.main.MainActivity
 import com.mishok.emojifinder.ui.shop.EmojiShopModel
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.reward.RewardItem
-import com.google.android.gms.ads.reward.RewardedVideoAd
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import kotlin.random.Random
@@ -47,7 +45,7 @@ class LootBoxesFragment : DaggerFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLootBoxesBinding.inflate(inflater)
 
         viewModel = injectViewModel(viewModelFactory)
@@ -92,7 +90,7 @@ class LootBoxesFragment : DaggerFragment() {
         emojis.add(binding.emojiAppCompatEditText5)
 
         for (emoji in emojis) {
-            val emojiModel = (activity as MainActivity).randomEmojis.random()
+            val emojiModel = viewModel.randomEmojis.random()
             emojisModel.add(emojiModel)
             emoji.setText(emojiModel.text)
         }
@@ -155,9 +153,9 @@ class LootBoxesFragment : DaggerFragment() {
     }
 
     private fun showRandomPrizeDialog() {
-        RandomPrizeDialog.create(this)
+        RandomPrizeDialog.create(this, viewModel.randomEmojis)
         RandomPrizeDialog.show()
-        RandomPrizeDialog.emoji.observe(viewLifecycleOwner, Observer { emoji ->
+        RandomPrizeDialog.emoji.observe(viewLifecycleOwner, { emoji ->
             viewModel.addGeneratedEmoji(emoji)
             updateUserEmojisCount()
             viewModel.updateUserEmojis(getUserValues().emojis + 1)

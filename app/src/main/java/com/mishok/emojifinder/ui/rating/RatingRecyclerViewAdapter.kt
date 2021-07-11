@@ -15,8 +15,6 @@ import com.mishok.emojifinder.databinding.RatingUserItemBinding
 class RatingRecyclerViewAdapter(val context: Context) :
     ListAdapter<MainAccountModel, RatingRecyclerViewAdapter.RatingViewHolder>(DiffCallback) {
 
-    var users = 0
-
     companion object DiffCallback : DiffUtil.ItemCallback<MainAccountModel>() {
 
         override fun areItemsTheSame(
@@ -35,7 +33,6 @@ class RatingRecyclerViewAdapter(val context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RatingViewHolder {
-
         return RatingViewHolder(
             RatingUserItemBinding.inflate(LayoutInflater.from(parent.context)),
             context
@@ -44,25 +41,20 @@ class RatingRecyclerViewAdapter(val context: Context) :
 
     override fun onBindViewHolder(holder: RatingViewHolder, position: Int) {
         val emoji = getItem(position)
-        users++
-        holder.bind(emoji, users)
+        holder.bind(emoji)
     }
 
     class RatingViewHolder(private val binding: RatingUserItemBinding, val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private val GOLD = 1
-        private val SILVER = 2
-        private val BRONZE = 3
-
-        fun bind(user: MainAccountModel?, users: Int) {
+        fun bind(user: MainAccountModel?) {
             binding.user = user
-            binding.userNumberRating.text = users.toString()
-            setRatingAvatars(binding.userNumberRatingPlace, users)
+            binding.userNumberRating.text = user?.place.toString()
+            setRatingAvatars(binding.userNumberRatingPlace, user?.place)
             binding.executePendingBindings()
         }
 
-        private fun setRatingAvatars(userNumberRatingPlace: RelativeLayout, users: Int) {
+        private fun setRatingAvatars(userNumberRatingPlace: RelativeLayout, users: Int?) {
             when (users) {
                 GOLD -> userNumberRatingPlace.background =
                     ContextCompat.getDrawable(context, R.drawable.rating_gold_background)
@@ -71,6 +63,12 @@ class RatingRecyclerViewAdapter(val context: Context) :
                 BRONZE -> userNumberRatingPlace.background =
                     ContextCompat.getDrawable(context, R.drawable.rating_bronze_background)
             }
+        }
+
+        companion object {
+            private const val GOLD = 1
+            private const val SILVER = 2
+            private const val BRONZE = 3
         }
     }
 

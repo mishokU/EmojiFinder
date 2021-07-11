@@ -28,7 +28,7 @@ class RatingFragment : DaggerFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRatingBinding.inflate(inflater)
 
         initUsers()

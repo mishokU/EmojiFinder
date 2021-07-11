@@ -17,7 +17,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.emoji.widget.EmojiAppCompatButton
 import androidx.emoji.widget.EmojiAppCompatEditText
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdRequest
@@ -73,7 +72,7 @@ class ArcadeGameFragment : DaggerFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ArcadeGameLayoutBinding.inflate(inflater)
 
         interstitialAd = InterstitialAd(requireContext())
@@ -142,18 +141,18 @@ class ArcadeGameFragment : DaggerFragment() {
 
     private fun loadUserScore() {
         viewModelAccount.fetchMainUserData()
-        viewModelAccount.userMainDataResponse.observe(viewLifecycleOwner, Observer {
+        viewModelAccount.userMainDataResponse.observe(viewLifecycleOwner, {
             it?.let {
                 when(it){
                     is Result.Success -> {
-                        userScore = it.data!!.score
+                        userScore = it.data.score
                     }
                 }
             }
         })
 
         viewModelAccount.fetchUserValues()
-        viewModelAccount.userValuesResponse.observe(viewLifecycleOwner, Observer {
+        viewModelAccount.userValuesResponse.observe(viewLifecycleOwner, {
             it?.let {
                 when(it){
                     is Result.Success -> {
@@ -163,13 +162,13 @@ class ArcadeGameFragment : DaggerFragment() {
             }
         })
 
-        viewModel.oneLevelEmojisData.observe(viewLifecycleOwner, Observer {
+        viewModel.oneLevelEmojisData.observe(viewLifecycleOwner, {
             it?.let {
                 //userEmojisAdapter.submitList(it)
             }
         })
 
-        viewModel.bottomEmojis.observe(viewLifecycleOwner, Observer {
+        viewModel.bottomEmojis.observe(viewLifecycleOwner, {
             it?.let {
                 createBottomEmojis(it)
             }
@@ -232,7 +231,7 @@ class ArcadeGameFragment : DaggerFragment() {
 
         animation.addListener(onEnd = {
             playSound(MusicType.WIN)
-            stopSound(MusicType.GAME)
+            stopSound()
             loadAd()
             if(score == 0){
                 EndGameDialog.open(score)
@@ -361,7 +360,7 @@ class ArcadeGameFragment : DaggerFragment() {
         (activity as MainActivity).mediaPlayerPool.play(type)
     }
 
-    private fun stopSound(type: MusicType) {
+    private fun stopSound() {
         (activity as MainActivity).mediaPlayerPool.stop(MusicType.GAME)
     }
 
@@ -399,14 +398,14 @@ class ArcadeGameFragment : DaggerFragment() {
 
     private fun initAudioButton() {
         if(settingsPrefs.isPlayMusic()){
-            binding.arcadeGameAudioBtn.icon = resources.getDrawable(R.drawable.icons8_audio_24px)
+            binding.arcadeGameAudioBtn.icon = ContextCompat.getDrawable(requireContext(), R.drawable.icons8_audio_24px)
         } else {
-            binding.arcadeGameAudioBtn.icon = resources.getDrawable(R.drawable.icons8_no_audio_24px)
+            binding.arcadeGameAudioBtn.icon = ContextCompat.getDrawable(requireContext(),R.drawable.icons8_no_audio_24px)
         }
     }
 
     private fun initViewModel() {
-        allEmojis = (requireActivity() as MainActivity).randomEmojis as MutableList<EmojiShopModel?>
+        allEmojis = viewModelAccount.randomEmojis.toMutableList()
         createGamePlace(allEmojis)
         if(showGameHintPrefs.isArcadeHintShown()){
             animation.start()

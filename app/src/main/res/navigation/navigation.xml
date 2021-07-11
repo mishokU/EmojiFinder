@@ -77,8 +77,7 @@
             app:destination="@id/categotyGameFragment" />
         <action
             android:id="@+id/action_mainMenuFragment_to_helpFragment"
-            app:destination="@id/helpFragment"
-            app:enterAnim="@anim/fragment_fade_enter" />
+            app:destination="@id/helpFragment" />
         <action
             android:id="@+id/action_mainMenuFragment_to_arcadeGameFragment"
             app:destination="@id/arcadeGameFragment" />
@@ -184,8 +183,7 @@
         tools:layout="@layout/fragment_help" >
         <action
             android:id="@+id/action_helpFragment_to_readQAFragment"
-            app:destination="@id/readQAFragment"
-            app:enterAnim="@anim/fragment_open_enter" />
+            app:destination="@id/readQAFragment" />
         <action
             android:id="@+id/action_helpFragment_to_writeQuestionFragment"
             app:destination="@id/writeQuestionFragment" />

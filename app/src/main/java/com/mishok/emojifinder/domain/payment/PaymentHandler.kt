@@ -20,29 +20,29 @@ fun getBaseRequest(): JSONObject {
 }
 
 //For card encryption need gateway of master card and my ID
-fun getGatewayTokenizationSpecification(): JSONObject? {
+fun getGatewayTokenizationSpecification(): JSONObject {
     return object : JSONObject() {
         init {
             put("type", "PAYMENT_GATEWAY")
             put("parameters", object : JSONObject() {
                 init {
                     put("gateway", "example")
-                    put("gatewayMerchantId", "exampleGatewayMerchantId")
+                    put("gatewayMerchantId", "12345678901234567890")
                 }
             })
         }
     }
 }
 
-fun getAllowedCardNetworks() : JSONArray? {
+fun getAllowedCardNetworks(): JSONArray {
     return object : JSONArray() {
         init {
             put("AMEX")
-                put("DISCOVER")
-                put("INTERAC")
-                put("JCB")
-                put("MASTERCARD")
-                put("VISA")
+            put("DISCOVER")
+            put("INTERAC")
+            put("JCB")
+            put("MASTERCARD")
+            put("VISA")
         }
     }
 }
@@ -54,18 +54,13 @@ fun getAllowedCardAuthMethods(): JSONArray? {
 }
 
 @Throws(JSONException::class)
-fun getBaseCardPaymentMethod(): JSONObject? {
-
-    val billingAddressParameters = JSONObject().apply {
-        put("format", "FULL")
-    }
+fun getBaseCardPaymentMethod(): JSONObject {
 
     val parameters = JSONObject().apply {
         put("allowedAuthMethods", getAllowedCardAuthMethods())
         put("allowedCardNetworks", getAllowedCardNetworks())
         // Optionally, you can add billing address/phone number associated with a CARD payment method.
-        put("billingAddressRequired", true)
-        put("billingAddressParameters", billingAddressParameters)
+        put("billingAddressRequired", false)
     }
 
     return JSONObject().apply {
@@ -75,10 +70,9 @@ fun getBaseCardPaymentMethod(): JSONObject? {
 }
 
 @Throws(JSONException::class)
-fun getCardPaymentMethod() = getBaseCardPaymentMethod()?.apply  {
+fun getCardPaymentMethod() = getBaseCardPaymentMethod().apply {
     put("tokenizationSpecification", getGatewayTokenizationSpecification())
 }
-
 
 fun getTransactionInfo(price: String?) = JSONObject().apply {
     put("totalPrice", price)
@@ -95,7 +89,7 @@ fun getMerchantInfo() = JSONObject().apply {
 fun getPaymentDataRequest(priceLong: Long): Optional<JSONObject> {
     return try {
 
-        val price : String? = centsToString(priceLong)
+        val price: String? = centsToString(priceLong)
 
         val paymentDataRequest: JSONObject = getBaseRequest().apply {
             put("allowedPaymentMethods", JSONArray().put(getCardPaymentMethod()));

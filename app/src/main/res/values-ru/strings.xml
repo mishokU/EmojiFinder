@@ -52,6 +52,7 @@
     <string name="reset">Сброс</string>
     <string name="generate">Сложить</string>
     <string name="shop">Магазин</string>
+    <string name="payment_canceled">Платеж отменен</string>
     <string name="filter">Фильтр</string>
     <string name="there_is_no_emojis">У вас нет эмодзи</string>
     <string name="buy">Купить</string>
@@ -218,5 +219,6 @@
     <string name="emoji_mistakes">📛</string>
     <string name="googlepay_status_unavailable">Google pay is not supported on your device</string>
     <string name="next_version">This feature will avaliable in the next versions</string>
+    <string name="error_while_loading_user_data">Error while loading user data.</string>
 
 </resources>
