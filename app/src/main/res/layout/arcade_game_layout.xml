@@ -14,8 +14,12 @@
         android:id="@+id/rootArcadeGame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundDesignColor"
         tools:context=".ui.game.campaign.gameAlerts.GameFragment">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/strone_background" />
 
         <RelativeLayout
             android:layout_width="match_parent"

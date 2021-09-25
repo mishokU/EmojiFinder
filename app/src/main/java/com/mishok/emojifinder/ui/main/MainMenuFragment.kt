@@ -76,7 +76,7 @@ class MainMenuFragment : DaggerFragment() {
 //        } else {
 //            alarmPrefs.setStarted()
 //        }
-        notificationsService.create()
+//        notificationsService.create()
     }
 
     private fun addListenerToAdView(showAd : Boolean) {
@@ -92,6 +92,10 @@ class MainMenuFragment : DaggerFragment() {
     }
 
     private fun handleButtons() {
+        binding.playLevel.setOnClickListener {
+            this.findNavController().navigate(R.id.arcadeGameFragment)
+        }
+
         binding.startArcadeGameBtn.setOnClickListener {
             this.findNavController().navigate(R.id.arcadeGameFragment)
         }

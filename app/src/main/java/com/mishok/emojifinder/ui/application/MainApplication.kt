@@ -36,14 +36,14 @@ class MainApplication : DaggerApplication() {
             //enableStrictMode()
         }
 
-        val testDeviceIds = listOf("33BE2250B43518CCDA7DE426D04EE231",
-            "FD9586430CDB7E0EF8DE82B129A21EE9")
+        val testDeviceIds = listOf(
+            "33BE2250B43518CCDA7DE426D04EE231",
+            "FD9586430CDB7E0EF8DE82B129A21EE9"
+        )
         val configuration = RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
 
         MobileAds.setRequestConfiguration(configuration)
-        MobileAds.initialize(this) {
-
-        }
+        MobileAds.initialize(this) {}
 
         super.onCreate()
     }

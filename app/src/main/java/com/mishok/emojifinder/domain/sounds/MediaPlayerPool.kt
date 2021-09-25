@@ -7,8 +7,6 @@ import com.mishok.emojifinder.R
 import com.mishok.emojifinder.domain.prefs.SettingsPrefs
 import javax.inject.Inject
 
-enum class MusicType {SUCCESSFUL, FAIL, WIN, LOSE, BUY, MONEY, CORRECT, GAME }
-
 class MediaPlayerPool @Inject constructor(application: Application) {
 
     private var context: Context = application.applicationContext
@@ -72,7 +70,7 @@ class MediaPlayerPool @Inject constructor(application: Application) {
             MusicType.WIN -> playCorrect(winPlayer)
             MusicType.CORRECT -> playCorrect(correctClick)
             MusicType.GAME -> playCorrect(gamePlayer)
-            MusicType.MONEY -> TODO()
+            MusicType.MONEY -> playCorrect(winPlayer)
         }
     }
 
@@ -95,7 +93,7 @@ class MediaPlayerPool @Inject constructor(application: Application) {
             MusicType.WIN -> stopMusic(winPlayer)
             MusicType.CORRECT -> stopMusic(correctClick)
             MusicType.GAME -> stopMusic(gamePlayer)
-            MusicType.MONEY -> TODO()
+            MusicType.MONEY -> stopMusic(winPlayer)
         }
     }
 

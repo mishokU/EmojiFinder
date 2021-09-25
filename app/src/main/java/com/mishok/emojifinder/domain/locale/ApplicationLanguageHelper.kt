@@ -14,8 +14,8 @@ import java.util.*
 class ApplicationLanguageHelper(base: Context) : ContextThemeWrapper(base, R.style.AppTheme) {
     companion object {
 
-        fun wrap(context: Context, language: String): ContextThemeWrapper {
-            var context = context
+        fun wrap(newContext: Context, language: String): ContextThemeWrapper {
+            var context = newContext
             val config = context.resources.configuration
             if (language != "") {
                 val locale = Locale(language)
@@ -25,12 +25,8 @@ class ApplicationLanguageHelper(base: Context) : ContextThemeWrapper(base, R.sty
                 } else {
                     setSystemLocaleLegacy(config, locale)
                 }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    config.setLayoutDirection(locale)
-                    context = context.createConfigurationContext(config)
-                } else {
-                    context.resources.updateConfiguration(config, context.resources.displayMetrics)
-                }
+                config.setLayoutDirection(locale)
+                context = context.createConfigurationContext(config)
             }
             return ApplicationLanguageHelper(context)
         }

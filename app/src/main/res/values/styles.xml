@@ -13,14 +13,11 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:windowLightStatusBar">true</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:statusBarColor">#B301BCEF</item>
         <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button</item>
-        <item name="android:windowTranslucentNavigation">true</item>
         <item name="colorControlNormal">@color/buttonBlueColor</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
     <style name="CustomTextView" parent="Widget.AppCompat.TextView">
@@ -83,7 +80,6 @@
     <style name="Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
         <item name="android:statusBarColor">@color/backgroundDesignColor</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>

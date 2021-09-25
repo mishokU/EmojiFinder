@@ -35,7 +35,6 @@ class AccountFragment : DaggerFragment() {
 
     private lateinit var userEmojisAdapter: UserEmojisAdapter
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentAccountBinding.inflate(inflater)
 

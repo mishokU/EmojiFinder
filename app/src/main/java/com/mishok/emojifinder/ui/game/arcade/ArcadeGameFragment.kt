@@ -50,9 +50,9 @@ class ArcadeGameFragment : DaggerFragment() {
     var emojis : MutableList<EmojiAppCompatEditText> = mutableListOf()
 
     private var findEmojis = 0
-    var score = 0
     private var userScore = 0
     private var userEmos = 0
+    var score = 0
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

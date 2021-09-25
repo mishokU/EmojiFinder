@@ -3,16 +3,33 @@ package com.mishok.emojifinder.domain.notifications
 import android.app.AlarmManager
 import android.app.Application
 import android.app.PendingIntent
-import android.content.Context.ALARM_SERVICE
+import android.app.Service
 import android.content.Intent
+import android.os.IBinder
 import android.util.Log
 import java.util.*
 import javax.inject.Inject
 
-class NotificationsService @Inject constructor(val application: Application) {
+class NotificationsService @Inject constructor(
+    private val app: Application
+): Service() {
 
     fun create() {
         initCalendar()
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+
+        return START_STICKY
+    }
+
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
     }
 
     private fun initCalendar() {

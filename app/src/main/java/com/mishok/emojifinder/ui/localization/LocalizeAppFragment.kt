@@ -6,9 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.emoji.widget.EmojiAppCompatButton
+import androidx.fragment.app.activityViewModels
 import com.mishok.emojifinder.R
 import com.mishok.emojifinder.databinding.FragmentLocalizeAppBinding
 import com.mishok.emojifinder.domain.locale.LocaleHelper
+import com.mishok.emojifinder.domain.viewModels.SharedViewModel
+import com.mishok.emojifinder.ui.localization.AppLanguages.DUTCH
+import com.mishok.emojifinder.ui.localization.AppLanguages.ENGLISH
+import com.mishok.emojifinder.ui.localization.AppLanguages.HINDI
+import com.mishok.emojifinder.ui.localization.AppLanguages.RUSSIAN
 import dagger.android.support.DaggerFragment
 
 
@@ -17,10 +23,12 @@ class LocalizeAppFragment : DaggerFragment() {
     private lateinit var binding: FragmentLocalizeAppBinding
     private var mapOfCountries: HashMap<EmojiAppCompatButton, Boolean> = hashMapOf()
 
+    private val viewModelShared : SharedViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentLocalizeAppBinding.inflate(inflater)
 
@@ -36,6 +44,7 @@ class LocalizeAppFragment : DaggerFragment() {
             LocaleHelper.setLocale(requireActivity().baseContext, getSelectedLanguage())
             binding.saveLanguageBtn.text = resources.getString(R.string.save_info)
             binding.ratingTitle.text = resources.getString(R.string.rating)
+            viewModelShared.updateLanguageFlag(getSelectedLanguage())
         }
     }
 
@@ -43,14 +52,14 @@ class LocalizeAppFragment : DaggerFragment() {
         for (country in mapOfCountries) {
             if (country.value) {
                 when (country.key) {
-                    binding.americanFrag -> return "en"
-                    binding.dutchFlag -> return "de"
-                    binding.indieFlag -> return "hi"
-                    binding.russianFlag -> return "ru"
+                    binding.americanFrag -> return ENGLISH
+                    binding.dutchFlag -> return DUTCH
+                    binding.indieFlag -> return HINDI
+                    binding.russianFlag -> return RUSSIAN
                 }
             }
         }
-        return "en"
+        return ENGLISH
     }
 
     private fun initArrayOfCountries() {
@@ -59,10 +68,10 @@ class LocalizeAppFragment : DaggerFragment() {
         mapOfCountries[binding.dutchFlag] = false
         mapOfCountries[binding.indieFlag] = false
         when(LocaleHelper.getLanguage(requireActivity().baseContext)){
-            "ru" -> handleLanguage(binding.russianFlag)
-            "en" -> handleLanguage(binding.americanFrag)
-            "hi" -> handleLanguage(binding.indieFlag)
-            "de" -> handleLanguage(binding.dutchFlag)
+            RUSSIAN -> handleLanguage(binding.russianFlag)
+            ENGLISH -> handleLanguage(binding.americanFrag)
+            HINDI -> handleLanguage(binding.indieFlag)
+            DUTCH -> handleLanguage(binding.dutchFlag)
         }
     }
 

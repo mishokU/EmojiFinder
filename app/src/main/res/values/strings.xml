@@ -211,6 +211,10 @@
     <string name="update_avatar">Update avatar</string>
     <string name="log_in">Log in</string>
     <string name="emoji_mistakes">📛</string>
+    <string name="emoji_american_flag">🇺🇸</string>
+    <string name="emoji_russian_flag">🇷🇺</string>
+    <string name="emoji_german_flag">🇩🇪</string>
+    <string name="emoji_hindi_flag">🇮🇳</string>
 
     <!-- Payment notification -->
     <string name="channel_name">Payment Channel</string>

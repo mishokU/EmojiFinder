@@ -7,3 +7,4 @@ data class DailyModel(
     val type : Daily,
     val cost : Int
 )
+
